@@ -1,0 +1,54 @@
+{% extends 'base.html' %}
+
+{% block title %}{{ action }} Category - EventPro{% endblock %}
+
+{% block heading %}{{ action }} Category{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col-md-6 mx-auto">
+        <div class="card card-primary shadow">
+            <div class="card-header">
+                <h3 class="card-title">Category Details</h3>
+            </div>
+            <form method="post" novalidate>
+                {% csrf_token %}
+                <div class="card-body">
+                    {% for field in form %}
+                    <div class="form-group mb-3">
+                        <label for="{{ field.id_for_label }}" class="fw-bold">{{ field.label }}</label>
+                        {{ field }}
+                        {% if field.help_text %}
+                            <small class="form-text text-muted d-block mt-1">{{ field.help_text }}</small>
+                        {% endif %}
+                        {% if field.errors %}
+                            <div class="text-danger small mt-1">{{ field.errors.0 }}</div>
+                        {% endif %}
+                    </div>
+                    {% endfor %}
+                </div>
+                <div class="card-footer bg-white border-top">
+                    <button type="submit" class="btn btn-primary px-4">
+                        <i class="bi bi-save me-1"></i> Save Category
+                    </button>
+                    <a href="{% url 'events:category_list' %}" class="btn btn-default border float-end">Cancel</a>
+                </div>
+            </form>
+        </div>
+
+        <div class="mt-4 card card-outline card-info">
+            <div class="card-body small">
+                <h5 class="text-info"><i class="bi bi-info-circle me-1"></i> Tips</h5>
+                <ul class="mb-0 ps-3">
+                    <li>Use <strong>Bootstrap Icons</strong> names (e.g., <code>bi-music-note</code>).</li>
+                    <li>Enter a <strong>Hex Color</strong> (e.g., <code>#FF5733</code>) for unique labeling.</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    .form-control, .form-select { border-radius: 4px; border: 1px solid #ced4da; }
+</style>
+{% endblock %}

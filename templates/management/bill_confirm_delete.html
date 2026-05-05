@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+
+{% block title %}Delete Bill - EventPro{% endblock %}
+{% block heading %}Delete Bill{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col-md-6 mx-auto">
+        <div class="card card-danger shadow">
+            <div class="card-header bg-danger text-white">
+                <h3 class="card-title"><i class="bi bi-exclamation-triangle-fill me-2"></i>Confirm Delete</h3>
+            </div>
+            <div class="card-body">
+                <p class="mb-1">Are you sure you want to delete this bill?</p>
+                <h5 class="text-danger fw-bold">{{ bill.title }}</h5>
+                <p class="text-muted small">
+                    Supplier: <strong>{{ bill.supplier.name }}</strong> |
+                    Amount: <strong>${{ bill.amount }}</strong> |
+                    Status: <strong>{{ bill.get_status_display }}</strong>
+                </p>
+                <div class="alert alert-warning">
+                    <i class="bi bi-exclamation-triangle me-1"></i>
+                    This action cannot be undone.
+                </div>
+            </div>
+            <div class="card-footer bg-white d-flex justify-content-between">
+                <form method="post">
+                    {% csrf_token %}
+                    <button type="submit" class="btn btn-danger px-4">
+                        <i class="bi bi-trash me-1"></i> Yes, Delete
+                    </button>
+                </form>
+                <a href="{% url 'management:bill_list' %}" class="btn btn-outline-secondary">Cancel</a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

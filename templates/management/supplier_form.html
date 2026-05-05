@@ -1,0 +1,83 @@
+{% extends 'base.html' %}
+
+{% block title %}{{ action }} Supplier - EventPro{% endblock %}
+{% block heading %}{{ action }} Supplier{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col-md-8 mx-auto">
+        <div class="card card-primary shadow">
+            <div class="card-header">
+                <h3 class="card-title">
+                    <i class="bi bi-building me-2"></i>Supplier Details
+                </h3>
+            </div>
+            <form method="post" novalidate>
+                {% csrf_token %}
+                <div class="card-body">
+                    <div class="row">
+                        <!-- Name -->
+                        <div class="col-md-8 mb-3">
+                            <label for="{{ form.name.id_for_label }}" class="fw-bold">Supplier Name <span class="text-danger">*</span></label>
+                            {{ form.name }}
+                            {% if form.name.errors %}<div class="text-danger small mt-1">{{ form.name.errors.0 }}</div>{% endif %}
+                        </div>
+                        <!-- Service Type -->
+                        <div class="col-md-4 mb-3">
+                            <label for="{{ form.service_type.id_for_label }}" class="fw-bold">Service Type <span class="text-danger">*</span></label>
+                            {{ form.service_type }}
+                            {% if form.service_type.errors %}<div class="text-danger small mt-1">{{ form.service_type.errors.0 }}</div>{% endif %}
+                        </div>
+                        <!-- Contact Person -->
+                        <div class="col-md-6 mb-3">
+                            <label for="{{ form.contact_person.id_for_label }}" class="fw-bold">Contact Person</label>
+                            {{ form.contact_person }}
+                        </div>
+                        <!-- Phone -->
+                        <div class="col-md-6 mb-3">
+                            <label for="{{ form.phone.id_for_label }}" class="fw-bold">Phone</label>
+                            {{ form.phone }}
+                        </div>
+                        <!-- Email -->
+                        <div class="col-md-6 mb-3">
+                            <label for="{{ form.email.id_for_label }}" class="fw-bold">Email</label>
+                            {{ form.email }}
+                        </div>
+                        <!-- Active toggle -->
+                        <div class="col-md-6 mb-3 d-flex align-items-end">
+                            <div class="form-check form-switch">
+                                {{ form.is_active }}
+                                <label class="form-check-label fw-bold ms-2" for="{{ form.is_active.id_for_label }}">
+                                    Active Supplier
+                                </label>
+                            </div>
+                        </div>
+                        <!-- Address -->
+                        <div class="col-12 mb-3">
+                            <label for="{{ form.address.id_for_label }}" class="fw-bold">Address</label>
+                            {{ form.address }}
+                        </div>
+                        <!-- Notes -->
+                        <div class="col-12 mb-3">
+                            <label for="{{ form.notes.id_for_label }}" class="fw-bold">Notes</label>
+                            {{ form.notes }}
+                        </div>
+                    </div>
+
+                    {% if form.non_field_errors %}
+                    <div class="alert alert-danger">{{ form.non_field_errors }}</div>
+                    {% endif %}
+                </div>
+                <div class="card-footer bg-white border-top d-flex justify-content-between">
+                    <button type="submit" class="btn btn-primary px-4">
+                        <i class="bi bi-save me-1"></i> Save Supplier
+                    </button>
+                    <a href="{% url 'management:supplier_list' %}" class="btn btn-outline-secondary">
+                        <i class="bi bi-x-lg me-1"></i> Cancel
+                    </a>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}

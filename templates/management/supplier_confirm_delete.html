@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+
+{% block title %}Delete Supplier - EventPro{% endblock %}
+{% block heading %}Delete Supplier{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col-md-6 mx-auto">
+        <div class="card card-danger shadow">
+            <div class="card-header bg-danger text-white">
+                <h3 class="card-title"><i class="bi bi-exclamation-triangle-fill me-2"></i>Confirm Delete</h3>
+            </div>
+            <div class="card-body">
+                <p class="mb-1">Are you sure you want to delete supplier:</p>
+                <h5 class="text-danger fw-bold">{{ supplier.name }}</h5>
+                <p class="text-muted small">Service: {{ supplier.get_service_type_display }}</p>
+                <div class="alert alert-warning">
+                    <i class="bi bi-exclamation-triangle me-1"></i>
+                    This will also delete all <strong>{{ supplier.bills.count }}</strong> bills linked to this supplier. This action cannot be undone.
+                </div>
+            </div>
+            <div class="card-footer bg-white d-flex justify-content-between">
+                <form method="post">
+                    {% csrf_token %}
+                    <button type="submit" class="btn btn-danger px-4">
+                        <i class="bi bi-trash me-1"></i> Yes, Delete
+                    </button>
+                </form>
+                <a href="{% url 'management:supplier_list' %}" class="btn btn-outline-secondary">Cancel</a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

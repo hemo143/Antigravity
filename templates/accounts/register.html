@@ -1,0 +1,60 @@
+{% extends 'base.html' %}
+
+{% block title %}Register - EventPro{% endblock %}
+
+{% block heading %}Create Account{% endblock %}
+
+{% block content %}
+<div class="row justify-content-center pt-5">
+    <div class="col-md-5">
+        <div class="card card-outline card-primary shadow">
+            <div class="card-header text-center py-4 bg-white border-top border-primary border-4">
+                <a href="/" class="h1 text-decoration-none text-dark"><b>Event</b>Pro</a>
+            </div>
+            <div class="card-body p-4">
+                <p class="login-box-msg text-center text-muted mb-4">Register a new membership</p>
+
+                <form method="post" novalidate>
+                    {% csrf_token %}
+                    
+                    {% for field in form %}
+                    <div class="input-group mb-3">
+                        <div class="input-group-text bg-white border-end-0">
+                            {% if 'email' in field.name %}<i class="bi bi-envelope-fill"></i>
+                            {% elif 'user' in field.name %}<i class="bi bi-person-fill"></i>
+                            {% elif 'pass' in field.name %}<i class="bi bi-lock-fill"></i>
+                            {% else %}<i class="bi bi-pencil-fill"></i>{% endif %}
+                        </div>
+                        <input type="{{ field.field.widget.input_type }}" 
+                               name="{{ field.name }}" 
+                               class="form-control {% if field.errors %}is-invalid{% endif %}" 
+                               placeholder="{{ field.label }}"
+                               id="{{ field.id_for_label }}">
+                        {% if field.errors %}
+                            <div class="invalid-feedback d-block">{{ field.errors.0 }}</div>
+                        {% endif %}
+                    </div>
+                    {% endfor %}
+
+                    <div class="row mt-4">
+                        <div class="col-12">
+                            <button type="submit" class="btn btn-primary w-100 fw-bold">Register</button>
+                        </div>
+                    </div>
+                </form>
+
+                <div class="text-center mt-4">
+                    <p class="mb-0">
+                        <a href="{% url 'accounts:login' %}" class="text-center text-decoration-none">I already have a membership</a>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    input.form-control { border-left: 0; }
+    .card-outline.card-primary { border-top: 3px solid #007bff; }
+</style>
+{% endblock %}

@@ -1,0 +1,87 @@
+{% extends 'base.html' %}
+{% load i18n %}
+
+{% block title %}{% trans "Event Attendees" %} - {{ event.title }}{% endblock %}
+
+{% block heading %}{% trans "Attendance Management" %}{% endblock %}
+
+{% block content %}
+<div class="card shadow-sm border-0">
+    <div class="card-header bg-white py-3">
+        <div class="d-flex justify-content-between align-items-center">
+            <h5 class="mb-0 fw-bold">{% trans "Attendees for" %}: <span class="text-primary">{{ event.title }}</span></h5>
+            <span class="badge bg-info">{{ attendees.count }} {% trans "Bookings" %}</span>
+        </div>
+    </div>
+    <div class="card-body p-0">
+        <div class="table-responsive">
+            <table class="table table-hover align-middle mb-0">
+                <thead class="table-light">
+                    <tr>
+                        <th class="ps-4">{% trans "User" %}</th>
+                        <th>{% trans "Email" %}</th>
+                        <th>{% trans "Tickets" %}</th>
+                        <th>{% trans "Status" %}</th>
+                        <th class="text-end pe-4">{% trans "Actions" %}</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for booking in attendees %}
+                    <tr>
+                        <td class="ps-4">
+                            <div class="d-flex align-items-center">
+                                <div class="bg-secondary rounded-circle me-3" style="width: 32px; height: 32px;"></div>
+                                <div>
+                                    <div class="fw-bold text-dark">{{ booking.user.get_full_name|default:booking.user.username }}</div>
+                                    <small class="text-muted">@{{ booking.user.username }}</small>
+                                </div>
+                            </div>
+                        </td>
+                        <td>{{ booking.user.email }}</td>
+                        <td>{{ booking.tickets }}</td>
+                        <td>
+                            {% if booking.status == 'attended' %}
+                                <span class="badge bg-success-subtle text-success border border-success">
+                                    <i class="bi bi-check-circle-fill me-1"></i> {% trans "Attended" %}
+                                </span>
+                            {% elif booking.status == 'cancelled' %}
+                                <span class="badge bg-danger-subtle text-danger border border-danger">
+                                    <i class="bi bi-x-circle-fill me-1"></i> {% trans "Cancelled" %}
+                                </span>
+                            {% else %}
+                                <span class="badge bg-warning-subtle text-warning border border-warning">
+                                    <i class="bi bi-clock-fill me-1"></i> {% trans "Confirmed" %}
+                                </span>
+                            {% endif %}
+                        </td>
+                        <td class="text-end pe-4">
+                            {% if booking.status != 'cancelled' %}
+                            <a href="{% url 'events:mark_attendance' booking.id %}" class="btn btn-sm {% if booking.status == 'attended' %}btn-outline-warning{% else %}btn-success{% endif %}">
+                                {% if booking.status == 'attended' %}
+                                    <i class="bi bi-person-x-fill"></i> {% trans "Mark Absence" %}
+                                {% else %}
+                                    <i class="bi bi-person-check-fill"></i> {% trans "Mark Attendance" %}
+                                {% endif %}
+                            </a>
+                            {% endif %}
+                        </td>
+                    </tr>
+                    {% empty %}
+                    <tr>
+                        <td colspan="5" class="text-center py-5 text-muted">
+                            <i class="bi bi-people fs-1 d-block mb-3"></i>
+                            {% trans "No attendees registered yet." %}
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="card-footer bg-white text-end py-3">
+        <a href="{% url 'events:event_detail' event.slug %}" class="btn btn-secondary">
+            <i class="bi bi-arrow-left"></i> {% trans "Back to Event" %}
+        </a>
+    </div>
+</div>
+{% endblock %}

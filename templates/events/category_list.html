@@ -1,0 +1,63 @@
+{% extends 'base.html' %}
+
+{% block title %}Categories - EventPro{% endblock %}
+
+{% block heading %}Event Categories{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col-12">
+        <div class="card shadow">
+            <div class="card-header d-flex justify-content-between align-items-center">
+                <h3 class="card-title">Manage Categories</h3>
+                <a href="{% url 'events:category_create' %}" class="btn btn-primary btn-sm float-end">
+                    <i class="bi bi-plus-lg me-1"></i> Add New Category
+                </a>
+            </div>
+            <div class="card-body p-0">
+                <div class="table-responsive">
+                    <table class="table table-hover mb-0">
+                        <thead>
+                            <tr>
+                                <th style="width: 60px;">#</th>
+                                <th>Category Name</th>
+                                <th>Icon</th>
+                                <th style="width: 100px;">Color</th>
+                                <th style="width: 150px;">Events Count</th>
+                                <th style="width: 150px;">Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for cat in categories %}
+                            <tr>
+                                <td>{{ forloop.counter }}</td>
+                                <td><span class="fw-bold">{{ cat.name }}</span></td>
+                                <td><i class="bi {{ cat.icon }} fs-5"></i></td>
+                                <td>
+                                    <div class="rounded-pill px-2 py-1 text-center small text-white" style="background:{{ cat.color }}">
+                                        {{ cat.color }}
+                                    </div>
+                                </td>
+                                <td>{{ cat.events.count }}</td>
+                                <td>
+                                    <a href="{% url 'events:category_update' cat.pk %}" class="btn-action btn-edit">
+                                        <i class="bi bi-pencil-square"></i>
+                                    </a>
+                                    <a href="{% url 'events:category_delete' cat.pk %}" class="btn-action btn-delete">
+                                        <i class="bi bi-trash"></i>
+                                    </a>
+                                </td>
+                            </tr>
+                            {% empty %}
+                            <tr>
+                                <td colspan="6" class="text-center py-4 text-muted">No categories defined yet.</td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

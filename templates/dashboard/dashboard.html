@@ -1,0 +1,174 @@
+{% extends 'base.html' %}
+{% load i18n %}
+
+{% block title %}{% trans "Dashboard" %} - EventPro{% endblock %}
+
+{% block heading %}{% trans "Dashboard" %}{% endblock %}
+
+{% block content %}
+
+<!-- ═══ STAT BOXES ROW ═══ -->
+<div class="row">
+    <!-- Event Category -->
+    <div class="col-lg-3 col-6">
+        <div class="small-box bg-info">
+            <div class="inner">
+                <h3>{{ categories_stats.count }}</h3>
+                <p>{% trans "Event Category" %}</p>
+            </div>
+            <div class="icon">
+                <i class="bi bi-folder-fill"></i>
+            </div>
+            <a href="{% url 'events:category_list' %}" class="small-box-footer">
+                {% trans "More info" %} <i class="bi bi-arrow-right-circle"></i>
+            </a>
+        </div>
+    </div>
+
+    <!-- Events -->
+    <div class="col-lg-3 col-6">
+        <div class="small-box bg-success">
+            <div class="inner">
+                <h3>{{ total_events }}</h3>
+                <p>{% trans "Events" %}</p>
+            </div>
+            <div class="icon">
+                <i class="bi bi-calendar-event"></i>
+            </div>
+            <a href="{% url 'events:event_list' %}" class="small-box-footer">
+                {% trans "More info" %} <i class="bi bi-arrow-right-circle"></i>
+            </a>
+        </div>
+    </div>
+
+    <!-- User Registrations -->
+    <div class="col-lg-3 col-6">
+        <div class="small-box bg-warning">
+            <div class="inner">
+                <h3>{{ total_users }}</h3>
+                <p>{% trans "User Registrations" %}</p>
+            </div>
+            <div class="icon">
+                <i class="bi bi-person-plus-fill"></i>
+            </div>
+            <a href="{% url 'accounts:user_list' %}" class="small-box-footer">
+                {% trans "More info" %} <i class="bi bi-arrow-right-circle"></i>
+            </a>
+        </div>
+    </div>
+
+    <!-- Complete Event -->
+    <div class="col-lg-3 col-6">
+        <div class="small-box bg-danger">
+            <div class="inner">
+                <h3>{{ completed_events }}</h3>
+                <p>{% trans "Completed Events" %}</p>
+            </div>
+            <div class="icon">
+                <i class="bi bi-check-circle-fill"></i>
+            </div>
+            <a href="#" class="small-box-footer">
+                {% trans "More info" %} <i class="bi bi-arrow-right-circle"></i>
+            </a>
+        </div>
+    </div>
+</div>
+
+<!-- ═══ FINANCE STAT ROW ═══ -->
+{% if user.is_organizer %}
+<div class="row">
+    <div class="col-lg-3 col-6">
+        <div class="small-box" style="background: #6f42c1; color: white;">
+            <div class="inner">
+                <h3>{{ total_suppliers }}</h3>
+                <p>{% trans "Active Suppliers" %}</p>
+            </div>
+            <div class="icon"><i class="bi bi-building"></i></div>
+            <a href="{% url 'management:supplier_list' %}" class="small-box-footer">
+                {% trans "More info" %} <i class="bi bi-arrow-right-circle"></i>
+            </a>
+        </div>
+    </div>
+    <div class="col-lg-3 col-6">
+        <div class="small-box" style="background: #fd7e14; color: white;">
+            <div class="inner">
+                <h3>{{ total_bills }}</h3>
+                <p>{% trans "Total Bills" %}</p>
+            </div>
+            <div class="icon"><i class="bi bi-receipt"></i></div>
+            <a href="{% url 'management:bill_list' %}" class="small-box-footer">
+                {% trans "More info" %} <i class="bi bi-arrow-right-circle"></i>
+            </a>
+        </div>
+    </div>
+    <div class="col-lg-3 col-6">
+        <div class="small-box bg-danger">
+            <div class="inner">
+                <h3>${{ unpaid_bills_amount|floatformat:0 }}</h3>
+                <p>{% trans "Unpaid / Outstanding" %}</p>
+            </div>
+            <div class="icon"><i class="bi bi-exclamation-circle-fill"></i></div>
+            <a href="{% url 'management:bill_list' %}?status=unpaid" class="small-box-footer">
+                {% trans "More info" %} <i class="bi bi-arrow-right-circle"></i>
+            </a>
+        </div>
+    </div>
+</div>
+{% endif %}
+
+<!-- ═══ EVENT LIST TABLE ═══ -->
+<div class="card mt-4">
+    <div class="card-header">
+        <h3 class="card-title">{% trans "Event List" %}</h3>
+    </div>
+    <div class="card-body p-0">
+        <div class="table-responsive">
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th style="width: 50px;">#</th>
+                        <th>{% trans "Name" %}</th>
+                        <th>{% trans "Category" %}</th>
+                        <th>{% trans "Start Date" %}</th>
+                        <th>{% trans "End Date" %}</th>
+                        <th>{% trans "Venue" %}</th>
+                        <th>{% trans "Status" %}</th>
+                        <th>{% trans "Actions" %}</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for event in recent_events %}
+                    <tr>
+                        <td>{{ forloop.counter }}</td>
+                        <td>{{ event.title }}</td>
+                        <td>{% if event.category %}{{ event.category.name }}{% else %}-{% endif %}</td>
+                        <td>{{ event.start_date|date:"F d, Y" }}</td>
+                        <td>{{ event.end_date|date:"F d, Y" }}</td>
+                        <td>{{ event.venue }}</td>
+                        <td>
+                            {% if event.status == 'published' %}
+                                <span class="text-success">{% trans "Active" %}</span>
+                            {% elif event.status == 'completed' %}
+                                <span class="text-primary">{% trans "Completed" %}</span>
+                            {% else %}
+                                <span class="text-warning">{{ event.status|title }}</span>
+                            {% endif %}
+                        </td>
+                        <td>
+                            <a href="{{ event.get_absolute_url }}" class="btn-action btn-view"><i class="bi bi-eye"></i></a>
+                            <a href="{% url 'events:event_update' event.slug %}" class="btn-action btn-edit"><i class="bi bi-pencil-square"></i></a>
+                            <a href="{% url 'events:event_delete' event.slug %}" class="btn-action btn-delete"><i class="bi bi-trash"></i></a>
+                        </td>
+                    </tr>
+                    {% empty %}
+                    <tr>
+                        <td colspan="8" class="text-center py-4">{% trans "No events found." %}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

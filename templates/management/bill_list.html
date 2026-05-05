@@ -1,0 +1,177 @@
+{% extends 'base.html' %}
+
+{% block title %}Bills - EventPro{% endblock %}
+{% block heading %}Bills & Expenses{% endblock %}
+
+{% block content %}
+
+<!-- ═══ SUMMARY CARDS ═══ -->
+<div class="row mb-4">
+    <div class="col-md-3">
+        <div class="small-box bg-dark">
+            <div class="inner">
+                <h3>${{ total_amount|floatformat:0 }}</h3>
+                <p>Total Billed</p>
+            </div>
+            <div class="icon"><i class="bi bi-receipt"></i></div>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="small-box bg-success">
+            <div class="inner">
+                <h3>${{ total_paid|floatformat:0 }}</h3>
+                <p>Total Paid</p>
+            </div>
+            <div class="icon"><i class="bi bi-check-circle-fill"></i></div>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="small-box bg-danger">
+            <div class="inner">
+                <h3>${{ total_remaining|floatformat:0 }}</h3>
+                <p>Remaining / Unpaid</p>
+            </div>
+            <div class="icon"><i class="bi bi-exclamation-circle-fill"></i></div>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="small-box bg-warning">
+            <div class="inner">
+                <h3>{{ overdue_count }}</h3>
+                <p>Overdue Bills</p>
+            </div>
+            <div class="icon"><i class="bi bi-clock-fill"></i></div>
+        </div>
+    </div>
+</div>
+
+<!-- ═══ FILTER + ACTION ═══ -->
+<div class="card mb-4 shadow-sm">
+    <div class="card-body py-2">
+        <form method="get" class="row g-2 align-items-center">
+            <div class="col-md-3">
+                {{ filter_form.supplier }}
+            </div>
+            <div class="col-md-3">
+                {{ filter_form.status }}
+            </div>
+            <div class="col-md-3">
+                {{ filter_form.event }}
+            </div>
+            <div class="col-md-1">
+                <button type="submit" class="btn btn-primary btn-sm w-100">
+                    <i class="bi bi-funnel-fill"></i>
+                </button>
+            </div>
+            <div class="col-md-2">
+                <a href="{% url 'management:bill_create' %}" class="btn btn-success btn-sm w-100">
+                    <i class="bi bi-plus-lg me-1"></i> New Bill
+                </a>
+            </div>
+        </form>
+    </div>
+</div>
+
+<!-- ═══ BILLS TABLE ═══ -->
+<div class="card shadow-sm">
+    <div class="card-header d-flex justify-content-between align-items-center">
+        <h3 class="card-title mb-0"><i class="bi bi-receipt me-2"></i>Bills List</h3>
+        <span class="badge bg-secondary">{{ page_obj.paginator.count }} records</span>
+    </div>
+    <div class="card-body p-0">
+        <div class="table-responsive">
+            <table class="table table-hover mb-0">
+                <thead class="table-light">
+                    <tr>
+                        <th>#</th>
+                        <th>Title</th>
+                        <th>Supplier</th>
+                        <th>Event</th>
+                        <th>Amount</th>
+                        <th>Paid</th>
+                        <th>Remaining</th>
+                        <th>Due Date</th>
+                        <th>Status</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for bill in bills %}
+                    <tr {% if bill.is_overdue %}class="table-warning"{% endif %}>
+                        <td>{{ forloop.counter }}</td>
+                        <td>
+                            <strong>{{ bill.title|truncatechars:35 }}</strong>
+                            {% if bill.receipt %}
+                                <a href="{{ bill.receipt.url }}" target="_blank" title="View Receipt" class="text-muted ms-1">
+                                    <i class="bi bi-paperclip"></i>
+                                </a>
+                            {% endif %}
+                        </td>
+                        <td>
+                            <a href="{% url 'management:supplier_detail' bill.supplier.pk %}" class="text-decoration-none">
+                                {{ bill.supplier.name }}
+                            </a>
+                        </td>
+                        <td>{{ bill.event.title|default:"—"|truncatechars:25 }}</td>
+                        <td class="fw-bold">${{ bill.amount|floatformat:2 }}</td>
+                        <td class="text-success">${{ bill.paid_amount|floatformat:2 }}</td>
+                        <td class="{% if bill.remaining_amount > 0 %}text-danger fw-bold{% else %}text-success{% endif %}">
+                            ${{ bill.remaining_amount|floatformat:2 }}
+                        </td>
+                        <td>
+                            {{ bill.due_date }}
+                            {% if bill.is_overdue %}
+                                <span class="badge bg-danger ms-1">Overdue</span>
+                            {% endif %}
+                        </td>
+                        <td>
+                            {% if bill.status == 'paid' %}
+                                <span class="badge bg-success">Paid</span>
+                            {% elif bill.status == 'partial' %}
+                                <span class="badge bg-warning text-dark">Partial</span>
+                            {% elif bill.status == 'cancelled' %}
+                                <span class="badge bg-secondary">Cancelled</span>
+                            {% else %}
+                                <span class="badge bg-danger">Unpaid</span>
+                            {% endif %}
+                        </td>
+                        <td>
+                            <a href="{% url 'management:bill_update' bill.pk %}" class="btn-action btn-edit" title="Edit"><i class="bi bi-pencil-square"></i></a>
+                            {% if user.is_admin %}
+                            <a href="{% url 'management:bill_delete' bill.pk %}" class="btn-action btn-delete" title="Delete"><i class="bi bi-trash"></i></a>
+                            {% endif %}
+                        </td>
+                    </tr>
+                    {% empty %}
+                    <tr>
+                        <td colspan="10" class="text-center py-5 text-muted">
+                            <i class="bi bi-receipt fs-1 d-block mb-2"></i>
+                            No bills found. <a href="{% url 'management:bill_create' %}">Create your first bill</a>.
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+    {% if page_obj.has_other_pages %}
+    <div class="card-footer">
+        <nav>
+            <ul class="pagination pagination-sm mb-0 justify-content-center">
+                {% if page_obj.has_previous %}
+                <li class="page-item"><a class="page-link" href="?page={{ page_obj.previous_page_number }}">&laquo;</a></li>
+                {% endif %}
+                {% for num in page_obj.paginator.page_range %}
+                <li class="page-item {% if num == page_obj.number %}active{% endif %}">
+                    <a class="page-link" href="?page={{ num }}">{{ num }}</a>
+                </li>
+                {% endfor %}
+                {% if page_obj.has_next %}
+                <li class="page-item"><a class="page-link" href="?page={{ page_obj.next_page_number }}">&raquo;</a></li>
+                {% endif %}
+            </ul>
+        </nav>
+    </div>
+    {% endif %}
+</div>
+{% endblock %}

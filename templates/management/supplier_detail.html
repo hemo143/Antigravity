@@ -1,0 +1,158 @@
+{% extends 'base.html' %}
+
+{% block title %}{{ supplier.name }} - Supplier Detail - EventPro{% endblock %}
+{% block heading %}Supplier: {{ supplier.name }}{% endblock %}
+
+{% block content %}
+<div class="row mb-4">
+    <!-- Info Card -->
+    <div class="col-md-4">
+        <div class="card shadow-sm">
+            <div class="card-header bg-primary text-white">
+                <h5 class="mb-0"><i class="bi bi-building me-2"></i>{{ supplier.name }}</h5>
+            </div>
+            <div class="card-body">
+                <table class="table table-borderless table-sm mb-0">
+                    <tr>
+                        <td class="text-muted fw-bold">Service</td>
+                        <td><span class="badge bg-info text-dark">{{ supplier.get_service_type_display }}</span></td>
+                    </tr>
+                    <tr>
+                        <td class="text-muted fw-bold">Contact</td>
+                        <td>{{ supplier.contact_person|default:"—" }}</td>
+                    </tr>
+                    <tr>
+                        <td class="text-muted fw-bold">Phone</td>
+                        <td>{{ supplier.phone|default:"—" }}</td>
+                    </tr>
+                    <tr>
+                        <td class="text-muted fw-bold">Email</td>
+                        <td>
+                            {% if supplier.email %}<a href="mailto:{{ supplier.email }}">{{ supplier.email }}</a>{% else %}—{% endif %}
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="text-muted fw-bold">Status</td>
+                        <td>
+                            {% if supplier.is_active %}
+                                <span class="badge bg-success">Active</span>
+                            {% else %}
+                                <span class="badge bg-secondary">Inactive</span>
+                            {% endif %}
+                        </td>
+                    </tr>
+                    {% if supplier.address %}
+                    <tr>
+                        <td class="text-muted fw-bold">Address</td>
+                        <td>{{ supplier.address }}</td>
+                    </tr>
+                    {% endif %}
+                </table>
+            </div>
+            <div class="card-footer d-flex gap-2">
+                <a href="{% url 'management:supplier_update' supplier.pk %}" class="btn btn-warning btn-sm flex-fill">
+                    <i class="bi bi-pencil-square me-1"></i>Edit
+                </a>
+                <a href="{% url 'management:bill_create' %}?supplier={{ supplier.pk }}" class="btn btn-success btn-sm flex-fill">
+                    <i class="bi bi-plus-lg me-1"></i>Add Bill
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Financial Summary -->
+    <div class="col-md-8">
+        <div class="row">
+            <div class="col-md-4 mb-3">
+                <div class="card text-center border-0 shadow-sm">
+                    <div class="card-body py-3">
+                        <div class="text-muted small">Total Billed</div>
+                        <h4 class="fw-bold text-dark mb-0">${{ total_billed|floatformat:2 }}</h4>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 mb-3">
+                <div class="card text-center border-0 shadow-sm">
+                    <div class="card-body py-3">
+                        <div class="text-muted small">Total Paid</div>
+                        <h4 class="fw-bold text-success mb-0">${{ total_paid|floatformat:2 }}</h4>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 mb-3">
+                <div class="card text-center border-0 shadow-sm">
+                    <div class="card-body py-3">
+                        <div class="text-muted small">Remaining</div>
+                        <h4 class="fw-bold {% if remaining > 0 %}text-danger{% else %}text-success{% endif %} mb-0">${{ remaining|floatformat:2 }}</h4>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Bills Table -->
+        <div class="card shadow-sm">
+            <div class="card-header">
+                <h5 class="card-title mb-0"><i class="bi bi-receipt me-2"></i>Bills ({{ bills.count }})</h5>
+            </div>
+            <div class="card-body p-0">
+                <div class="table-responsive">
+                    <table class="table table-hover mb-0">
+                        <thead class="table-light">
+                            <tr>
+                                <th>Title</th>
+                                <th>Event</th>
+                                <th>Amount</th>
+                                <th>Paid</th>
+                                <th>Due Date</th>
+                                <th>Status</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for bill in bills %}
+                            <tr {% if bill.is_overdue %}class="table-danger"{% endif %}>
+                                <td>{{ bill.title }}</td>
+                                <td>{{ bill.event.title|default:"—"|truncatechars:20 }}</td>
+                                <td>${{ bill.amount|floatformat:2 }}</td>
+                                <td>${{ bill.paid_amount|floatformat:2 }}</td>
+                                <td>
+                                    {{ bill.due_date }}
+                                    {% if bill.is_overdue %}
+                                        <span class="badge bg-danger ms-1">Overdue</span>
+                                    {% endif %}
+                                </td>
+                                <td>
+                                    {% if bill.status == 'paid' %}
+                                        <span class="badge bg-success">Paid</span>
+                                    {% elif bill.status == 'partial' %}
+                                        <span class="badge bg-warning text-dark">Partial</span>
+                                    {% elif bill.status == 'cancelled' %}
+                                        <span class="badge bg-secondary">Cancelled</span>
+                                    {% else %}
+                                        <span class="badge bg-danger">Unpaid</span>
+                                    {% endif %}
+                                </td>
+                                <td>
+                                    <a href="{% url 'management:bill_update' bill.pk %}" class="btn-action btn-edit" title="Edit"><i class="bi bi-pencil-square"></i></a>
+                                    {% if user.is_admin %}
+                                    <a href="{% url 'management:bill_delete' bill.pk %}" class="btn-action btn-delete" title="Delete"><i class="bi bi-trash"></i></a>
+                                    {% endif %}
+                                </td>
+                            </tr>
+                            {% empty %}
+                            <tr>
+                                <td colspan="7" class="text-center py-4 text-muted">No bills yet.</td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<a href="{% url 'management:supplier_list' %}" class="btn btn-outline-secondary">
+    <i class="bi bi-arrow-left me-1"></i> Back to Suppliers
+</a>
+{% endblock %}

@@ -1,0 +1,101 @@
+{% extends 'base.html' %}
+
+{% block title %}{{ action }} Bill - EventPro{% endblock %}
+{% block heading %}{{ action }} Bill{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col-md-9 mx-auto">
+        <div class="card card-primary shadow">
+            <div class="card-header">
+                <h3 class="card-title">
+                    <i class="bi bi-receipt me-2"></i>Bill / Expense Details
+                </h3>
+            </div>
+            <form method="post" enctype="multipart/form-data" novalidate>
+                {% csrf_token %}
+                <div class="card-body">
+                    <div class="row">
+                        <!-- Title -->
+                        <div class="col-12 mb-3">
+                            <label for="{{ form.title.id_for_label }}" class="fw-bold">Bill Title / Description <span class="text-danger">*</span></label>
+                            {{ form.title }}
+                            {% if form.title.errors %}<div class="text-danger small mt-1">{{ form.title.errors.0 }}</div>{% endif %}
+                        </div>
+                        <!-- Supplier -->
+                        <div class="col-md-6 mb-3">
+                            <label for="{{ form.supplier.id_for_label }}" class="fw-bold">Supplier <span class="text-danger">*</span></label>
+                            {{ form.supplier }}
+                            {% if form.supplier.errors %}<div class="text-danger small mt-1">{{ form.supplier.errors.0 }}</div>{% endif %}
+                        </div>
+                        <!-- Event -->
+                        <div class="col-md-6 mb-3">
+                            <label for="{{ form.event.id_for_label }}" class="fw-bold">Related Event <small class="text-muted">(optional)</small></label>
+                            {{ form.event }}
+                        </div>
+                        <!-- Amount -->
+                        <div class="col-md-4 mb-3">
+                            <label for="{{ form.amount.id_for_label }}" class="fw-bold">Total Amount ($) <span class="text-danger">*</span></label>
+                            {{ form.amount }}
+                            {% if form.amount.errors %}<div class="text-danger small mt-1">{{ form.amount.errors.0 }}</div>{% endif %}
+                        </div>
+                        <!-- Paid Amount -->
+                        <div class="col-md-4 mb-3">
+                            <label for="{{ form.paid_amount.id_for_label }}" class="fw-bold">Paid Amount ($)</label>
+                            {{ form.paid_amount }}
+                            {% if form.paid_amount.errors %}<div class="text-danger small mt-1">{{ form.paid_amount.errors.0 }}</div>{% endif %}
+                        </div>
+                        <!-- Status -->
+                        <div class="col-md-4 mb-3">
+                            <label for="{{ form.status.id_for_label }}" class="fw-bold">Payment Status</label>
+                            {{ form.status }}
+                            <small class="text-muted d-block mt-1">Auto-updated based on paid amount.</small>
+                        </div>
+                        <!-- Issue Date -->
+                        <div class="col-md-6 mb-3">
+                            <label for="{{ form.issue_date.id_for_label }}" class="fw-bold">Issue Date <span class="text-danger">*</span></label>
+                            {{ form.issue_date }}
+                            {% if form.issue_date.errors %}<div class="text-danger small mt-1">{{ form.issue_date.errors.0 }}</div>{% endif %}
+                        </div>
+                        <!-- Due Date -->
+                        <div class="col-md-6 mb-3">
+                            <label for="{{ form.due_date.id_for_label }}" class="fw-bold">Due Date <span class="text-danger">*</span></label>
+                            {{ form.due_date }}
+                            {% if form.due_date.errors %}<div class="text-danger small mt-1">{{ form.due_date.errors.0 }}</div>{% endif %}
+                        </div>
+                        <!-- Receipt upload -->
+                        <div class="col-12 mb-3">
+                            <label for="{{ form.receipt.id_for_label }}" class="fw-bold">Receipt / Invoice File <small class="text-muted">(PDF, image — optional)</small></label>
+                            {{ form.receipt }}
+                            {% if bill.receipt %}
+                            <div class="mt-2">
+                                <a href="{{ bill.receipt.url }}" target="_blank" class="btn btn-outline-secondary btn-sm">
+                                    <i class="bi bi-paperclip me-1"></i> View Current Receipt
+                                </a>
+                            </div>
+                            {% endif %}
+                        </div>
+                        <!-- Notes -->
+                        <div class="col-12 mb-3">
+                            <label for="{{ form.notes.id_for_label }}" class="fw-bold">Notes</label>
+                            {{ form.notes }}
+                        </div>
+                    </div>
+
+                    {% if form.non_field_errors %}
+                    <div class="alert alert-danger">{{ form.non_field_errors }}</div>
+                    {% endif %}
+                </div>
+                <div class="card-footer bg-white border-top d-flex justify-content-between">
+                    <button type="submit" class="btn btn-primary px-4">
+                        <i class="bi bi-save me-1"></i> Save Bill
+                    </button>
+                    <a href="{% url 'management:bill_list' %}" class="btn btn-outline-secondary">
+                        <i class="bi bi-x-lg me-1"></i> Cancel
+                    </a>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}

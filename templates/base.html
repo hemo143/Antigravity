@@ -1,0 +1,203 @@
+{% load i18n %}
+{% get_current_language as LANGUAGE_CODE %}
+<!DOCTYPE html>
+<html lang="{{ LANGUAGE_CODE }}" {% if LANGUAGE_CODE == 'ar' %}dir="rtl"{% endif %}>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Event Management System{% endblock %}</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
+    <link href="/static/css/main.css" rel="stylesheet">
+    {% block extra_css %}{% endblock %}
+</head>
+<body>
+
+{% if user.is_authenticated %}
+<!-- ═══ SIDEBAR ═══ -->
+<div class="sidebar">
+    <div class="sidebar-header">
+        <div class="sidebar-logo">A</div>
+        <span class="fw-bold">{% trans "Admin Panel" %}</span>
+    </div>
+    <div class="user-panel">
+        <div class="user-img"></div>
+        <span>{{ user.get_full_name|default:user.username }}</span>
+    </div>
+    <ul class="sidebar-menu">
+        <li>
+            <a href="{% url 'dashboard:index' %}" class="menu-item {% if request.resolver_match.namespace == 'dashboard' %}active{% endif %}">
+                <i class="bi bi-grid-3x3-gap-fill"></i> {% trans "Dashboard" %}
+            </a>
+        </li>
+
+        <li class="menu-header">{% trans "MANAGEMENT" %}</li>
+
+        <li>
+            <a href="{% url 'events:category_list' %}" class="menu-item">
+                <i class="bi bi-folder-fill"></i> Event Category
+            </a>
+            <ul class="list-unstyled ms-4">
+                <li><a href="{% url 'events:category_list' %}" class="menu-item text-sm"><i class="bi bi-pencil-square"></i> Create Category</a></li>
+                <li><a href="{% url 'events:category_list' %}" class="menu-item text-sm"><i class="bi bi-list-ul"></i> Category List</a></li>
+            </ul>
+        </li>
+
+        <li>
+            <a href="{% url 'events:event_list' %}" class="menu-item">
+                <i class="bi bi-calendar-event"></i> {% trans "Events" %}
+            </a>
+            <ul class="list-unstyled ms-4">
+                <li><a href="{% url 'events:event_create' %}" class="menu-item text-sm"><i class="bi bi-pencil-square"></i> {% trans "Create Event" %}</a></li>
+                <li><a href="{% url 'events:event_list' %}" class="menu-item text-sm"><i class="bi bi-list-ul"></i> {% trans "Event List" %}</a></li>
+                <li><a href="{% url 'events:wishlist_list' %}" class="menu-item text-sm"><i class="bi bi-heart-fill"></i> {% trans "My Wishlist" %}</a></li>
+            </ul>
+        </li>
+
+        {% if user.is_organizer %}
+        <li class="menu-header">FINANCE</li>
+
+        <li>
+            <a href="{% url 'management:supplier_list' %}" class="menu-item {% if request.resolver_match.namespace == 'management' and 'supplier' in request.path %}active{% endif %}">
+                <i class="bi bi-building"></i> Suppliers
+            </a>
+            <ul class="list-unstyled ms-4">
+                <li><a href="{% url 'management:supplier_create' %}" class="menu-item text-sm"><i class="bi bi-plus-circle"></i> Add Supplier</a></li>
+                <li><a href="{% url 'management:supplier_list' %}" class="menu-item text-sm"><i class="bi bi-list-ul"></i> Supplier List</a></li>
+            </ul>
+        </li>
+
+        <li>
+            <a href="{% url 'management:bill_list' %}" class="menu-item {% if request.resolver_match.namespace == 'management' and 'bill' in request.path %}active{% endif %}">
+                <i class="bi bi-receipt"></i> Bills & Expenses
+            </a>
+            <ul class="list-unstyled ms-4">
+                <li><a href="{% url 'management:bill_create' %}" class="menu-item text-sm"><i class="bi bi-plus-circle"></i> Add Bill</a></li>
+                <li><a href="{% url 'management:bill_list' %}" class="menu-item text-sm"><i class="bi bi-list-ul"></i> Bill List</a></li>
+            </ul>
+        </li>
+        {% endif %}
+    </ul>
+</div>
+
+<!-- ═══ MAIN WRAPPER ═══ -->
+<div class="main-wrapper">
+    <nav class="top-navbar">
+        <div class="d-flex align-items-center">
+            <i class="bi bi-list fs-4 me-3 cursor-pointer"></i>
+            <div class="d-flex gap-3">
+                <a href="#" class="nav-item-link text-white text-decoration-none">Home</a>
+                <a href="#" class="nav-item-link text-white text-decoration-none">Contact</a>
+            </div>
+        </div>
+        <div class="search-box d-none d-md-block">
+            <div class="input-group">
+                <input type="text" class="form-control form-control-sm" placeholder="Search">
+                <button class="btn btn-sm btn-light border-0"><i class="bi bi-search"></i></button>
+            </div>
+        </div>
+        <div class="ms-auto d-flex align-items-center gap-3">
+            <i class="bi bi-chat-left-text text-white position-relative">
+                <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger" style="font-size: 8px;">3</span>
+            </i>
+            <i class="bi bi-bell text-white position-relative">
+                <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-warning text-dark" style="font-size: 8px;">15</span>
+            </i>
+            <i class="bi bi-grid-fill text-white"></i>
+            <div class="dropdown">
+                <button class="btn btn-sm text-white dropdown-toggle border-0" data-bs-toggle="dropdown">
+                    <i class="bi bi-person-circle fs-5"></i>
+                </button>
+                <ul class="dropdown-menu dropdown-menu-end">
+                    <li><a class="dropdown-item" href="/admin/">{% trans "Admin Panel" %}</a></li>
+                    <li><hr class="dropdown-divider"></li>
+                    <li>
+                        <form action="{% url 'set_language' %}" method="post" class="px-3 py-1">
+                            {% csrf_token %}
+                            <input name="next" type="hidden" value="{{ request.get_full_path }}">
+                            <div class="d-flex gap-2">
+                                <button name="language" value="en" class="btn btn-sm {% if LANGUAGE_CODE == 'en' %}btn-primary{% else %}btn-outline-secondary{% endif %}">EN</button>
+                                <button name="language" value="ar" class="btn btn-sm {% if LANGUAGE_CODE == 'ar' %}btn-primary{% else %}btn-outline-secondary{% endif %}">AR</button>
+                            </div>
+                        </form>
+                    </li>
+                    <li><hr class="dropdown-divider"></li>
+                    <li>
+                        <form method="post" action="{% url 'accounts:logout' %}">
+                            {% csrf_token %}
+                            <button type="submit" class="dropdown-item text-danger">{% trans "Logout" %}</button>
+                        </form>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <main class="content-wrapper">
+        <div class="page-header">
+            <h1 class="page-title">{% block heading %}Dashboard{% endblock %}</h1>
+            <nav>
+                <ol class="breadcrumb mb-0">
+                    <li class="breadcrumb-item"><a href="#" class="text-decoration-none text-primary">Home</a></li>
+                    <li class="breadcrumb-item active">Dashboard</li>
+                </ol>
+            </nav>
+        </div>
+        <div class="content-body">
+            {% if messages %}
+            {% for message in messages %}
+            <div class="alert alert-{{ message.tags }} alert-dismissible fade show">
+                {{ message }}<button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+            </div>
+            {% endfor %}
+            {% endif %}
+{% else %}
+<!-- ═══ PUBLIC NAVBAR ═══ -->
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark px-4">
+    <a class="navbar-brand fw-bold" href="{% url 'events:event_list' %}">
+        <i class="bi bi-calendar-event-fill text-primary me-2"></i>EventPro
+    </a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarPublic">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarPublic">
+        <ul class="navbar-nav me-auto">
+            <li class="nav-item"><a class="nav-link" href="{% url 'events:event_list' %}">Events</a></li>
+        </ul>
+        <div class="d-flex gap-2">
+            <a href="{% url 'accounts:login' %}" class="btn btn-outline-light btn-sm">Login</a>
+            <a href="{% url 'accounts:register' %}" class="btn btn-primary btn-sm">Sign Up</a>
+        </div>
+    </div>
+</nav>
+<main class="container my-4">
+    {% if messages %}
+    {% for message in messages %}
+    <div class="alert alert-{% if message.tags == 'error' %}danger{% else %}{{ message.tags }}{% endif %} alert-dismissible fade show">
+        {{ message }}<button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+    </div>
+    {% endfor %}
+    {% endif %}
+{% endif %}
+
+{% block content %}{% endblock %}
+
+{% if user.is_authenticated %}
+        </div><!-- /.content-body -->
+    </main><!-- /.content-wrapper -->
+    <footer class="main-footer">
+        <div class="float-end d-none d-sm-block">
+            <b>Developed By</b> Antigravity
+        </div>
+        <strong>Copyright &copy; 2024 <a href="#" class="text-primary text-decoration-none">EventPro</a>.</strong> All rights reserved.
+    </footer>
+</div><!-- /.main-wrapper -->
+{% else %}
+</main><!-- /.container -->
+{% endif %}
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+<script src="/static/js/main.js"></script>
+{% block extra_js %}{% endblock %}
+</body>
+</html>

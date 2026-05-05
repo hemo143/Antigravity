@@ -1,0 +1,160 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: EventPro\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2024-04-22 01:45+0200\n"
+"PO-Revision-Date: 2024-04-22 02:00+0200\n"
+"Last-Translator: Antigravity\n"
+"Language-Team: Arabic\n"
+"Language: ar\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=6; plural=n==0 ? 0 : n==1 ? 1 : n==2 ? 2 : n%100>=3 && n%100<=10 ? 3 : n%100>=11 && n%100<=99 ? 4 : 5;\n"
+
+msgid "Dashboard"
+msgstr "لوحة التحكم"
+
+msgid "Admin Panel"
+msgstr "لوحة الإدارة"
+
+msgid "MANAGEMENT"
+msgstr "الإدارة"
+
+msgid "Events"
+msgstr "الأحداث"
+
+msgid "Create Event"
+msgstr "إنشاء حدث"
+
+msgid "Event List"
+msgstr "قائمة الأحداث"
+
+msgid "My Wishlist"
+msgstr "قائمة أمنياتي"
+
+msgid "Logout"
+msgstr "تسجيل الخروج"
+
+msgid "Login"
+msgstr "تسجيل الدخول"
+
+msgid "Sign Up"
+msgstr "إنشاء حساب"
+
+msgid "Home"
+msgstr "الرئيسية"
+
+msgid "Contact"
+msgstr "اتصل بنا"
+
+msgid "Search"
+msgstr "بحث"
+
+msgid "I forgot my password"
+msgstr "نسيت كلمة المرور"
+
+msgid "Register a new membership"
+msgstr "تسجيل عضوية جديدة"
+
+msgid "Event Attendees"
+msgstr "حضور الحدث"
+
+msgid "Attendance Management"
+msgstr "إدارة الحضور"
+
+msgid "Attendees for"
+msgstr "الحاضرون لـ"
+
+msgid "Bookings"
+msgstr "الحجوزات"
+
+msgid "User"
+msgstr "المستخدم"
+
+msgid "Email"
+msgstr "البريد الإلكتروني"
+
+msgid "Tickets"
+msgstr "التذاكر"
+
+msgid "Status"
+msgstr "الحالة"
+
+msgid "Actions"
+msgstr "الإجراءات"
+
+msgid "Attended"
+msgstr "حضر"
+
+msgid "Cancelled"
+msgstr "ملغي"
+
+msgid "Confirmed"
+msgstr "مؤكد"
+
+msgid "Mark Absence"
+msgstr "تحديد كغائب"
+
+msgid "Mark Attendance"
+msgstr "تحديد كحاضر"
+
+msgid "No attendees registered yet."
+msgstr "لا يوجد حضور مسجلين بعد."
+
+msgid "Back to Event"
+msgstr "العودة للحدث"
+
+msgid "FREE"
+msgstr "مجاني"
+
+msgid "View Details"
+msgstr "عرض التفاصيل"
+
+msgid "Your wishlist is empty"
+msgstr "قائمة أمنياتك فارغة"
+
+msgid "Explore events and save the ones you love!"
+msgstr "استكشف الأحداث واحفظ ما يعجبك!"
+
+msgid "Discover Events"
+msgstr "اكتشف الأحداث"
+
+msgid "Password Reset"
+msgstr "إعادة تعيين كلمة المرور"
+
+msgid "Forgotten your password? Enter your email address below, and we'll email instructions for setting a new one."
+msgstr "نسيت كلمة مرورك؟ أدخل عنوان بريدك الإلكتروني أدناه، وسنرسل لك تعليمات لتعيين كلمة مرور جديدة."
+
+msgid "Send Password Reset Email"
+msgstr "إرسال بريد إعادة التعيين"
+
+msgid "Back to Login"
+msgstr "العودة لتسجيل الدخول"
+
+msgid "Verification Email Sent"
+msgstr "تم إرسال بريد التحقق"
+
+msgid "We've emailed you instructions for setting your password, if an account exists with the email you entered. You should receive them shortly."
+msgstr "لقد أرسلنا لك تعليمات لتعيين كلمة مرورك، في حالة وجود حساب بالبريد الذي أدخلته. ستستلمها قريباً."
+
+msgid "If you don't receive an email, please make sure you've entered the address you registered with, and check your spam folder."
+msgstr "إذا لم تستلم بريداً، يرجى التأكد من أنك أدخلت العنوان الذي سجلت به، وتفقد صندوق البريد المزعج (Spam)."
+
+msgid "Set New Password"
+msgstr "تعيين كلمة مرور جديدة"
+
+msgid "Please enter your new password twice so we can verify you typed it correctly."
+msgstr "يرجى إدخال كلمة المرور الجديدة مرتين للتأكد من كتابتها بشكل صحيح."
+
+msgid "Change my password"
+msgstr "تغيير كلمة المرور"
+
+msgid "Password Reset Complete"
+msgstr "اكتملت إعادة تعيين كلمة المرور"
+
+msgid "Your password has been set. You may now log in with your new password."
+msgstr "تم تعيين كلمة مرورك الجديدة. يمكنك الآن تسجيل الدخول بها."
+
+msgid "Log In"
+msgstr "تسجيل دخول"

@@ -1,0 +1,120 @@
+{% extends 'base.html' %}
+{% load i18n %}
+
+{% block title %}{% trans "Events" %} - EventPro{% endblock %}
+
+{% block heading %}{% trans "Browse Events" %}{% endblock %}
+
+{% block content %}
+<!-- Search & Filter Bar -->
+<div class="card card-default shadow-sm mb-4">
+    <div class="card-header">
+        <h3 class="card-title"><i class="bi bi-funnel-fill me-1"></i> {% trans "Filter Events" %}</h3>
+    </div>
+    <div class="card-body">
+        <form method="get" class="row g-3">
+            <div class="col-md-4">
+                <input type="text" name="q" value="{{ form.q.value|default:'' }}"
+                       class="form-control" placeholder="Event name, description...">
+            </div>
+            <div class="col-md-2">
+                <select name="category" class="form-select">
+                    <option value="">All Categories</option>
+                    {% for cat in categories %}
+                    <option value="{{ cat.id }}" {% if form.category.value|stringformat:"s" == cat.id|stringformat:"s" %}selected{% endif %}>
+                        {{ cat.name }}
+                    </option>
+                    {% endfor %}
+                </select>
+            </div>
+            <div class="col-md-2">
+                <select name="is_free" class="form-select">
+                    <option value="">Any Price</option>
+                    <option value="true" {% if form.is_free.value == 'true' %}selected{% endif %}>Free Only</option>
+                    <option value="false" {% if form.is_free.value == 'false' %}selected{% endif %}>Paid Only</option>
+                </select>
+            </div>
+            <div class="col-md-2 text-end d-grid gap-2 d-md-flex">
+                <button type="submit" class="btn btn-primary flex-fill">
+                    <i class="bi bi-search"></i>
+                </button>
+                <a href="{% url 'events:event_list' %}" class="btn btn-default border">{% trans "Clear" %}</a>
+            </div>
+        </form>
+    </div>
+</div>
+
+<div class="row">
+    {% for event in page_obj %}
+    <div class="col-md-4 mb-4">
+        <div class="card shadow-sm h-100 overflow-hidden">
+            {% if event.cover_image %}
+                <img src="{{ event.cover_image.url }}" class="card-img-top" style="height: 180px; object-fit: cover;">
+            {% else %}
+                <div class="card-img-top bg-secondary d-flex align-items-center justify-content-center text-white" style="height: 180px;">
+                    <i class="bi bi-image fs-1" style="opacity: 0.5;"></i>
+                </div>
+            {% endif %}
+            
+            <div class="card-body">
+                <div class="d-flex justify-content-between align-items-start mb-2">
+                    <h5 class="card-title fw-bold mb-0">
+                        <a href="{{ event.get_absolute_url }}" class="text-decoration-none text-dark">{{ event.title }}</a>
+                    </h5>
+                    {% if event.category %}
+                        <span class="badge" style="background:{{ event.category.color }}">{{ event.category.name }}</span>
+                    {% endif %}
+                </div>
+                
+                <p class="card-text text-muted small mb-3">
+                    <i class="bi bi-calendar-check me-1"></i> {{ event.start_date|date:"M d, Y" }} <br>
+                    <i class="bi bi-geo-alt-fill me-1"></i> {{ event.venue }}
+                </p>
+
+                <div class="progress mb-2" style="height: 8px;">
+                    <div class="progress-bar {% if event.booking_percentage > 80 %}bg-danger{% else %}bg-success{% endif %}" 
+                         role="progressbar" style="width: {{ event.booking_percentage }}%"></div>
+                </div>
+                <div class="d-flex justify-content-between x-small text-muted mb-3">
+                    <span>{{ event.available_seats }} {% trans "seats left" %}</span>
+                    <span>{{ event.booking_percentage }}% {% trans "full" %}</span>
+                </div>
+
+                <a href="{{ event.get_absolute_url }}" class="btn btn-outline-primary btn-sm w-100">{% trans "View Details" %}</a>
+            </div>
+            <div class="card-footer bg-white d-flex justify-content-between align-items-center">
+                {% if event.is_free %}
+                    <span class="text-success fw-bold">{% trans "FREE" %}</span>
+                {% else %}
+                    <span class="text-dark fw-bold">${{ event.price }}</span>
+                {% endif %}
+                <small class="text-muted"><i class="bi bi-person"></i> {{ event.organizer.username }}</small>
+            </div>
+        </div>
+    </div>
+    {% empty %}
+    <div class="col-12 text-center py-5">
+        <p class="text-muted fs-4">{% trans "No events match your criteria." %}</p>
+    </div>
+    {% endfor %}
+</div>
+
+<!-- Pagination -->
+{% if page_obj.has_other_pages %}
+<nav class="d-flex justify-content-center mt-4">
+    <ul class="pagination pagination-sm">
+        {% if page_obj.has_previous %}
+        <li class="page-item"><a class="page-link" href="?page={{ page_obj.previous_page_number }}">&laquo;</a></li>
+        {% endif %}
+        {% for num in page_obj.paginator.page_range %}
+        <li class="page-item {% if num == page_obj.number %}active{% endif %}">
+            <a class="page-link" href="?page={{ num }}">{{ num }}</a>
+        </li>
+        {% endfor %}
+        {% if page_obj.has_next %}
+        <li class="page-item"><a class="page-link" href="?page={{ page_obj.next_page_number }}">&raquo;</a></li>
+        {% endif %}
+    </ul>
+</nav>
+{% endif %}
+{% endblock %}

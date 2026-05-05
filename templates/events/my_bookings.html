@@ -1,0 +1,76 @@
+{% extends 'base.html' %}
+{% block title %}My Bookings - EventPro{% endblock %}
+
+{% block breadcrumb %}
+<div class="breadcrumb-bar">
+    <h4 class="page-title">My Bookings</h4>
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb mb-0">
+            <li class="breadcrumb-item"><a href="{% url 'dashboard:index' %}">Dashboard</a></li>
+            <li class="breadcrumb-item active">My Bookings</li>
+        </ol>
+    </nav>
+</div>
+{% endblock %}
+
+{% block content %}
+{% if bookings %}
+<div class="row g-4">
+    {% for booking in bookings %}
+    <div class="col-12 col-md-6 col-xl-4">
+        <div class="card card-dashboard h-100 border-{% if booking.status == 'confirmed' %}success{% elif booking.status == 'cancelled' %}danger{% else %}secondary{% endif %} border-opacity-25">
+            <div class="card-body">
+                <div class="d-flex justify-content-between mb-3">
+                    {% if booking.event.category %}
+                    <span class="badge" style="background:{{ booking.event.category.color }}">
+                        {{ booking.event.category.name }}
+                    </span>
+                    {% endif %}
+                    <span class="badge bg-{% if booking.status == 'confirmed' %}success{% elif booking.status == 'cancelled' %}danger{% else %}warning{% endif %}">
+                        {{ booking.status|title }}
+                    </span>
+                </div>
+
+                <h6 class="fw-bold">
+                    <a href="{{ booking.event.get_absolute_url }}" class="text-decoration-none text-dark">
+                        {{ booking.event.title }}
+                    </a>
+                </h6>
+
+                <ul class="list-unstyled text-muted small mt-3">
+                    <li class="mb-1"><i class="bi bi-calendar3 me-2"></i>{{ booking.event.start_date|date:"D, M d Y" }}</li>
+                    <li class="mb-1"><i class="bi bi-clock me-2"></i>{{ booking.event.start_date|date:"g:i A" }}</li>
+                    <li class="mb-1"><i class="bi bi-geo-alt me-2"></i>{{ booking.event.venue }}</li>
+                    <li class="mb-1"><i class="bi bi-ticket me-2"></i>{{ booking.tickets }} ticket{{ booking.tickets|pluralize }}</li>
+                    <li><i class="bi bi-cash me-2"></i>{% if booking.event.is_free %}Free{% else %}${{ booking.total_price }}{% endif %}</li>
+                </ul>
+
+                <div class="mt-3 d-flex gap-2">
+                    <a href="{{ booking.event.get_absolute_url }}" class="btn btn-outline-primary btn-sm flex-fill">
+                        <i class="bi bi-eye me-1"></i>View Event
+                    </a>
+                    {% if booking.status == 'confirmed' and booking.event.is_upcoming %}
+                    <a href="{% url 'events:cancel_booking' booking.id %}" class="btn btn-outline-danger btn-sm">
+                        <i class="bi bi-x"></i>
+                    </a>
+                    {% endif %}
+                </div>
+            </div>
+            <div class="card-footer text-muted small">
+                Booked on {{ booking.booked_at|date:"M d, Y" }}
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+{% else %}
+<div class="text-center py-5">
+    <i class="bi bi-bookmark-x text-muted" style="font-size:5rem"></i>
+    <h4 class="mt-3 text-muted">No bookings yet</h4>
+    <p class="text-muted">Start exploring events and book your first one!</p>
+    <a href="{% url 'events:event_list' %}" class="btn btn-primary mt-2">
+        <i class="bi bi-search me-2"></i>Browse Events
+    </a>
+</div>
+{% endif %}
+{% endblock %}

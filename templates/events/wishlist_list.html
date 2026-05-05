@@ -1,0 +1,67 @@
+{% extends 'base.html' %}
+{% load i18n %}
+
+{% block title %}{% trans "My Wishlist" %} - EventPro{% endblock %}
+
+{% block heading %}{% trans "My Wishlist" %}{% endblock %}
+
+{% block content %}
+<div class="row">
+    {% for item in wishlist %}
+    <div class="col-md-4 mb-4">
+        <div class="card h-100 shadow-sm border-0 event-card">
+            {% if item.event.cover_image %}
+            <img src="{{ item.event.cover_image.url }}" class="card-img-top" alt="{{ item.event.title }}" style="height: 200px; object-fit: cover;">
+            {% else %}
+            <div class="bg-light text-center py-5" style="height: 200px;">
+                <i class="bi bi-image text-muted fs-1"></i>
+            </div>
+            {% endif %}
+            
+            <div class="card-body">
+                <div class="d-flex justify-content-between align-items-start mb-2">
+                    <span class="badge" style="background: {{ item.event.category.color }};">
+                        {{ item.event.category.name }}
+                    </span>
+                    <a href="{% url 'events:toggle_wishlist' item.event.slug %}" class="text-danger">
+                        <i class="bi bi-heart-fill"></i>
+                    </a>
+                </div>
+                <h5 class="card-title fw-bold">{{ item.event.title }}</h5>
+                <p class="card-text text-muted small mb-3">
+                    <i class="bi bi-calendar-event me-1"></i> {{ item.event.start_date|date:"M d, Y" }}
+                </p>
+                <div class="d-flex justify-content-between align-items-center mt-auto">
+                    <span class="fw-bold text-primary">
+                        {% if item.event.is_free %}{% trans "FREE" %}{% else %}${{ item.event.price }}{% endif %}
+                    </span>
+                    <a href="{{ item.event.get_absolute_url }}" class="btn btn-sm btn-outline-primary">{% trans "View Details" %}</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% empty %}
+    <div class="col-12 text-center py-5">
+        <div class="mb-4">
+            <i class="bi bi-heart text-muted" style="font-size: 5rem;"></i>
+        </div>
+        <h3>{% trans "Your wishlist is empty" %}</h3>
+        <p class="text-muted">{% trans "Explore events and save the ones you love!" %}</p>
+        <a href="{% url 'events:event_list' %}" class="btn btn-primary mt-3">
+            <i class="bi bi-search me-2"></i> {% trans "Discover Events" %}
+        </a>
+    </div>
+    {% endfor %}
+</div>
+
+<style>
+    .event-card {
+        transition: transform 0.2s;
+        border-radius: 12px;
+        overflow: hidden;
+    }
+    .event-card:hover {
+        transform: translateY(-5px);
+    }
+</style>
+{% endblock %}

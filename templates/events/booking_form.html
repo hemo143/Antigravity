@@ -1,0 +1,88 @@
+{% extends 'base.html' %}
+{% block title %}Book Event - EventPro{% endblock %}
+
+{% block breadcrumb %}
+<div class="breadcrumb-bar">
+    <h4 class="page-title">Book Event</h4>
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb mb-0">
+            <li class="breadcrumb-item"><a href="{% url 'events:event_list' %}">Events</a></li>
+            <li class="breadcrumb-item"><a href="{{ event.get_absolute_url }}">{{ event.title|truncatechars:25 }}</a></li>
+            <li class="breadcrumb-item active">Book</li>
+        </ol>
+    </nav>
+</div>
+{% endblock %}
+
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-12 col-md-7 col-lg-6">
+        <div class="card card-dashboard">
+            <div class="card-header">
+                <h5 class="card-title mb-0"><i class="bi bi-bookmark-plus me-2"></i>Complete Your Booking</h5>
+            </div>
+            <div class="card-body">
+                <!-- Event Summary -->
+                <div class="p-3 bg-light rounded-3 mb-4">
+                    <div class="fw-bold">{{ event.title }}</div>
+                    <div class="text-muted small mt-1">
+                        <i class="bi bi-calendar3 me-1"></i>{{ event.start_date|date:"D, M d Y · g:i A" }}<br>
+                        <i class="bi bi-geo-alt me-1"></i>{{ event.venue }}{% if event.city %}, {{ event.city }}{% endif %}
+                    </div>
+                    <div class="mt-2">
+                        <span class="badge bg-{% if event.is_free %}success{% else %}dark{% endif %}">
+                            {% if event.is_free %}FREE{% else %}${{ event.price }} per ticket{% endif %}
+                        </span>
+                        <span class="badge bg-primary ms-1">{{ event.available_seats }} seats left</span>
+                    </div>
+                </div>
+
+                <form method="post">
+                    {% csrf_token %}
+                    <div class="mb-3">
+                        <label class="form-label fw-medium">Number of Tickets</label>
+                        {{ form.tickets }}
+                        <div class="form-text">Maximum 10 tickets per booking.</div>
+                    </div>
+                    <div class="mb-4">
+                        <label class="form-label fw-medium">Special Requirements (Optional)</label>
+                        {{ form.notes }}
+                    </div>
+
+                    {% if not event.is_free %}
+                    <div class="p-3 bg-light rounded-3 mb-4">
+                        <div class="d-flex justify-content-between">
+                            <span>Price per ticket:</span>
+                            <strong>${{ event.price }}</strong>
+                        </div>
+                        <div class="d-flex justify-content-between text-primary fw-bold fs-5 mt-1">
+                            <span>Total:</span>
+                            <span id="totalPrice">${{ event.price }}</span>
+                        </div>
+                    </div>
+                    {% endif %}
+
+                    <button type="submit" class="btn btn-primary w-100 py-2">
+                        <i class="bi bi-check-circle me-2"></i>Confirm Booking
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+{% if not event.is_free %}
+<script>
+const ticketsInput = document.querySelector('[name="tickets"]');
+const totalEl = document.getElementById('totalPrice');
+const price = {{ event.price }};
+
+ticketsInput.addEventListener('input', function() {
+    const tickets = parseInt(this.value) || 1;
+    totalEl.textContent = '$' + (price * tickets).toFixed(2);
+});
+</script>
+{% endif %}
+{% endblock %}

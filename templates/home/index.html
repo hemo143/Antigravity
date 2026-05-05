@@ -1,0 +1,889 @@
+{% load i18n %}{% get_current_language as LANGUAGE_CODE %}<!DOCTYPE html>
+<html lang="{{ LANGUAGE_CODE }}" dir="{% if LANGUAGE_CODE == 'ar' %}rtl{% else %}ltr{% endif %}">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {% if LANGUAGE_CODE == 'ar' %}
+    <title>ProAV – خبراء AV للمؤتمرات والمعارض والفعاليات</title>
+    <meta name="description" content="حلول صوت وصورة احترافية للمؤتمرات والمعارض وفعاليات الشركات. شاشات LED وأنظمة صوت وإضاءة وإنتاج فيديو.">
+    {% else %}
+    <title>ProAV Solutions – Conference & Exhibition AV Specialists</title>
+    <meta name="description" content="Professional Audio Visual solutions for conferences, exhibitions, and corporate events. LED screens, sound systems, lighting & video production.">
+    {% endif %}
+
+    <!-- Inter (EN) + Cairo (AR) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Cairo:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" rel="stylesheet">
+    <link href="/static/css/landing.css" rel="stylesheet">
+</head>
+<body>
+
+<!-- ══════════════════════════════════════════════
+     NAVBAR
+══════════════════════════════════════════════ -->
+<nav class="av-navbar" id="mainNav">
+    <div class="container-xl">
+        <div class="nav-inner">
+
+            <a href="#home" class="nav-logo">
+                <span class="logo-icon"><i class="bi bi-display-fill"></i></span>
+                <span class="logo-text">Pro<span class="accent">AV</span></span>
+            </a>
+
+            <ul class="nav-links">
+                <li><a href="#services">{% if LANGUAGE_CODE == 'ar' %}الخدمات{% else %}Services{% endif %}</a></li>
+                <li><a href="#portfolio">{% if LANGUAGE_CODE == 'ar' %}أعمالنا{% else %}Portfolio{% endif %}</a></li>
+                <li><a href="#about">{% if LANGUAGE_CODE == 'ar' %}من نحن{% else %}About{% endif %}</a></li>
+                <li><a href="#contact">{% if LANGUAGE_CODE == 'ar' %}تواصل{% else %}Contact{% endif %}</a></li>
+            </ul>
+
+            <!-- Language switcher -->
+            <form action="{% url 'set_language' %}" method="post" class="lang-switch-form">
+                {% csrf_token %}
+                <input name="next" type="hidden" value="{{ request.get_full_path }}">
+                {% if LANGUAGE_CODE == 'ar' %}
+                    <button name="language" value="en" class="btn-lang">EN</button>
+                {% else %}
+                    <button name="language" value="ar" class="btn-lang">عربي</button>
+                {% endif %}
+            </form>
+
+            <a href="#contact" class="btn-quote">
+                <i class="bi bi-send-fill me-2"></i>
+                {% if LANGUAGE_CODE == 'ar' %}احصل على عرض{% else %}Get a Quote{% endif %}
+            </a>
+
+            <button class="nav-toggle" id="navToggle" aria-label="Toggle menu">
+                <span></span><span></span><span></span>
+            </button>
+        </div>
+    </div>
+
+    <!-- Mobile Menu -->
+    <div class="mobile-menu" id="mobileMenu">
+        <ul>
+            <li><a href="#services"  class="mobile-link">{% if LANGUAGE_CODE == 'ar' %}الخدمات{% else %}Services{% endif %}</a></li>
+            <li><a href="#portfolio" class="mobile-link">{% if LANGUAGE_CODE == 'ar' %}أعمالنا{% else %}Portfolio{% endif %}</a></li>
+            <li><a href="#about"     class="mobile-link">{% if LANGUAGE_CODE == 'ar' %}من نحن{% else %}About{% endif %}</a></li>
+            <li><a href="#contact"   class="mobile-link">{% if LANGUAGE_CODE == 'ar' %}تواصل{% else %}Contact{% endif %}</a></li>
+        </ul>
+        <div class="d-flex gap-2 mt-3">
+            <a href="#contact" class="btn-quote flex-grow-1 text-center">
+                {% if LANGUAGE_CODE == 'ar' %}احصل على عرض{% else %}Get a Quote{% endif %}
+            </a>
+            <form action="{% url 'set_language' %}" method="post">
+                {% csrf_token %}
+                <input name="next" type="hidden" value="{{ request.get_full_path }}">
+                {% if LANGUAGE_CODE == 'ar' %}
+                    <button name="language" value="en" class="btn-lang">EN</button>
+                {% else %}
+                    <button name="language" value="ar" class="btn-lang">عربي</button>
+                {% endif %}
+            </form>
+        </div>
+    </div>
+</nav>
+
+
+<!-- ══════════════════════════════════════════════
+     HERO
+══════════════════════════════════════════════ -->
+<section class="hero-section" id="home">
+    <div class="hero-video-wrap">
+        <video autoplay muted loop playsinline class="hero-video">
+            <source src="https://www.w3schools.com/html/mov_bbb.mp4" type="video/mp4">
+        </video>
+        <div class="hero-overlay"></div>
+    </div>
+
+    <div class="container-xl hero-content">
+        <div class="hero-badge" data-aos="fade-down">
+            <i class="bi bi-patch-check-fill me-2"></i>
+            {% if LANGUAGE_CODE == 'ar' %}موثوق به من أكثر من 200 شركة{% else %}Trusted by 200+ Corporates{% endif %}
+        </div>
+
+        <h1 class="hero-title" data-aos="fade-up" data-aos-delay="100">
+            {% if LANGUAGE_CODE == 'ar' %}
+                نُدير فعاليات الشركات<br><span class="gradient-text">بمستوى عالمي</span>
+            {% else %}
+                We Power <span class="gradient-text">World-Class</span><br>Corporate Events
+            {% endif %}
+        </h1>
+
+        <p class="hero-subtitle" data-aos="fade-up" data-aos-delay="200">
+            {% if LANGUAGE_CODE == 'ar' %}
+                حلول صوت وصورة متكاملة للمؤتمرات والمعارض وفعاليات الشركات.<br>
+                من جدران LED إلى الصوت الغامر — نقدم تجارب تُغلق الصفقات.
+            {% else %}
+                Full-service Audio Visual solutions for conferences, exhibitions &amp; corporate events.<br>
+                From LED walls to immersive sound — we deliver experiences that close deals.
+            {% endif %}
+        </p>
+
+        <div class="hero-actions" data-aos="fade-up" data-aos-delay="300">
+            <a href="#contact" class="btn-primary-av">
+                <i class="bi bi-send-fill me-2"></i>
+                {% if LANGUAGE_CODE == 'ar' %}احصل على عرض سعر{% else %}Get a Quote{% endif %}
+            </a>
+            <a href="#portfolio" class="btn-ghost-av">
+                <i class="bi bi-play-circle-fill me-2"></i>
+                {% if LANGUAGE_CODE == 'ar' %}شاهد أعمالنا{% else %}View Portfolio{% endif %}
+            </a>
+        </div>
+
+        <div class="hero-stats" data-aos="fade-up" data-aos-delay="400">
+            <div class="stat-item">
+                <span class="stat-num">200+</span>
+                <span class="stat-label">{% if LANGUAGE_CODE == 'ar' %}فعالية منجزة{% else %}Events Delivered{% endif %}</span>
+            </div>
+            <div class="stat-divider"></div>
+            <div class="stat-item">
+                <span class="stat-num">12+</span>
+                <span class="stat-label">{% if LANGUAGE_CODE == 'ar' %}سنة خبرة{% else %}Years Experience{% endif %}</span>
+            </div>
+            <div class="stat-divider"></div>
+            <div class="stat-item">
+                <span class="stat-num">98%</span>
+                <span class="stat-label">{% if LANGUAGE_CODE == 'ar' %}رضا العملاء{% else %}Client Satisfaction{% endif %}</span>
+            </div>
+            <div class="stat-divider"></div>
+            <div class="stat-item">
+                <span class="stat-num">50+</span>
+                <span class="stat-label">{% if LANGUAGE_CODE == 'ar' %}عميل مؤسسي{% else %}Corporate Clients{% endif %}</span>
+            </div>
+        </div>
+    </div>
+
+    <a href="#services" class="scroll-indicator"><i class="bi bi-chevron-down"></i></a>
+</section>
+
+
+<!-- ══════════════════════════════════════════════
+     SERVICES
+══════════════════════════════════════════════ -->
+<section class="section-pad" id="services">
+    <div class="container-xl">
+        <div class="section-header" data-aos="fade-up">
+            <span class="section-tag">{% if LANGUAGE_CODE == 'ar' %}ما نقدمه{% else %}What We Do{% endif %}</span>
+            <h2 class="section-title">{% if LANGUAGE_CODE == 'ar' %}خدمات AV الاحترافية{% else %}Professional AV Services{% endif %}</h2>
+            <p class="section-subtitle">
+                {% if LANGUAGE_CODE == 'ar' %}
+                    حلول صوت وصورة شاملة مصممة لتحقيق الأثر — من قاعات الاجتماعات إلى مؤتمرات 5000 مقعد.
+                {% else %}
+                    End-to-end audio visual solutions engineered for impact — from intimate boardrooms to 5,000-seat conferences.
+                {% endif %}
+            </p>
+        </div>
+
+        <div class="services-grid" data-aos="fade-up" data-aos-delay="100">
+
+            <div class="service-card">
+                <div class="service-icon-wrap" style="--accent:#4F8EF7;"><i class="bi bi-mic-fill"></i></div>
+                <h3 class="service-title">{% if LANGUAGE_CODE == 'ar' %}حلول AV للمؤتمرات{% else %}Conference AV Solutions{% endif %}</h3>
+                <p class="service-desc">
+                    {% if LANGUAGE_CODE == 'ar' %}
+                        أنظمة AV متكاملة للمؤتمرات الكبرى — ميكروفونات وبث مباشر وعرض بلا انقطاع.
+                    {% else %}
+                        Complete AV setups for large-scale conferences — microphones, mixers, projection, and live streaming with zero downtime.
+                    {% endif %}
+                </p>
+                <a href="#contact" class="service-link">{% if LANGUAGE_CODE == 'ar' %}اطلب الخدمة{% else %}Request Service{% endif %} <i class="bi bi-arrow-{% if LANGUAGE_CODE == 'ar' %}left{% else %}right{% endif %} ms-1"></i></a>
+            </div>
+
+            <div class="service-card">
+                <div class="service-icon-wrap" style="--accent:#FF6B35;"><i class="bi bi-grid-3x3-gap-fill"></i></div>
+                <h3 class="service-title">{% if LANGUAGE_CODE == 'ar' %}AV للمعارض{% else %}Exhibition AV{% endif %}</h3>
+                <p class="service-desc">
+                    {% if LANGUAGE_CODE == 'ar' %}
+                        استقطب الزوار في المعارض بشاشات رقمية وأكشاك تفاعلية وبيئات صوتية مميزة.
+                    {% else %}
+                        Captivate visitors at trade shows with dynamic digital displays, interactive kiosks, and branded audio environments.
+                    {% endif %}
+                </p>
+                <a href="#contact" class="service-link">{% if LANGUAGE_CODE == 'ar' %}اطلب الخدمة{% else %}Request Service{% endif %} <i class="bi bi-arrow-{% if LANGUAGE_CODE == 'ar' %}left{% else %}right{% endif %} ms-1"></i></a>
+            </div>
+
+            <div class="service-card">
+                <div class="service-icon-wrap" style="--accent:#00D4AA;"><i class="bi bi-tv-fill"></i></div>
+                <h3 class="service-title">{% if LANGUAGE_CODE == 'ar' %}شاشات LED وجدران الفيديو{% else %}LED Screens & Video Walls{% endif %}</h3>
+                <p class="service-desc">
+                    {% if LANGUAGE_CODE == 'ar' %}
+                        ألواح LED فائقة السطوع وجدران فيديو معيارية بدقة بكسل مثالية لأي حجم مكان.
+                    {% else %}
+                        Ultra-bright indoor/outdoor LED panels and modular video walls with pixel-perfect clarity for any venue size.
+                    {% endif %}
+                </p>
+                <a href="#contact" class="service-link">{% if LANGUAGE_CODE == 'ar' %}اطلب الخدمة{% else %}Request Service{% endif %} <i class="bi bi-arrow-{% if LANGUAGE_CODE == 'ar' %}left{% else %}right{% endif %} ms-1"></i></a>
+            </div>
+
+            <div class="service-card">
+                <div class="service-icon-wrap" style="--accent:#A855F7;"><i class="bi bi-speaker-fill"></i></div>
+                <h3 class="service-title">{% if LANGUAGE_CODE == 'ar' %}أنظمة الصوت{% else %}Sound Systems{% endif %}</h3>
+                <p class="service-desc">
+                    {% if LANGUAGE_CODE == 'ar' %}
+                        صفوف صوتية خطية نقية ووفيرة الطاقة وأنظمة صوت موزعة — مصممة صوتياً لكل نوع قاعة.
+                    {% else %}
+                        Crystal-clear line arrays, subwoofers, and distributed audio systems. Acoustically engineered for every room type.
+                    {% endif %}
+                </p>
+                <a href="#contact" class="service-link">{% if LANGUAGE_CODE == 'ar' %}اطلب الخدمة{% else %}Request Service{% endif %} <i class="bi bi-arrow-{% if LANGUAGE_CODE == 'ar' %}left{% else %}right{% endif %} ms-1"></i></a>
+            </div>
+
+            <div class="service-card">
+                <div class="service-icon-wrap" style="--accent:#F59E0B;"><i class="bi bi-lightbulb-fill"></i></div>
+                <h3 class="service-title">{% if LANGUAGE_CODE == 'ar' %}إضاءة احترافية{% else %}Professional Lighting{% endif %}</h3>
+                <p class="service-desc">
+                    {% if LANGUAGE_CODE == 'ar' %}
+                        إضاءة مسرحية ورؤوس متحركة وإسقاط GOBO. كل شعاع مُصمَّم بدقة وهدف.
+                    {% else %}
+                        Stage lighting, ambient wash, moving heads, and GOBO projections. Every beam placed with precision and purpose.
+                    {% endif %}
+                </p>
+                <a href="#contact" class="service-link">{% if LANGUAGE_CODE == 'ar' %}اطلب الخدمة{% else %}Request Service{% endif %} <i class="bi bi-arrow-{% if LANGUAGE_CODE == 'ar' %}left{% else %}right{% endif %} ms-1"></i></a>
+            </div>
+
+            <div class="service-card">
+                <div class="service-icon-wrap" style="--accent:#EC4899;"><i class="bi bi-camera-video-fill"></i></div>
+                <h3 class="service-title">{% if LANGUAGE_CODE == 'ar' %}إنتاج الفيديو{% else %}Video Production{% endif %}</h3>
+                <p class="service-desc">
+                    {% if LANGUAGE_CODE == 'ar' %}
+                        إنتاج مباشر متعدد الكاميرات وبث بجودة بث تلفزيوني وحزم فيديو ما بعد الحدث.
+                    {% else %}
+                        Multi-camera live production, event highlight reels, broadcast-quality streaming, and post-event video packages.
+                    {% endif %}
+                </p>
+                <a href="#contact" class="service-link">{% if LANGUAGE_CODE == 'ar' %}اطلب الخدمة{% else %}Request Service{% endif %} <i class="bi bi-arrow-{% if LANGUAGE_CODE == 'ar' %}left{% else %}right{% endif %} ms-1"></i></a>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+
+<!-- ══════════════════════════════════════════════
+     WHY CHOOSE US
+══════════════════════════════════════════════ -->
+<section class="why-section" id="about">
+    <div class="container-xl">
+        <div class="why-inner">
+
+            {% if LANGUAGE_CODE != 'ar' %}
+            <div class="why-visual" data-aos="fade-right">
+            {% else %}
+            <div class="why-visual" data-aos="fade-left">
+            {% endif %}
+                <div class="why-img-main">
+                    <img src="https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=600&q=80" alt="Conference event" loading="lazy">
+                </div>
+                <div class="why-img-badge">
+                    <i class="bi bi-award-fill text-warning fs-2"></i>
+                    <span>{% if LANGUAGE_CODE == 'ar' %}جائزة<br><strong>قطاع AV</strong>{% else %}Industry<br><strong>Award Winner</strong>{% endif %}</span>
+                </div>
+                <div class="why-img-float">
+                    <img src="https://images.unsplash.com/photo-1505373877841-8d25f7d46678?w=280&q=80" alt="Exhibition" loading="lazy">
+                </div>
+            </div>
+
+            {% if LANGUAGE_CODE != 'ar' %}
+            <div class="why-content" data-aos="fade-left">
+            {% else %}
+            <div class="why-content" data-aos="fade-right">
+            {% endif %}
+                <span class="section-tag">{% if LANGUAGE_CODE == 'ar' %}لماذا تختارنا{% else %}Why Choose Us{% endif %}</span>
+                <h2 class="section-title">
+                    {% if LANGUAGE_CODE == 'ar' %}المعيار الذهبي لتميز AV الشركات{% else %}The Standard for Corporate AV Excellence{% endif %}
+                </h2>
+                <p class="why-lead">
+                    {% if LANGUAGE_CODE == 'ar' %}
+                        نحن لا نُركّب معدات فحسب — بل نُهندس بيئات غامرة تُعزز علامتك التجارية وتُشرك جمهورك وتُخلّد فعاليتك في الأذهان.
+                    {% else %}
+                        We don't just set up equipment — we engineer immersive environments that amplify your brand, engage your audience, and make your event unforgettable.
+                    {% endif %}
+                </p>
+
+                <div class="why-points">
+                    <div class="why-point">
+                        <div class="why-point-icon" style="background:rgba(79,142,247,.12);color:#4F8EF7;"><i class="bi bi-lightning-charge-fill"></i></div>
+                        <div>
+                            <h4>{% if LANGUAGE_CODE == 'ar' %}تنفيذ سريع{% else %}Rapid Deployment{% endif %}</h4>
+                            <p>{% if LANGUAGE_CODE == 'ar' %}الإعداد والاختبار الكامل خلال النوافذ الزمنية المتفق عليها — لا تأخير يوم الحدث أبداً.{% else %}Full setup and testing completed within agreed windows — never a delay on event day.{% endif %}</p>
+                        </div>
+                    </div>
+                    <div class="why-point">
+                        <div class="why-point-icon" style="background:rgba(255,107,53,.12);color:#FF6B35;"><i class="bi bi-shield-check-fill"></i></div>
+                        <div>
+                            <h4>{% if LANGUAGE_CODE == 'ar' %}ضمان بلا أعطال{% else %}Zero-Failure Guarantee{% endif %}</h4>
+                            <p>{% if LANGUAGE_CODE == 'ar' %}أنظمة احتياطية ومهندسون في الموقع وجولات استعداد قبل الحدث — لا شيء يمكن أن يسوء.{% else %}Redundant systems, on-site engineers, and pre-event walkthroughs ensure nothing goes wrong.{% endif %}</p>
+                        </div>
+                    </div>
+                    <div class="why-point">
+                        <div class="why-point-icon" style="background:rgba(0,212,170,.12);color:#00D4AA;"><i class="bi bi-bar-chart-fill"></i></div>
+                        <div>
+                            <h4>{% if LANGUAGE_CODE == 'ar' %}خبرة 12+ سنة{% else %}12+ Years of Expertise{% endif %}</h4>
+                            <p>{% if LANGUAGE_CODE == 'ar' %}أكثر من عقد من الخدمة لكبرى الشركات والمعارض الدولية والجهات الحكومية.{% else %}Over a decade serving Fortune 500 companies, government bodies, and international exhibitions.{% endif %}</p>
+                        </div>
+                    </div>
+                    <div class="why-point">
+                        <div class="why-point-icon" style="background:rgba(168,85,247,.12);color:#A855F7;"><i class="bi bi-puzzle-fill"></i></div>
+                        <div>
+                            <h4>{% if LANGUAGE_CODE == 'ar' %}حلول متكاملة{% else %}Integrated Solutions{% endif %}</h4>
+                            <p>{% if LANGUAGE_CODE == 'ar' %}فريق واحد يتولى كل شيء — AV وإضاءة وبث وإنتاج. لا فوضى تنسيق.{% else %}One team handles everything — AV, lighting, streaming, and production. No coordination chaos.{% endif %}</p>
+                        </div>
+                    </div>
+                </div>
+
+                <a href="#contact" class="btn-primary-av mt-4 d-inline-flex">
+                    <i class="bi bi-telephone-fill me-2"></i>
+                    {% if LANGUAGE_CODE == 'ar' %}تحدث مع خبير{% else %}Talk to an Expert{% endif %}
+                </a>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+
+<!-- ══════════════════════════════════════════════
+     PORTFOLIO
+══════════════════════════════════════════════ -->
+<section class="section-pad bg-section-alt" id="portfolio">
+    <div class="container-xl">
+        <div class="section-header" data-aos="fade-up">
+            <span class="section-tag">{% if LANGUAGE_CODE == 'ar' %}أعمالنا{% else %}Our Work{% endif %}</span>
+            <h2 class="section-title">{% if LANGUAGE_CODE == 'ar' %}مشاريع مختارة{% else %}Featured Projects{% endif %}</h2>
+            <p class="section-subtitle">
+                {% if LANGUAGE_CODE == 'ar' %}
+                    نماذج من المؤتمرات والمعارض وفعاليات الشركات التي أدرنا تقنياتها في المنطقة.
+                {% else %}
+                    A selection of conferences, exhibitions, and corporate events we've powered across the region.
+                {% endif %}
+            </p>
+        </div>
+
+        <div class="portfolio-filters" data-aos="fade-up" data-aos-delay="100">
+            <button class="pf-btn active" data-filter="all">{% if LANGUAGE_CODE == 'ar' %}الكل{% else %}All{% endif %}</button>
+            <button class="pf-btn" data-filter="conference">{% if LANGUAGE_CODE == 'ar' %}مؤتمرات{% else %}Conferences{% endif %}</button>
+            <button class="pf-btn" data-filter="exhibition">{% if LANGUAGE_CODE == 'ar' %}معارض{% else %}Exhibitions{% endif %}</button>
+            <button class="pf-btn" data-filter="corporate">{% if LANGUAGE_CODE == 'ar' %}شركات{% else %}Corporate{% endif %}</button>
+        </div>
+
+        <div class="portfolio-grid" data-aos="fade-up" data-aos-delay="200">
+
+            {% if portfolio_items %}
+                {% for item in portfolio_items %}
+                <div class="portfolio-card" data-type="{{ item.event_type }}">
+                    <div class="portfolio-img">
+                        <img src="{{ item.image.url }}" alt="{% if LANGUAGE_CODE == 'ar' %}{{ item.title_ar }}{% else %}{{ item.title_en }}{% endif %}" loading="lazy">
+                        <div class="portfolio-overlay">
+                            <span class="portfolio-tag">
+                                {% if LANGUAGE_CODE == 'ar' %}
+                                    {% if item.event_type == 'conference' %}مؤتمر{% elif item.event_type == 'exhibition' %}معرض{% else %}شركات{% endif %}
+                                {% else %}
+                                    {{ item.get_event_type_display|truncatechars:15 }}
+                                {% endif %}
+                            </span>
+                            <h4>{% if LANGUAGE_CODE == 'ar' %}{{ item.title_ar }}{% else %}{{ item.title_en }}{% endif %}</h4>
+                            {% if LANGUAGE_CODE == 'ar' %}
+                                {% if item.description_ar %}<p>{{ item.description_ar }}</p>{% endif %}
+                            {% else %}
+                                {% if item.description_en %}<p>{{ item.description_en }}</p>{% endif %}
+                            {% endif %}
+                            <a href="#contact" class="btn-ghost-sm">
+                                {% if LANGUAGE_CODE == 'ar' %}تفاصيل المشروع{% else %}View Case Study{% endif %}
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+
+            {% else %}
+                <!-- Default placeholder items when DB is empty -->
+                <div class="portfolio-card" data-type="conference">
+                    <div class="portfolio-img">
+                        <img src="https://images.unsplash.com/photo-1587825140708-dfaf72ae4b04?w=600&q=80" alt="Tech Summit" loading="lazy">
+                        <div class="portfolio-overlay">
+                            <span class="portfolio-tag">{% if LANGUAGE_CODE == 'ar' %}مؤتمر{% else %}Conference{% endif %}</span>
+                            <h4>{% if LANGUAGE_CODE == 'ar' %}قمة التقنية 2024{% else %}Tech Summit 2024{% endif %}</h4>
+                            <p>{% if LANGUAGE_CODE == 'ar' %}3,000 مقعد · جدران LED · بث كامل{% else %}3,000-seat venue · LED walls · Full broadcast{% endif %}</p>
+                            <a href="#contact" class="btn-ghost-sm">{% if LANGUAGE_CODE == 'ar' %}تفاصيل المشروع{% else %}View Case Study{% endif %}</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="portfolio-card" data-type="exhibition">
+                    <div class="portfolio-img">
+                        <img src="https://images.unsplash.com/photo-1497366216548-37526070297c?w=600&q=80" alt="Exhibition" loading="lazy">
+                        <div class="portfolio-overlay">
+                            <span class="portfolio-tag">{% if LANGUAGE_CODE == 'ar' %}معرض{% else %}Exhibition{% endif %}</span>
+                            <h4>{% if LANGUAGE_CODE == 'ar' %}جيتكس — جناح المعرض{% else %}GITEX Exhibition Stand{% endif %}</h4>
+                            <p>{% if LANGUAGE_CODE == 'ar' %}LED تفاعلي · صوت مكاني · 5 مناطق{% else %}Interactive LED · Spatial audio · 5 zones{% endif %}</p>
+                            <a href="#contact" class="btn-ghost-sm">{% if LANGUAGE_CODE == 'ar' %}تفاصيل المشروع{% else %}View Case Study{% endif %}</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="portfolio-card" data-type="corporate">
+                    <div class="portfolio-img">
+                        <img src="https://images.unsplash.com/photo-1515187029135-18ee286d815b?w=600&q=80" alt="Corporate Event" loading="lazy">
+                        <div class="portfolio-overlay">
+                            <span class="portfolio-tag">{% if LANGUAGE_CODE == 'ar' %}شركات{% else %}Corporate{% endif %}</span>
+                            <h4>{% if LANGUAGE_CODE == 'ar' %}قمة القيادة السنوية{% else %}Annual Leadership Summit{% endif %}</h4>
+                            <p>{% if LANGUAGE_CODE == 'ar' %}هجين · بث مباشر · 800 حضور{% else %}Hybrid event · Live streaming · 800 attendees{% endif %}</p>
+                            <a href="#contact" class="btn-ghost-sm">{% if LANGUAGE_CODE == 'ar' %}تفاصيل المشروع{% else %}View Case Study{% endif %}</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="portfolio-card" data-type="conference">
+                    <div class="portfolio-img">
+                        <img src="https://images.unsplash.com/photo-1475721027785-f74eccf877e2?w=600&q=80" alt="Medical Congress" loading="lazy">
+                        <div class="portfolio-overlay">
+                            <span class="portfolio-tag">{% if LANGUAGE_CODE == 'ar' %}مؤتمر{% else %}Conference{% endif %}</span>
+                            <h4>{% if LANGUAGE_CODE == 'ar' %}المؤتمر الطبي 2024{% else %}Medical Congress 2024{% endif %}</h4>
+                            <p>{% if LANGUAGE_CODE == 'ar' %}ترجمة فورية · 6 قاعات{% else %}Simultaneous translation · 6 breakout rooms{% endif %}</p>
+                            <a href="#contact" class="btn-ghost-sm">{% if LANGUAGE_CODE == 'ar' %}تفاصيل المشروع{% else %}View Case Study{% endif %}</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="portfolio-card" data-type="exhibition">
+                    <div class="portfolio-img">
+                        <img src="https://images.unsplash.com/photo-1561489413-985b06da5bee?w=600&q=80" alt="Real Estate Expo" loading="lazy">
+                        <div class="portfolio-overlay">
+                            <span class="portfolio-tag">{% if LANGUAGE_CODE == 'ar' %}معرض{% else %}Exhibition{% endif %}</span>
+                            <h4>{% if LANGUAGE_CODE == 'ar' %}معرض العقارات{% else %}Real Estate Expo{% endif %}</h4>
+                            <p>{% if LANGUAGE_CODE == 'ar' %}جدران فيديو · إضاءة محيطية · جولات 3D{% else %}Video walls · Ambient lighting · 3D walkthroughs{% endif %}</p>
+                            <a href="#contact" class="btn-ghost-sm">{% if LANGUAGE_CODE == 'ar' %}تفاصيل المشروع{% else %}View Case Study{% endif %}</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="portfolio-card" data-type="corporate">
+                    <div class="portfolio-img">
+                        <img src="https://images.unsplash.com/photo-1529543544282-ea669407fca3?w=600&q=80" alt="Product Launch" loading="lazy">
+                        <div class="portfolio-overlay">
+                            <span class="portfolio-tag">{% if LANGUAGE_CODE == 'ar' %}شركات{% else %}Corporate{% endif %}</span>
+                            <h4>{% if LANGUAGE_CODE == 'ar' %}إطلاق منتج عالمي{% else %}Global Product Launch{% endif %}</h4>
+                            <p>{% if LANGUAGE_CODE == 'ar' %}بث لمدن متعددة · تصميم مسرح مُخصص{% else %}Multi-city simulcast · Branded stage design{% endif %}</p>
+                            <a href="#contact" class="btn-ghost-sm">{% if LANGUAGE_CODE == 'ar' %}تفاصيل المشروع{% else %}View Case Study{% endif %}</a>
+                        </div>
+                    </div>
+                </div>
+            {% endif %}
+
+        </div>
+
+        <div class="text-center mt-5" data-aos="fade-up">
+            <a href="#contact" class="btn-primary-av">
+                <i class="bi bi-collection-fill me-2"></i>
+                {% if LANGUAGE_CODE == 'ar' %}شاهد كامل الأعمال{% else %}View Full Portfolio{% endif %}
+            </a>
+        </div>
+    </div>
+</section>
+
+
+<!-- ══════════════════════════════════════════════
+     HOW IT WORKS
+══════════════════════════════════════════════ -->
+<section class="section-pad how-section">
+    <div class="container-xl">
+        <div class="section-header" data-aos="fade-up">
+            <span class="section-tag">{% if LANGUAGE_CODE == 'ar' %}طريقة عملنا{% else %}Our Process{% endif %}</span>
+            <h2 class="section-title">{% if LANGUAGE_CODE == 'ar' %}من الفكرة إلى الإبداع{% else %}From Brief to Brilliant{% endif %}</h2>
+            <p class="section-subtitle">
+                {% if LANGUAGE_CODE == 'ar' %}
+                    عملية مُجرَّبة من 3 خطوات تحوّل رؤيتك لفعاليتك إلى واقع مُنفَّذ بلا أخطاء.
+                {% else %}
+                    A proven 3-step process that turns your event vision into a flawlessly executed reality.
+                {% endif %}
+            </p>
+        </div>
+
+        <div class="how-steps">
+            <div class="how-step" data-aos="fade-up" data-aos-delay="0">
+                <div class="step-number">01</div>
+                <div class="step-icon"><i class="bi bi-clipboard2-check-fill"></i></div>
+                <h3 class="step-title">{% if LANGUAGE_CODE == 'ar' %}أرسل تفاصيل فعاليتك{% else %}Submit Your Brief{% endif %}</h3>
+                <p class="step-desc">
+                    {% if LANGUAGE_CODE == 'ar' %}
+                        أخبرنا عن فعاليتك — المكان والحجم والتاريخ والرؤية. نردّ خلال 24 ساعة بعرض مخصص.
+                    {% else %}
+                        Tell us about your event — venue, audience size, date, and vision. We respond within 24 hours with a tailored proposal.
+                    {% endif %}
+                </p>
+            </div>
+
+            <div class="how-connector" data-aos="fade-up" data-aos-delay="100">
+                <i class="bi bi-arrow-{% if LANGUAGE_CODE == 'ar' %}left{% else %}right{% endif %}-circle-fill connector-arrow"></i>
+            </div>
+
+            <div class="how-step" data-aos="fade-up" data-aos-delay="200">
+                <div class="step-number">02</div>
+                <div class="step-icon"><i class="bi bi-diagram-3-fill"></i></div>
+                <h3 class="step-title">{% if LANGUAGE_CODE == 'ar' %}التخطيط والتجهيز{% else %}Plan & Prepare{% endif %}</h3>
+                <p class="step-desc">
+                    {% if LANGUAGE_CODE == 'ar' %}
+                        فريقنا التقني يزور المكان ويصمم خطة AV ويُبرمج الأنظمة مسبقاً. تحصل على تقرير فني كامل قبل يوم الحدث.
+                    {% else %}
+                        Our technical team visits the venue, designs the AV layout, and pre-programs all systems. You get a full tech rider before event day.
+                    {% endif %}
+                </p>
+            </div>
+
+            <div class="how-connector" data-aos="fade-up" data-aos-delay="300">
+                <i class="bi bi-arrow-{% if LANGUAGE_CODE == 'ar' %}left{% else %}right{% endif %}-circle-fill connector-arrow"></i>
+            </div>
+
+            <div class="how-step" data-aos="fade-up" data-aos-delay="400">
+                <div class="step-number">03</div>
+                <div class="step-icon"><i class="bi bi-trophy-fill"></i></div>
+                <h3 class="step-title">{% if LANGUAGE_CODE == 'ar' %}التنفيذ والإنجاز{% else %}Execute & Deliver{% endif %}</h3>
+                <p class="step-desc">
+                    {% if LANGUAGE_CODE == 'ar' %}
+                        طاقمنا الميداني يُدير الحدث كاملاً في الوقت الفعلي — ركّز على ضيوفك ونحن نتولى كل التفاصيل التقنية.
+                    {% else %}
+                        Our on-site crew manages the entire event in real-time — so you focus on your guests while we handle every technical detail.
+                    {% endif %}
+                </p>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<!-- ══════════════════════════════════════════════
+     TESTIMONIALS
+══════════════════════════════════════════════ -->
+<section class="section-pad bg-section-alt testimonials-section">
+    <div class="container-xl">
+        <div class="section-header" data-aos="fade-up">
+            <span class="section-tag">{% if LANGUAGE_CODE == 'ar' %}آراء العملاء{% else %}Client Reviews{% endif %}</span>
+            <h2 class="section-title">{% if LANGUAGE_CODE == 'ar' %}موثوق به من قادة الصناعة{% else %}Trusted by Industry Leaders{% endif %}</h2>
+            <p class="section-subtitle">
+                {% if LANGUAGE_CODE == 'ar' %}آراء حقيقية من الشركات التي عايشت عملنا عن كثب.{% else %}Real feedback from the companies that have experienced our work first-hand.{% endif %}
+            </p>
+        </div>
+
+        <div class="testimonials-grid" data-aos="fade-up" data-aos-delay="100">
+
+            <div class="testimonial-card">
+                <div class="testi-stars"><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i></div>
+                <p class="testi-text">
+                    {% if LANGUAGE_CODE == 'ar' %}
+                        "حوّلت ProAV مؤتمرنا السنوي إلى تجربة احترافية رائعة. جدار LED كان مذهلاً والصوت كان نقياً طوال القاعة."
+                    {% else %}
+                        "ProAV transformed our annual conference into an incredibly professional experience. The LED wall was stunning and the sound was crystal clear throughout the 3,000-seat hall."
+                    {% endif %}
+                </p>
+                <div class="testi-author">
+                    <div class="testi-avatar">MA</div>
+                    <div>
+                        <strong>{% if LANGUAGE_CODE == 'ar' %}محمد الراشد{% else %}Mohammed Al-Rashid{% endif %}</strong>
+                        <span>{% if LANGUAGE_CODE == 'ar' %}مدير الفعاليات، TechCorp ME{% else %}Events Director, TechCorp ME{% endif %}</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="testimonial-card featured-testi">
+                <div class="testi-stars"><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i></div>
+                <p class="testi-text">
+                    {% if LANGUAGE_CODE == 'ar' %}
+                        "تعاملنا مع شركات AV كثيرة على مدار السنين. ProAV تتميز باحترافيتها وسرعة الإعداد والخبرة التقنية التي يجلبها فريقها. لا يُفوّتون شيئاً."
+                    {% else %}
+                        "We've worked with many AV companies over the years. ProAV stands out for their professionalism, rapid setup, and the technical expertise their team brings on-site. They don't miss a beat."
+                    {% endif %}
+                </p>
+                <div class="testi-author">
+                    <div class="testi-avatar">SL</div>
+                    <div>
+                        <strong>Sarah Lindström</strong>
+                        <span>{% if LANGUAGE_CODE == 'ar' %}مدير الفعاليات العالمي، Nexus Group{% else %}Global Events Manager, Nexus Group{% endif %}</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="testimonial-card">
+                <div class="testi-stars"><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i></div>
+                <p class="testi-text">
+                    {% if LANGUAGE_CODE == 'ar' %}
+                        "بدا جناحنا في جيتكس رائعاً بفضل إعداد جدار الفيديو من ProAV. زاد حجم الزيارات بنسبة 40% مقارنة بالعام الماضي."
+                    {% else %}
+                        "Our GITEX booth looked incredible thanks to ProAV's video wall setup. Foot traffic increased by 40% compared to last year. Our brand finally looked as premium as it deserves."
+                    {% endif %}
+                </p>
+                <div class="testi-author">
+                    <div class="testi-avatar">KJ</div>
+                    <div>
+                        <strong>{% if LANGUAGE_CODE == 'ar' %}خالد جاسم{% else %}Khalid Jassim{% endif %}</strong>
+                        <span>{% if LANGUAGE_CODE == 'ar' %}نائب رئيس التسويق، فلك للابتكار{% else %}Marketing VP, Falak Innovations{% endif %}</span>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="client-logos-strip" data-aos="fade-up" data-aos-delay="200">
+            <span class="logos-label">{% if LANGUAGE_CODE == 'ar' %}يثق بنا{% else %}Trusted By{% endif %}</span>
+            <div class="logos-track">
+                <div class="logo-item"><i class="bi bi-building-fill"></i> TechCorp</div>
+                <div class="logo-item"><i class="bi bi-building-fill"></i> Nexus Group</div>
+                <div class="logo-item"><i class="bi bi-building-fill"></i> Falak Inc</div>
+                <div class="logo-item"><i class="bi bi-building-fill"></i> Gulf Expo</div>
+                <div class="logo-item"><i class="bi bi-building-fill"></i> Meridian</div>
+                <div class="logo-item"><i class="bi bi-building-fill"></i> AlFajr Co</div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<!-- ══════════════════════════════════════════════
+     CTA SECTION
+══════════════════════════════════════════════ -->
+<section class="cta-section">
+    <div class="cta-bg-pattern"></div>
+    <div class="container-xl text-center" style="position:relative;z-index:2;">
+        <div data-aos="zoom-in">
+            <span class="cta-eyebrow">
+                {% if LANGUAGE_CODE == 'ar' %}مستعد لرفع مستوى فعاليتك؟{% else %}Ready to Elevate Your Event?{% endif %}
+            </span>
+            <h2 class="cta-title">
+                {% if LANGUAGE_CODE == 'ar' %}
+                    لنبني شيئاً <span class="gradient-text">استثنائياً</span> معاً
+                {% else %}
+                    Let's Build Something <span class="gradient-text">Extraordinary</span>
+                {% endif %}
+            </h2>
+            <p class="cta-subtitle">
+                {% if LANGUAGE_CODE == 'ar' %}
+                    أخبرنا عن فعاليتك واحصل على عرض مفصّل خلال 24 ساعة. بدون التزام ولا ضغط.
+                {% else %}
+                    Tell us about your event and get a detailed quote within 24 hours. No commitment, no pressure.
+                {% endif %}
+            </p>
+            <div class="cta-actions">
+                <a href="#contact" class="btn-primary-av btn-lg-av">
+                    <i class="bi bi-send-fill me-2"></i>
+                    {% if LANGUAGE_CODE == 'ar' %}احصل على عرض الآن{% else %}Get a Quote Now{% endif %}
+                </a>
+                <a href="https://wa.me/966500000000" class="btn-whatsapp">
+                    <i class="bi bi-whatsapp me-2"></i>
+                    {% if LANGUAGE_CODE == 'ar' %}واتساب{% else %}WhatsApp Us{% endif %}
+                </a>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<!-- ══════════════════════════════════════════════
+     CONTACT / QUOTE FORM
+══════════════════════════════════════════════ -->
+<section class="section-pad contact-section" id="contact">
+    <div class="container-xl">
+        <div class="contact-inner">
+
+            <div class="contact-info" data-aos="fade-right">
+                <span class="section-tag">{% if LANGUAGE_CODE == 'ar' %}تواصل معنا{% else %}Get In Touch{% endif %}</span>
+                <h2 class="section-title">{% if LANGUAGE_CODE == 'ar' %}اطلب عرض سعر{% else %}Request a Quote{% endif %}</h2>
+                <p class="contact-lead">
+                    {% if LANGUAGE_CODE == 'ar' %}
+                        أدخل تفاصيل فعاليتك وسيتواصل معك فريقنا خلال 24 ساعة بعرض AV مُخصَّص لك.
+                    {% else %}
+                        Fill in your event details and our team will reach out within 24 hours with a customized AV proposal.
+                    {% endif %}
+                </p>
+                <div class="contact-details">
+                    <div class="contact-detail-item">
+                        <div class="cd-icon"><i class="bi bi-telephone-fill"></i></div>
+                        <div>
+                            <strong>{% if LANGUAGE_CODE == 'ar' %}هاتف{% else %}Phone{% endif %}</strong>
+                            <span dir="ltr">+966 50 000 0000</span>
+                        </div>
+                    </div>
+                    <div class="contact-detail-item">
+                        <div class="cd-icon"><i class="bi bi-envelope-fill"></i></div>
+                        <div>
+                            <strong>{% if LANGUAGE_CODE == 'ar' %}البريد{% else %}Email{% endif %}</strong>
+                            <span dir="ltr">info@proavsolutions.com</span>
+                        </div>
+                    </div>
+                    <div class="contact-detail-item">
+                        <div class="cd-icon"><i class="bi bi-geo-alt-fill"></i></div>
+                        <div>
+                            <strong>{% if LANGUAGE_CODE == 'ar' %}الموقع{% else %}Location{% endif %}</strong>
+                            <span>{% if LANGUAGE_CODE == 'ar' %}الرياض، المملكة العربية السعودية{% else %}Riyadh, Saudi Arabia{% endif %}</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="social-links mt-4">
+                    <a href="#" class="social-btn"><i class="bi bi-linkedin"></i></a>
+                    <a href="#" class="social-btn"><i class="bi bi-instagram"></i></a>
+                    <a href="#" class="social-btn"><i class="bi bi-youtube"></i></a>
+                    <a href="#" class="social-btn"><i class="bi bi-whatsapp"></i></a>
+                </div>
+            </div>
+
+            <div class="contact-form-wrap" data-aos="fade-left">
+                <form class="quote-form" id="quoteForm" method="post" action="{% url 'quote_submit' %}">
+                    {% csrf_token %}
+
+                    <div class="form-row-2">
+                        <div class="form-group">
+                            <label>{% if LANGUAGE_CODE == 'ar' %}الاسم *{% else %}Your Name *{% endif %}</label>
+                            <input type="text" name="name" placeholder="{% if LANGUAGE_CODE == 'ar' %}أحمد محمد{% else %}Ahmed Mohammed{% endif %}" required>
+                        </div>
+                        <div class="form-group">
+                            <label>{% if LANGUAGE_CODE == 'ar' %}اسم الشركة *{% else %}Company Name *{% endif %}</label>
+                            <input type="text" name="company" placeholder="{% if LANGUAGE_CODE == 'ar' %}شركتك{% else %}Your Company{% endif %}" required>
+                        </div>
+                    </div>
+
+                    <div class="form-row-2">
+                        <div class="form-group">
+                            <label>{% if LANGUAGE_CODE == 'ar' %}البريد الإلكتروني *{% else %}Email Address *{% endif %}</label>
+                            <input type="email" name="email" placeholder="you@company.com" required dir="ltr">
+                        </div>
+                        <div class="form-group">
+                            <label>{% if LANGUAGE_CODE == 'ar' %}رقم الهاتف *{% else %}Phone Number *{% endif %}</label>
+                            <input type="tel" name="phone" placeholder="+966 5X XXX XXXX" required dir="ltr">
+                        </div>
+                    </div>
+
+                    <div class="form-row-2">
+                        <div class="form-group">
+                            <label>{% if LANGUAGE_CODE == 'ar' %}نوع الفعالية *{% else %}Event Type *{% endif %}</label>
+                            <select name="event_type" required>
+                                <option value="" disabled selected>{% if LANGUAGE_CODE == 'ar' %}اختر النوع{% else %}Select event type{% endif %}</option>
+                                <option value="Conference">{% if LANGUAGE_CODE == 'ar' %}مؤتمر{% else %}Conference{% endif %}</option>
+                                <option value="Exhibition">{% if LANGUAGE_CODE == 'ar' %}معرض{% else %}Exhibition{% endif %}</option>
+                                <option value="Corporate Event">{% if LANGUAGE_CODE == 'ar' %}فعالية شركة{% else %}Corporate Event{% endif %}</option>
+                                <option value="Product Launch">{% if LANGUAGE_CODE == 'ar' %}إطلاق منتج{% else %}Product Launch{% endif %}</option>
+                                <option value="Other">{% if LANGUAGE_CODE == 'ar' %}أخرى{% else %}Other{% endif %}</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>{% if LANGUAGE_CODE == 'ar' %}عدد الحضور{% else %}Expected Attendees{% endif %}</label>
+                            <select name="attendees">
+                                <option value="" disabled selected>{% if LANGUAGE_CODE == 'ar' %}اختر النطاق{% else %}Select range{% endif %}</option>
+                                <option>{% if LANGUAGE_CODE == 'ar' %}أقل من 100{% else %}Under 100{% endif %}</option>
+                                <option>100 – 500</option>
+                                <option>500 – 1,000</option>
+                                <option>1,000 – 5,000</option>
+                                <option>5,000+</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label>{% if LANGUAGE_CODE == 'ar' %}تاريخ الفعالية{% else %}Event Date{% endif %}</label>
+                        <input type="date" name="event_date" dir="ltr">
+                    </div>
+
+                    <div class="form-group">
+                        <label>{% if LANGUAGE_CODE == 'ar' %}الخدمات المطلوبة{% else %}Services Required{% endif %}</label>
+                        <div class="services-checkboxes">
+                            <label class="check-item"><input type="checkbox" name="services" value="Conference AV"> {% if LANGUAGE_CODE == 'ar' %}AV للمؤتمرات{% else %}Conference AV{% endif %}</label>
+                            <label class="check-item"><input type="checkbox" name="services" value="LED Screens"> {% if LANGUAGE_CODE == 'ar' %}شاشات LED{% else %}LED Screens{% endif %}</label>
+                            <label class="check-item"><input type="checkbox" name="services" value="Sound Systems"> {% if LANGUAGE_CODE == 'ar' %}أنظمة الصوت{% else %}Sound Systems{% endif %}</label>
+                            <label class="check-item"><input type="checkbox" name="services" value="Lighting"> {% if LANGUAGE_CODE == 'ar' %}الإضاءة{% else %}Lighting{% endif %}</label>
+                            <label class="check-item"><input type="checkbox" name="services" value="Video Production"> {% if LANGUAGE_CODE == 'ar' %}إنتاج فيديو{% else %}Video Production{% endif %}</label>
+                            <label class="check-item"><input type="checkbox" name="services" value="Live Streaming"> {% if LANGUAGE_CODE == 'ar' %}بث مباشر{% else %}Live Streaming{% endif %}</label>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label>{% if LANGUAGE_CODE == 'ar' %}ملاحظات إضافية{% else %}Additional Notes{% endif %}</label>
+                        <textarea rows="4" name="notes" placeholder="{% if LANGUAGE_CODE == 'ar' %}أخبرنا المزيد عن متطلباتك...{% else %}Tell us more about your event requirements...{% endif %}"></textarea>
+                    </div>
+
+                    <button type="submit" class="btn-primary-av w-100 justify-content-center" id="submitBtn">
+                        <i class="bi bi-send-fill me-2"></i>
+                        {% if LANGUAGE_CODE == 'ar' %}أرسل طلب العرض{% else %}Submit Quote Request{% endif %}
+                    </button>
+
+                    <div class="form-success d-none" id="formSuccess">
+                        <i class="bi bi-check-circle-fill text-success fs-2"></i>
+                        <p>{% if LANGUAGE_CODE == 'ar' %}شكراً! سنتواصل معك خلال 24 ساعة بعرض سعر مخصص.{% else %}Thank you! We'll contact you within 24 hours with your custom quote.{% endif %}</p>
+                    </div>
+                </form>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+
+<!-- ══════════════════════════════════════════════
+     FOOTER
+══════════════════════════════════════════════ -->
+<footer class="av-footer">
+    <div class="container-xl">
+        <div class="footer-top">
+
+            <div class="footer-brand">
+                <a href="#home" class="nav-logo mb-3 d-inline-flex">
+                    <span class="logo-icon"><i class="bi bi-display-fill"></i></span>
+                    <span class="logo-text">Pro<span class="accent">AV</span></span>
+                </a>
+                <p>{% if LANGUAGE_CODE == 'ar' %}حلول صوت وصورة متكاملة للمؤتمرات والمعارض وفعاليات الشركات في المنطقة.{% else %}Full-service Audio Visual solutions for conferences, exhibitions, and corporate events across the region.{% endif %}</p>
+                <div class="social-links mt-3">
+                    <a href="#" class="social-btn"><i class="bi bi-linkedin"></i></a>
+                    <a href="#" class="social-btn"><i class="bi bi-instagram"></i></a>
+                    <a href="#" class="social-btn"><i class="bi bi-youtube"></i></a>
+                    <a href="#" class="social-btn"><i class="bi bi-whatsapp"></i></a>
+                </div>
+            </div>
+
+            <div class="footer-col">
+                <h5>{% if LANGUAGE_CODE == 'ar' %}خدماتنا{% else %}Services{% endif %}</h5>
+                <ul>
+                    <li><a href="#services">{% if LANGUAGE_CODE == 'ar' %}حلول AV للمؤتمرات{% else %}Conference AV Solutions{% endif %}</a></li>
+                    <li><a href="#services">{% if LANGUAGE_CODE == 'ar' %}AV للمعارض{% else %}Exhibition AV{% endif %}</a></li>
+                    <li><a href="#services">{% if LANGUAGE_CODE == 'ar' %}شاشات LED{% else %}LED Screens{% endif %}</a></li>
+                    <li><a href="#services">{% if LANGUAGE_CODE == 'ar' %}أنظمة الصوت{% else %}Sound Systems{% endif %}</a></li>
+                    <li><a href="#services">{% if LANGUAGE_CODE == 'ar' %}الإضاءة الاحترافية{% else %}Professional Lighting{% endif %}</a></li>
+                    <li><a href="#services">{% if LANGUAGE_CODE == 'ar' %}إنتاج الفيديو{% else %}Video Production{% endif %}</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-col">
+                <h5>{% if LANGUAGE_CODE == 'ar' %}الشركة{% else %}Company{% endif %}</h5>
+                <ul>
+                    <li><a href="#about">{% if LANGUAGE_CODE == 'ar' %}من نحن{% else %}About Us{% endif %}</a></li>
+                    <li><a href="#portfolio">{% if LANGUAGE_CODE == 'ar' %}أعمالنا{% else %}Our Portfolio{% endif %}</a></li>
+                    <li><a href="#contact">{% if LANGUAGE_CODE == 'ar' %}اطلب عرضاً{% else %}Get a Quote{% endif %}</a></li>
+                    <li><a href="#">{% if LANGUAGE_CODE == 'ar' %}وظائف{% else %}Careers{% endif %}</a></li>
+                    <li><a href="#">{% if LANGUAGE_CODE == 'ar' %}سياسة الخصوصية{% else %}Privacy Policy{% endif %}</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-col">
+                <h5>{% if LANGUAGE_CODE == 'ar' %}تواصل معنا{% else %}Contact Us{% endif %}</h5>
+                <ul class="contact-list">
+                    <li><i class="bi bi-telephone-fill"></i> <span dir="ltr">+966 50 000 0000</span></li>
+                    <li><i class="bi bi-envelope-fill"></i> <span dir="ltr">info@proavsolutions.com</span></li>
+                    <li><i class="bi bi-geo-alt-fill"></i> {% if LANGUAGE_CODE == 'ar' %}الرياض، المملكة العربية السعودية{% else %}Riyadh, Saudi Arabia{% endif %}</li>
+                    <li><i class="bi bi-whatsapp"></i> {% if LANGUAGE_CODE == 'ar' %}واتساب متاح 24/7{% else %}WhatsApp Available 24/7{% endif %}</li>
+                </ul>
+            </div>
+
+        </div>
+
+        <div class="footer-bottom">
+            <p>&copy; 2024 ProAV Solutions. {% if LANGUAGE_CODE == 'ar' %}جميع الحقوق محفوظة.{% else %}All rights reserved.{% endif %}</p>
+            <p>{% if LANGUAGE_CODE == 'ar' %}مصمم للأداء وتوليد العملاء.{% else %}Designed for performance &amp; lead generation.{% endif %}</p>
+        </div>
+    </div>
+</footer>
+
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
+<script>
+    // Pass language to JS
+    window.LANG = '{{ LANGUAGE_CODE }}';
+</script>
+<script src="/static/js/landing.js"></script>
+</body>
+</html>

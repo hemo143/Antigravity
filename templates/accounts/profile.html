@@ -1,0 +1,117 @@
+{% extends 'base.html' %}
+
+{% block title %}My Profile - EventPro{% endblock %}
+
+{% block breadcrumb %}
+<div class="breadcrumb-bar">
+    <h4 class="page-title">My Profile</h4>
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb mb-0">
+            <li class="breadcrumb-item"><a href="{% url 'dashboard:index' %}">Dashboard</a></li>
+            <li class="breadcrumb-item active">Profile</li>
+        </ol>
+    </nav>
+</div>
+{% endblock %}
+
+{% block content %}
+<div class="row g-4">
+    <!-- Profile Card -->
+    <div class="col-12 col-lg-4">
+        <div class="card card-dashboard text-center">
+            <div class="card-body py-5">
+                {% if user.avatar %}
+                    <img src="{{ user.avatar.url }}" class="rounded-circle mb-3" width="100" height="100" style="object-fit:cover">
+                {% else %}
+                    <div class="avatar-placeholder-lg rounded-circle bg-primary d-flex align-items-center justify-content-center text-white mx-auto mb-3"
+                         style="width:100px;height:100px;font-size:2rem">
+                        {{ user.first_name|first|upper }}{{ user.last_name|first|upper }}
+                    </div>
+                {% endif %}
+                <h5 class="fw-bold">{{ user.get_full_name }}</h5>
+                <p class="text-muted">{{ user.email }}</p>
+                <span class="badge bg-primary">{{ user.get_role_display }}</span>
+
+                <hr>
+                <div class="row text-center g-0">
+                    <div class="col">
+                        <div class="fw-bold">{{ user.get_bookings_count }}</div>
+                        <div class="text-muted small">Bookings</div>
+                    </div>
+                    <div class="col border-start">
+                        <div class="fw-bold">{{ user.organized_events.count }}</div>
+                        <div class="text-muted small">Events</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Edit Form -->
+    <div class="col-12 col-lg-8">
+        <div class="card card-dashboard">
+            <div class="card-header">
+                <h5 class="card-title mb-0"><i class="bi bi-pencil me-2"></i>Edit Profile</h5>
+            </div>
+            <div class="card-body">
+                <form method="post" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <div class="row g-3">
+                        <div class="col-md-6">
+                            <label class="form-label">First Name</label>
+                            {{ form.first_name }}
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label">Last Name</label>
+                            {{ form.last_name }}
+                        </div>
+                        <div class="col-12">
+                            <label class="form-label">Phone</label>
+                            {{ form.phone }}
+                        </div>
+                        <div class="col-12">
+                            <label class="form-label">Bio</label>
+                            {{ form.bio }}
+                        </div>
+                        <div class="col-12">
+                            <label class="form-label">Profile Photo</label>
+                            {{ form.avatar }}
+                        </div>
+                    </div>
+                    <div class="mt-4">
+                        <button type="submit" class="btn btn-primary">
+                            <i class="bi bi-check-lg me-2"></i>Save Changes
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <!-- Recent Bookings -->
+        {% if bookings %}
+        <div class="card card-dashboard mt-4">
+            <div class="card-header">
+                <h5 class="card-title mb-0"><i class="bi bi-bookmark me-2"></i>Recent Bookings</h5>
+            </div>
+            <div class="card-body p-0">
+                <ul class="list-group list-group-flush">
+                    {% for booking in bookings %}
+                    <li class="list-group-item px-4 py-3">
+                        <div class="d-flex justify-content-between">
+                            <div>
+                                <div class="fw-medium">{{ booking.event.title }}</div>
+                                <div class="text-muted small">{{ booking.event.start_date|date:"M d, Y" }} · {{ booking.event.venue }}</div>
+                            </div>
+                            <span class="badge bg-{% if booking.status == 'confirmed' %}success{% elif booking.status == 'cancelled' %}danger{% else %}warning{% endif %}">
+                                {{ booking.status|title }}
+                            </span>
+                        </div>
+                    </li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}
