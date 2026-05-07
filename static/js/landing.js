@@ -1,5 +1,5 @@
 /* ══════════════════════════════════════════════
-   ProAV Solutions — Landing Page JS
+   Pro Event — Landing Page JS
 ══════════════════════════════════════════════ */
 
 document.addEventListener('DOMContentLoaded', function () {

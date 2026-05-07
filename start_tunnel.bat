@@ -1,9 +1,9 @@
 @echo off
-title ProAV - Live Server
+title Pro Event - Live Server
 color 0A
 echo.
 echo  ==========================================
-echo    ProAV Solutions - Starting Live Server
+echo    Pro Event - Starting Live Server
 echo  ==========================================
 echo.
 
@@ -31,6 +31,6 @@ echo  ==========================================
 echo   Getting your public URL...
 echo  ==========================================
 echo.
-npx localtunnel --port 8000
+npx localtunnel --port 8000 --subdomain proevent
 
 pause

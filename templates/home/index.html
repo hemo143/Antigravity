@@ -4,10 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     {% if LANGUAGE_CODE == 'ar' %}
-    <title>ProAV – خبراء AV للمؤتمرات والمعارض والفعاليات</title>
+    <title>Pro Event – خبراء الفعاليات للمؤتمرات والمعارض</title>
     <meta name="description" content="حلول صوت وصورة احترافية للمؤتمرات والمعارض وفعاليات الشركات. شاشات LED وأنظمة صوت وإضاءة وإنتاج فيديو.">
     {% else %}
-    <title>ProAV Solutions – Conference & Exhibition AV Specialists</title>
+    <title>Pro Event – Conference & Exhibition Specialists</title>
     <meta name="description" content="Professional Audio Visual solutions for conferences, exhibitions, and corporate events. LED screens, sound systems, lighting & video production.">
     {% endif %}
 
@@ -31,7 +31,7 @@
 
             <a href="#home" class="nav-logo">
                 <span class="logo-icon"><i class="bi bi-display-fill"></i></span>
-                <span class="logo-text">Pro<span class="accent">AV</span></span>
+                <span class="logo-text">Pro<span class="accent">Event</span></span>
             </a>
 
             <ul class="nav-links">
@@ -103,35 +103,35 @@
     <div class="container-xl hero-content">
         <div class="hero-badge" data-aos="fade-down">
             <i class="bi bi-patch-check-fill me-2"></i>
-            {% if LANGUAGE_CODE == 'ar' %}موثوق به من أكثر من 200 شركة{% else %}Trusted by 200+ Corporates{% endif %}
+            {% if LANGUAGE_CODE == 'ar' %}الشريك التقني الأول للفعاليات في مصر{% else %}Egypt's #1 Technical Event Partner{% endif %}
         </div>
 
         <h1 class="hero-title" data-aos="fade-up" data-aos-delay="100">
             {% if LANGUAGE_CODE == 'ar' %}
-                نُدير فعاليات الشركات<br><span class="gradient-text">بمستوى عالمي</span>
+                Pro Event – <span class="gradient-text">شريكك التقني</span><br>لنجاح فعالياتك
             {% else %}
-                We Power <span class="gradient-text">World-Class</span><br>Corporate Events
+                Pro Event – Your <span class="gradient-text">Technical Partner</span><br>for Event Success
             {% endif %}
         </h1>
 
         <p class="hero-subtitle" data-aos="fade-up" data-aos-delay="200">
             {% if LANGUAGE_CODE == 'ar' %}
-                حلول صوت وصورة متكاملة للمؤتمرات والمعارض وفعاليات الشركات.<br>
-                من جدران LED إلى الصوت الغامر — نقدم تجارب تُغلق الصفقات.
+                نقدم أحدث حلول الصوتيات والمرئيات (AV) وخدمات التنظيم والإنتاج الفني<br>
+                للمؤتمرات، المعارض، والفعاليات الكبرى في مصر.
             {% else %}
-                Full-service Audio Visual solutions for conferences, exhibitions &amp; corporate events.<br>
-                From LED walls to immersive sound — we deliver experiences that close deals.
+                We provide the latest AV solutions and technical production services<br>
+                for conferences, exhibitions, and major events across Egypt.
             {% endif %}
         </p>
 
         <div class="hero-actions" data-aos="fade-up" data-aos-delay="300">
-            <a href="#contact" class="btn-primary-av">
-                <i class="bi bi-send-fill me-2"></i>
-                {% if LANGUAGE_CODE == 'ar' %}احصل على عرض سعر{% else %}Get a Quote{% endif %}
+            <a href="#services" class="btn-primary-av">
+                <i class="bi bi-grid-fill me-2"></i>
+                {% if LANGUAGE_CODE == 'ar' %}تصفح خدماتنا{% else %}Browse Our Services{% endif %}
             </a>
-            <a href="#portfolio" class="btn-ghost-av">
-                <i class="bi bi-play-circle-fill me-2"></i>
-                {% if LANGUAGE_CODE == 'ar' %}شاهد أعمالنا{% else %}View Portfolio{% endif %}
+            <a href="#contact" class="btn-ghost-av">
+                <i class="bi bi-send-fill me-2"></i>
+                {% if LANGUAGE_CODE == 'ar' %}احصل على عرض سعر مجاني{% else %}Get a Free Quote{% endif %}
             </a>
         </div>
 
@@ -169,91 +169,97 @@
     <div class="container-xl">
         <div class="section-header" data-aos="fade-up">
             <span class="section-tag">{% if LANGUAGE_CODE == 'ar' %}ما نقدمه{% else %}What We Do{% endif %}</span>
-            <h2 class="section-title">{% if LANGUAGE_CODE == 'ar' %}خدمات AV الاحترافية{% else %}Professional AV Services{% endif %}</h2>
+            <h2 class="section-title">{% if LANGUAGE_CODE == 'ar' %}خدماتنا التقنية{% else %}Our Technical Services{% endif %}</h2>
             <p class="section-subtitle">
                 {% if LANGUAGE_CODE == 'ar' %}
-                    حلول صوت وصورة شاملة مصممة لتحقيق الأثر — من قاعات الاجتماعات إلى مؤتمرات 5000 مقعد.
+                    في Pro Event نوفر مجموعة شاملة من خدمات تكنولوجيا الفعاليات لتلبية كافة متطلباتك الإبداعية والتقنية.
                 {% else %}
-                    End-to-end audio visual solutions engineered for impact — from intimate boardrooms to 5,000-seat conferences.
+                    At Pro Event, we provide comprehensive event technology services to meet all your creative and technical requirements.
                 {% endif %}
             </p>
         </div>
 
         <div class="services-grid" data-aos="fade-up" data-aos-delay="100">
 
+            <!-- 1 -->
             <div class="service-card">
-                <div class="service-icon-wrap" style="--accent:#4F8EF7;"><i class="bi bi-mic-fill"></i></div>
-                <h3 class="service-title">{% if LANGUAGE_CODE == 'ar' %}حلول AV للمؤتمرات{% else %}Conference AV Solutions{% endif %}</h3>
+                <div class="service-icon-wrap" style="--accent:#4F8EF7;"><i class="bi bi-building-fill"></i></div>
+                <h3 class="service-title">{% if LANGUAGE_CODE == 'ar' %}فعاليات الشركات والمؤتمرات{% else %}Corporate Events & Conferences{% endif %}</h3>
                 <p class="service-desc">
                     {% if LANGUAGE_CODE == 'ar' %}
-                        أنظمة AV متكاملة للمؤتمرات الكبرى — ميكروفونات وبث مباشر وعرض بلا انقطاع.
+                        تخطيط وتنفيذ تقني متكامل للاجتماعات السنوية، إطلاق المنتجات، والمؤتمرات الطبية والتجارية. نضمن وصول رسالتك لجمهورك بأفضل صورة وصوت.
                     {% else %}
-                        Complete AV setups for large-scale conferences — microphones, mixers, projection, and live streaming with zero downtime.
+                        Full technical planning and execution for annual meetings, product launches, and medical & business conferences. We ensure your message reaches your audience in the best quality.
                     {% endif %}
                 </p>
                 <a href="#contact" class="service-link">{% if LANGUAGE_CODE == 'ar' %}اطلب الخدمة{% else %}Request Service{% endif %} <i class="bi bi-arrow-{% if LANGUAGE_CODE == 'ar' %}left{% else %}right{% endif %} ms-1"></i></a>
             </div>
 
+            <!-- 2 -->
             <div class="service-card">
-                <div class="service-icon-wrap" style="--accent:#FF6B35;"><i class="bi bi-grid-3x3-gap-fill"></i></div>
-                <h3 class="service-title">{% if LANGUAGE_CODE == 'ar' %}AV للمعارض{% else %}Exhibition AV{% endif %}</h3>
+                <div class="service-icon-wrap" style="--accent:#FF6B35;"><i class="bi bi-tv-fill"></i></div>
+                <h3 class="service-title">{% if LANGUAGE_CODE == 'ar' %}تأجير معدات الصوتيات والمرئيات{% else %}Audio Visual Equipment Rental{% endif %}</h3>
                 <p class="service-desc">
                     {% if LANGUAGE_CODE == 'ar' %}
-                        استقطب الزوار في المعارض بشاشات رقمية وأكشاك تفاعلية وبيئات صوتية مميزة.
+                        خيارات تأجير مرنة لأحدث شاشات LED عالية الدقة (Indoor/Outdoor)، أنظمة الصوت الاحترافية، الإضاءة المسرحية، ومعدات الترجمة الفورية — مع التركيب والتشغيل.
                     {% else %}
-                        Captivate visitors at trade shows with dynamic digital displays, interactive kiosks, and branded audio environments.
+                        Flexible rental options for the latest high-definition LED screens (Indoor/Outdoor), professional sound systems, stage lighting, and simultaneous translation equipment — including installation and operation.
                     {% endif %}
                 </p>
                 <a href="#contact" class="service-link">{% if LANGUAGE_CODE == 'ar' %}اطلب الخدمة{% else %}Request Service{% endif %} <i class="bi bi-arrow-{% if LANGUAGE_CODE == 'ar' %}left{% else %}right{% endif %} ms-1"></i></a>
             </div>
 
+            <!-- 3 -->
             <div class="service-card">
-                <div class="service-icon-wrap" style="--accent:#00D4AA;"><i class="bi bi-tv-fill"></i></div>
-                <h3 class="service-title">{% if LANGUAGE_CODE == 'ar' %}شاشات LED وجدران الفيديو{% else %}LED Screens & Video Walls{% endif %}</h3>
+                <div class="service-icon-wrap" style="--accent:#00D4AA;"><i class="bi bi-layers-fill"></i></div>
+                <h3 class="service-title">{% if LANGUAGE_CODE == 'ar' %}الإنتاج الفني وتصميم المسارح{% else %}Staging & Event Production{% endif %}</h3>
                 <p class="service-desc">
                     {% if LANGUAGE_CODE == 'ar' %}
-                        ألواح LED فائقة السطوع وجدران فيديو معيارية بدقة بكسل مثالية لأي حجم مكان.
+                        تصميم وبناء مسارح مخصصة (Custom Stages) وخلفيات تعكس هوية علامتك التجارية، مع دمج التقنيات البصرية لإبهار الحضور.
                     {% else %}
-                        Ultra-bright indoor/outdoor LED panels and modular video walls with pixel-perfect clarity for any venue size.
+                        Design and build custom stages and backdrops that reflect your brand identity, integrating visual technologies to impress your audience.
                     {% endif %}
                 </p>
                 <a href="#contact" class="service-link">{% if LANGUAGE_CODE == 'ar' %}اطلب الخدمة{% else %}Request Service{% endif %} <i class="bi bi-arrow-{% if LANGUAGE_CODE == 'ar' %}left{% else %}right{% endif %} ms-1"></i></a>
             </div>
 
+            <!-- 4 -->
             <div class="service-card">
-                <div class="service-icon-wrap" style="--accent:#A855F7;"><i class="bi bi-speaker-fill"></i></div>
-                <h3 class="service-title">{% if LANGUAGE_CODE == 'ar' %}أنظمة الصوت{% else %}Sound Systems{% endif %}</h3>
+                <div class="service-icon-wrap" style="--accent:#A855F7;"><i class="bi bi-cast"></i></div>
+                <h3 class="service-title">{% if LANGUAGE_CODE == 'ar' %}البث المباشر والفعاليات الافتراضية{% else %}Live Streaming & Virtual Events{% endif %}</h3>
                 <p class="service-desc">
                     {% if LANGUAGE_CODE == 'ar' %}
-                        صفوف صوتية خطية نقية ووفيرة الطاقة وأنظمة صوت موزعة — مصممة صوتياً لكل نوع قاعة.
+                        ربط جمهورك أينما كانوا من خلال خدمات البث المباشر عالية الجودة وحلول الفعاليات الهجينة (Hybrid Events).
                     {% else %}
-                        Crystal-clear line arrays, subwoofers, and distributed audio systems. Acoustically engineered for every room type.
+                        Connect your audience wherever they are through high-quality live streaming services and Hybrid Event solutions.
                     {% endif %}
                 </p>
                 <a href="#contact" class="service-link">{% if LANGUAGE_CODE == 'ar' %}اطلب الخدمة{% else %}Request Service{% endif %} <i class="bi bi-arrow-{% if LANGUAGE_CODE == 'ar' %}left{% else %}right{% endif %} ms-1"></i></a>
             </div>
 
+            <!-- 5 -->
             <div class="service-card">
                 <div class="service-icon-wrap" style="--accent:#F59E0B;"><i class="bi bi-lightbulb-fill"></i></div>
-                <h3 class="service-title">{% if LANGUAGE_CODE == 'ar' %}إضاءة احترافية{% else %}Professional Lighting{% endif %}</h3>
+                <h3 class="service-title">{% if LANGUAGE_CODE == 'ar' %}الإضاءة المسرحية والديكورية{% else %}Stage & Decorative Lighting{% endif %}</h3>
                 <p class="service-desc">
                     {% if LANGUAGE_CODE == 'ar' %}
-                        إضاءة مسرحية ورؤوس متحركة وإسقاط GOBO. كل شعاع مُصمَّم بدقة وهدف.
+                        إضاءة مسرحية احترافية ورؤوس متحركة وإضاءة ديكورية محيطية تُضفي على فعاليتك الأبهة والاحترافية.
                     {% else %}
-                        Stage lighting, ambient wash, moving heads, and GOBO projections. Every beam placed with precision and purpose.
+                        Professional stage lighting, moving heads, and decorative ambient lighting that adds grandeur and professionalism to your event.
                     {% endif %}
                 </p>
                 <a href="#contact" class="service-link">{% if LANGUAGE_CODE == 'ar' %}اطلب الخدمة{% else %}Request Service{% endif %} <i class="bi bi-arrow-{% if LANGUAGE_CODE == 'ar' %}left{% else %}right{% endif %} ms-1"></i></a>
             </div>
 
+            <!-- 6 -->
             <div class="service-card">
-                <div class="service-icon-wrap" style="--accent:#EC4899;"><i class="bi bi-camera-video-fill"></i></div>
-                <h3 class="service-title">{% if LANGUAGE_CODE == 'ar' %}إنتاج الفيديو{% else %}Video Production{% endif %}</h3>
+                <div class="service-icon-wrap" style="--accent:#EC4899;"><i class="bi bi-headset"></i></div>
+                <h3 class="service-title">{% if LANGUAGE_CODE == 'ar' %}الدعم الفني الميداني{% else %}On-Site Technical Support{% endif %}</h3>
                 <p class="service-desc">
                     {% if LANGUAGE_CODE == 'ar' %}
-                        إنتاج مباشر متعدد الكاميرات وبث بجودة بث تلفزيوني وحزم فيديو ما بعد الحدث.
+                        فريق هندسي وتقني متمرس في الموقع طوال الفعالية يضمن سير كل شيء بسلاسة تامة وبدون أي أخطاء.
                     {% else %}
-                        Multi-camera live production, event highlight reels, broadcast-quality streaming, and post-event video packages.
+                        An experienced on-site engineering team throughout the event ensures everything runs smoothly with zero errors.
                     {% endif %}
                 </p>
                 <a href="#contact" class="service-link">{% if LANGUAGE_CODE == 'ar' %}اطلب الخدمة{% else %}Request Service{% endif %} <i class="bi bi-arrow-{% if LANGUAGE_CODE == 'ar' %}left{% else %}right{% endif %} ms-1"></i></a>
@@ -293,45 +299,38 @@
             {% else %}
             <div class="why-content" data-aos="fade-right">
             {% endif %}
-                <span class="section-tag">{% if LANGUAGE_CODE == 'ar' %}لماذا تختارنا{% else %}Why Choose Us{% endif %}</span>
+                <span class="section-tag">{% if LANGUAGE_CODE == 'ar' %}من هي Pro Event؟{% else %}Who is Pro Event?{% endif %}</span>
                 <h2 class="section-title">
-                    {% if LANGUAGE_CODE == 'ar' %}المعيار الذهبي لتميز AV الشركات{% else %}The Standard for Corporate AV Excellence{% endif %}
+                    {% if LANGUAGE_CODE == 'ar' %}شريكك الأمثل لفعالية لا تُنسى{% else %}Your Ideal Partner for an Unforgettable Event{% endif %}
                 </h2>
                 <p class="why-lead">
                     {% if LANGUAGE_CODE == 'ar' %}
-                        نحن لا نُركّب معدات فحسب — بل نُهندس بيئات غامرة تُعزز علامتك التجارية وتُشرك جمهورك وتُخلّد فعاليتك في الأذهان.
+                        نحن شركة رائدة في مجال تكنولوجيا الفعاليات والإنتاج الفني في مصر، متخصصون في تقديم حلول صوتيات ومرئيات (AV) متكاملة للمؤتمرات والمعارض وفعاليات الشركات الكبرى. رسالتنا هي تحويل كل فعالية إلى تجربة استثنائية لا تُنسى، من خلال الجمع بين أحدث التقنيات وفريق متمرس يعمل بشغف واحترافية عالية. رؤيتنا أن نكون المرجع الأول لتكنولوجيا الفعاليات في مصر والمنطقة.
                     {% else %}
-                        We don't just set up equipment — we engineer immersive environments that amplify your brand, engage your audience, and make your event unforgettable.
+                        We are a leading event technology and technical production company in Egypt, specialized in delivering integrated AV solutions for conferences, exhibitions, and major corporate events. Our mission is to transform every event into an unforgettable experience by combining cutting-edge technology with a passionate, highly professional team. Our vision is to be the number-one reference for event technology in Egypt and across the region.
                     {% endif %}
                 </p>
 
                 <div class="why-points">
                     <div class="why-point">
-                        <div class="why-point-icon" style="background:rgba(79,142,247,.12);color:#4F8EF7;"><i class="bi bi-lightning-charge-fill"></i></div>
+                        <div class="why-point-icon" style="background:rgba(79,142,247,.12);color:#4F8EF7;"><i class="bi bi-cpu-fill"></i></div>
                         <div>
-                            <h4>{% if LANGUAGE_CODE == 'ar' %}تنفيذ سريع{% else %}Rapid Deployment{% endif %}</h4>
-                            <p>{% if LANGUAGE_CODE == 'ar' %}الإعداد والاختبار الكامل خلال النوافذ الزمنية المتفق عليها — لا تأخير يوم الحدث أبداً.{% else %}Full setup and testing completed within agreed windows — never a delay on event day.{% endif %}</p>
+                            <h4>{% if LANGUAGE_CODE == 'ar' %}معدات متطورة{% else %}Advanced Equipment{% endif %}</h4>
+                            <p>{% if LANGUAGE_CODE == 'ar' %}نعتمد على أحدث التقنيات في شاشات العرض وأنظمة الصوت والإضاءة لضمان جودة استثنائية في كل فعالية.{% else %}We rely on the latest technologies in display screens, sound systems, and lighting to ensure exceptional quality in every event.{% endif %}</p>
                         </div>
                     </div>
                     <div class="why-point">
-                        <div class="why-point-icon" style="background:rgba(255,107,53,.12);color:#FF6B35;"><i class="bi bi-shield-check-fill"></i></div>
+                        <div class="why-point-icon" style="background:rgba(255,107,53,.12);color:#FF6B35;"><i class="bi bi-people-fill"></i></div>
                         <div>
-                            <h4>{% if LANGUAGE_CODE == 'ar' %}ضمان بلا أعطال{% else %}Zero-Failure Guarantee{% endif %}</h4>
-                            <p>{% if LANGUAGE_CODE == 'ar' %}أنظمة احتياطية ومهندسون في الموقع وجولات استعداد قبل الحدث — لا شيء يمكن أن يسوء.{% else %}Redundant systems, on-site engineers, and pre-event walkthroughs ensure nothing goes wrong.{% endif %}</p>
+                            <h4>{% if LANGUAGE_CODE == 'ar' %}فريق خبراء{% else %}Expert Team{% endif %}</h4>
+                            <p>{% if LANGUAGE_CODE == 'ar' %}طاقم هندسي وتقني متمرس يضمن تنفيذ الفعاليات بسلاسة وبدون أخطاء — من التجهيز حتى آخر لحظة في الحدث.{% else %}An experienced engineering and technical crew that ensures flawless event execution — from setup to the final moment.{% endif %}</p>
                         </div>
                     </div>
                     <div class="why-point">
-                        <div class="why-point-icon" style="background:rgba(0,212,170,.12);color:#00D4AA;"><i class="bi bi-bar-chart-fill"></i></div>
-                        <div>
-                            <h4>{% if LANGUAGE_CODE == 'ar' %}خبرة 12+ سنة{% else %}12+ Years of Expertise{% endif %}</h4>
-                            <p>{% if LANGUAGE_CODE == 'ar' %}أكثر من عقد من الخدمة لكبرى الشركات والمعارض الدولية والجهات الحكومية.{% else %}Over a decade serving Fortune 500 companies, government bodies, and international exhibitions.{% endif %}</p>
-                        </div>
-                    </div>
-                    <div class="why-point">
-                        <div class="why-point-icon" style="background:rgba(168,85,247,.12);color:#A855F7;"><i class="bi bi-puzzle-fill"></i></div>
+                        <div class="why-point-icon" style="background:rgba(0,212,170,.12);color:#00D4AA;"><i class="bi bi-puzzle-fill"></i></div>
                         <div>
                             <h4>{% if LANGUAGE_CODE == 'ar' %}حلول متكاملة{% else %}Integrated Solutions{% endif %}</h4>
-                            <p>{% if LANGUAGE_CODE == 'ar' %}فريق واحد يتولى كل شيء — AV وإضاءة وبث وإنتاج. لا فوضى تنسيق.{% else %}One team handles everything — AV, lighting, streaming, and production. No coordination chaos.{% endif %}</p>
+                            <p>{% if LANGUAGE_CODE == 'ar' %}من التخطيط المبدئي والتصميم وحتى التنفيذ التقني في الموقع، نحن نغطي كافة احتياجاتك تحت سقف واحد.{% else %}From initial planning and design to on-site technical execution, we cover all your needs under one roof.{% endif %}</p>
                         </div>
                     </div>
                 </div>
@@ -570,9 +569,9 @@
                 <div class="testi-stars"><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i></div>
                 <p class="testi-text">
                     {% if LANGUAGE_CODE == 'ar' %}
-                        "حوّلت ProAV مؤتمرنا السنوي إلى تجربة احترافية رائعة. جدار LED كان مذهلاً والصوت كان نقياً طوال القاعة."
+                        "حوّلت Pro Event مؤتمرنا السنوي إلى تجربة احترافية رائعة. جدار LED كان مذهلاً والصوت كان نقياً طوال القاعة."
                     {% else %}
-                        "ProAV transformed our annual conference into an incredibly professional experience. The LED wall was stunning and the sound was crystal clear throughout the 3,000-seat hall."
+                        "Pro Event transformed our annual conference into an incredibly professional experience. The LED wall was stunning and the sound was crystal clear throughout the 3,000-seat hall."
                     {% endif %}
                 </p>
                 <div class="testi-author">
@@ -588,9 +587,9 @@
                 <div class="testi-stars"><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i></div>
                 <p class="testi-text">
                     {% if LANGUAGE_CODE == 'ar' %}
-                        "تعاملنا مع شركات AV كثيرة على مدار السنين. ProAV تتميز باحترافيتها وسرعة الإعداد والخبرة التقنية التي يجلبها فريقها. لا يُفوّتون شيئاً."
+                        "تعاملنا مع شركات AV كثيرة على مدار السنين. Pro Event تتميز باحترافيتها وسرعة الإعداد والخبرة التقنية التي يجلبها فريقها. لا يُفوّتون شيئاً."
                     {% else %}
-                        "We've worked with many AV companies over the years. ProAV stands out for their professionalism, rapid setup, and the technical expertise their team brings on-site. They don't miss a beat."
+                        "We've worked with many AV companies over the years. Pro Event stands out for their professionalism, rapid setup, and the technical expertise their team brings on-site. They don't miss a beat."
                     {% endif %}
                 </p>
                 <div class="testi-author">
@@ -606,9 +605,9 @@
                 <div class="testi-stars"><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i></div>
                 <p class="testi-text">
                     {% if LANGUAGE_CODE == 'ar' %}
-                        "بدا جناحنا في جيتكس رائعاً بفضل إعداد جدار الفيديو من ProAV. زاد حجم الزيارات بنسبة 40% مقارنة بالعام الماضي."
+                        "بدا جناحنا في جيتكس رائعاً بفضل إعداد جدار الفيديو من Pro Event. زاد حجم الزيارات بنسبة 40% مقارنة بالعام الماضي."
                     {% else %}
-                        "Our GITEX booth looked incredible thanks to ProAV's video wall setup. Foot traffic increased by 40% compared to last year. Our brand finally looked as premium as it deserves."
+                        "Our GITEX booth looked incredible thanks to Pro Event's video wall setup. Foot traffic increased by 40% compared to last year. Our brand finally looked as premium as it deserves."
                     {% endif %}
                 </p>
                 <div class="testi-author">
@@ -666,7 +665,7 @@
                     <i class="bi bi-send-fill me-2"></i>
                     {% if LANGUAGE_CODE == 'ar' %}احصل على عرض الآن{% else %}Get a Quote Now{% endif %}
                 </a>
-                <a href="https://wa.me/966500000000" class="btn-whatsapp">
+                <a href="https://wa.me/201119333199" class="btn-whatsapp">
                     <i class="bi bi-whatsapp me-2"></i>
                     {% if LANGUAGE_CODE == 'ar' %}واتساب{% else %}WhatsApp Us{% endif %}
                 </a>
@@ -698,21 +697,21 @@
                         <div class="cd-icon"><i class="bi bi-telephone-fill"></i></div>
                         <div>
                             <strong>{% if LANGUAGE_CODE == 'ar' %}هاتف{% else %}Phone{% endif %}</strong>
-                            <span dir="ltr">+966 50 000 0000</span>
+                            <span dir="ltr">+20 (111) 933 3199</span>
                         </div>
                     </div>
                     <div class="contact-detail-item">
                         <div class="cd-icon"><i class="bi bi-envelope-fill"></i></div>
                         <div>
                             <strong>{% if LANGUAGE_CODE == 'ar' %}البريد{% else %}Email{% endif %}</strong>
-                            <span dir="ltr">info@proavsolutions.com</span>
+                            <span dir="ltr">hammammazin@gmail.com</span>
                         </div>
                     </div>
                     <div class="contact-detail-item">
                         <div class="cd-icon"><i class="bi bi-geo-alt-fill"></i></div>
                         <div>
                             <strong>{% if LANGUAGE_CODE == 'ar' %}الموقع{% else %}Location{% endif %}</strong>
-                            <span>{% if LANGUAGE_CODE == 'ar' %}الرياض، المملكة العربية السعودية{% else %}Riyadh, Saudi Arabia{% endif %}</span>
+                            <span>{% if LANGUAGE_CODE == 'ar' %}القاهرة، مصر{% else %}Cairo, Egypt{% endif %}</span>
                         </div>
                     </div>
                 </div>
@@ -824,9 +823,9 @@
             <div class="footer-brand">
                 <a href="#home" class="nav-logo mb-3 d-inline-flex">
                     <span class="logo-icon"><i class="bi bi-display-fill"></i></span>
-                    <span class="logo-text">Pro<span class="accent">AV</span></span>
+                    <span class="logo-text">Pro<span class="accent">Event</span></span>
                 </a>
-                <p>{% if LANGUAGE_CODE == 'ar' %}حلول صوت وصورة متكاملة للمؤتمرات والمعارض وفعاليات الشركات في المنطقة.{% else %}Full-service Audio Visual solutions for conferences, exhibitions, and corporate events across the region.{% endif %}</p>
+                <p>{% if LANGUAGE_CODE == 'ar' %}حلول تكنولوجيا الفعاليات والإنتاج الفني للمؤتمرات والمعارض وفعاليات الشركات في مصر.{% else %}Event technology & technical production solutions for conferences, exhibitions, and corporate events in Egypt.{% endif %}</p>
                 <div class="social-links mt-3">
                     <a href="#" class="social-btn"><i class="bi bi-linkedin"></i></a>
                     <a href="#" class="social-btn"><i class="bi bi-instagram"></i></a>
@@ -861,9 +860,9 @@
             <div class="footer-col">
                 <h5>{% if LANGUAGE_CODE == 'ar' %}تواصل معنا{% else %}Contact Us{% endif %}</h5>
                 <ul class="contact-list">
-                    <li><i class="bi bi-telephone-fill"></i> <span dir="ltr">+966 50 000 0000</span></li>
-                    <li><i class="bi bi-envelope-fill"></i> <span dir="ltr">info@proavsolutions.com</span></li>
-                    <li><i class="bi bi-geo-alt-fill"></i> {% if LANGUAGE_CODE == 'ar' %}الرياض، المملكة العربية السعودية{% else %}Riyadh, Saudi Arabia{% endif %}</li>
+                    <li><i class="bi bi-telephone-fill"></i> <span dir="ltr">+20 (111) 933 3199</span></li>
+                    <li><i class="bi bi-envelope-fill"></i> <span dir="ltr">hammammazin@gmail.com</span></li>
+                    <li><i class="bi bi-geo-alt-fill"></i> {% if LANGUAGE_CODE == 'ar' %}القاهرة، مصر{% else %}Cairo, Egypt{% endif %}</li>
                     <li><i class="bi bi-whatsapp"></i> {% if LANGUAGE_CODE == 'ar' %}واتساب متاح 24/7{% else %}WhatsApp Available 24/7{% endif %}</li>
                 </ul>
             </div>
@@ -871,7 +870,7 @@
         </div>
 
         <div class="footer-bottom">
-            <p>&copy; 2024 ProAV Solutions. {% if LANGUAGE_CODE == 'ar' %}جميع الحقوق محفوظة.{% else %}All rights reserved.{% endif %}</p>
+            <p>&copy; 2024 Pro Event. {% if LANGUAGE_CODE == 'ar' %}جميع الحقوق محفوظة.{% else %}All rights reserved.{% endif %}</p>
             <p>{% if LANGUAGE_CODE == 'ar' %}مصمم للأداء وتوليد العملاء.{% else %}Designed for performance &amp; lead generation.{% endif %}</p>
         </div>
     </div>
