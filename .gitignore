@@ -32,3 +32,9 @@ desktop.ini
 
 # Node
 node_modules/
+
+# Tunneling
+lt_err.txt
+start_ngrok.bat
+start_tunnel.bat
+start_ngrok.py
