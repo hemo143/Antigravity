@@ -217,11 +217,13 @@ a { text-decoration: none; color: inherit; }
 ══════════════════════════════════════════════ */
 .hero-section {
     position: relative;
-    aspect-ratio: 16 / 9;
+    width: 100%;
+    height: 56.25vw;
     min-height: 560px;
     max-height: 100vh;
     display: flex;
     align-items: center;
+    justify-content: center;
     overflow: hidden;
 }
 
@@ -251,7 +253,7 @@ a { text-decoration: none; color: inherit; }
 
 @media (max-width: 768px) {
     .hero-section {
-        aspect-ratio: auto;
+        height: auto;
         min-height: 90vh;
     }
 }
