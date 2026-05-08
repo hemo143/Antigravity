@@ -217,7 +217,9 @@ a { text-decoration: none; color: inherit; }
 ══════════════════════════════════════════════ */
 .hero-section {
     position: relative;
-    min-height: 100vh;
+    aspect-ratio: 16 / 9;
+    min-height: 560px;
+    max-height: 100vh;
     display: flex;
     align-items: center;
     overflow: hidden;
@@ -232,7 +234,8 @@ a { text-decoration: none; color: inherit; }
 .hero-video {
     width: 100%; height: 100%;
     object-fit: cover;
-    opacity: 0.35;
+    opacity: 1;
+    filter: contrast(1.15) saturate(1.25) brightness(0.85);
 }
 
 .hero-overlay {
@@ -240,10 +243,17 @@ a { text-decoration: none; color: inherit; }
     inset: 0;
     background: linear-gradient(
         135deg,
-        rgba(10,14,26,0.92) 0%,
-        rgba(10,14,26,0.75) 50%,
-        rgba(10,14,26,0.88) 100%
+        rgba(10,14,26,0.55) 0%,
+        rgba(10,14,26,0.30) 50%,
+        rgba(10,14,26,0.60) 100%
     );
+}
+
+@media (max-width: 768px) {
+    .hero-section {
+        aspect-ratio: auto;
+        min-height: 90vh;
+    }
 }
 
 .hero-content {
