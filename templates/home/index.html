@@ -1,4 +1,4 @@
-{% load i18n %}{% get_current_language as LANGUAGE_CODE %}<!DOCTYPE html>
+{% load i18n static %}{% get_current_language as LANGUAGE_CODE %}<!DOCTYPE html>
 <html lang="{{ LANGUAGE_CODE }}" dir="{% if LANGUAGE_CODE == 'ar' %}rtl{% else %}ltr{% endif %}">
 <head>
     <meta charset="UTF-8">
@@ -94,8 +94,9 @@
 ══════════════════════════════════════════════ -->
 <section class="hero-section" id="home">
     <div class="hero-video-wrap">
-        <video autoplay muted loop playsinline class="hero-video">
-            <source src="https://www.w3schools.com/html/mov_bbb.mp4" type="video/mp4">
+        <video autoplay muted loop playsinline preload="metadata"
+               poster="{% static 'img/hero-poster.jpg' %}" class="hero-video">
+            <source src="{% static 'video/hero.mp4' %}" type="video/mp4">
         </video>
         <div class="hero-overlay"></div>
     </div>
