@@ -1,0 +1,139 @@
+{% load i18n static %}
+<!-- ═══ AMBIENT SOUNDTRACK ═══ -->
+<audio id="ambientAudio" loop preload="auto">
+    <source src="{% static 'audio/ambient.mp3' %}" type="audio/mpeg">
+</audio>
+
+<button class="audio-toggle" id="audioToggle"
+        aria-label="{% if LANGUAGE_CODE == 'ar' %}تشغيل/إيقاف الموسيقى{% else %}Toggle soundtrack{% endif %}"
+        aria-pressed="false">
+    <span class="audio-toggle-icon">
+        <svg class="ico-off" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="18" height="18">
+            <path d="M9 18V5l12-2v13"/>
+            <circle cx="6" cy="18" r="3"/>
+            <circle cx="18" cy="16" r="3"/>
+        </svg>
+        <span class="audio-bars" aria-hidden="true">
+            <span></span><span></span><span></span><span></span>
+        </span>
+    </span>
+    <span class="audio-toggle-label">
+        <span class="lbl-off">{% if LANGUAGE_CODE == 'ar' %}الموسيقى{% else %}Soundtrack{% endif %}</span>
+        <span class="lbl-on">{% if LANGUAGE_CODE == 'ar' %}يعمل{% else %}Playing{% endif %}</span>
+    </span>
+</button>
+
+<script>
+(function() {
+    const audio  = document.getElementById('ambientAudio');
+    const toggle = document.getElementById('audioToggle');
+    if (!audio || !toggle) return;
+
+    const TARGET_VOL   = 0.15;   // low, premium volume
+    const FADE_MS      = 1500;
+    const STATE_KEY    = 'pe_audio_state';   // 'playing' | 'paused'
+    const TIME_KEY     = 'pe_audio_time';    // last currentTime (seconds)
+
+    let isPlaying = false;
+    let fadeTimer = null;
+
+    audio.volume = 0;
+
+    // Restore previous time so music continues across page navigations
+    try {
+        const savedTime = parseFloat(sessionStorage.getItem(TIME_KEY) || '0');
+        if (savedTime > 0 && !isNaN(savedTime)) {
+            audio.addEventListener('loadedmetadata', () => {
+                if (savedTime < audio.duration) audio.currentTime = savedTime;
+            }, { once: true });
+        }
+    } catch (e) {}
+
+    function setUI(playing) {
+        isPlaying = playing;
+        toggle.classList.toggle('playing', playing);
+        toggle.setAttribute('aria-pressed', playing ? 'true' : 'false');
+        try {
+            sessionStorage.setItem(STATE_KEY, playing ? 'playing' : 'paused');
+        } catch (e) {}
+    }
+
+    function fadeTo(target, onDone) {
+        clearInterval(fadeTimer);
+        const start = audio.volume;
+        const steps = 30;
+        const stepMs = FADE_MS / steps;
+        let i = 0;
+        fadeTimer = setInterval(() => {
+            i++;
+            audio.volume = Math.max(0, Math.min(1, start + (target - start) * (i / steps)));
+            if (i >= steps) {
+                clearInterval(fadeTimer);
+                if (onDone) onDone();
+            }
+        }, stepMs);
+    }
+
+    function tryPlay() {
+        return audio.play().then(() => {
+            setUI(true);
+            fadeTo(TARGET_VOL);
+            return true;
+        }).catch(() => false);
+    }
+
+    function pause() {
+        fadeTo(0, () => {
+            audio.pause();
+            setUI(false);
+        });
+    }
+
+    // Manual click toggle
+    toggle.addEventListener('click', (e) => {
+        e.stopPropagation();
+        if (isPlaying) pause();
+        else tryPlay();
+    });
+
+    // Save progress periodically so navigation resumes correctly
+    setInterval(() => {
+        if (!audio.paused) {
+            try { sessionStorage.setItem(TIME_KEY, String(audio.currentTime)); } catch (e) {}
+        }
+    }, 1000);
+
+    // ─── Smart autoplay strategy ────────────────────────────────────────
+    // 1. Try immediate autoplay (works if user already interacted in session)
+    // 2. If blocked, start on the first user gesture anywhere on the page
+    const wasPlayingBefore = (() => {
+        try { return sessionStorage.getItem(STATE_KEY) === 'playing'; }
+        catch (e) { return false; }
+    })();
+
+    // Always attempt autoplay — if user paused before, respect that and skip
+    const shouldAutoStart = wasPlayingBefore || !sessionStorage.getItem(STATE_KEY);
+
+    if (shouldAutoStart) {
+        tryPlay().then(started => {
+            if (started) return;
+            // Autoplay blocked — wait for first user interaction
+            const events = ['click', 'touchstart', 'scroll', 'keydown', 'mousemove'];
+            const startOnInteract = () => {
+                tryPlay();
+                events.forEach(ev => window.removeEventListener(ev, startOnInteract, true));
+            };
+            events.forEach(ev => window.addEventListener(ev, startOnInteract, { capture: true, once: true, passive: true }));
+        });
+    }
+
+    // Pause when tab is hidden, resume when visible (only if was playing)
+    document.addEventListener('visibilitychange', () => {
+        if (document.hidden && !audio.paused) {
+            audio.pause();
+        } else if (!document.hidden && isPlaying && audio.paused) {
+            audio.play().catch(()=>{});
+        }
+    });
+})();
+</script>
