@@ -7,7 +7,7 @@ from django.conf import settings
 from django.conf.urls.static import static
 from django.conf.urls.i18n import i18n_patterns
 from django.views.generic import RedirectView
-from apps.management.home_views import home_view, quote_submit
+from apps.management.home_views import home_view, quote_submit, how_we_work_view
 
 urlpatterns = [
     path('i18n/', include('django.conf.urls.i18n')),
@@ -21,6 +21,7 @@ urlpatterns += i18n_patterns(
 
     # AV Company Landing Page
     path('', home_view, name='home'),
+    path('how-we-work/', how_we_work_view, name='how_we_work'),
     path('quote/submit/', quote_submit, name='quote_submit'),
 
     # Apps URLs

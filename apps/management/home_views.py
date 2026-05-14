@@ -12,6 +12,10 @@ def home_view(request):
     return render(request, 'home/index.html', {'portfolio_items': portfolio_items})
 
 
+def how_we_work_view(request):
+    return render(request, 'home/how_we_work.html')
+
+
 @require_POST
 def quote_submit(request):
     try:

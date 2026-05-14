@@ -36,6 +36,7 @@
 
             <ul class="nav-links">
                 <li><a href="#services">{% if LANGUAGE_CODE == 'ar' %}الخدمات{% else %}Services{% endif %}</a></li>
+                <li><a href="{% url 'how_we_work' %}">{% if LANGUAGE_CODE == 'ar' %}كيف نعمل{% else %}How We Work{% endif %}</a></li>
                 <li><a href="#portfolio">{% if LANGUAGE_CODE == 'ar' %}أعمالنا{% else %}Portfolio{% endif %}</a></li>
                 <li><a href="#about">{% if LANGUAGE_CODE == 'ar' %}من نحن{% else %}About{% endif %}</a></li>
                 <li><a href="#contact">{% if LANGUAGE_CODE == 'ar' %}تواصل{% else %}Contact{% endif %}</a></li>
@@ -67,6 +68,7 @@
     <div class="mobile-menu" id="mobileMenu">
         <ul>
             <li><a href="#services"  class="mobile-link">{% if LANGUAGE_CODE == 'ar' %}الخدمات{% else %}Services{% endif %}</a></li>
+            <li><a href="{% url 'how_we_work' %}" class="mobile-link">{% if LANGUAGE_CODE == 'ar' %}كيف نعمل{% else %}How We Work{% endif %}</a></li>
             <li><a href="#portfolio" class="mobile-link">{% if LANGUAGE_CODE == 'ar' %}أعمالنا{% else %}Portfolio{% endif %}</a></li>
             <li><a href="#about"     class="mobile-link">{% if LANGUAGE_CODE == 'ar' %}من نحن{% else %}About{% endif %}</a></li>
             <li><a href="#contact"   class="mobile-link">{% if LANGUAGE_CODE == 'ar' %}تواصل{% else %}Contact{% endif %}</a></li>

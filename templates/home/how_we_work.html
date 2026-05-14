@@ -1,0 +1,548 @@
+{% load i18n static %}{% get_current_language as LANGUAGE_CODE %}<!DOCTYPE html>
+<html lang="{{ LANGUAGE_CODE }}" dir="{% if LANGUAGE_CODE == 'ar' %}rtl{% else %}ltr{% endif %}">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {% if LANGUAGE_CODE == 'ar' %}
+    <title>كيف نعمل – Pro Event Operations Workflow</title>
+    <meta name="description" content="منهجية تنفيذ الفعاليات في Pro Event — 14 مرحلة احترافية من استلام طلب العميل إلى التقرير النهائي.">
+    {% else %}
+    <title>How We Work – Pro Event Operations Workflow</title>
+    <meta name="description" content="Pro Event's 14-stage event operations workflow — from client inquiry through technical design, live execution, and post-event reporting.">
+    {% endif %}
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Cairo:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" rel="stylesheet">
+    <link href="{% static 'css/landing.css' %}" rel="stylesheet">
+    <link href="{% static 'css/how-we-work.css' %}" rel="stylesheet">
+</head>
+<body>
+
+<!-- ═══ NAVBAR ═══ -->
+<nav class="av-navbar" id="mainNav">
+    <div class="container-xl">
+        <div class="nav-inner">
+            <a href="{% url 'home' %}" class="nav-logo">
+                <span class="logo-icon"><i class="bi bi-display-fill"></i></span>
+                <span class="logo-text">Pro<span class="accent">Event</span></span>
+            </a>
+            <ul class="nav-links">
+                <li><a href="{% url 'home' %}#services">{% if LANGUAGE_CODE == 'ar' %}الخدمات{% else %}Services{% endif %}</a></li>
+                <li><a href="{% url 'how_we_work' %}" class="active">{% if LANGUAGE_CODE == 'ar' %}كيف نعمل{% else %}How We Work{% endif %}</a></li>
+                <li><a href="{% url 'home' %}#portfolio">{% if LANGUAGE_CODE == 'ar' %}أعمالنا{% else %}Portfolio{% endif %}</a></li>
+                <li><a href="{% url 'home' %}#contact">{% if LANGUAGE_CODE == 'ar' %}تواصل{% else %}Contact{% endif %}</a></li>
+            </ul>
+            <form action="{% url 'set_language' %}" method="post" class="lang-switch-form">
+                {% csrf_token %}
+                <input name="next" type="hidden" value="{{ request.get_full_path }}">
+                {% if LANGUAGE_CODE == 'ar' %}
+                    <button name="language" value="en" class="btn-lang">EN</button>
+                {% else %}
+                    <button name="language" value="ar" class="btn-lang">عربي</button>
+                {% endif %}
+            </form>
+            <a href="{% url 'home' %}#contact" class="btn-quote">
+                <i class="bi bi-send-fill me-2"></i>
+                {% if LANGUAGE_CODE == 'ar' %}احصل على عرض{% else %}Get a Quote{% endif %}
+            </a>
+            <button class="nav-toggle" id="navToggle" aria-label="Toggle menu">
+                <span></span><span></span><span></span>
+            </button>
+        </div>
+    </div>
+    <div class="mobile-menu" id="mobileMenu">
+        <ul>
+            <li><a href="{% url 'home' %}#services" class="mobile-link">{% if LANGUAGE_CODE == 'ar' %}الخدمات{% else %}Services{% endif %}</a></li>
+            <li><a href="{% url 'how_we_work' %}" class="mobile-link">{% if LANGUAGE_CODE == 'ar' %}كيف نعمل{% else %}How We Work{% endif %}</a></li>
+            <li><a href="{% url 'home' %}#portfolio" class="mobile-link">{% if LANGUAGE_CODE == 'ar' %}أعمالنا{% else %}Portfolio{% endif %}</a></li>
+            <li><a href="{% url 'home' %}#contact" class="mobile-link">{% if LANGUAGE_CODE == 'ar' %}تواصل{% else %}Contact{% endif %}</a></li>
+        </ul>
+    </div>
+</nav>
+
+<!-- ═══ HERO ═══ -->
+<section class="hww-hero">
+    <div class="hww-hero-bg"></div>
+    <div class="container-xl hww-hero-content">
+        <div class="hww-eyebrow" data-aos="fade-down">
+            <i class="bi bi-diagram-3-fill me-2"></i>
+            {% if LANGUAGE_CODE == 'ar' %}منهجية التشغيل والتنفيذ{% else %}Operations & Execution Methodology{% endif %}
+        </div>
+        <h1 class="hww-title" data-aos="fade-up" data-aos-delay="100">
+            {% if LANGUAGE_CODE == 'ar' %}
+                كيف <span class="hww-grad">ننفّذ</span> فعاليات احترافية
+            {% else %}
+                How We <span class="hww-grad">Execute</span> Professional Events
+            {% endif %}
+        </h1>
+        <p class="hww-lead" data-aos="fade-up" data-aos-delay="200">
+            {% if LANGUAGE_CODE == 'ar' %}
+                14 مرحلة مدروسة من استلام طلب العميل وحتى التقرير النهائي — كل خطوة موثّقة وكل تفصيلة تحت السيطرة. هذا ما يحوّل المؤتمر من فكرة إلى تجربة لا تُنسى.
+            {% else %}
+                14 carefully orchestrated stages — from client inquiry to final reporting. Every step documented, every detail under control. This is what turns an event from a concept into a flawless experience.
+            {% endif %}
+        </p>
+        <div class="hww-stats" data-aos="fade-up" data-aos-delay="300">
+            <div class="hww-stat">
+                <div class="hww-stat-num">14</div>
+                <div class="hww-stat-lbl">{% if LANGUAGE_CODE == 'ar' %}مرحلة تنفيذ{% else %}Execution Stages{% endif %}</div>
+            </div>
+            <div class="hww-stat">
+                <div class="hww-stat-num">4</div>
+                <div class="hww-stat-lbl">{% if LANGUAGE_CODE == 'ar' %}مراحل رئيسية{% else %}Core Phases{% endif %}</div>
+            </div>
+            <div class="hww-stat">
+                <div class="hww-stat-num">200+</div>
+                <div class="hww-stat-lbl">{% if LANGUAGE_CODE == 'ar' %}حدث نُفّذ بهذه المنهجية{% else %}Events Delivered{% endif %}</div>
+            </div>
+            <div class="hww-stat">
+                <div class="hww-stat-num">98%</div>
+                <div class="hww-stat-lbl">{% if LANGUAGE_CODE == 'ar' %}رضا العملاء{% else %}Client Satisfaction{% endif %}</div>
+            </div>
+        </div>
+        <a href="#phase-1" class="hww-scroll-cta" data-aos="fade-up" data-aos-delay="400">
+            <span>{% if LANGUAGE_CODE == 'ar' %}ابدأ من المرحلة الأولى{% else %}Start From Phase 1{% endif %}</span>
+            <i class="bi bi-arrow-down"></i>
+        </a>
+    </div>
+</section>
+
+<!-- ═══ PHASE OVERVIEW ═══ -->
+<section class="hww-overview">
+    <div class="container-xl">
+        <div class="hww-overview-grid">
+            <div class="hww-phase-card" style="--phase-color:#4F8EF7;" data-aos="fade-up">
+                <div class="hww-phase-num">01</div>
+                <h3>{% if LANGUAGE_CODE == 'ar' %}الاستكشاف والتخطيط{% else %}Discovery & Planning{% endif %}</h3>
+                <p>{% if LANGUAGE_CODE == 'ar' %}من الاستفسار الأول إلى اعتماد العرض النهائي.{% else %}From first inquiry to signed quotation.{% endif %}</p>
+                <span class="hww-phase-tag">{% if LANGUAGE_CODE == 'ar' %}مراحل 1–5{% else %}Stages 1–5{% endif %}</span>
+            </div>
+            <div class="hww-phase-card" style="--phase-color:#FF6B35;" data-aos="fade-up" data-aos-delay="100">
+                <div class="hww-phase-num">02</div>
+                <h3>{% if LANGUAGE_CODE == 'ar' %}ما قبل الإنتاج{% else %}Pre-Production{% endif %}</h3>
+                <p>{% if LANGUAGE_CODE == 'ar' %}تجهيز الفرق والمعدات واللوجستيات قبل الحدث.{% else %}Crews, equipment, and logistics readied for show day.{% endif %}</p>
+                <span class="hww-phase-tag">{% if LANGUAGE_CODE == 'ar' %}مراحل 6–8{% else %}Stages 6–8{% endif %}</span>
+            </div>
+            <div class="hww-phase-card" style="--phase-color:#00D4AA;" data-aos="fade-up" data-aos-delay="200">
+                <div class="hww-phase-num">03</div>
+                <h3>{% if LANGUAGE_CODE == 'ar' %}التنفيذ في الموقع{% else %}On-Site Execution{% endif %}</h3>
+                <p>{% if LANGUAGE_CODE == 'ar' %}التركيب والاختبار وإدارة الحدث المباشر.{% else %}Setup, testing, and live show operations.{% endif %}</p>
+                <span class="hww-phase-tag">{% if LANGUAGE_CODE == 'ar' %}مراحل 9–12{% else %}Stages 9–12{% endif %}</span>
+            </div>
+            <div class="hww-phase-card" style="--phase-color:#A855F7;" data-aos="fade-up" data-aos-delay="300">
+                <div class="hww-phase-num">04</div>
+                <h3>{% if LANGUAGE_CODE == 'ar' %}الإقفال والتقرير{% else %}Closure & Reporting{% endif %}</h3>
+                <p>{% if LANGUAGE_CODE == 'ar' %}الفك والتسليم والمراجعة بعد الحدث.{% else %}Teardown, handover, and post-event review.{% endif %}</p>
+                <span class="hww-phase-tag">{% if LANGUAGE_CODE == 'ar' %}مراحل 13–14{% else %}Stages 13–14{% endif %}</span>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ═══ TIMELINE STAGES ═══ -->
+<section class="hww-timeline" id="phase-1">
+    <div class="container-xl">
+
+        <!-- ─── PHASE 1 HEADER ─── -->
+        <div class="hww-phase-banner" style="--phase-color:#4F8EF7;" data-aos="fade-up">
+            <div class="hww-banner-num">PHASE 01</div>
+            <h2>{% if LANGUAGE_CODE == 'ar' %}الاستكشاف والتخطيط{% else %}Discovery & Planning{% endif %}</h2>
+            <p>{% if LANGUAGE_CODE == 'ar' %}كل حدث ناجح يبدأ بفهم عميق لأهداف العميل وحدود التنفيذ.{% else %}Every successful event begins with a deep understanding of objectives and execution boundaries.{% endif %}</p>
+        </div>
+
+        <!-- 01 -->
+        <div class="hww-stage hww-stage-left" data-aos="fade-right" style="--phase-color:#4F8EF7;">
+            <div class="hww-stage-marker"><span>01</span></div>
+            <div class="hww-stage-card">
+                <div class="hww-stage-head">
+                    <i class="bi bi-envelope-paper-fill"></i>
+                    <div>
+                        <h3>{% if LANGUAGE_CODE == 'ar' %}استلام طلب العميل{% else %}Client Inquiry{% endif %}</h3>
+                        <span class="hww-duration"><i class="bi bi-clock me-1"></i> {% if LANGUAGE_CODE == 'ar' %}1–2 يوم{% else %}1–2 days{% endif %}</span>
+                    </div>
+                </div>
+                <p>{% if LANGUAGE_CODE == 'ar' %}استقبال موجز الحدث (Brief) وتصنيف نوعه ونطاقه المبدئي، ثم تخصيص فريق حساب للعميل.{% else %}We receive the event brief, classify type and initial scope, and assign a dedicated account team — so the client has one point of contact from day one.{% endif %}</p>
+                <ul class="hww-activities">
+                    <li><i class="bi bi-check2"></i> {% if LANGUAGE_CODE == 'ar' %}استلام Brief الحدث{% else %}Event brief intake{% endif %}</li>
+                    <li><i class="bi bi-check2"></i> {% if LANGUAGE_CODE == 'ar' %}تصنيف نوع الحدث والحجم{% else %}Event type & scale classification{% endif %}</li>
+                    <li><i class="bi bi-check2"></i> {% if LANGUAGE_CODE == 'ar' %}تقييم النطاق المبدئي{% else %}Initial scope assessment{% endif %}</li>
+                    <li><i class="bi bi-check2"></i> {% if LANGUAGE_CODE == 'ar' %}تخصيص Account Manager{% else %}Account Manager assignment{% endif %}</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- 02 -->
+        <div class="hww-stage hww-stage-right" data-aos="fade-left" style="--phase-color:#4F8EF7;">
+            <div class="hww-stage-marker"><span>02</span></div>
+            <div class="hww-stage-card">
+                <div class="hww-stage-head">
+                    <i class="bi bi-chat-square-dots-fill"></i>
+                    <div>
+                        <h3>{% if LANGUAGE_CODE == 'ar' %}الاستشارة والاكتشاف{% else %}Consultation & Discovery{% endif %}</h3>
+                        <span class="hww-duration"><i class="bi bi-clock me-1"></i> {% if LANGUAGE_CODE == 'ar' %}3–5 أيام{% else %}3–5 days{% endif %}</span>
+                    </div>
+                </div>
+                <p>{% if LANGUAGE_CODE == 'ar' %}جلسات مع أصحاب القرار، معاينة الموقع، وتحليل الجمهور والميزانية لرسم صورة كاملة للحدث.{% else %}Stakeholder workshops, on-site venue surveys, audience profiling, and budget framing — building the complete picture before a single cable is specced.{% endif %}</p>
+                <ul class="hww-activities">
+                    <li><i class="bi bi-check2"></i> {% if LANGUAGE_CODE == 'ar' %}اجتماعات أصحاب المصلحة{% else %}Stakeholder workshops{% endif %}</li>
+                    <li><i class="bi bi-check2"></i> {% if LANGUAGE_CODE == 'ar' %}معاينة الموقع (Site Survey){% else %}Venue site survey{% endif %}</li>
+                    <li><i class="bi bi-check2"></i> {% if LANGUAGE_CODE == 'ar' %}تحليل الجمهور المستهدف{% else %}Target audience analysis{% endif %}</li>
+                    <li><i class="bi bi-check2"></i> {% if LANGUAGE_CODE == 'ar' %}إطار الميزانية ومؤشرات النجاح{% else %}Budget framework & success metrics{% endif %}</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- 03 -->
+        <div class="hww-stage hww-stage-left" data-aos="fade-right" style="--phase-color:#4F8EF7;">
+            <div class="hww-stage-marker"><span>03</span></div>
+            <div class="hww-stage-card">
+                <div class="hww-stage-head">
+                    <i class="bi bi-lightbulb-fill"></i>
+                    <div>
+                        <h3>{% if LANGUAGE_CODE == 'ar' %}التخطيط والمفهوم{% else %}Planning & Concept{% endif %}</h3>
+                        <span class="hww-duration"><i class="bi bi-clock me-1"></i> {% if LANGUAGE_CODE == 'ar' %}5–10 أيام{% else %}5–10 days{% endif %}</span>
+                    </div>
+                </div>
+                <p>{% if LANGUAGE_CODE == 'ar' %}تطوير المفهوم الإبداعي ووضع Timeline رئيسي للإنتاج وتوزيع الموارد وخطة المخاطر.{% else %}Creative concept development, master production timeline, crew allocation, and a risk register that anticipates problems before they happen.{% endif %}</p>
+                <ul class="hww-activities">
+                    <li><i class="bi bi-check2"></i> {% if LANGUAGE_CODE == 'ar' %}تطوير المفهوم الإبداعي{% else %}Creative concept development{% endif %}</li>
+                    <li><i class="bi bi-check2"></i> {% if LANGUAGE_CODE == 'ar' %}Master Production Timeline{% else %}Master production timeline{% endif %}</li>
+                    <li><i class="bi bi-check2"></i> {% if LANGUAGE_CODE == 'ar' %}توزيع الفرق والموارد{% else %}Crew & resource allocation{% endif %}</li>
+                    <li><i class="bi bi-check2"></i> {% if LANGUAGE_CODE == 'ar' %}سجل المخاطر والخطط البديلة{% else %}Risk register & contingencies{% endif %}</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- 04 -->
+        <div class="hww-stage hww-stage-right" data-aos="fade-left" style="--phase-color:#4F8EF7;">
+            <div class="hww-stage-marker"><span>04</span></div>
+            <div class="hww-stage-card">
+                <div class="hww-stage-head">
+                    <i class="bi bi-cpu-fill"></i>
+                    <div>
+                        <h3>{% if LANGUAGE_CODE == 'ar' %}التصميم التقني{% else %}Technical Design{% endif %}</h3>
+                        <span class="hww-duration"><i class="bi bi-clock me-1"></i> {% if LANGUAGE_CODE == 'ar' %}5–7 أيام{% else %}5–7 days{% endif %}</span>
+                    </div>
+                </div>
+                <p>{% if LANGUAGE_CODE == 'ar' %}تصميم بنية الـ AV كاملة: شاشات LED، الصوت، الإضاءة، البث، وتوزيع الطاقة — مع مخططات هندسية موثّقة.{% else %}Full AV architecture: LED screen mapping, audio coverage simulation, lighting design (3D render), streaming topology with redundancy, and power load calculations — all in documented engineering drawings.{% endif %}</p>
+                <ul class="hww-activities">
+                    <li><i class="bi bi-tv-fill"></i> {% if LANGUAGE_CODE == 'ar' %}مخطط شاشات LED ومواقعها{% else %}LED screen specification & mapping{% endif %}</li>
+                    <li><i class="bi bi-speaker-fill"></i> {% if LANGUAGE_CODE == 'ar' %}محاكاة تغطية الصوت{% else %}Audio coverage simulation{% endif %}</li>
+                    <li><i class="bi bi-lightbulb-fill"></i> {% if LANGUAGE_CODE == 'ar' %}تصميم الإضاءة (3D Render){% else %}Lighting design (3D render){% endif %}</li>
+                    <li><i class="bi bi-broadcast"></i> {% if LANGUAGE_CODE == 'ar' %}توبولوجي البث والتكرار{% else %}Streaming topology & redundancy{% endif %}</li>
+                    <li><i class="bi bi-plug-fill"></i> {% if LANGUAGE_CODE == 'ar' %}حساب توزيع الطاقة{% else %}Power load distribution{% endif %}</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- 05 -->
+        <div class="hww-stage hww-stage-left" data-aos="fade-right" style="--phase-color:#4F8EF7;">
+            <div class="hww-stage-marker"><span>05</span></div>
+            <div class="hww-stage-card">
+                <div class="hww-stage-head">
+                    <i class="bi bi-file-earmark-check-fill"></i>
+                    <div>
+                        <h3>{% if LANGUAGE_CODE == 'ar' %}عرض السعر والاعتماد{% else %}Quotation & Approval{% endif %}</h3>
+                        <span class="hww-duration"><i class="bi bi-clock me-1"></i> {% if LANGUAGE_CODE == 'ar' %}2–5 أيام{% else %}2–5 days{% endif %}</span>
+                    </div>
+                </div>
+                <p>{% if LANGUAGE_CODE == 'ar' %}عرض مالي تفصيلي مع مواصفات المعدات وعقد SLA يضمن مستوى الخدمة، يليه اعتماد العميل النهائي.{% else %}Detailed cost breakdown, equipment specification sheet, and a Service Level Agreement that codifies what the client can expect — followed by final sign-off.{% endif %}</p>
+                <ul class="hww-activities">
+                    <li><i class="bi bi-check2"></i> {% if LANGUAGE_CODE == 'ar' %}تفصيل التكلفة بالبنود{% else %}Itemized cost breakdown{% endif %}</li>
+                    <li><i class="bi bi-check2"></i> {% if LANGUAGE_CODE == 'ar' %}ورقة مواصفات المعدات{% else %}Equipment specification sheet{% endif %}</li>
+                    <li><i class="bi bi-check2"></i> {% if LANGUAGE_CODE == 'ar' %}توقيع العقد و SLA{% else %}Contract & SLA execution{% endif %}</li>
+                    <li><i class="bi bi-check2"></i> {% if LANGUAGE_CODE == 'ar' %}قفل نطاق المشروع{% else %}Project scope lock-in{% endif %}</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- ─── PHASE 2 HEADER ─── -->
+        <div class="hww-phase-banner" style="--phase-color:#FF6B35;" data-aos="fade-up">
+            <div class="hww-banner-num">PHASE 02</div>
+            <h2>{% if LANGUAGE_CODE == 'ar' %}ما قبل الإنتاج{% else %}Pre-Production{% endif %}</h2>
+            <p>{% if LANGUAGE_CODE == 'ar' %}كل قطعة معدات تُختبر وكل عضو فريق يعرف دوره قبل اليوم الأول.{% else %}Every piece of equipment tested, every crew member briefed — long before day one.{% endif %}</p>
+        </div>
+
+        <!-- 06 -->
+        <div class="hww-stage hww-stage-right" data-aos="fade-left" style="--phase-color:#FF6B35;">
+            <div class="hww-stage-marker"><span>06</span></div>
+            <div class="hww-stage-card">
+                <div class="hww-stage-head">
+                    <i class="bi bi-people-fill"></i>
+                    <div>
+                        <h3>{% if LANGUAGE_CODE == 'ar' %}ما قبل الإنتاج{% else %}Pre-Production{% endif %}</h3>
+                        <span class="hww-duration"><i class="bi bi-clock me-1"></i> {% if LANGUAGE_CODE == 'ar' %}1–2 أسبوع{% else %}1–2 weeks{% endif %}</span>
+                    </div>
+                </div>
+                <p>{% if LANGUAGE_CODE == 'ar' %}توزيع الأدوار التشغيلية، تنسيق الموردين الخارجيين، ووضع Run-of-Show النهائي مع جدول الإنتاج.{% else %}Crew briefings, third-party vendor coordination, run-of-show finalization, and a production schedule locked to the minute.{% endif %}</p>
+                <ul class="hww-activities">
+                    <li><i class="bi bi-check2"></i> {% if LANGUAGE_CODE == 'ar' %}اجتماعات تعريف الفرق{% else %}Crew briefings{% endif %}</li>
+                    <li><i class="bi bi-check2"></i> {% if LANGUAGE_CODE == 'ar' %}تنسيق الموردين الخارجيين{% else %}Vendor coordination{% endif %}</li>
+                    <li><i class="bi bi-check2"></i> {% if LANGUAGE_CODE == 'ar' %}قفل Run-of-Show{% else %}Run-of-show finalization{% endif %}</li>
+                    <li><i class="bi bi-check2"></i> {% if LANGUAGE_CODE == 'ar' %}جدول الإنتاج النهائي{% else %}Production schedule lock{% endif %}</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- 07 -->
+        <div class="hww-stage hww-stage-left" data-aos="fade-right" style="--phase-color:#FF6B35;">
+            <div class="hww-stage-marker"><span>07</span></div>
+            <div class="hww-stage-card">
+                <div class="hww-stage-head">
+                    <i class="bi bi-box-seam-fill"></i>
+                    <div>
+                        <h3>{% if LANGUAGE_CODE == 'ar' %}تجهيز المخزن{% else %}Warehouse Preparation{% endif %}</h3>
+                        <span class="hww-duration"><i class="bi bi-clock me-1"></i> {% if LANGUAGE_CODE == 'ar' %}2–4 أيام{% else %}2–4 days{% endif %}</span>
+                    </div>
+                </div>
+                <p>{% if LANGUAGE_CODE == 'ar' %}اختيار المعدات واختبارها (PAT Testing)، تجهيز الكابلات بـ Loom وعلامات، وتحضير وحدات احتياطية لكل نظام حرج.{% else %}Equipment selection, PAT testing on every unit, cable looms labeled and numbered, and a redundant backup for every mission-critical device.{% endif %}</p>
+                <ul class="hww-activities">
+                    <li><i class="bi bi-check2"></i> {% if LANGUAGE_CODE == 'ar' %}اختبار سلامة المعدات (PAT){% else %}Equipment PAT testing{% endif %}</li>
+                    <li><i class="bi bi-check2"></i> {% if LANGUAGE_CODE == 'ar' %}تجهيز كابلات بعلامات{% else %}Cable looms & labeling{% endif %}</li>
+                    <li><i class="bi bi-check2"></i> {% if LANGUAGE_CODE == 'ar' %}تحضير وحدات احتياطية{% else %}Backup unit preparation{% endif %}</li>
+                    <li><i class="bi bi-check2"></i> {% if LANGUAGE_CODE == 'ar' %}توقيع جودة قبل الشحن{% else %}QC sign-off pre-dispatch{% endif %}</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- 08 -->
+        <div class="hww-stage hww-stage-right" data-aos="fade-left" style="--phase-color:#FF6B35;">
+            <div class="hww-stage-marker"><span>08</span></div>
+            <div class="hww-stage-card">
+                <div class="hww-stage-head">
+                    <i class="bi bi-truck"></i>
+                    <div>
+                        <h3>{% if LANGUAGE_CODE == 'ar' %}النقل واللوجستيات{% else %}Transportation & Logistics{% endif %}</h3>
+                        <span class="hww-duration"><i class="bi bi-clock me-1"></i> {% if LANGUAGE_CODE == 'ar' %}1–2 يوم{% else %}1–2 days{% endif %}</span>
+                    </div>
+                </div>
+                <p>{% if LANGUAGE_CODE == 'ar' %}خطة تحميل ومانيفست شحن، توزيع المركبات، التراخيص والجمارك إذا لزم، وتنسيق عملية التفريغ بالموقع.{% else %}Load plan with manifest, vehicle dispatch schedule, permits and customs clearance where required, and on-site offload coordination — minutes counted.{% endif %}</p>
+                <ul class="hww-activities">
+                    <li><i class="bi bi-check2"></i> {% if LANGUAGE_CODE == 'ar' %}خطة التحميل والمانيفست{% else %}Load plan & manifest{% endif %}</li>
+                    <li><i class="bi bi-check2"></i> {% if LANGUAGE_CODE == 'ar' %}توزيع المركبات{% else %}Vehicle dispatch{% endif %}</li>
+                    <li><i class="bi bi-check2"></i> {% if LANGUAGE_CODE == 'ar' %}تراخيص وتخليص جمركي{% else %}Permits & customs clearance{% endif %}</li>
+                    <li><i class="bi bi-check2"></i> {% if LANGUAGE_CODE == 'ar' %}تنسيق التفريغ بالموقع{% else %}On-site offload coordination{% endif %}</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- ─── PHASE 3 HEADER ─── -->
+        <div class="hww-phase-banner" style="--phase-color:#00D4AA;" data-aos="fade-up">
+            <div class="hww-banner-num">PHASE 03</div>
+            <h2>{% if LANGUAGE_CODE == 'ar' %}التنفيذ في الموقع{% else %}On-Site Execution{% endif %}</h2>
+            <p>{% if LANGUAGE_CODE == 'ar' %}من التركيب وحتى آخر دقيقة من البث المباشر — أعيننا على كل تفصيلة.{% else %}From the first truss bolt to the final stream-cut — eyes on every detail.{% endif %}</p>
+        </div>
+
+        <!-- 09 -->
+        <div class="hww-stage hww-stage-left" data-aos="fade-right" style="--phase-color:#00D4AA;">
+            <div class="hww-stage-marker"><span>09</span></div>
+            <div class="hww-stage-card">
+                <div class="hww-stage-head">
+                    <i class="bi bi-tools"></i>
+                    <div>
+                        <h3>{% if LANGUAGE_CODE == 'ar' %}التركيب في الموقع{% else %}On-Site Setup{% endif %}</h3>
+                        <span class="hww-duration"><i class="bi bi-clock me-1"></i> {% if LANGUAGE_CODE == 'ar' %}1–3 أيام{% else %}1–3 days{% endif %}</span>
+                    </div>
+                </div>
+                <p>{% if LANGUAGE_CODE == 'ar' %}تركيب المسرح، تجميع جدار الشاشات LED، نشر أنظمة الصوت ووحدات الإضاءة، تموضع الكاميرات، ومد كابلات البنية التحتية.{% else %}Stage rigging and truss build, LED wall assembly and color alignment, line-array audio deployment, lighting fixture installation, camera positioning, and structured cable infrastructure.{% endif %}</p>
+                <ul class="hww-activities">
+                    <li><i class="bi bi-bricks"></i> {% if LANGUAGE_CODE == 'ar' %}تجهيز المسرح والـ Truss{% else %}Stage rigging & truss build{% endif %}</li>
+                    <li><i class="bi bi-tv-fill"></i> {% if LANGUAGE_CODE == 'ar' %}تجميع جدار LED ومحاذاة الألوان{% else %}LED wall assembly & alignment{% endif %}</li>
+                    <li><i class="bi bi-soundwave"></i> {% if LANGUAGE_CODE == 'ar' %}نشر Line-array صوتي{% else %}Line-array audio deployment{% endif %}</li>
+                    <li><i class="bi bi-lightbulb-fill"></i> {% if LANGUAGE_CODE == 'ar' %}تركيب وحدات الإضاءة{% else %}Lighting fixture installation{% endif %}</li>
+                    <li><i class="bi bi-camera-video-fill"></i> {% if LANGUAGE_CODE == 'ar' %}تموضع الكاميرات{% else %}Camera positioning{% endif %}</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- 10 -->
+        <div class="hww-stage hww-stage-right" data-aos="fade-left" style="--phase-color:#00D4AA;">
+            <div class="hww-stage-marker"><span>10</span></div>
+            <div class="hww-stage-card">
+                <div class="hww-stage-head">
+                    <i class="bi bi-shield-check"></i>
+                    <div>
+                        <h3>{% if LANGUAGE_CODE == 'ar' %}اختبار الأنظمة{% else %}System Testing{% endif %}</h3>
+                        <span class="hww-duration"><i class="bi bi-clock me-1"></i> {% if LANGUAGE_CODE == 'ar' %}4–12 ساعة{% else %}4–12 hours{% endif %}</span>
+                    </div>
+                </div>
+                <p>{% if LANGUAGE_CODE == 'ar' %}التحقق من مسار الإشارة، ضبط EQ الصوت، معايرة ألوان LED، برمجة Cues الإضاءة، اختبار البث المزدوج، وبروفة تقنية كاملة.{% else %}Signal flow verification, audio EQ and system tuning, LED color calibration, lighting cue programming, dual-redundancy stream check, and a full tech rehearsal — nothing goes live untested.{% endif %}</p>
+                <ul class="hww-activities">
+                    <li><i class="bi bi-check2"></i> {% if LANGUAGE_CODE == 'ar' %}التحقق من مسار الإشارة{% else %}Signal flow verification{% endif %}</li>
+                    <li><i class="bi bi-check2"></i> {% if LANGUAGE_CODE == 'ar' %}ضبط EQ ومعايرة الصوت{% else %}Audio EQ & system tuning{% endif %}</li>
+                    <li><i class="bi bi-check2"></i> {% if LANGUAGE_CODE == 'ar' %}معايرة ألوان LED{% else %}LED color calibration{% endif %}</li>
+                    <li><i class="bi bi-check2"></i> {% if LANGUAGE_CODE == 'ar' %}برمجة Cues الإضاءة{% else %}Lighting cue programming{% endif %}</li>
+                    <li><i class="bi bi-check2"></i> {% if LANGUAGE_CODE == 'ar' %}بروفة تقنية كاملة{% else %}Full tech rehearsal{% endif %}</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- 11 -->
+        <div class="hww-stage hww-stage-left" data-aos="fade-right" style="--phase-color:#00D4AA;">
+            <div class="hww-stage-marker"><span>11</span></div>
+            <div class="hww-stage-card">
+                <div class="hww-stage-head">
+                    <i class="bi bi-broadcast"></i>
+                    <div>
+                        <h3>{% if LANGUAGE_CODE == 'ar' %}عمليات الحدث المباشر{% else %}Live Event Operations{% endif %}</h3>
+                        <span class="hww-duration"><i class="bi bi-clock me-1"></i> {% if LANGUAGE_CODE == 'ar' %}مدة الحدث{% else %}Event duration{% endif %}</span>
+                    </div>
+                </div>
+                <p>{% if LANGUAGE_CODE == 'ar' %}مزج الصوت من FOH، تبديل الفيديو متعدد الكاميرات، تشغيل الإضاءة، التحكم في البث المباشر، وإدارة العرض من Show Caller.{% else %}Front-of-house audio mixing, multi-camera video switching, show lighting operation, live stream control, and show-calling from the director's chair.{% endif %}</p>
+                <ul class="hww-activities">
+                    <li><i class="bi bi-sliders"></i> {% if LANGUAGE_CODE == 'ar' %}مزج الصوت FOH{% else %}Front-of-house audio mixing{% endif %}</li>
+                    <li><i class="bi bi-camera-reels-fill"></i> {% if LANGUAGE_CODE == 'ar' %}تبديل الفيديو Multi-Cam{% else %}Multi-camera video switching{% endif %}</li>
+                    <li><i class="bi bi-lightbulb-fill"></i> {% if LANGUAGE_CODE == 'ar' %}تشغيل الإضاءة المباشر{% else %}Show lighting operation{% endif %}</li>
+                    <li><i class="bi bi-broadcast"></i> {% if LANGUAGE_CODE == 'ar' %}التحكم في البث المباشر{% else %}Live stream control{% endif %}</li>
+                    <li><i class="bi bi-megaphone-fill"></i> {% if LANGUAGE_CODE == 'ar' %}إدارة العرض (Show Calling){% else %}Show calling & directing{% endif %}</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- 12 -->
+        <div class="hww-stage hww-stage-right" data-aos="fade-left" style="--phase-color:#00D4AA;">
+            <div class="hww-stage-marker"><span>12</span></div>
+            <div class="hww-stage-card">
+                <div class="hww-stage-head">
+                    <i class="bi bi-activity"></i>
+                    <div>
+                        <h3>{% if LANGUAGE_CODE == 'ar' %}مراقبة الحدث{% else %}Event Monitoring{% endif %}</h3>
+                        <span class="hww-duration"><i class="bi bi-clock me-1"></i> {% if LANGUAGE_CODE == 'ar' %}مدة الحدث{% else %}Event duration{% endif %}</span>
+                    </div>
+                </div>
+                <p>{% if LANGUAGE_CODE == 'ar' %}مهندس احتياطي في وضع الاستعداد الحار، لوحة مراقبة لأداء الشبكة، تتبّع صحة المعدات، وبروتوكول استجابة سريعة لأي طارئ.{% else %}A backup engineer on hot-standby, a network performance dashboard, real-time equipment health tracking, and a rapid-response protocol for anything unexpected.{% endif %}</p>
+                <ul class="hww-activities">
+                    <li><i class="bi bi-check2"></i> {% if LANGUAGE_CODE == 'ar' %}مهندس احتياطي Hot-Standby{% else %}Backup engineer hot-standby{% endif %}</li>
+                    <li><i class="bi bi-check2"></i> {% if LANGUAGE_CODE == 'ar' %}لوحة مراقبة الشبكة{% else %}Network performance dashboard{% endif %}</li>
+                    <li><i class="bi bi-check2"></i> {% if LANGUAGE_CODE == 'ar' %}مراقبة صحة المعدات{% else %}Equipment health monitoring{% endif %}</li>
+                    <li><i class="bi bi-check2"></i> {% if LANGUAGE_CODE == 'ar' %}بروتوكول استجابة سريعة{% else %}Rapid response protocol{% endif %}</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- ─── PHASE 4 HEADER ─── -->
+        <div class="hww-phase-banner" style="--phase-color:#A855F7;" data-aos="fade-up">
+            <div class="hww-banner-num">PHASE 04</div>
+            <h2>{% if LANGUAGE_CODE == 'ar' %}الإقفال والتقرير{% else %}Closure & Reporting{% endif %}</h2>
+            <p>{% if LANGUAGE_CODE == 'ar' %}الحدث لم ينتهِ بانتهاء العرض — التقرير النهائي والتعلّم جزء من المنهجية.{% else %}The event doesn't end when the lights go down — final reporting and lessons-learned are part of the methodology.{% endif %}</p>
+        </div>
+
+        <!-- 13 -->
+        <div class="hww-stage hww-stage-left" data-aos="fade-right" style="--phase-color:#A855F7;">
+            <div class="hww-stage-marker"><span>13</span></div>
+            <div class="hww-stage-card">
+                <div class="hww-stage-head">
+                    <i class="bi bi-box-arrow-down"></i>
+                    <div>
+                        <h3>{% if LANGUAGE_CODE == 'ar' %}الفك والإعادة{% else %}Breakdown & Teardown{% endif %}</h3>
+                        <span class="hww-duration"><i class="bi bi-clock me-1"></i> {% if LANGUAGE_CODE == 'ar' %}4–12 ساعة{% else %}4–12 hours{% endif %}</span>
+                    </div>
+                </div>
+                <p>{% if LANGUAGE_CODE == 'ar' %}فك منهجي للمعدات، جرد كامل، إدارة الكابلات وإعادتها بنفس الترتيب، وإعادة الموقع لحالته الأصلية.{% else %}Systematic de-rigging, full equipment inventory verification, cables managed and coiled to original order, and the venue restored to its starting state.{% endif %}</p>
+                <ul class="hww-activities">
+                    <li><i class="bi bi-check2"></i> {% if LANGUAGE_CODE == 'ar' %}فك منهجي للمعدات{% else %}Systematic de-rigging{% endif %}</li>
+                    <li><i class="bi bi-check2"></i> {% if LANGUAGE_CODE == 'ar' %}جرد المعدات{% else %}Equipment inventory verification{% endif %}</li>
+                    <li><i class="bi bi-check2"></i> {% if LANGUAGE_CODE == 'ar' %}إدارة الكابلات{% else %}Cable management & coiling{% endif %}</li>
+                    <li><i class="bi bi-check2"></i> {% if LANGUAGE_CODE == 'ar' %}إعادة الموقع لحالته{% else %}Venue restoration{% endif %}</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- 14 -->
+        <div class="hww-stage hww-stage-right" data-aos="fade-left" style="--phase-color:#A855F7;">
+            <div class="hww-stage-marker"><span>14</span></div>
+            <div class="hww-stage-card">
+                <div class="hww-stage-head">
+                    <i class="bi bi-clipboard-data-fill"></i>
+                    <div>
+                        <h3>{% if LANGUAGE_CODE == 'ar' %}تقرير ما بعد الحدث{% else %}Post-Event Reporting{% endif %}</h3>
+                        <span class="hww-duration"><i class="bi bi-clock me-1"></i> {% if LANGUAGE_CODE == 'ar' %}3–7 أيام{% else %}3–7 days{% endif %}</span>
+                    </div>
+                </div>
+                <p>{% if LANGUAGE_CODE == 'ar' %}تقرير الأداء والمقاييس، سجل حالة المعدات، اجتماع Debrief مع العميل، وتوثيق الدروس المستفادة للمشاريع القادمة.{% else %}Performance and metrics report, equipment status log, a client debrief meeting, and a lessons-learned document that improves the next project — every event makes us better.{% endif %}</p>
+                <ul class="hww-activities">
+                    <li><i class="bi bi-check2"></i> {% if LANGUAGE_CODE == 'ar' %}تقرير الأداء والمقاييس{% else %}Performance & metrics report{% endif %}</li>
+                    <li><i class="bi bi-check2"></i> {% if LANGUAGE_CODE == 'ar' %}سجل حالة المعدات{% else %}Equipment status log{% endif %}</li>
+                    <li><i class="bi bi-check2"></i> {% if LANGUAGE_CODE == 'ar' %}اجتماع Debrief مع العميل{% else %}Client debrief meeting{% endif %}</li>
+                    <li><i class="bi bi-check2"></i> {% if LANGUAGE_CODE == 'ar' %}توثيق الدروس المستفادة{% else %}Lessons-learned documentation{% endif %}</li>
+                </ul>
+            </div>
+        </div>
+
+    </div>
+</section>
+
+<!-- ═══ CTA ═══ -->
+<section class="hww-cta">
+    <div class="container-xl">
+        <div class="hww-cta-card" data-aos="zoom-in">
+            <h2>{% if LANGUAGE_CODE == 'ar' %}جاهز للبدء بحدثك القادم؟{% else %}Ready to start your next event?{% endif %}</h2>
+            <p>{% if LANGUAGE_CODE == 'ar' %}كل حدث ينفّذه فريقنا يمرّ بهذه الـ 14 مرحلة. تكلّم معنا، وخلّينا نُريك الفرق.{% else %}Every event we deliver runs through these 14 stages. Talk to us — let us show you the difference.{% endif %}</p>
+            <div class="hww-cta-actions">
+                <a href="{% url 'home' %}#contact" class="btn-quote">
+                    <i class="bi bi-send-fill me-2"></i>
+                    {% if LANGUAGE_CODE == 'ar' %}احصل على عرض مجاني{% else %}Get a Free Quote{% endif %}
+                </a>
+                <a href="{% url 'home' %}#portfolio" class="btn-outline">
+                    {% if LANGUAGE_CODE == 'ar' %}شاهد أعمالنا{% else %}View Our Work{% endif %}
+                    <i class="bi bi-arrow-{% if LANGUAGE_CODE == 'ar' %}left{% else %}right{% endif %} ms-2"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ═══ FOOTER ═══ -->
+<footer class="av-footer">
+    <div class="container-xl">
+        <div class="footer-top">
+            <div class="footer-brand">
+                <a href="{% url 'home' %}" class="nav-logo mb-3 d-inline-flex">
+                    <span class="logo-icon"><i class="bi bi-display-fill"></i></span>
+                    <span class="logo-text">Pro<span class="accent">Event</span></span>
+                </a>
+                <p>{% if LANGUAGE_CODE == 'ar' %}حلول تكنولوجيا الفعاليات والإنتاج الفني للمؤتمرات والمعارض وفعاليات الشركات في مصر.{% else %}Event technology & technical production solutions for conferences, exhibitions, and corporate events in Egypt.{% endif %}</p>
+            </div>
+            <div class="footer-col">
+                <h5>{% if LANGUAGE_CODE == 'ar' %}روابط سريعة{% else %}Quick Links{% endif %}</h5>
+                <ul>
+                    <li><a href="{% url 'home' %}#services">{% if LANGUAGE_CODE == 'ar' %}الخدمات{% else %}Services{% endif %}</a></li>
+                    <li><a href="{% url 'how_we_work' %}">{% if LANGUAGE_CODE == 'ar' %}كيف نعمل{% else %}How We Work{% endif %}</a></li>
+                    <li><a href="{% url 'home' %}#portfolio">{% if LANGUAGE_CODE == 'ar' %}أعمالنا{% else %}Portfolio{% endif %}</a></li>
+                    <li><a href="{% url 'home' %}#contact">{% if LANGUAGE_CODE == 'ar' %}تواصل{% else %}Contact{% endif %}</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h5>{% if LANGUAGE_CODE == 'ar' %}تواصل معنا{% else %}Contact Us{% endif %}</h5>
+                <ul class="contact-list">
+                    <li><i class="bi bi-telephone-fill"></i> <span dir="ltr">+20 (111) 933 3199</span></li>
+                    <li><i class="bi bi-envelope-fill"></i> <span dir="ltr">hammammazin@gmail.com</span></li>
+                    <li><i class="bi bi-geo-alt-fill"></i> {% if LANGUAGE_CODE == 'ar' %}القاهرة، مصر{% else %}Cairo, Egypt{% endif %}</li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2024 Pro Event. {% if LANGUAGE_CODE == 'ar' %}جميع الحقوق محفوظة.{% else %}All rights reserved.{% endif %}</p>
+        </div>
+    </div>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
+<script>
+    AOS.init({ duration: 800, easing: 'ease-out-cubic', once: true, offset: 80 });
+    // Mobile menu toggle
+    document.getElementById('navToggle')?.addEventListener('click', () => {
+        document.getElementById('mobileMenu').classList.toggle('active');
+    });
+    // Navbar scroll effect
+    window.addEventListener('scroll', () => {
+        document.getElementById('mainNav').classList.toggle('scrolled', window.scrollY > 50);
+    });
+</script>
+</body>
+</html>
