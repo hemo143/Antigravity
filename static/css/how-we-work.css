@@ -548,3 +548,174 @@
 .nav-links a.active {
     color: #FF6B35;
 }
+
+
+/* ══════════════════════════════════════════════
+   STAGE WITH VISUAL — gradient panel opposite the card
+══════════════════════════════════════════════ */
+.hww-stage-with-visual {
+    min-height: 360px;
+}
+
+.hww-stage-with-visual .hww-stage-visual {
+    position: absolute;
+    top: 0;
+    width: calc(50% - 60px);
+    height: 100%;
+    min-height: 360px;
+    border-radius: 20px;
+    overflow: hidden;
+    background:
+        radial-gradient(circle at 75% 25%, color-mix(in srgb, var(--phase-color) 35%, transparent), transparent 55%),
+        radial-gradient(circle at 20% 80%, color-mix(in srgb, var(--phase-color) 18%, transparent), transparent 60%),
+        linear-gradient(135deg, #0F1626 0%, #0A0E1A 100%);
+    border: 1px solid color-mix(in srgb, var(--phase-color) 22%, rgba(255,255,255,0.06));
+    box-shadow: 0 16px 40px rgba(0, 0, 0, 0.45);
+    transition: transform 0.4s ease, box-shadow 0.4s ease, border-color 0.4s ease;
+}
+
+.hww-stage-with-visual.hww-stage-left .hww-stage-visual { right: 0; }
+.hww-stage-with-visual.hww-stage-right .hww-stage-visual { left: 0; }
+
+/* Soft grid pattern overlay for premium tech feel */
+.hww-stage-with-visual .hww-stage-visual::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image:
+        linear-gradient(rgba(255,255,255,0.025) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,0.025) 1px, transparent 1px);
+    background-size: 40px 40px;
+    mask-image: radial-gradient(circle at 50% 50%, black 30%, transparent 75%);
+    -webkit-mask-image: radial-gradient(circle at 50% 50%, black 30%, transparent 75%);
+    pointer-events: none;
+}
+
+/* Animated light beam */
+.hww-visual-light {
+    position: absolute;
+    top: -40%;
+    left: -10%;
+    width: 60%;
+    height: 180%;
+    background: linear-gradient(115deg, transparent 40%, color-mix(in srgb, var(--phase-color) 30%, transparent) 50%, transparent 60%);
+    filter: blur(40px);
+    pointer-events: none;
+    opacity: 0.7;
+}
+
+/* Huge faint number in the corner */
+.hww-visual-num {
+    position: absolute;
+    bottom: -28px;
+    right: -10px;
+    font-size: clamp(8rem, 14vw, 12rem);
+    font-weight: 900;
+    line-height: 1;
+    color: transparent;
+    -webkit-text-stroke: 2px color-mix(in srgb, var(--phase-color) 35%, transparent);
+    letter-spacing: -8px;
+    user-select: none;
+    pointer-events: none;
+}
+
+[dir="rtl"] .hww-visual-num { right: auto; left: -10px; }
+
+/* Centered hero icon */
+.hww-visual-icon {
+    position: relative;
+    z-index: 2;
+    font-size: clamp(3rem, 5vw, 4.5rem);
+    color: var(--phase-color);
+    filter: drop-shadow(0 8px 24px color-mix(in srgb, var(--phase-color) 60%, transparent));
+    margin: auto;
+    transition: transform 0.5s ease;
+}
+
+/* Stage name pill at the top */
+.hww-visual-tag {
+    position: absolute;
+    top: 24px;
+    left: 24px;
+    z-index: 2;
+    font-size: 0.72rem;
+    font-weight: 700;
+    color: color-mix(in srgb, var(--phase-color) 80%, #FFFFFF);
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    padding: 6px 14px;
+    background: color-mix(in srgb, var(--phase-color) 12%, rgba(0,0,0,0.4));
+    border: 1px solid color-mix(in srgb, var(--phase-color) 30%, transparent);
+    border-radius: 30px;
+    backdrop-filter: blur(8px);
+}
+
+[dir="rtl"] .hww-visual-tag { left: auto; right: 24px; }
+
+/* Make the visual a flex centerpiece for the icon */
+.hww-stage-with-visual .hww-stage-visual {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Hover lift + icon glow */
+.hww-stage-with-visual:hover .hww-stage-visual {
+    transform: translateY(-4px);
+    border-color: color-mix(in srgb, var(--phase-color) 45%, transparent);
+    box-shadow:
+        0 24px 56px rgba(0, 0, 0, 0.55),
+        0 0 0 1px color-mix(in srgb, var(--phase-color) 25%, transparent),
+        0 0 60px color-mix(in srgb, var(--phase-color) 15%, transparent);
+}
+
+.hww-stage-with-visual:hover .hww-visual-icon {
+    transform: scale(1.08) rotate(-3deg);
+}
+
+/* ─── RTL: flip the visual placement so it stays opposite the card ─── */
+[dir="rtl"] .hww-stage-with-visual.hww-stage-left .hww-stage-visual {
+    right: auto;
+    left: 0;
+}
+
+[dir="rtl"] .hww-stage-with-visual.hww-stage-right .hww-stage-visual {
+    left: auto;
+    right: 0;
+}
+
+/* ─── Mobile / tablet: stack visual above the card ─── */
+@media (max-width: 768px) {
+    .hww-stage-with-visual {
+        display: flex;
+        flex-direction: column;
+        min-height: 0;
+    }
+
+    .hww-stage-with-visual .hww-stage-visual,
+    [dir="rtl"] .hww-stage-with-visual .hww-stage-visual {
+        position: relative;
+        top: auto;
+        right: auto;
+        left: auto;
+        width: calc(100% - 70px);
+        height: 200px;
+        min-height: 200px;
+        margin-left: 70px;
+        margin-right: 0;
+        margin-bottom: 16px;
+        order: -1;
+    }
+
+    [dir="rtl"] .hww-stage-with-visual .hww-stage-visual {
+        margin-left: 0;
+        margin-right: 70px;
+    }
+
+    .hww-stage-with-visual .hww-stage-marker {
+        top: 0;
+    }
+
+    .hww-visual-num { font-size: 8rem; bottom: -20px; right: -5px; }
+    [dir="rtl"] .hww-visual-num { right: auto; left: -5px; }
+}
