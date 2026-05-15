@@ -723,12 +723,18 @@
 
 /* ══════════════════════════════════════════════
    STAGE VISUAL — image variant (custom-designed PNG)
+   Container respects the image's natural aspect ratio
 ══════════════════════════════════════════════ */
 .hww-stage-visual.hww-stage-visual-img {
     background: #0A0E1A;
     align-items: stretch;
     justify-content: stretch;
     padding: 0;
+    /* Match the actual image aspect (1500x735 ≈ 2:1).
+       Override the default 100% / 360px from .hww-stage-visual */
+    height: auto;
+    min-height: 0;
+    aspect-ratio: 2 / 1;
 }
 
 .hww-stage-visual.hww-stage-visual-img::before,
@@ -739,7 +745,7 @@
 .hww-stage-visual.hww-stage-visual-img > img {
     width: 100%;
     height: 100%;
-    object-fit: cover;
+    object-fit: contain;
     object-position: center;
     display: block;
     border-radius: 19px;
