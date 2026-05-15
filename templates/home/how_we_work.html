@@ -135,11 +135,10 @@
                     <li><i class="bi bi-check2"></i> {% if LANGUAGE_CODE == 'ar' %}سجل المخاطر والخطط البديلة{% else %}Risk register & contingency plans{% endif %}</li>
                 </ul>
             </div>
-            <div class="hww-stage-visual">
-                <span class="hww-visual-num">01</span>
-                <i class="bi bi-binoculars-fill hww-visual-icon"></i>
-                <span class="hww-visual-tag">{% if LANGUAGE_CODE == 'ar' %}الاكتشاف{% else %}Discovery{% endif %}</span>
-                <span class="hww-visual-light"></span>
+            <div class="hww-stage-visual hww-stage-visual-img">
+                <img src="{% static 'img/stages/01-discovery.jpg' %}"
+                     alt="{% if LANGUAGE_CODE == 'ar' %}الاكتشاف والتخطيط{% else %}Discovery & Planning{% endif %}"
+                     loading="lazy" width="1500" height="735">
             </div>
         </div>
 
