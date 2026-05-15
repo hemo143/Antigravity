@@ -399,7 +399,23 @@ a { text-decoration: none; color: inherit; }
     min-width: 100px;
     display: flex;
     flex-direction: column;
-    gap: 4px;
+    align-items: center;
+    gap: 6px;
+    text-align: center;
+}
+
+.stat-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 38px;
+    height: 38px;
+    border-radius: 10px;
+    background: rgba(255,107,53,0.12);
+    border: 1px solid rgba(255,107,53,0.25);
+    color: #FF6B35;
+    font-size: 1.05rem;
+    margin-bottom: 2px;
 }
 
 .stat-num {
@@ -1483,18 +1499,37 @@ a { text-decoration: none; color: inherit; }
 
 
 /* ══════════════════════════════════════════════
-   AMBIENT SOUNDTRACK TOGGLE
-   Premium pill button — bottom right
+   AMBIENT SOUNDTRACK — minimal player pill
 ══════════════════════════════════════════════ */
-.audio-toggle {
+.audio-dock {
     position: fixed;
     bottom: 24px;
     right: 24px;
     z-index: 999;
     display: inline-flex;
     align-items: center;
+    gap: 8px;
+}
+
+.audio-sparkle {
+    color: rgba(255, 255, 255, 0.55);
+    font-size: 1.15rem;
+    line-height: 1;
+    opacity: 0.85;
+    transition: transform 0.4s ease, color 0.3s ease;
+    pointer-events: none;
+}
+
+.audio-dock:hover .audio-sparkle {
+    color: #FF6B35;
+    transform: rotate(8deg) scale(1.1);
+}
+
+.audio-toggle {
+    display: inline-flex;
+    align-items: center;
     gap: 10px;
-    padding: 10px 18px 10px 14px;
+    padding: 9px 14px 9px 9px;
     background: rgba(17, 25, 39, 0.78);
     backdrop-filter: blur(14px);
     -webkit-backdrop-filter: blur(14px);
@@ -1503,9 +1538,9 @@ a { text-decoration: none; color: inherit; }
     color: #FFFFFF;
     cursor: pointer;
     font: inherit;
-    font-size: 0.78rem;
-    font-weight: 600;
-    letter-spacing: 0.3px;
+    font-size: 0.82rem;
+    font-weight: 500;
+    letter-spacing: 0.2px;
     box-shadow: 0 8px 28px rgba(0, 0, 0, 0.35);
     transition: transform 0.3s ease, border-color 0.3s ease, background 0.3s ease, box-shadow 0.3s ease;
 }
@@ -1522,33 +1557,37 @@ a { text-decoration: none; color: inherit; }
     outline-offset: 3px;
 }
 
-.audio-toggle-icon {
+/* Play / Pause icon disc */
+.audio-toggle-play {
     position: relative;
-    width: 22px;
-    height: 22px;
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    background: #FF6B35;
+    color: #FFFFFF;
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    color: #FF6B35;
+    font-size: 1rem;
+    flex-shrink: 0;
 }
 
-.audio-toggle-icon .ico-off {
-    display: block;
-}
+.audio-toggle-play .ico-pause,
+.audio-toggle-play .audio-bars { display: none; }
+.audio-toggle-play .ico-play   { display: block; margin-inline-start: 2px; }
 
 .audio-bars {
     position: absolute;
     inset: 0;
-    display: none;
     align-items: flex-end;
     justify-content: space-between;
     gap: 2px;
-    padding: 4px 2px;
+    padding: 7px 6px;
 }
 
 .audio-bars span {
     flex: 1;
-    background: #FF6B35;
+    background: #FFFFFF;
     border-radius: 1px;
     animation: audioBar 1s ease-in-out infinite;
 }
@@ -1564,26 +1603,26 @@ a { text-decoration: none; color: inherit; }
 }
 
 .audio-toggle-label {
+    color: #FFFFFF;
     line-height: 1;
-    display: inline-flex;
-    flex-direction: column;
-    text-align: left;
 }
 
-.audio-toggle-label .lbl-on  { display: none; color: #FF6B35; }
-.audio-toggle-label .lbl-off { display: inline; color: #FFFFFF; }
+.audio-dots {
+    color: rgba(255, 255, 255, 0.55);
+    font-size: 1rem;
+    line-height: 0.5;
+    padding-inline-start: 2px;
+}
 
 /* ─── PLAYING state ─── */
-.audio-toggle.playing .ico-off       { display: none; }
-.audio-toggle.playing .audio-bars    { display: flex; }
-.audio-toggle.playing .lbl-on        { display: inline; }
-.audio-toggle.playing .lbl-off       { display: none; }
+.audio-toggle.playing .ico-play   { display: none; }
+.audio-toggle.playing .audio-bars { display: flex; }
 .audio-toggle.playing {
     border-color: rgba(255, 107, 53, 0.5);
     background: rgba(17, 25, 39, 0.92);
 }
 
-/* ─── First-time attention hint ─── */
+/* ─── First-time hint ─── */
 .audio-toggle.hint {
     animation: audioHint 1.8s ease-out 2;
 }
@@ -1594,23 +1633,19 @@ a { text-decoration: none; color: inherit; }
 }
 
 /* ─── RTL placement ─── */
-[dir="rtl"] .audio-toggle {
+[dir="rtl"] .audio-dock {
     right: auto;
     left: 24px;
-    padding: 10px 14px 10px 18px;
-}
-
-[dir="rtl"] .audio-toggle-label {
-    text-align: right;
 }
 
 /* ─── Mobile ─── */
 @media (max-width: 576px) {
-    .audio-toggle {
+    .audio-dock {
         bottom: 16px;
         right: 16px;
-        padding: 9px 14px 9px 12px;
-        font-size: 0.72rem;
     }
-    [dir="rtl"] .audio-toggle { left: 16px; right: auto; }
+    [dir="rtl"] .audio-dock { left: 16px; right: auto; }
+    .audio-toggle { padding: 8px 12px 8px 8px; font-size: 0.76rem; }
+    .audio-toggle-play { width: 24px; height: 24px; font-size: 0.85rem; }
+    .audio-sparkle { font-size: 1rem; }
 }

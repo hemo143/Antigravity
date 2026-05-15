@@ -4,24 +4,24 @@
     <source src="{% static 'audio/ambient.mp3' %}" type="audio/mpeg">
 </audio>
 
-<button class="audio-toggle" id="audioToggle"
-        aria-label="{% if LANGUAGE_CODE == 'ar' %}تشغيل/إيقاف الموسيقى{% else %}Toggle soundtrack{% endif %}"
-        aria-pressed="false">
-    <span class="audio-toggle-icon">
-        <svg class="ico-off" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="18" height="18">
-            <path d="M9 18V5l12-2v13"/>
-            <circle cx="6" cy="18" r="3"/>
-            <circle cx="18" cy="16" r="3"/>
-        </svg>
-        <span class="audio-bars" aria-hidden="true">
-            <span></span><span></span><span></span><span></span>
+<div class="audio-dock">
+    <span class="audio-sparkle" aria-hidden="true"><i class="bi bi-stars"></i></span>
+    <button class="audio-toggle" id="audioToggle"
+            aria-label="{% if LANGUAGE_CODE == 'ar' %}تشغيل/إيقاف الموسيقى{% else %}Toggle soundtrack{% endif %}"
+            aria-pressed="false">
+        <span class="audio-toggle-play">
+            <i class="bi bi-play-fill ico-play"></i>
+            <i class="bi bi-pause-fill ico-pause"></i>
+            <span class="audio-bars" aria-hidden="true">
+                <span></span><span></span><span></span><span></span>
+            </span>
         </span>
-    </span>
-    <span class="audio-toggle-label">
-        <span class="lbl-off">{% if LANGUAGE_CODE == 'ar' %}الموسيقى{% else %}Soundtrack{% endif %}</span>
-        <span class="lbl-on">{% if LANGUAGE_CODE == 'ar' %}يعمل{% else %}Playing{% endif %}</span>
-    </span>
-</button>
+        <span class="audio-toggle-label">soundtrack</span>
+        <span class="audio-dots" aria-hidden="true">
+            <i class="bi bi-three-dots"></i>
+        </span>
+    </button>
+</div>
 
 <script>
 (function() {
