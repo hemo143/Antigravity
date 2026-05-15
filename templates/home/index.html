@@ -115,10 +115,11 @@
         <div class="hero-headline-card" data-aos="fade-up" data-aos-delay="100">
             <h1 class="hero-title">
                 {% if LANGUAGE_CODE == 'ar' %}
-                    Pro Event – <span class="title-thin">شريكك</span> <span class="gradient-text">التقني</span><br>
-                    <span class="title-thin">لنجاح</span> <span class="gradient-text-2">فعالياتك</span>
+                    Pro Event – شريكك <span class="gradient-text">التقني</span><br>
+                    <span class="gradient-text-blue">لنجاح</span> <span class="gradient-text-2">فعالياتك</span>
                 {% else %}
-                    Pro Event – Your <span class="gradient-text">Technical</span> Partner<br>
+                    Pro Event – Your <span class="gradient-text">Technical</span><br>
+                    <span class="gradient-text-blue">Partner</span><br>
                     for Event <span class="gradient-text-2">Success</span>
                 {% endif %}
             </h1>
@@ -146,26 +147,23 @@
         </div>
 
         <div class="hero-stats" data-aos="fade-up" data-aos-delay="400">
-            <div class="stat-item">
-                <i class="stat-icon bi bi-truck"></i>
+            <div class="stat-item stat-accent-orange">
+                <span class="stat-icon stat-emoji" aria-hidden="true">🚚</span>
                 <span class="stat-num">200+</span>
                 <span class="stat-label">{% if LANGUAGE_CODE == 'ar' %}فعالية<br>منجزة{% else %}Events<br>Delivered{% endif %}</span>
             </div>
-            <div class="stat-divider"></div>
-            <div class="stat-item">
-                <i class="stat-icon bi bi-trophy"></i>
+            <div class="stat-item stat-accent-blue">
+                <span class="stat-icon stat-emoji" aria-hidden="true">🏆</span>
                 <span class="stat-num">12+</span>
                 <span class="stat-label">{% if LANGUAGE_CODE == 'ar' %}سنوات<br>خبرة{% else %}Years<br>Experience{% endif %}</span>
             </div>
-            <div class="stat-divider"></div>
-            <div class="stat-item">
-                <i class="stat-icon bi bi-hand-thumbs-up"></i>
+            <div class="stat-item stat-accent-orange">
+                <span class="stat-icon stat-emoji" aria-hidden="true">🤝</span>
                 <span class="stat-num">98%</span>
                 <span class="stat-label">{% if LANGUAGE_CODE == 'ar' %}رضا<br>العملاء{% else %}Client<br>Satisfaction{% endif %}</span>
             </div>
-            <div class="stat-divider"></div>
-            <div class="stat-item">
-                <i class="stat-icon bi bi-buildings"></i>
+            <div class="stat-item stat-accent-blue">
+                <span class="stat-icon stat-emoji" aria-hidden="true">🏢</span>
                 <span class="stat-num">50+</span>
                 <span class="stat-label">{% if LANGUAGE_CODE == 'ar' %}عملاء<br>مؤسسيون{% else %}Corporate<br>Clients{% endif %}</span>
             </div>
