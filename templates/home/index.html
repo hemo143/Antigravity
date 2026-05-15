@@ -30,13 +30,13 @@
         <div class="nav-inner">
 
             <a href="#home" class="nav-logo">
-                <span class="logo-icon"><i class="bi bi-display-fill"></i></span>
+                <span class="logo-icon logo-icon-pe">PE</span>
                 <span class="logo-text">Pro<span class="accent">Event</span></span>
             </a>
 
             <ul class="nav-links">
                 <li><a href="#services">{% if LANGUAGE_CODE == 'ar' %}الخدمات{% else %}Services{% endif %}</a></li>
-                <li><a href="{% url 'how_we_work' %}">{% if LANGUAGE_CODE == 'ar' %}كيف نعمل{% else %}How We Work{% endif %}</a></li>
+                <li><a href="{% url 'how_we_work' %}">{% if LANGUAGE_CODE == 'ar' %}خبراتنا{% else %}Expertise{% endif %}</a></li>
                 <li><a href="#portfolio">{% if LANGUAGE_CODE == 'ar' %}أعمالنا{% else %}Portfolio{% endif %}</a></li>
                 <li><a href="#about">{% if LANGUAGE_CODE == 'ar' %}من نحن{% else %}About{% endif %}</a></li>
                 <li><a href="#contact">{% if LANGUAGE_CODE == 'ar' %}تواصل{% else %}Contact{% endif %}</a></li>
@@ -68,7 +68,7 @@
     <div class="mobile-menu" id="mobileMenu">
         <ul>
             <li><a href="#services"  class="mobile-link">{% if LANGUAGE_CODE == 'ar' %}الخدمات{% else %}Services{% endif %}</a></li>
-            <li><a href="{% url 'how_we_work' %}" class="mobile-link">{% if LANGUAGE_CODE == 'ar' %}كيف نعمل{% else %}How We Work{% endif %}</a></li>
+            <li><a href="{% url 'how_we_work' %}" class="mobile-link">{% if LANGUAGE_CODE == 'ar' %}خبراتنا{% else %}Expertise{% endif %}</a></li>
             <li><a href="#portfolio" class="mobile-link">{% if LANGUAGE_CODE == 'ar' %}أعمالنا{% else %}Portfolio{% endif %}</a></li>
             <li><a href="#about"     class="mobile-link">{% if LANGUAGE_CODE == 'ar' %}من نحن{% else %}About{% endif %}</a></li>
             <li><a href="#contact"   class="mobile-link">{% if LANGUAGE_CODE == 'ar' %}تواصل{% else %}Contact{% endif %}</a></li>
@@ -112,26 +112,27 @@
             {% if LANGUAGE_CODE == 'ar' %}الشريك التقني الأول للفعاليات في مصر{% else %}Egypt's #1 Technical Event Partner{% endif %}
         </div>
 
-        <h1 class="hero-title" data-aos="fade-up" data-aos-delay="100">
-            {% if LANGUAGE_CODE == 'ar' %}
-                <span class="title-thin">Pro Event</span><br>
-                <span class="gradient-text">شريكك التقني</span> <span class="title-thin">لنجاح فعالياتك</span>
-            {% else %}
-                <span class="title-thin">Pro Event —</span><br>
-                Your <span class="gradient-text">Technical Partner</span><br>
-                <span class="title-thin">for Event Success</span>
-            {% endif %}
-        </h1>
+        <div class="hero-headline-card" data-aos="fade-up" data-aos-delay="100">
+            <h1 class="hero-title">
+                {% if LANGUAGE_CODE == 'ar' %}
+                    Pro Event – <span class="title-thin">شريكك</span> <span class="gradient-text">التقني</span><br>
+                    <span class="title-thin">لنجاح</span> <span class="gradient-text-2">فعالياتك</span>
+                {% else %}
+                    Pro Event – Your <span class="gradient-text">Technical</span> Partner<br>
+                    for Event <span class="gradient-text-2">Success</span>
+                {% endif %}
+            </h1>
 
-        <p class="hero-subtitle" data-aos="fade-up" data-aos-delay="200">
-            {% if LANGUAGE_CODE == 'ar' %}
-                نقدم أحدث حلول الصوتيات والمرئيات (AV) وخدمات التنظيم والإنتاج الفني<br>
-                للمؤتمرات وفعاليات الشركات الكبرى في مصر.
-            {% else %}
-                We provide the latest AV solutions and technical production services<br>
-                for conferences and major corporate events across Egypt.
-            {% endif %}
-        </p>
+            <p class="hero-subtitle">
+                {% if LANGUAGE_CODE == 'ar' %}
+                    نقدم أحدث حلول الصوتيات والمرئيات (AV) وخدمات التنظيم والإنتاج الفني
+                    للمؤتمرات الراقية وفعاليات الشركات الكبرى في مصر.
+                {% else %}
+                    We provide the latest AV solutions and technical production services
+                    for high-end conferences and major corporate events across Egypt.
+                {% endif %}
+            </p>
+        </div>
 
         <div class="hero-actions" data-aos="fade-up" data-aos-delay="300">
             <a href="#services" class="btn-primary-av">
@@ -148,25 +149,25 @@
             <div class="stat-item">
                 <i class="stat-icon bi bi-truck"></i>
                 <span class="stat-num">200+</span>
-                <span class="stat-label">{% if LANGUAGE_CODE == 'ar' %}فعالية منجزة{% else %}Events Delivered{% endif %}</span>
+                <span class="stat-label">{% if LANGUAGE_CODE == 'ar' %}فعالية<br>منجزة{% else %}Events<br>Delivered{% endif %}</span>
             </div>
             <div class="stat-divider"></div>
             <div class="stat-item">
-                <i class="stat-icon bi bi-trophy-fill"></i>
+                <i class="stat-icon bi bi-trophy"></i>
                 <span class="stat-num">12+</span>
-                <span class="stat-label">{% if LANGUAGE_CODE == 'ar' %}سنة خبرة{% else %}Years Experience{% endif %}</span>
+                <span class="stat-label">{% if LANGUAGE_CODE == 'ar' %}سنوات<br>خبرة{% else %}Years<br>Experience{% endif %}</span>
             </div>
             <div class="stat-divider"></div>
             <div class="stat-item">
-                <i class="stat-icon bi bi-hand-thumbs-up-fill"></i>
+                <i class="stat-icon bi bi-hand-thumbs-up"></i>
                 <span class="stat-num">98%</span>
-                <span class="stat-label">{% if LANGUAGE_CODE == 'ar' %}رضا العملاء{% else %}Client Satisfaction{% endif %}</span>
+                <span class="stat-label">{% if LANGUAGE_CODE == 'ar' %}رضا<br>العملاء{% else %}Client<br>Satisfaction{% endif %}</span>
             </div>
             <div class="stat-divider"></div>
             <div class="stat-item">
-                <i class="stat-icon bi bi-buildings-fill"></i>
+                <i class="stat-icon bi bi-buildings"></i>
                 <span class="stat-num">50+</span>
-                <span class="stat-label">{% if LANGUAGE_CODE == 'ar' %}عميل مؤسسي{% else %}Corporate Clients{% endif %}</span>
+                <span class="stat-label">{% if LANGUAGE_CODE == 'ar' %}عملاء<br>مؤسسيون{% else %}Corporate<br>Clients{% endif %}</span>
             </div>
         </div>
     </div>
