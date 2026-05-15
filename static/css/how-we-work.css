@@ -723,29 +723,34 @@
 
 /* ══════════════════════════════════════════════
    STAGE VISUAL — image variant (custom-designed PNG)
-   Container respects the image's natural aspect ratio
+   Container respects the image's natural aspect ratio (2:1)
+   Selectors use parent + element to beat .hww-stage-with-visual .hww-stage-visual
 ══════════════════════════════════════════════ */
-.hww-stage-visual.hww-stage-visual-img {
+.hww-stage-with-visual .hww-stage-visual.hww-stage-visual-img,
+.hww-stage-with-visual.hww-stage-left .hww-stage-visual.hww-stage-visual-img,
+.hww-stage-with-visual.hww-stage-right .hww-stage-visual.hww-stage-visual-img {
     background: #0A0E1A;
-    align-items: stretch;
-    justify-content: stretch;
     padding: 0;
-    /* Match the actual image aspect (1500x735 ≈ 2:1).
-       Override the default 100% / 360px from .hww-stage-visual */
+    display: block;
+    /* Free the container from the card's height — image dictates aspect */
     height: auto;
     min-height: 0;
     aspect-ratio: 2 / 1;
+    overflow: hidden;
 }
 
 .hww-stage-visual.hww-stage-visual-img::before,
-.hww-stage-visual.hww-stage-visual-img > .hww-visual-light {
-    display: none;
+.hww-stage-visual.hww-stage-visual-img > .hww-visual-light,
+.hww-stage-visual.hww-stage-visual-img > .hww-visual-num,
+.hww-stage-visual.hww-stage-visual-img > .hww-visual-icon,
+.hww-stage-visual.hww-stage-visual-img > .hww-visual-tag {
+    display: none !important;
 }
 
 .hww-stage-visual.hww-stage-visual-img > img {
     width: 100%;
     height: 100%;
-    object-fit: contain;
+    object-fit: cover;
     object-position: center;
     display: block;
     border-radius: 19px;
@@ -757,9 +762,9 @@
 }
 
 @media (max-width: 768px) {
-    .hww-stage-visual.hww-stage-visual-img {
-        min-height: 0;
-        height: auto;
+    .hww-stage-with-visual .hww-stage-visual.hww-stage-visual-img {
         aspect-ratio: 2 / 1;
+        height: auto;
+        min-height: 0;
     }
 }

@@ -163,11 +163,10 @@
                     <li><i class="bi bi-file-earmark-check-fill"></i> {% if LANGUAGE_CODE == 'ar' %}عرض مفصّل وعقد SLA{% else %}Itemized quotation & SLA{% endif %}</li>
                 </ul>
             </div>
-            <div class="hww-stage-visual">
-                <span class="hww-visual-num">02</span>
-                <i class="bi bi-cpu-fill hww-visual-icon"></i>
-                <span class="hww-visual-tag">{% if LANGUAGE_CODE == 'ar' %}التصميم التقني{% else %}Technical Design{% endif %}</span>
-                <span class="hww-visual-light"></span>
+            <div class="hww-stage-visual hww-stage-visual-img">
+                <img src="{% static 'img/stages/02-technical-design.jpg' %}"
+                     alt="{% if LANGUAGE_CODE == 'ar' %}التصميم التقني والعرض{% else %}Technical Design & Quotation{% endif %}"
+                     loading="lazy" width="1500" height="735">
             </div>
         </div>
 
