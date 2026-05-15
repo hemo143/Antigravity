@@ -8,7 +8,7 @@ from .models import PortfolioProject, QuoteRequest
 
 
 def home_view(request):
-    portfolio_items = PortfolioProject.objects.filter(is_featured=True)
+    portfolio_items = PortfolioProject.objects.filter(is_featured=True).exclude(event_type='exhibition')
     return render(request, 'home/index.html', {'portfolio_items': portfolio_items})
 
 

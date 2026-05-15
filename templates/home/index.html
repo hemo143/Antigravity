@@ -4,11 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     {% if LANGUAGE_CODE == 'ar' %}
-    <title>Pro Event – خبراء الفعاليات للمؤتمرات والمعارض</title>
-    <meta name="description" content="حلول صوت وصورة احترافية للمؤتمرات والمعارض وفعاليات الشركات. شاشات LED وأنظمة صوت وإضاءة وإنتاج فيديو.">
+    <title>Pro Event – خبراء المؤتمرات وفعاليات الشركات</title>
+    <meta name="description" content="حلول صوت وصورة احترافية للمؤتمرات وفعاليات الشركات. شاشات LED وأنظمة صوت وإضاءة وإنتاج فيديو.">
     {% else %}
-    <title>Pro Event – Conference & Exhibition Specialists</title>
-    <meta name="description" content="Professional Audio Visual solutions for conferences, exhibitions, and corporate events. LED screens, sound systems, lighting & video production.">
+    <title>Pro Event – Conference & Corporate Event Specialists</title>
+    <meta name="description" content="Professional Audio Visual solutions for conferences and corporate events. LED screens, sound systems, lighting & video production.">
     {% endif %}
 
     <!-- Inter (EN) + Cairo (AR) -->
@@ -120,10 +120,10 @@
         <p class="hero-subtitle" data-aos="fade-up" data-aos-delay="200">
             {% if LANGUAGE_CODE == 'ar' %}
                 نقدم أحدث حلول الصوتيات والمرئيات (AV) وخدمات التنظيم والإنتاج الفني<br>
-                للمؤتمرات، المعارض، والفعاليات الكبرى في مصر.
+                للمؤتمرات وفعاليات الشركات الكبرى في مصر.
             {% else %}
                 We provide the latest AV solutions and technical production services<br>
-                for conferences, exhibitions, and major events across Egypt.
+                for conferences and major corporate events across Egypt.
             {% endif %}
         </p>
 
@@ -293,7 +293,7 @@
                     <span>{% if LANGUAGE_CODE == 'ar' %}جائزة<br><strong>قطاع AV</strong>{% else %}Industry<br><strong>Award Winner</strong>{% endif %}</span>
                 </div>
                 <div class="why-img-float">
-                    <img src="https://images.unsplash.com/photo-1505373877841-8d25f7d46678?w=280&q=80" alt="Exhibition" loading="lazy">
+                    <img src="https://images.unsplash.com/photo-1505373877841-8d25f7d46678?w=280&q=80" alt="Event production" loading="lazy">
                 </div>
             </div>
 
@@ -308,9 +308,9 @@
                 </h2>
                 <p class="why-lead">
                     {% if LANGUAGE_CODE == 'ar' %}
-                        نحن شركة رائدة في مجال تكنولوجيا الفعاليات والإنتاج الفني في مصر، متخصصون في تقديم حلول صوتيات ومرئيات (AV) متكاملة للمؤتمرات والمعارض وفعاليات الشركات الكبرى. رسالتنا هي تحويل كل فعالية إلى تجربة استثنائية لا تُنسى، من خلال الجمع بين أحدث التقنيات وفريق متمرس يعمل بشغف واحترافية عالية. رؤيتنا أن نكون المرجع الأول لتكنولوجيا الفعاليات في مصر والمنطقة.
+                        نحن شركة رائدة في مجال تكنولوجيا الفعاليات والإنتاج الفني في مصر، متخصصون في تقديم حلول صوتيات ومرئيات (AV) متكاملة للمؤتمرات وفعاليات الشركات الكبرى. رسالتنا هي تحويل كل فعالية إلى تجربة استثنائية لا تُنسى، من خلال الجمع بين أحدث التقنيات وفريق متمرس يعمل بشغف واحترافية عالية. رؤيتنا أن نكون المرجع الأول لتكنولوجيا الفعاليات في مصر والمنطقة.
                     {% else %}
-                        We are a leading event technology and technical production company in Egypt, specialized in delivering integrated AV solutions for conferences, exhibitions, and major corporate events. Our mission is to transform every event into an unforgettable experience by combining cutting-edge technology with a passionate, highly professional team. Our vision is to be the number-one reference for event technology in Egypt and across the region.
+                        We are a leading event technology and technical production company in Egypt, specialized in delivering integrated AV solutions for conferences and major corporate events. Our mission is to transform every event into an unforgettable experience by combining cutting-edge technology with a passionate, highly professional team. Our vision is to be the number-one reference for event technology in Egypt and across the region.
                     {% endif %}
                 </p>
 
@@ -359,9 +359,9 @@
             <h2 class="section-title">{% if LANGUAGE_CODE == 'ar' %}مشاريع مختارة{% else %}Featured Projects{% endif %}</h2>
             <p class="section-subtitle">
                 {% if LANGUAGE_CODE == 'ar' %}
-                    نماذج من المؤتمرات والمعارض وفعاليات الشركات التي أدرنا تقنياتها في المنطقة.
+                    نماذج من المؤتمرات وفعاليات الشركات التي أدرنا تقنياتها في المنطقة.
                 {% else %}
-                    A selection of conferences, exhibitions, and corporate events we've powered across the region.
+                    A selection of conferences and corporate events we've powered across the region.
                 {% endif %}
             </p>
         </div>
@@ -369,7 +369,6 @@
         <div class="portfolio-filters" data-aos="fade-up" data-aos-delay="100">
             <button class="pf-btn active" data-filter="all">{% if LANGUAGE_CODE == 'ar' %}الكل{% else %}All{% endif %}</button>
             <button class="pf-btn" data-filter="conference">{% if LANGUAGE_CODE == 'ar' %}مؤتمرات{% else %}Conferences{% endif %}</button>
-            <button class="pf-btn" data-filter="exhibition">{% if LANGUAGE_CODE == 'ar' %}معارض{% else %}Exhibitions{% endif %}</button>
             <button class="pf-btn" data-filter="corporate">{% if LANGUAGE_CODE == 'ar' %}شركات{% else %}Corporate{% endif %}</button>
         </div>
 
@@ -415,17 +414,6 @@
                         </div>
                     </div>
                 </div>
-                <div class="portfolio-card" data-type="exhibition">
-                    <div class="portfolio-img">
-                        <img src="https://images.unsplash.com/photo-1497366216548-37526070297c?w=600&q=80" alt="Exhibition" loading="lazy">
-                        <div class="portfolio-overlay">
-                            <span class="portfolio-tag">{% if LANGUAGE_CODE == 'ar' %}معرض{% else %}Exhibition{% endif %}</span>
-                            <h4>{% if LANGUAGE_CODE == 'ar' %}جيتكس — جناح المعرض{% else %}GITEX Exhibition Stand{% endif %}</h4>
-                            <p>{% if LANGUAGE_CODE == 'ar' %}LED تفاعلي · صوت مكاني · 5 مناطق{% else %}Interactive LED · Spatial audio · 5 zones{% endif %}</p>
-                            <a href="#contact" class="btn-ghost-sm">{% if LANGUAGE_CODE == 'ar' %}تفاصيل المشروع{% else %}View Case Study{% endif %}</a>
-                        </div>
-                    </div>
-                </div>
                 <div class="portfolio-card" data-type="corporate">
                     <div class="portfolio-img">
                         <img src="https://images.unsplash.com/photo-1515187029135-18ee286d815b?w=600&q=80" alt="Corporate Event" loading="lazy">
@@ -444,17 +432,6 @@
                             <span class="portfolio-tag">{% if LANGUAGE_CODE == 'ar' %}مؤتمر{% else %}Conference{% endif %}</span>
                             <h4>{% if LANGUAGE_CODE == 'ar' %}المؤتمر الطبي 2024{% else %}Medical Congress 2024{% endif %}</h4>
                             <p>{% if LANGUAGE_CODE == 'ar' %}ترجمة فورية · 6 قاعات{% else %}Simultaneous translation · 6 breakout rooms{% endif %}</p>
-                            <a href="#contact" class="btn-ghost-sm">{% if LANGUAGE_CODE == 'ar' %}تفاصيل المشروع{% else %}View Case Study{% endif %}</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="portfolio-card" data-type="exhibition">
-                    <div class="portfolio-img">
-                        <img src="https://images.unsplash.com/photo-1561489413-985b06da5bee?w=600&q=80" alt="Real Estate Expo" loading="lazy">
-                        <div class="portfolio-overlay">
-                            <span class="portfolio-tag">{% if LANGUAGE_CODE == 'ar' %}معرض{% else %}Exhibition{% endif %}</span>
-                            <h4>{% if LANGUAGE_CODE == 'ar' %}معرض العقارات{% else %}Real Estate Expo{% endif %}</h4>
-                            <p>{% if LANGUAGE_CODE == 'ar' %}جدران فيديو · إضاءة محيطية · جولات 3D{% else %}Video walls · Ambient lighting · 3D walkthroughs{% endif %}</p>
                             <a href="#contact" class="btn-ghost-sm">{% if LANGUAGE_CODE == 'ar' %}تفاصيل المشروع{% else %}View Case Study{% endif %}</a>
                         </div>
                     </div>
@@ -758,7 +735,6 @@
                             <select name="event_type" required>
                                 <option value="" disabled selected>{% if LANGUAGE_CODE == 'ar' %}اختر النوع{% else %}Select event type{% endif %}</option>
                                 <option value="Conference">{% if LANGUAGE_CODE == 'ar' %}مؤتمر{% else %}Conference{% endif %}</option>
-                                <option value="Exhibition">{% if LANGUAGE_CODE == 'ar' %}معرض{% else %}Exhibition{% endif %}</option>
                                 <option value="Corporate Event">{% if LANGUAGE_CODE == 'ar' %}فعالية شركة{% else %}Corporate Event{% endif %}</option>
                                 <option value="Product Launch">{% if LANGUAGE_CODE == 'ar' %}إطلاق منتج{% else %}Product Launch{% endif %}</option>
                                 <option value="Other">{% if LANGUAGE_CODE == 'ar' %}أخرى{% else %}Other{% endif %}</option>
@@ -828,7 +804,7 @@
                     <span class="logo-icon"><i class="bi bi-display-fill"></i></span>
                     <span class="logo-text">Pro<span class="accent">Event</span></span>
                 </a>
-                <p>{% if LANGUAGE_CODE == 'ar' %}حلول تكنولوجيا الفعاليات والإنتاج الفني للمؤتمرات والمعارض وفعاليات الشركات في مصر.{% else %}Event technology & technical production solutions for conferences, exhibitions, and corporate events in Egypt.{% endif %}</p>
+                <p>{% if LANGUAGE_CODE == 'ar' %}حلول تكنولوجيا الفعاليات والإنتاج الفني للمؤتمرات وفعاليات الشركات في مصر.{% else %}Event technology & technical production solutions for conferences and corporate events in Egypt.{% endif %}</p>
                 <div class="social-links mt-3">
                     <a href="#" class="social-btn"><i class="bi bi-linkedin"></i></a>
                     <a href="#" class="social-btn"><i class="bi bi-instagram"></i></a>
@@ -841,7 +817,6 @@
                 <h5>{% if LANGUAGE_CODE == 'ar' %}خدماتنا{% else %}Services{% endif %}</h5>
                 <ul>
                     <li><a href="#services">{% if LANGUAGE_CODE == 'ar' %}حلول AV للمؤتمرات{% else %}Conference AV Solutions{% endif %}</a></li>
-                    <li><a href="#services">{% if LANGUAGE_CODE == 'ar' %}AV للمعارض{% else %}Exhibition AV{% endif %}</a></li>
                     <li><a href="#services">{% if LANGUAGE_CODE == 'ar' %}شاشات LED{% else %}LED Screens{% endif %}</a></li>
                     <li><a href="#services">{% if LANGUAGE_CODE == 'ar' %}أنظمة الصوت{% else %}Sound Systems{% endif %}</a></li>
                     <li><a href="#services">{% if LANGUAGE_CODE == 'ar' %}الإضاءة الاحترافية{% else %}Professional Lighting{% endif %}</a></li>
