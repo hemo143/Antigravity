@@ -101,6 +101,9 @@
             <source src="{% static 'video/hero.mp4' %}" type="video/mp4">
         </video>
         <div class="hero-overlay"></div>
+        <div class="hero-ambient hero-ambient-orange" aria-hidden="true"></div>
+        <div class="hero-ambient hero-ambient-blue" aria-hidden="true"></div>
+        <div class="hero-vignette" aria-hidden="true"></div>
     </div>
 
     <div class="container-xl hero-content">
@@ -111,9 +114,12 @@
 
         <h1 class="hero-title" data-aos="fade-up" data-aos-delay="100">
             {% if LANGUAGE_CODE == 'ar' %}
-                Pro Event – <span class="gradient-text">شريكك التقني</span><br>لنجاح فعالياتك
+                <span class="title-thin">Pro Event</span><br>
+                <span class="gradient-text">شريكك التقني</span> <span class="title-thin">لنجاح فعالياتك</span>
             {% else %}
-                Pro Event – Your <span class="gradient-text">Technical Partner</span><br>for Event Success
+                <span class="title-thin">Pro Event —</span><br>
+                Your <span class="gradient-text">Technical Partner</span><br>
+                <span class="title-thin">for Event Success</span>
             {% endif %}
         </h1>
 
