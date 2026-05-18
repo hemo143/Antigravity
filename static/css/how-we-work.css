@@ -477,8 +477,13 @@
 }
 
 @media (max-width: 768px) {
-    .hww-hero { padding: 140px 0 80px; }
-    .hww-timeline { padding: 60px 0 40px; }
+    .hww-hero { padding: 120px 0 60px; }
+    .hww-timeline { padding: 48px 0 32px; }
+    .hww-eyebrow { font-size: 0.7rem; padding: 6px 14px; margin-bottom: 18px; }
+    .hww-lead { font-size: 0.95rem; margin-bottom: 32px; line-height: 1.7; }
+    .hww-stats { padding: 24px 20px; }
+    .hww-stat-num { font-size: 1.8rem; }
+    .hww-stat-lbl { font-size: 0.66rem; letter-spacing: 0.5px; }
 
     .hww-timeline .container-xl::before {
         left: 26px;
@@ -499,6 +504,7 @@
         width: calc(100% - 70px);
         margin-left: 70px;
         margin-right: 0;
+        padding: 22px 20px;
     }
 
     .hww-stage-left .hww-stage-card::before,
@@ -507,8 +513,19 @@
         right: auto;
     }
 
+    .hww-stage-head h3 { font-size: 1.05rem; }
+    .hww-stage-card > p { font-size: 0.88rem; line-height: 1.7; }
+    .hww-activities li { font-size: 0.84rem; padding: 7px 10px; }
+
     .hww-phase-banner { padding: 22px; margin: 40px 0 30px; }
-    .hww-cta-card { padding: 50px 28px; }
+    .hww-phase-banner h2 { font-size: 1.45rem; }
+    .hww-phase-banner p { font-size: 0.88rem; }
+
+    .hww-cta-card { padding: 44px 22px; }
+    .hww-cta-card h2 { font-size: 1.5rem; }
+    .hww-cta-actions { flex-direction: column; gap: 12px; }
+    .hww-cta-actions .btn-quote,
+    .hww-cta-actions .btn-outline { width: 100%; justify-content: center; }
 }
 
 @media (max-width: 576px) {
