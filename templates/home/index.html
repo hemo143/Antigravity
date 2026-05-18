@@ -719,11 +719,11 @@
                     <div class="form-row-2">
                         <div class="form-group">
                             <label>{% if LANGUAGE_CODE == 'ar' %}الاسم *{% else %}Your Name *{% endif %}</label>
-                            <input type="text" name="name" placeholder="{% if LANGUAGE_CODE == 'ar' %}أحمد محمد{% else %}Ahmed Mohammed{% endif %}" required>
+                            <input type="text" name="name" placeholder="{% if LANGUAGE_CODE == 'ar' %}الاسم الكامل{% else %}Full Name{% endif %}" required>
                         </div>
                         <div class="form-group">
                             <label>{% if LANGUAGE_CODE == 'ar' %}اسم الشركة *{% else %}Company Name *{% endif %}</label>
-                            <input type="text" name="company" placeholder="{% if LANGUAGE_CODE == 'ar' %}شركتك{% else %}Your Company{% endif %}" required>
+                            <input type="text" name="company" placeholder="{% if LANGUAGE_CODE == 'ar' %}اسم الشركة{% else %}Company Name{% endif %}" required>
                         </div>
                     </div>
 
@@ -734,7 +734,7 @@
                         </div>
                         <div class="form-group">
                             <label>{% if LANGUAGE_CODE == 'ar' %}رقم الهاتف *{% else %}Phone Number *{% endif %}</label>
-                            <input type="tel" name="phone" placeholder="+966 5X XXX XXXX" required dir="ltr">
+                            <input type="tel" name="phone" placeholder="+20 1XX XXX XXXX" required dir="ltr">
                         </div>
                     </div>
 
@@ -768,14 +768,41 @@
                     </div>
 
                     <div class="form-group">
-                        <label>{% if LANGUAGE_CODE == 'ar' %}الخدمات المطلوبة{% else %}Services Required{% endif %}</label>
+                        <label>
+                            {% if LANGUAGE_CODE == 'ar' %}الخدمات المطلوبة{% else %}Services Required{% endif %}
+                            <span class="label-hint">{% if LANGUAGE_CODE == 'ar' %}اختر أكثر من خدمة{% else %}select all that apply{% endif %}</span>
+                        </label>
                         <div class="services-checkboxes">
-                            <label class="check-item"><input type="checkbox" name="services" value="Conference AV"> {% if LANGUAGE_CODE == 'ar' %}AV للمؤتمرات{% else %}Conference AV{% endif %}</label>
-                            <label class="check-item"><input type="checkbox" name="services" value="LED Screens"> {% if LANGUAGE_CODE == 'ar' %}شاشات LED{% else %}LED Screens{% endif %}</label>
-                            <label class="check-item"><input type="checkbox" name="services" value="Sound Systems"> {% if LANGUAGE_CODE == 'ar' %}أنظمة الصوت{% else %}Sound Systems{% endif %}</label>
-                            <label class="check-item"><input type="checkbox" name="services" value="Lighting"> {% if LANGUAGE_CODE == 'ar' %}الإضاءة{% else %}Lighting{% endif %}</label>
-                            <label class="check-item"><input type="checkbox" name="services" value="Video Production"> {% if LANGUAGE_CODE == 'ar' %}إنتاج فيديو{% else %}Video Production{% endif %}</label>
-                            <label class="check-item"><input type="checkbox" name="services" value="Live Streaming"> {% if LANGUAGE_CODE == 'ar' %}بث مباشر{% else %}Live Streaming{% endif %}</label>
+                            <label class="check-item">
+                                <input type="checkbox" name="services" value="Conference AV">
+                                <span class="check-box"><i class="bi bi-check2"></i></span>
+                                <span class="check-text">{% if LANGUAGE_CODE == 'ar' %}AV للمؤتمرات{% else %}Conference AV{% endif %}</span>
+                            </label>
+                            <label class="check-item">
+                                <input type="checkbox" name="services" value="LED Screens">
+                                <span class="check-box"><i class="bi bi-check2"></i></span>
+                                <span class="check-text">{% if LANGUAGE_CODE == 'ar' %}شاشات LED{% else %}LED Screens{% endif %}</span>
+                            </label>
+                            <label class="check-item">
+                                <input type="checkbox" name="services" value="Sound Systems">
+                                <span class="check-box"><i class="bi bi-check2"></i></span>
+                                <span class="check-text">{% if LANGUAGE_CODE == 'ar' %}أنظمة الصوت{% else %}Sound Systems{% endif %}</span>
+                            </label>
+                            <label class="check-item">
+                                <input type="checkbox" name="services" value="Lighting">
+                                <span class="check-box"><i class="bi bi-check2"></i></span>
+                                <span class="check-text">{% if LANGUAGE_CODE == 'ar' %}الإضاءة{% else %}Lighting{% endif %}</span>
+                            </label>
+                            <label class="check-item">
+                                <input type="checkbox" name="services" value="Video Production">
+                                <span class="check-box"><i class="bi bi-check2"></i></span>
+                                <span class="check-text">{% if LANGUAGE_CODE == 'ar' %}إنتاج فيديو{% else %}Video Production{% endif %}</span>
+                            </label>
+                            <label class="check-item">
+                                <input type="checkbox" name="services" value="Live Streaming">
+                                <span class="check-box"><i class="bi bi-check2"></i></span>
+                                <span class="check-text">{% if LANGUAGE_CODE == 'ar' %}بث مباشر{% else %}Live Streaming{% endif %}</span>
+                            </label>
                         </div>
                     </div>
 
