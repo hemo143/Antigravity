@@ -2,6 +2,7 @@
 Home (Landing Page) Views
 """
 import logging
+import threading
 from django.shortcuts import render
 from django.http import JsonResponse
 from django.views.decorators.http import require_POST
@@ -116,7 +117,10 @@ def _send_quote_emails(quote: QuoteRequest) -> None:
     '''
 
     try:
-        with get_connection() as conn:
+        # Use a single SMTP connection with a hard timeout so SMTP delays
+        # never hang the worker on Render's free tier.
+        conn = get_connection(timeout=15)
+        try:
             notify_msg = EmailMultiAlternatives(
                 notify_subject, notify_text, from_addr, [notify_to],
                 reply_to=[quote.email] if quote.email else None,
@@ -124,6 +128,7 @@ def _send_quote_emails(quote: QuoteRequest) -> None:
             )
             notify_msg.attach_alternative(notify_html, 'text/html')
             notify_msg.send()
+            logger.info('Quote notification sent for #%s -> %s', quote.pk, notify_to)
 
             if quote.email:
                 ack_msg = EmailMultiAlternatives(
@@ -132,8 +137,21 @@ def _send_quote_emails(quote: QuoteRequest) -> None:
                 )
                 ack_msg.attach_alternative(ack_html, 'text/html')
                 ack_msg.send()
+                logger.info('Quote ack sent for #%s -> %s', quote.pk, quote.email)
+        finally:
+            try:
+                conn.close()
+            except Exception:
+                pass
     except Exception as exc:
         logger.error('Failed to send quote emails for #%s: %s', quote.pk, exc, exc_info=True)
+
+
+def _send_quote_emails_async(quote: QuoteRequest) -> None:
+    """Fire-and-forget email sending so the form response isn't blocked
+    by slow SMTP (Render free tier is memory-constrained)."""
+    t = threading.Thread(target=_send_quote_emails, args=(quote,), daemon=True)
+    t.start()
 
 
 @require_POST
@@ -150,7 +168,7 @@ def quote_submit(request):
             services   = ', '.join(request.POST.getlist('services')),
             notes      = request.POST.get('notes', '').strip(),
         )
-        _send_quote_emails(quote)
+        _send_quote_emails_async(quote)
         return JsonResponse({'success': True})
     except Exception as exc:
         logger.exception('Quote submit failed')
