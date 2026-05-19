@@ -136,18 +136,20 @@ REST_FRAMEWORK = {
     'PAGE_SIZE': 10,
 }
 
-# Email Settings
-EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+# Email Settings — Resend HTTP API (SMTP blocked on Render Free Tier)
+RESEND_API_KEY = config('RESEND_API_KEY', default='')
+RESEND_FROM_EMAIL = config('RESEND_FROM_EMAIL', default='onboarding@resend.dev')
+
+# Recipient(s) who get a notification on every new quote request
+QUOTE_NOTIFICATION_EMAIL = config('QUOTE_NOTIFICATION_EMAIL', default='')
+
+# Legacy SMTP settings still parsed for local dev / fallback only
 EMAIL_HOST = config('EMAIL_HOST', default='smtp.gmail.com')
 EMAIL_PORT = config('EMAIL_PORT', default=587, cast=int)
 EMAIL_USE_TLS = config('EMAIL_USE_TLS', default=True, cast=bool)
 EMAIL_HOST_USER = config('EMAIL_HOST_USER', default='')
 EMAIL_HOST_PASSWORD = config('EMAIL_HOST_PASSWORD', default='')
-DEFAULT_FROM_EMAIL = config('DEFAULT_FROM_EMAIL', default=EMAIL_HOST_USER)
+DEFAULT_FROM_EMAIL = config('DEFAULT_FROM_EMAIL', default=RESEND_FROM_EMAIL)
 
-# Recipient(s) who get a notification on every new quote request
-QUOTE_NOTIFICATION_EMAIL = config('QUOTE_NOTIFICATION_EMAIL', default=EMAIL_HOST_USER)
-
-# للتطوير: يطبع الإيميل في الـ Console بدل الإرسال الفعلي
-if DEBUG:
-    EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend' if DEBUG else \
+                'django.core.mail.backends.smtp.EmailBackend'

@@ -1,12 +1,14 @@
 """
 Home (Landing Page) Views
 """
+import json
 import logging
 import threading
+import urllib.request
+import urllib.error
 from django.shortcuts import render
 from django.http import JsonResponse
 from django.views.decorators.http import require_POST
-from django.core.mail import EmailMultiAlternatives, get_connection
 from django.conf import settings
 from .models import PortfolioProject, QuoteRequest
 
@@ -22,19 +24,59 @@ def how_we_work_view(request):
     return render(request, 'home/how_we_work.html')
 
 
-def _send_quote_emails(quote: QuoteRequest) -> None:
-    """Send notification to staff + acknowledgement to the client.
+# ─── Resend HTTP API helpers ───────────────────────────────────────────
+RESEND_ENDPOINT = 'https://api.resend.com/emails'
 
-    Failures are logged but do not raise — the form already saved to DB.
-    """
-    from_addr = settings.DEFAULT_FROM_EMAIL or settings.EMAIL_HOST_USER
-    if not from_addr:
-        logger.warning('Quote saved but no EMAIL_HOST_USER configured; skipping mail.')
+
+def _resend_send(*, from_addr: str, to: list, subject: str, html: str, text: str, reply_to: str = None) -> tuple:
+    """POST a single email via Resend's HTTP API. Returns (ok, info)."""
+    api_key = settings.RESEND_API_KEY
+    if not api_key:
+        return False, 'RESEND_API_KEY is not set'
+
+    payload = {
+        'from': from_addr,
+        'to': to,
+        'subject': subject,
+        'html': html,
+        'text': text,
+    }
+    if reply_to:
+        payload['reply_to'] = reply_to
+
+    req = urllib.request.Request(
+        RESEND_ENDPOINT,
+        data=json.dumps(payload).encode('utf-8'),
+        headers={
+            'Authorization': f'Bearer {api_key}',
+            'Content-Type': 'application/json',
+        },
+        method='POST',
+    )
+    try:
+        with urllib.request.urlopen(req, timeout=15) as resp:
+            body = json.loads(resp.read().decode('utf-8'))
+            return True, body.get('id', 'sent')
+    except urllib.error.HTTPError as e:
+        try:
+            err_body = json.loads(e.read().decode('utf-8'))
+        except Exception:
+            err_body = str(e)
+        return False, f'HTTP {e.code}: {err_body}'
+    except Exception as e:
+        return False, str(e)
+
+
+def _send_quote_emails(quote: QuoteRequest) -> None:
+    """Send notification to staff + acknowledgement to the client via Resend."""
+    from_addr = settings.RESEND_FROM_EMAIL
+    notify_to = settings.QUOTE_NOTIFICATION_EMAIL or from_addr
+
+    if not settings.RESEND_API_KEY:
+        logger.warning('Quote #%s saved but RESEND_API_KEY missing; skipping email.', quote.pk)
         return
 
-    notify_to = getattr(settings, 'QUOTE_NOTIFICATION_EMAIL', from_addr) or from_addr
-
-    # ── 1) Internal notification ───────────────────────────────────────
+    # ── 1) Internal notification ─────────────────────────────────────
     notify_subject = f'[Pro Event] New Quote Request — {quote.name} / {quote.company}'
 
     notify_text = (
@@ -71,7 +113,26 @@ def _send_quote_emails(quote: QuoteRequest) -> None:
     </div>
     '''
 
-    # ── 2) Client acknowledgement ──────────────────────────────────────
+    ok, info = _resend_send(
+        from_addr=f'Pro Event <{from_addr}>',
+        to=[notify_to],
+        subject=notify_subject,
+        html=notify_html,
+        text=notify_text,
+        reply_to=quote.email or None,
+    )
+    if ok:
+        logger.info('Quote #%s notification sent to %s (id=%s)', quote.pk, notify_to, info)
+    else:
+        logger.error('Quote #%s notification FAILED: %s', quote.pk, info)
+
+    # ── 2) Client acknowledgement ────────────────────────────────────
+    # NOTE: With Resend's test domain (onboarding@resend.dev) and no
+    # verified custom domain, sending to addresses other than the
+    # account owner returns 403. We try it anyway and log the result.
+    if not quote.email:
+        return
+
     ack_subject = 'Thank you for contacting Pro Event'
     ack_text = (
         f'Hi {quote.name},\n\n'
@@ -116,40 +177,21 @@ def _send_quote_emails(quote: QuoteRequest) -> None:
     </div>
     '''
 
-    try:
-        # Use a single SMTP connection with a hard timeout so SMTP delays
-        # never hang the worker on Render's free tier.
-        conn = get_connection(timeout=15)
-        try:
-            notify_msg = EmailMultiAlternatives(
-                notify_subject, notify_text, from_addr, [notify_to],
-                reply_to=[quote.email] if quote.email else None,
-                connection=conn,
-            )
-            notify_msg.attach_alternative(notify_html, 'text/html')
-            notify_msg.send()
-            logger.info('Quote notification sent for #%s -> %s', quote.pk, notify_to)
-
-            if quote.email:
-                ack_msg = EmailMultiAlternatives(
-                    ack_subject, ack_text, from_addr, [quote.email],
-                    connection=conn,
-                )
-                ack_msg.attach_alternative(ack_html, 'text/html')
-                ack_msg.send()
-                logger.info('Quote ack sent for #%s -> %s', quote.pk, quote.email)
-        finally:
-            try:
-                conn.close()
-            except Exception:
-                pass
-    except Exception as exc:
-        logger.error('Failed to send quote emails for #%s: %s', quote.pk, exc, exc_info=True)
+    ok, info = _resend_send(
+        from_addr=f'Pro Event <{from_addr}>',
+        to=[quote.email],
+        subject=ack_subject,
+        html=ack_html,
+        text=ack_text,
+    )
+    if ok:
+        logger.info('Quote #%s ack sent to %s (id=%s)', quote.pk, quote.email, info)
+    else:
+        logger.warning('Quote #%s ack to %s skipped (likely needs domain verification): %s', quote.pk, quote.email, info)
 
 
 def _send_quote_emails_async(quote: QuoteRequest) -> None:
-    """Fire-and-forget email sending so the form response isn't blocked
-    by slow SMTP (Render free tier is memory-constrained)."""
+    """Fire-and-forget so the form response isn't blocked by network IO."""
     t = threading.Thread(target=_send_quote_emails, args=(quote,), daemon=True)
     t.start()
 
