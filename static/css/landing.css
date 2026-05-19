@@ -1354,27 +1354,48 @@ a { text-decoration: none; color: inherit; }
     font-weight: 500;
 }
 
-/* Social Links */
-.social-links { display: flex; gap: 10px; }
+/* Social Links — each icon adopts its brand color */
+.social-links { display: flex; gap: 10px; flex-wrap: wrap; }
 
 .social-btn {
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 40px; height: 40px;
-    border-radius: 10px;
-    background: rgba(255,255,255,0.06);
-    color: #8892A4;
-    font-size: 1rem;
-    border: 1px solid rgba(255,255,255,0.1);
-    transition: all 0.25s;
+    width: 42px;
+    height: 42px;
+    border-radius: 11px;
+    background: rgba(255,255,255,0.04);
+    color: var(--brand, #FFFFFF);
+    font-size: 1.05rem;
+    border: 1px solid rgba(255,255,255,0.10);
+    transition: transform 0.3s cubic-bezier(0.25,1,0.5,1),
+                background 0.3s ease,
+                border-color 0.3s ease,
+                box-shadow 0.3s ease;
+    position: relative;
 }
 
 .social-btn:hover {
-    background: #FF6B35;
+    background: var(--brand, #FF6B35);
     color: #FFFFFF;
-    border-color: #FF6B35;
-    transform: translateY(-3px);
+    border-color: var(--brand, #FF6B35);
+    transform: translateY(-3px) scale(1.04);
+    box-shadow: 0 10px 24px var(--brand-glow, rgba(255,107,53,0.35));
+}
+
+/* Brand colors per channel */
+.social-linkedin  { --brand: #0A66C2; --brand-glow: rgba(10,102,194,0.40); }
+.social-instagram { --brand: #E1306C; --brand-glow: rgba(225,48,108,0.40); }
+.social-youtube   { --brand: #FF0000; --brand-glow: rgba(255,0,0,0.40); }
+.social-whatsapp  { --brand: #25D366; --brand-glow: rgba(37,211,102,0.45); }
+.social-facebook  { --brand: #1877F2; --brand-glow: rgba(24,119,242,0.40); }
+.social-twitter   { --brand: #1DA1F2; --brand-glow: rgba(29,161,242,0.40); }
+.social-tiktok    { --brand: #FF0050; --brand-glow: rgba(255,0,80,0.40); }
+
+/* Instagram gets the iconic gradient on hover */
+.social-instagram:hover {
+    background: linear-gradient(45deg, #F58529 0%, #DD2A7B 35%, #8134AF 65%, #515BD4 100%);
+    border-color: rgba(221,42,123,0.6);
 }
 
 /* Form */
@@ -2125,4 +2146,149 @@ a { text-decoration: none; color: inherit; }
     .cta-banner-actions .btn-ghost-av { width: 100%; justify-content: center; }
     .cta-banner-trust { gap: 18px 24px; padding-top: 26px; }
     .cta-trust-item { font-size: 0.8rem; }
+}
+
+
+/* ══════════════════════════════════════════════
+   FLOATING CONTACT CTA — always-visible WhatsApp + Call
+══════════════════════════════════════════════ */
+.floating-contact {
+    position: fixed;
+    bottom: 24px;
+    left: 24px;
+    z-index: 998;
+    display: flex;
+    flex-direction: column-reverse;
+    gap: 12px;
+    pointer-events: none;
+}
+
+[dir="rtl"] .floating-contact {
+    left: auto;
+    right: 24px;
+}
+
+.float-btn {
+    position: relative;
+    pointer-events: auto;
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    color: #FFFFFF;
+    font-size: 1.5rem;
+    text-decoration: none;
+    transition: transform 0.3s cubic-bezier(0.25,1,0.5,1),
+                box-shadow 0.3s ease;
+}
+
+.float-btn:hover {
+    transform: translateY(-3px) scale(1.05);
+    color: #FFFFFF;
+}
+
+.float-whatsapp {
+    background: linear-gradient(135deg, #2BD46F 0%, #25D366 50%, #128C7E 100%);
+    box-shadow:
+        inset 0 1px 0 rgba(255,255,255,0.20),
+        0 10px 28px rgba(37, 211, 102, 0.40);
+}
+
+.float-whatsapp:hover {
+    box-shadow:
+        inset 0 1px 0 rgba(255,255,255,0.25),
+        0 18px 38px rgba(37, 211, 102, 0.55);
+}
+
+.float-call {
+    background: linear-gradient(135deg, #FF8347 0%, #FF6B35 50%, #E85E2A 100%);
+    box-shadow:
+        inset 0 1px 0 rgba(255,255,255,0.20),
+        0 10px 28px rgba(255, 107, 53, 0.40);
+}
+
+.float-call:hover {
+    box-shadow:
+        inset 0 1px 0 rgba(255,255,255,0.25),
+        0 18px 38px rgba(255, 107, 53, 0.55);
+}
+
+/* Pulse ring on the WhatsApp button to draw the eye */
+.float-pulse {
+    position: absolute;
+    inset: 0;
+    border-radius: 50%;
+    border: 2px solid #25D366;
+    opacity: 0;
+    animation: floatPulse 2.4s ease-out infinite;
+    pointer-events: none;
+}
+
+@keyframes floatPulse {
+    0%   { transform: scale(1);    opacity: 0.6; }
+    100% { transform: scale(1.55); opacity: 0; }
+}
+
+/* Tooltip that slides out on hover */
+.float-tooltip {
+    position: absolute;
+    left: calc(100% + 14px);
+    top: 50%;
+    transform: translateY(-50%) translateX(-8px);
+    background: rgba(15, 22, 38, 0.95);
+    color: #FFFFFF;
+    padding: 8px 14px;
+    border-radius: 8px;
+    font-size: 0.78rem;
+    font-weight: 600;
+    white-space: nowrap;
+    border: 1px solid rgba(255,255,255,0.10);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.4);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.25s ease, transform 0.25s ease;
+    backdrop-filter: blur(10px);
+}
+
+.float-tooltip::before {
+    content: '';
+    position: absolute;
+    left: -5px;
+    top: 50%;
+    transform: translateY(-50%) rotate(45deg);
+    width: 8px;
+    height: 8px;
+    background: rgba(15, 22, 38, 0.95);
+    border-left: 1px solid rgba(255,255,255,0.10);
+    border-bottom: 1px solid rgba(255,255,255,0.10);
+}
+
+[dir="rtl"] .float-tooltip {
+    left: auto;
+    right: calc(100% + 14px);
+    transform: translateY(-50%) translateX(8px);
+}
+
+[dir="rtl"] .float-tooltip::before {
+    left: auto;
+    right: -5px;
+    border-left: none;
+    border-bottom: none;
+    border-right: 1px solid rgba(255,255,255,0.10);
+    border-top: 1px solid rgba(255,255,255,0.10);
+}
+
+.float-btn:hover .float-tooltip {
+    opacity: 1;
+    transform: translateY(-50%) translateX(0);
+}
+
+/* Mobile: shrink slightly and hide tooltip */
+@media (max-width: 576px) {
+    .floating-contact { bottom: 16px; left: 16px; gap: 10px; }
+    [dir="rtl"] .floating-contact { left: auto; right: 16px; }
+    .float-btn { width: 50px; height: 50px; font-size: 1.3rem; }
+    .float-tooltip { display: none; }
 }

@@ -761,10 +761,10 @@
                     </div>
                 </div>
                 <div class="social-links mt-4">
-                    <a href="#" class="social-btn"><i class="bi bi-linkedin"></i></a>
-                    <a href="#" class="social-btn"><i class="bi bi-instagram"></i></a>
-                    <a href="#" class="social-btn"><i class="bi bi-youtube"></i></a>
-                    <a href="#" class="social-btn"><i class="bi bi-whatsapp"></i></a>
+                    <a href="https://www.linkedin.com/" target="_blank" rel="noopener" aria-label="LinkedIn" class="social-btn social-linkedin"><i class="bi bi-linkedin"></i></a>
+                    <a href="https://www.instagram.com/" target="_blank" rel="noopener" aria-label="Instagram" class="social-btn social-instagram"><i class="bi bi-instagram"></i></a>
+                    <a href="https://www.youtube.com/" target="_blank" rel="noopener" aria-label="YouTube" class="social-btn social-youtube"><i class="bi bi-youtube"></i></a>
+                    <a href="https://wa.me/201119333199" target="_blank" rel="noopener" aria-label="WhatsApp" class="social-btn social-whatsapp"><i class="bi bi-whatsapp"></i></a>
                 </div>
             </div>
 
@@ -900,10 +900,10 @@
                 </a>
                 <p>{% if LANGUAGE_CODE == 'ar' %}حلول تكنولوجيا الفعاليات والإنتاج الفني للمؤتمرات وفعاليات الشركات في مصر.{% else %}Event technology & technical production solutions for conferences and corporate events in Egypt.{% endif %}</p>
                 <div class="social-links mt-3">
-                    <a href="#" class="social-btn"><i class="bi bi-linkedin"></i></a>
-                    <a href="#" class="social-btn"><i class="bi bi-instagram"></i></a>
-                    <a href="#" class="social-btn"><i class="bi bi-youtube"></i></a>
-                    <a href="#" class="social-btn"><i class="bi bi-whatsapp"></i></a>
+                    <a href="https://www.linkedin.com/" target="_blank" rel="noopener" aria-label="LinkedIn" class="social-btn social-linkedin"><i class="bi bi-linkedin"></i></a>
+                    <a href="https://www.instagram.com/" target="_blank" rel="noopener" aria-label="Instagram" class="social-btn social-instagram"><i class="bi bi-instagram"></i></a>
+                    <a href="https://www.youtube.com/" target="_blank" rel="noopener" aria-label="YouTube" class="social-btn social-youtube"><i class="bi bi-youtube"></i></a>
+                    <a href="https://wa.me/201119333199" target="_blank" rel="noopener" aria-label="WhatsApp" class="social-btn social-whatsapp"><i class="bi bi-whatsapp"></i></a>
                 </div>
             </div>
 
@@ -955,6 +955,22 @@
     // Pass language to JS
     window.LANG = '{{ LANGUAGE_CODE }}';
 </script>
+
+<!-- Floating contact CTA — always-visible WhatsApp / Call -->
+<div class="floating-contact" aria-label="{% if LANGUAGE_CODE == 'ar' %}تواصل سريع{% else %}Quick contact{% endif %}">
+    <a href="tel:+201119333199" class="float-btn float-call" aria-label="Call Pro Event">
+        <i class="bi bi-telephone-fill"></i>
+        <span class="float-tooltip">{% if LANGUAGE_CODE == 'ar' %}اتصل الآن{% else %}Call Now{% endif %}</span>
+    </a>
+    <a href="https://wa.me/201119333199?text={% if LANGUAGE_CODE == 'ar' %}مرحبا%20Pro%20Event،%20أريد%20الاستفسار%20عن%20حدث{% else %}Hi%20Pro%20Event%2C%20I%27d%20like%20a%20quote%20for%20an%20event{% endif %}"
+       target="_blank" rel="noopener"
+       class="float-btn float-whatsapp"
+       aria-label="WhatsApp Pro Event">
+        <span class="float-pulse" aria-hidden="true"></span>
+        <i class="bi bi-whatsapp"></i>
+        <span class="float-tooltip">{% if LANGUAGE_CODE == 'ar' %}واتساب{% else %}WhatsApp Us{% endif %}</span>
+    </a>
+</div>
 
 <script src="/static/js/landing.js"></script>
 {% include "home/_audio_widget.html" %}
