@@ -2292,3 +2292,13 @@ a { text-decoration: none; color: inherit; }
     .float-btn { width: 50px; height: 50px; font-size: 1.3rem; }
     .float-tooltip { display: none; }
 }
+
+/* Hidden soundtrack — keep audio element + JS active, hide the pill */
+.audio-dock.audio-dock-hidden {
+    position: fixed;
+    left: -9999px;
+    width: 1px;
+    height: 1px;
+    opacity: 0;
+    pointer-events: none;
+}

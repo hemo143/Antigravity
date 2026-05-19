@@ -355,9 +355,6 @@
         document.getElementById('mainNav').classList.toggle('scrolled', window.scrollY > 50);
     });
 </script>
-{% comment %} Soundtrack widget intentionally disabled.
-    To re-enable, replace this comment block with:
-        {% include "home/_audio_widget.html" %}
-{% endcomment %}
+{% include "home/_audio_widget.html" %}
 </body>
 </html>

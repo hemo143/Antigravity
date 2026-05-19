@@ -1,10 +1,10 @@
 {% load i18n static %}
-<!-- ═══ AMBIENT SOUNDTRACK ═══ -->
+<!-- ═══ AMBIENT SOUNDTRACK — audio plays, visible button hidden ═══ -->
 <audio id="ambientAudio" loop preload="auto">
     <source src="{% static 'audio/ambient.mp3' %}" type="audio/mpeg">
 </audio>
 
-<div class="audio-dock">
+<div class="audio-dock audio-dock-hidden">
     <span class="audio-sparkle" aria-hidden="true"><i class="bi bi-stars"></i></span>
     <button class="audio-toggle" id="audioToggle"
             aria-label="{% if LANGUAGE_CODE == 'ar' %}تشغيل/إيقاف الموسيقى{% else %}Toggle soundtrack{% endif %}"
