@@ -153,3 +153,25 @@ DEFAULT_FROM_EMAIL = config('DEFAULT_FROM_EMAIL', default=RESEND_FROM_EMAIL)
 
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend' if DEBUG else \
                 'django.core.mail.backends.smtp.EmailBackend'
+
+# Send INFO-level logs from our apps to stdout so Render captures them
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+    'formatters': {
+        'simple': {'format': '[%(levelname)s] %(name)s: %(message)s'},
+    },
+    'handlers': {
+        'console': {
+            'class': 'logging.StreamHandler',
+            'formatter': 'simple',
+        },
+    },
+    'loggers': {
+        'apps': {
+            'handlers': ['console'],
+            'level': 'INFO',
+            'propagate': False,
+        },
+    },
+}
