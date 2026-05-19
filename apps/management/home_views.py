@@ -95,25 +95,128 @@ def _send_quote_emails(quote: QuoteRequest) -> None:
         f'Submitted at: {quote.created_at:%Y-%m-%d %H:%M}\n'
     )
 
-    notify_html = f'''
-    <div style="font-family:Inter,Arial,sans-serif;background:#0A0E1A;color:#E5EAF2;padding:32px;">
-      <div style="max-width:560px;margin:0 auto;background:#111927;border:1px solid rgba(255,255,255,0.06);border-radius:14px;padding:28px;">
-        <h2 style="color:#FF6B35;margin:0 0 18px;">New Quote Request</h2>
-        <table style="width:100%;border-collapse:collapse;font-size:14px;">
-          <tr><td style="padding:6px 0;color:#8892A4;">Name</td><td style="padding:6px 0;"><strong>{quote.name}</strong></td></tr>
-          <tr><td style="padding:6px 0;color:#8892A4;">Company</td><td style="padding:6px 0;">{quote.company}</td></tr>
-          <tr><td style="padding:6px 0;color:#8892A4;">Email</td><td style="padding:6px 0;"><a href="mailto:{quote.email}" style="color:#4F8EF7;">{quote.email}</a></td></tr>
-          <tr><td style="padding:6px 0;color:#8892A4;">Phone</td><td style="padding:6px 0;"><a href="tel:{quote.phone}" style="color:#4F8EF7;">{quote.phone}</a></td></tr>
-          <tr><td style="padding:6px 0;color:#8892A4;">Event Type</td><td style="padding:6px 0;">{quote.event_type}</td></tr>
-          <tr><td style="padding:6px 0;color:#8892A4;">Attendees</td><td style="padding:6px 0;">{quote.attendees or '—'}</td></tr>
-          <tr><td style="padding:6px 0;color:#8892A4;">Event Date</td><td style="padding:6px 0;">{quote.event_date or '—'}</td></tr>
-          <tr><td style="padding:6px 0;color:#8892A4;vertical-align:top;">Services</td><td style="padding:6px 0;">{quote.services or '—'}</td></tr>
-        </table>
-        {f'<div style="margin-top:18px;padding:14px;background:#0A0E1A;border-radius:10px;"><strong style="color:#FF6B35;">Notes:</strong><br>{quote.notes}</div>' if quote.notes else ''}
-        <p style="margin-top:22px;color:#6B7A8D;font-size:12px;">Submitted {quote.created_at:%Y-%m-%d %H:%M}</p>
-      </div>
-    </div>
-    '''
+    notes_block = (
+        f'<tr><td colspan="2" style="padding:0 24px 8px;">'
+        f'<div style="background:#0A0E1A;border-left:3px solid #FF6B35;padding:14px 18px;border-radius:6px;">'
+        f'<div style="font-size:11px;font-weight:700;letter-spacing:1.5px;color:#FF6B35;text-transform:uppercase;margin-bottom:6px;">Customer Notes</div>'
+        f'<div style="color:#E5EAF2;font-size:14px;line-height:1.65;">{quote.notes}</div>'
+        f'</div></td></tr>'
+    ) if quote.notes else ''
+
+    notify_html = f'''<!DOCTYPE html>
+<html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1.0"></head>
+<body style="margin:0;padding:0;background:#0A0E1A;font-family:'Helvetica Neue',Arial,sans-serif;-webkit-text-size-adjust:100%;">
+  <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="background:#0A0E1A;padding:40px 16px;">
+    <tr><td align="center">
+      <table role="presentation" width="600" cellpadding="0" cellspacing="0" border="0" style="max-width:600px;width:100%;">
+
+        <!-- Brand bar -->
+        <tr><td style="padding:0 0 24px;">
+          <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0">
+            <tr>
+              <td style="vertical-align:middle;">
+                <table role="presentation" cellpadding="0" cellspacing="0" border="0"><tr>
+                  <td style="background:linear-gradient(135deg,#FFD27A,#FF6B35);color:#2A1500;font-weight:900;font-size:18px;padding:9px 13px;border-radius:10px;line-height:1;letter-spacing:-0.5px;">PE</td>
+                  <td style="padding-left:12px;color:#FFFFFF;font-size:18px;font-weight:800;letter-spacing:-0.5px;">Pro<span style="color:#FF6B35;">Event</span></td>
+                </tr></table>
+              </td>
+              <td align="right" style="vertical-align:middle;color:#6B7A8D;font-size:12px;letter-spacing:1px;text-transform:uppercase;font-weight:600;">Quote Request</td>
+            </tr>
+          </table>
+        </td></tr>
+
+        <!-- Hero card -->
+        <tr><td style="background:linear-gradient(135deg,#111927 0%,#1A2540 100%);border:1px solid rgba(255,107,53,0.18);border-radius:18px 18px 0 0;padding:32px 28px 24px;position:relative;">
+          <div style="display:inline-block;background:rgba(255,107,53,0.14);border:1px solid rgba(255,107,53,0.35);color:#FFB28A;padding:5px 12px;border-radius:999px;font-size:11px;font-weight:700;letter-spacing:1.2px;text-transform:uppercase;margin-bottom:14px;">New Lead</div>
+          <h1 style="color:#FFFFFF;margin:0 0 6px;font-size:24px;font-weight:800;letter-spacing:-0.8px;line-height:1.25;">{quote.name}</h1>
+          <div style="color:#B0B8C8;font-size:14px;">{quote.company} &nbsp;·&nbsp; <span style="color:#FF6B35;">{quote.event_type}</span></div>
+        </td></tr>
+
+        <!-- Body card -->
+        <tr><td style="background:#111927;border:1px solid rgba(255,255,255,0.06);border-top:none;border-radius:0 0 18px 18px;padding:8px 0 24px;">
+          <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0">
+
+            <!-- Contact row -->
+            <tr><td style="padding:18px 24px 6px;">
+              <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0">
+                <tr>
+                  <td style="width:50%;padding:14px 14px 14px 0;">
+                    <div style="font-size:10px;font-weight:700;letter-spacing:1.5px;color:#6B7A8D;text-transform:uppercase;margin-bottom:6px;">Email</div>
+                    <a href="mailto:{quote.email}" style="color:#4F8EF7;font-size:14px;text-decoration:none;font-weight:600;word-break:break-all;">{quote.email}</a>
+                  </td>
+                  <td style="width:50%;padding:14px 0 14px 14px;border-left:1px solid rgba(255,255,255,0.05);">
+                    <div style="font-size:10px;font-weight:700;letter-spacing:1.5px;color:#6B7A8D;text-transform:uppercase;margin-bottom:6px;">Phone</div>
+                    <a href="tel:{quote.phone}" style="color:#4F8EF7;font-size:14px;text-decoration:none;font-weight:600;">{quote.phone}</a>
+                  </td>
+                </tr>
+              </table>
+            </td></tr>
+
+            <!-- Divider -->
+            <tr><td style="padding:6px 24px;"><div style="height:1px;background:rgba(255,255,255,0.06);"></div></td></tr>
+
+            <!-- Event grid -->
+            <tr><td style="padding:8px 24px;">
+              <div style="font-size:11px;font-weight:700;letter-spacing:1.5px;color:#FF6B35;text-transform:uppercase;margin-bottom:14px;">Event Details</div>
+              <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0">
+                <tr>
+                  <td style="width:33.33%;padding:6px 8px 6px 0;vertical-align:top;">
+                    <div style="background:#0A0E1A;border:1px solid rgba(255,255,255,0.04);border-radius:10px;padding:14px;">
+                      <div style="font-size:10px;color:#6B7A8D;text-transform:uppercase;letter-spacing:1px;font-weight:600;margin-bottom:6px;">Attendees</div>
+                      <div style="color:#FFFFFF;font-size:15px;font-weight:700;">{quote.attendees or '—'}</div>
+                    </div>
+                  </td>
+                  <td style="width:33.33%;padding:6px 4px;vertical-align:top;">
+                    <div style="background:#0A0E1A;border:1px solid rgba(255,255,255,0.04);border-radius:10px;padding:14px;">
+                      <div style="font-size:10px;color:#6B7A8D;text-transform:uppercase;letter-spacing:1px;font-weight:600;margin-bottom:6px;">Event Date</div>
+                      <div style="color:#FFFFFF;font-size:15px;font-weight:700;">{quote.event_date or 'TBD'}</div>
+                    </div>
+                  </td>
+                  <td style="width:33.33%;padding:6px 0 6px 8px;vertical-align:top;">
+                    <div style="background:#0A0E1A;border:1px solid rgba(255,255,255,0.04);border-radius:10px;padding:14px;">
+                      <div style="font-size:10px;color:#6B7A8D;text-transform:uppercase;letter-spacing:1px;font-weight:600;margin-bottom:6px;">Submitted</div>
+                      <div style="color:#FFFFFF;font-size:15px;font-weight:700;">{quote.created_at:%b %d, %H:%M}</div>
+                    </div>
+                  </td>
+                </tr>
+              </table>
+            </td></tr>
+
+            <!-- Services row -->
+            <tr><td style="padding:8px 24px;">
+              <div style="font-size:11px;font-weight:700;letter-spacing:1.5px;color:#FF6B35;text-transform:uppercase;margin-bottom:10px;">Services Required</div>
+              <div style="color:#E5EAF2;font-size:14px;line-height:1.7;">
+                {' '.join(f'<span style="display:inline-block;background:rgba(255,107,53,0.10);border:1px solid rgba(255,107,53,0.25);color:#FFB28A;padding:4px 11px;border-radius:6px;font-size:12px;font-weight:600;margin:2px 4px 2px 0;">{s.strip()}</span>' for s in (quote.services or '—').split(',') if s.strip())}
+              </div>
+            </td></tr>
+
+            {notes_block}
+
+            <!-- CTA -->
+            <tr><td style="padding:20px 24px 8px;">
+              <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0"><tr>
+                <td align="center">
+                  <a href="mailto:{quote.email}?subject=Re%3A%20Your%20Pro%20Event%20Quote%20Request"
+                     style="display:inline-block;background:linear-gradient(135deg,#FF8347,#FF6B35);color:#FFFFFF;font-weight:700;font-size:14px;padding:13px 28px;border-radius:10px;text-decoration:none;letter-spacing:0.3px;box-shadow:0 8px 24px rgba(255,107,53,0.30);">
+                    📧 &nbsp; Reply to {quote.name.split()[0] if quote.name else 'Customer'}
+                  </a>
+                </td>
+              </tr></table>
+            </td></tr>
+
+          </table>
+        </td></tr>
+
+        <!-- Footer -->
+        <tr><td align="center" style="padding:24px 0 0;color:#6B7A8D;font-size:11px;line-height:1.6;letter-spacing:0.3px;">
+          Pro Event — Egypt's #1 Technical Event Partner<br>
+          This lead came from <a href="https://proevent.onrender.com" style="color:#8892A4;text-decoration:none;">proevent.onrender.com</a>
+        </td></tr>
+
+      </table>
+    </td></tr>
+  </table>
+</body></html>'''
 
     ok, info = _resend_send(
         from_addr=f'Pro Event <{from_addr}>',
@@ -151,33 +254,104 @@ def _send_quote_emails(quote: QuoteRequest) -> None:
         f'Egypt\'s #1 Technical Event Partner\n'
     )
 
-    ack_html = f'''
-    <div style="font-family:Inter,Arial,sans-serif;background:#0A0E1A;color:#E5EAF2;padding:32px;">
-      <div style="max-width:560px;margin:0 auto;background:#111927;border:1px solid rgba(255,255,255,0.06);border-radius:14px;padding:32px;">
-        <div style="display:inline-block;background:linear-gradient(135deg,#FFD27A,#FF6B35);color:#2A1500;font-weight:900;font-size:18px;padding:8px 14px;border-radius:10px;margin-bottom:18px;">Pro Event</div>
-        <h2 style="color:#FFFFFF;margin:0 0 14px;font-size:22px;">Thank you, {quote.name}.</h2>
-        <p style="color:#B0B8C8;line-height:1.7;font-size:15px;">
-          We have received your quote request and our team will get back to you <strong style="color:#FFFFFF;">within 24 hours</strong>.
-        </p>
-        <div style="margin:22px 0;padding:18px;background:#0A0E1A;border:1px solid rgba(255,255,255,0.05);border-radius:10px;">
-          <p style="margin:0 0 8px;color:#FF6B35;font-weight:700;font-size:13px;letter-spacing:1px;">YOUR REQUEST SUMMARY</p>
-          <table style="width:100%;font-size:14px;color:#E5EAF2;">
-            <tr><td style="padding:4px 0;color:#8892A4;">Event Type</td><td style="padding:4px 0;text-align:right;">{quote.event_type}</td></tr>
-            <tr><td style="padding:4px 0;color:#8892A4;">Attendees</td><td style="padding:4px 0;text-align:right;">{quote.attendees or 'TBD'}</td></tr>
-            <tr><td style="padding:4px 0;color:#8892A4;">Event Date</td><td style="padding:4px 0;text-align:right;">{quote.event_date or 'TBD'}</td></tr>
+    first_name = quote.name.split()[0] if quote.name else 'there'
+
+    ack_html = f'''<!DOCTYPE html>
+<html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1.0"></head>
+<body style="margin:0;padding:0;background:#0A0E1A;font-family:'Helvetica Neue',Arial,sans-serif;-webkit-text-size-adjust:100%;">
+  <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="background:#0A0E1A;padding:40px 16px;">
+    <tr><td align="center">
+      <table role="presentation" width="600" cellpadding="0" cellspacing="0" border="0" style="max-width:600px;width:100%;">
+
+        <!-- Brand bar -->
+        <tr><td align="center" style="padding:0 0 28px;">
+          <table role="presentation" cellpadding="0" cellspacing="0" border="0"><tr>
+            <td style="background:linear-gradient(135deg,#FFD27A,#FF6B35);color:#2A1500;font-weight:900;font-size:20px;padding:11px 15px;border-radius:11px;line-height:1;letter-spacing:-0.5px;">PE</td>
+            <td style="padding-left:12px;color:#FFFFFF;font-size:20px;font-weight:800;letter-spacing:-0.5px;">Pro<span style="color:#FF6B35;">Event</span></td>
+          </tr></table>
+        </td></tr>
+
+        <!-- Main card -->
+        <tr><td style="background:#111927;border:1px solid rgba(255,255,255,0.06);border-radius:18px;overflow:hidden;">
+
+          <!-- Hero header with gradient -->
+          <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0">
+            <tr><td style="background:linear-gradient(135deg,rgba(255,107,53,0.15) 0%,rgba(79,142,247,0.10) 100%);padding:40px 32px 32px;text-align:center;border-bottom:1px solid rgba(255,255,255,0.05);">
+              <div style="font-size:42px;line-height:1;margin-bottom:16px;">✨</div>
+              <h1 style="color:#FFFFFF;margin:0 0 10px;font-size:28px;font-weight:800;letter-spacing:-1px;line-height:1.2;">Thank you, {first_name}.</h1>
+              <p style="color:#B0B8C8;margin:0;font-size:15px;line-height:1.6;">Your request is in our hands.</p>
+            </td></tr>
           </table>
-        </div>
-        <p style="color:#B0B8C8;line-height:1.7;font-size:15px;">
-          If your event is urgent, feel free to reach us directly on WhatsApp.
-        </p>
-        <hr style="border:none;border-top:1px solid rgba(255,255,255,0.06);margin:28px 0 18px;">
-        <p style="color:#6B7A8D;font-size:12px;margin:0;">
-          Pro Event — Egypt's #1 Technical Event Partner<br>
-          Cairo, Egypt
-        </p>
-      </div>
-    </div>
-    '''
+
+          <!-- Body -->
+          <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0">
+            <tr><td style="padding:32px;">
+
+              <p style="color:#E5EAF2;font-size:16px;line-height:1.75;margin:0 0 18px;">
+                We have received your quote request for Pro Event's technical services. Our senior production team is reviewing the details and will reach out to you <strong style="color:#FFFFFF;">within 24 hours</strong> with a tailored proposal.
+              </p>
+
+              <!-- Request summary -->
+              <div style="margin:28px 0 24px;background:#0A0E1A;border:1px solid rgba(255,255,255,0.05);border-radius:12px;padding:22px 24px;">
+                <div style="font-size:11px;font-weight:700;letter-spacing:1.5px;color:#FF6B35;text-transform:uppercase;margin-bottom:14px;">Your Request</div>
+                <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0">
+                  <tr>
+                    <td style="padding:8px 0;color:#8892A4;font-size:13px;width:40%;">Event Type</td>
+                    <td align="right" style="padding:8px 0;color:#FFFFFF;font-size:13px;font-weight:600;">{quote.event_type}</td>
+                  </tr>
+                  <tr>
+                    <td style="padding:8px 0;color:#8892A4;font-size:13px;border-top:1px solid rgba(255,255,255,0.04);">Expected Attendees</td>
+                    <td align="right" style="padding:8px 0;color:#FFFFFF;font-size:13px;font-weight:600;border-top:1px solid rgba(255,255,255,0.04);">{quote.attendees or 'To be discussed'}</td>
+                  </tr>
+                  <tr>
+                    <td style="padding:8px 0;color:#8892A4;font-size:13px;border-top:1px solid rgba(255,255,255,0.04);">Event Date</td>
+                    <td align="right" style="padding:8px 0;color:#FFFFFF;font-size:13px;font-weight:600;border-top:1px solid rgba(255,255,255,0.04);">{quote.event_date or 'To be discussed'}</td>
+                  </tr>
+                  {f'<tr><td style="padding:8px 0;color:#8892A4;font-size:13px;border-top:1px solid rgba(255,255,255,0.04);vertical-align:top;">Services</td><td align="right" style="padding:8px 0;color:#FFFFFF;font-size:13px;font-weight:600;border-top:1px solid rgba(255,255,255,0.04);line-height:1.5;">{quote.services}</td></tr>' if quote.services else ''}
+                </table>
+              </div>
+
+              <p style="color:#B0B8C8;font-size:14px;line-height:1.7;margin:0 0 24px;">
+                If your event is time-sensitive, feel free to reach us directly on WhatsApp — our team monitors it 24/7.
+              </p>
+
+              <!-- CTAs -->
+              <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0">
+                <tr>
+                  <td align="center" style="padding:6px;">
+                    <a href="https://wa.me/201119333199" style="display:inline-block;background:#25D366;color:#FFFFFF;font-weight:700;font-size:14px;padding:13px 26px;border-radius:10px;text-decoration:none;letter-spacing:0.3px;">💬 &nbsp; WhatsApp Us</a>
+                  </td>
+                  <td align="center" style="padding:6px;">
+                    <a href="https://proevent.onrender.com/en/how-we-work/" style="display:inline-block;background:transparent;color:#FFFFFF;border:1px solid rgba(255,255,255,0.20);font-weight:600;font-size:14px;padding:12px 26px;border-radius:10px;text-decoration:none;letter-spacing:0.3px;">See How We Work →</a>
+                  </td>
+                </tr>
+              </table>
+
+            </td></tr>
+          </table>
+
+          <!-- Signature -->
+          <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0">
+            <tr><td style="padding:0 32px 32px;">
+              <div style="border-top:1px solid rgba(255,255,255,0.05);padding-top:22px;">
+                <div style="color:#FFFFFF;font-size:14px;font-weight:700;margin-bottom:2px;">The Pro Event Team</div>
+                <div style="color:#6B7A8D;font-size:12px;">Egypt's #1 Technical Event Partner</div>
+              </div>
+            </td></tr>
+          </table>
+
+        </td></tr>
+
+        <!-- Footer -->
+        <tr><td align="center" style="padding:24px 0 0;color:#6B7A8D;font-size:11px;line-height:1.7;letter-spacing:0.3px;">
+          Pro Event &nbsp;·&nbsp; Cairo, Egypt &nbsp;·&nbsp; +20 (111) 933 3199<br>
+          <a href="https://proevent.onrender.com" style="color:#8892A4;text-decoration:none;">proevent.onrender.com</a>
+        </td></tr>
+
+      </table>
+    </td></tr>
+  </table>
+</body></html>'''
 
     ok, info = _resend_send(
         from_addr=f'Pro Event <{from_addr}>',

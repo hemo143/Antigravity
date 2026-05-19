@@ -199,9 +199,9 @@
                 <h3 class="service-title">{% if LANGUAGE_CODE == 'ar' %}فعاليات الشركات والمؤتمرات{% else %}Corporate Events & Conferences{% endif %}</h3>
                 <p class="service-desc">
                     {% if LANGUAGE_CODE == 'ar' %}
-                        تخطيط وتنفيذ تقني متكامل للاجتماعات السنوية، إطلاق المنتجات، والمؤتمرات الطبية والتجارية. نضمن وصول رسالتك لجمهورك بأفضل صورة وصوت.
+                        تخطيط وتنفيذ تقني متكامل للاجتماعات السنوية، المؤتمرات الطبية والتجارية، وفعاليات الشركات الكبرى. نضمن وصول رسالتك لجمهورك بأفضل صورة وصوت.
                     {% else %}
-                        Full technical planning and execution for annual meetings, product launches, and medical & business conferences. We ensure your message reaches your audience in the best quality.
+                        Full technical planning and execution for annual meetings, medical & business conferences, and major corporate events. We ensure your message reaches your audience in the best quality.
                     {% endif %}
                 </p>
                 <a href="#contact" class="service-link">{% if LANGUAGE_CODE == 'ar' %}اطلب الخدمة{% else %}Request Service{% endif %} <i class="bi bi-arrow-{% if LANGUAGE_CODE == 'ar' %}left{% else %}right{% endif %} ms-1"></i></a>
@@ -665,6 +665,62 @@
 
 
 <!-- ══════════════════════════════════════════════
+     PRE-CONTACT CTA BANNER
+══════════════════════════════════════════════ -->
+<section class="cta-banner" id="cta">
+    <div class="cta-banner-bg" aria-hidden="true"></div>
+    <div class="container-xl">
+        <div class="cta-banner-inner" data-aos="fade-up">
+            <div class="cta-banner-eyebrow">
+                <i class="bi bi-stars"></i>
+                {% if LANGUAGE_CODE == 'ar' %}جاهز للبدء بحدثك القادم؟{% else %}Ready for your next event?{% endif %}
+            </div>
+            <h2 class="cta-banner-title">
+                {% if LANGUAGE_CODE == 'ar' %}
+                    دع <span class="gradient-text">Pro Event</span> يصنع<br>
+                    الفارق التقني في حدثك
+                {% else %}
+                    Let <span class="gradient-text">Pro Event</span> deliver<br>
+                    the technical edge your event deserves
+                {% endif %}
+            </h2>
+            <p class="cta-banner-sub">
+                {% if LANGUAGE_CODE == 'ar' %}
+                    عرض سعر مجاني خلال 24 ساعة · استشارة فنية بدون التزام · فريق هندسي خبير في موقعك
+                {% else %}
+                    Free quote within 24 hours · No-obligation technical consultation · Expert engineering crew on-site
+                {% endif %}
+            </p>
+            <div class="cta-banner-actions">
+                <a href="#contact" class="btn-primary-av">
+                    <i class="bi bi-send-fill me-2"></i>
+                    {% if LANGUAGE_CODE == 'ar' %}احصل على عرض سعر مجاني{% else %}Get a Free Quote{% endif %}
+                </a>
+                <a href="https://wa.me/201119333199" target="_blank" rel="noopener" class="btn-ghost-av">
+                    <i class="bi bi-whatsapp me-2"></i>
+                    {% if LANGUAGE_CODE == 'ar' %}تواصل واتساب{% else %}WhatsApp Us{% endif %}
+                </a>
+            </div>
+            <div class="cta-banner-trust">
+                <div class="cta-trust-item">
+                    <i class="bi bi-shield-check"></i>
+                    <span>{% if LANGUAGE_CODE == 'ar' %}+12 سنة خبرة{% else %}12+ Years Experience{% endif %}</span>
+                </div>
+                <div class="cta-trust-item">
+                    <i class="bi bi-people-fill"></i>
+                    <span>{% if LANGUAGE_CODE == 'ar' %}+50 عميل مؤسسي{% else %}50+ Corporate Clients{% endif %}</span>
+                </div>
+                <div class="cta-trust-item">
+                    <i class="bi bi-clock-history"></i>
+                    <span>{% if LANGUAGE_CODE == 'ar' %}رد خلال 24 ساعة{% else %}24h Response{% endif %}</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<!-- ══════════════════════════════════════════════
      CONTACT / QUOTE FORM
 ══════════════════════════════════════════════ -->
 <section class="section-pad contact-section" id="contact">
@@ -745,7 +801,9 @@
                                 <option value="" disabled selected>{% if LANGUAGE_CODE == 'ar' %}اختر النوع{% else %}Select event type{% endif %}</option>
                                 <option value="Conference">{% if LANGUAGE_CODE == 'ar' %}مؤتمر{% else %}Conference{% endif %}</option>
                                 <option value="Corporate Event">{% if LANGUAGE_CODE == 'ar' %}فعالية شركة{% else %}Corporate Event{% endif %}</option>
-                                <option value="Product Launch">{% if LANGUAGE_CODE == 'ar' %}إطلاق منتج{% else %}Product Launch{% endif %}</option>
+                                <option value="Medical Conference">{% if LANGUAGE_CODE == 'ar' %}مؤتمر طبي{% else %}Medical Conference{% endif %}</option>
+                                <option value="Exhibition">{% if LANGUAGE_CODE == 'ar' %}معرض{% else %}Exhibition{% endif %}</option>
+                                <option value="Live Streaming">{% if LANGUAGE_CODE == 'ar' %}بث مباشر{% else %}Live Streaming{% endif %}</option>
                                 <option value="Other">{% if LANGUAGE_CODE == 'ar' %}أخرى{% else %}Other{% endif %}</option>
                             </select>
                         </div>
