@@ -33,7 +33,7 @@
     align-items: center;
     background: rgba(255,107,53,0.12);
     border: 1px solid rgba(255,107,53,0.3);
-    color: #FF6B35;
+    color: var(--brand);
     padding: 8px 18px;
     border-radius: 30px;
     font-size: 0.8rem;
@@ -45,7 +45,7 @@
 .hww-title {
     font-size: clamp(2.2rem, 5vw, 4rem);
     font-weight: 900;
-    color: #FFFFFF;
+    color: var(--text-primary);
     line-height: 1.1;
     letter-spacing: -1.5px;
     margin-bottom: 24px;
@@ -60,7 +60,7 @@
 
 .hww-lead {
     font-size: clamp(1rem, 1.5vw, 1.15rem);
-    color: #B0BAC9;
+    color: var(--text-secondary);
     line-height: 1.8;
     max-width: 720px;
     margin: 0 auto 48px;
@@ -81,14 +81,14 @@
 .hww-stat-num {
     font-size: clamp(1.8rem, 3vw, 2.6rem);
     font-weight: 900;
-    color: #FF6B35;
+    color: var(--brand);
     line-height: 1;
     margin-bottom: 6px;
 }
 
 .hww-stat-lbl {
     font-size: 0.78rem;
-    color: #8892A4;
+    color: var(--text-muted);
     text-transform: uppercase;
     letter-spacing: 1px;
     font-weight: 600;
@@ -98,7 +98,7 @@
     display: inline-flex;
     align-items: center;
     gap: 10px;
-    color: #FFFFFF;
+    color: var(--text-primary);
     text-decoration: none;
     font-weight: 600;
     padding: 14px 28px;
@@ -109,8 +109,8 @@
 
 .hww-scroll-cta:hover {
     background: rgba(255,107,53,0.15);
-    border-color: #FF6B35;
-    color: #FFFFFF;
+    border-color: var(--brand);
+    color: var(--text-primary);
     transform: translateY(2px);
 }
 
@@ -126,7 +126,7 @@
 /* ─── PHASE OVERVIEW ─────────────────────────── */
 .hww-overview {
     padding: 80px 0;
-    background: #0A0E1A;
+    background: var(--bg-base);
     border-bottom: 1px solid rgba(255,255,255,0.04);
 }
 
@@ -137,7 +137,7 @@
 }
 
 .hww-phase-card {
-    background: #111927;
+    background: var(--bg-card);
     border: 1px solid rgba(255,255,255,0.06);
     border-top: 3px solid var(--phase-color);
     border-radius: 16px;
@@ -162,13 +162,13 @@
 .hww-phase-card h3 {
     font-size: 1.1rem;
     font-weight: 700;
-    color: #FFFFFF;
+    color: var(--text-primary);
     margin-bottom: 10px;
 }
 
 .hww-phase-card p {
     font-size: 0.9rem;
-    color: #8892A4;
+    color: var(--text-muted);
     line-height: 1.6;
     margin-bottom: 16px;
 }
@@ -242,12 +242,12 @@
 .hww-phase-banner h2 {
     font-size: clamp(1.6rem, 3vw, 2.2rem);
     font-weight: 800;
-    color: #FFFFFF;
+    color: var(--text-primary);
     margin-bottom: 8px;
 }
 
 .hww-phase-banner p {
-    color: #B0BAC9;
+    color: var(--text-secondary);
     font-size: 0.95rem;
     max-width: 680px;
     margin: 0 auto;
@@ -268,7 +268,7 @@
     width: 52px;
     height: 52px;
     background: var(--phase-color);
-    color: #FFFFFF;
+    color: var(--text-primary);
     border-radius: 50%;
     display: flex;
     align-items: center;
@@ -281,7 +281,7 @@
 
 .hww-stage-card {
     position: relative;
-    background: #111927;
+    background: var(--bg-card);
     border: 1px solid rgba(255,255,255,0.06);
     border-radius: 18px;
     padding: 28px;
@@ -346,7 +346,7 @@
 .hww-stage-head h3 {
     font-size: 1.15rem;
     font-weight: 700;
-    color: #FFFFFF;
+    color: var(--text-primary);
     margin-bottom: 6px;
 }
 
@@ -362,7 +362,7 @@
 }
 
 .hww-stage-card > p {
-    color: #B0BAC9;
+    color: var(--text-secondary);
     font-size: 0.92rem;
     line-height: 1.75;
     margin-bottom: 18px;
@@ -402,7 +402,7 @@
 /* ─── CTA ────────────────────────────────────── */
 .hww-cta {
     padding: 100px 0;
-    background: #0A0E1A;
+    background: var(--bg-base);
 }
 
 .hww-cta-card {
@@ -428,13 +428,13 @@
 .hww-cta-card h2 {
     font-size: clamp(1.6rem, 3vw, 2.4rem);
     font-weight: 800;
-    color: #FFFFFF;
+    color: var(--text-primary);
     margin-bottom: 16px;
     position: relative;
 }
 
 .hww-cta-card > p {
-    color: #B0BAC9;
+    color: var(--text-secondary);
     font-size: 1rem;
     line-height: 1.7;
     margin-bottom: 32px;
@@ -456,7 +456,7 @@
     align-items: center;
     padding: 14px 32px;
     background: transparent;
-    color: #FFFFFF;
+    color: var(--text-primary);
     border: 1px solid rgba(255,255,255,0.2);
     border-radius: 12px;
     font-weight: 600;
@@ -467,7 +467,7 @@
 .btn-outline:hover {
     background: rgba(255,255,255,0.06);
     border-color: rgba(255,255,255,0.4);
-    color: #FFFFFF;
+    color: var(--text-primary);
 }
 
 /* ─── RESPONSIVE ─────────────────────────────── */
@@ -563,7 +563,7 @@
 
 /* ─── ACTIVE NAV LINK ───────────────────────── */
 .nav-links a.active {
-    color: #FF6B35;
+    color: var(--brand);
 }
 
 
@@ -746,7 +746,7 @@
 .hww-stage-with-visual .hww-stage-visual.hww-stage-visual-img,
 .hww-stage-with-visual.hww-stage-left .hww-stage-visual.hww-stage-visual-img,
 .hww-stage-with-visual.hww-stage-right .hww-stage-visual.hww-stage-visual-img {
-    background: #0A0E1A;
+    background: var(--bg-base);
     padding: 0;
     display: block;
     /* Free the container from the card's height — image dictates aspect */
