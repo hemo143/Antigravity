@@ -1,13 +1,63 @@
 /* ══════════════════════════════════════════════
    Pro Event — Landing Page CSS
-   Color Palette:
-     Primary BG : #0A0E1A
-     Section Alt: #0D1423
-     Card BG    : #111927
-     Accent     : #FF6B35  (orange)
-     Blue       : #4F8EF7
-     Text       : #FFFFFF / #B0B8C8
+   Design tokens live in :root below.  Inherited rules keep the
+   existing hex values working; new code should prefer the var().
 ══════════════════════════════════════════════ */
+
+:root {
+    /* ── Brand ── */
+    --brand:           #FF6B35;
+    --brand-light:     #FFB347;
+    --brand-dark:      #E85E2A;
+    --brand-glow:      rgba(255, 107, 53, 0.35);
+
+    /* ── Accent ── */
+    --accent-blue:     #4F8EF7;
+    --accent-green:    #25D366;
+    --accent-purple:   #A855F7;
+
+    /* ── Surface ── */
+    --bg-base:         #0A0E1A;
+    --bg-section-alt:  #0D1423;
+    --bg-elevated:     #0F1626;
+    --bg-card:         #111927;
+
+    /* ── Text ── */
+    --text-primary:    #FFFFFF;
+    --text-secondary:  #B0B8C8;
+    --text-muted:      #8892A4;
+    --text-faint:      #6B7A8D;
+
+    /* ── Border ── */
+    --border-subtle:   rgba(255, 255, 255, 0.06);
+    --border-medium:   rgba(255, 255, 255, 0.10);
+    --border-strong:   rgba(255, 255, 255, 0.18);
+
+    /* ── Spacing scale (4px base) ── */
+    --space-1:  4px;
+    --space-2:  8px;
+    --space-3:  12px;
+    --space-4:  16px;
+    --space-5:  24px;
+    --space-6:  32px;
+    --space-7:  48px;
+    --space-8:  64px;
+    --space-9:  96px;
+
+    /* ── Radius scale ── */
+    --r-sm:  8px;
+    --r-md:  12px;
+    --r-lg:  16px;
+    --r-xl:  20px;
+    --r-2xl: 28px;
+    --r-pill: 999px;
+
+    /* ── Motion ── */
+    --ease-out:    cubic-bezier(0.25, 1, 0.5, 1);
+    --duration-1:  0.2s;
+    --duration-2:  0.35s;
+    --duration-3:  0.5s;
+}
 
 /* ── Reset & Base ── */
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -16,10 +66,58 @@ html { scroll-behavior: smooth; font-size: 16px; }
 
 body {
     font-family: 'Inter', sans-serif;
-    background: #0A0E1A;
-    color: #B0B8C8;
+    background: var(--bg-base);
+    color: var(--text-secondary);
     line-height: 1.7;
     overflow-x: hidden;
+}
+
+/* ══════════════════════════════════════════════
+   ACCESSIBILITY — focus + skip link
+══════════════════════════════════════════════ */
+*:focus { outline: none; }
+
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible,
+[tabindex]:focus-visible {
+    outline: 2px solid var(--brand);
+    outline-offset: 3px;
+    border-radius: 4px;
+}
+
+.skip-link {
+    position: absolute;
+    top: -40px;
+    left: 12px;
+    z-index: 9999;
+    background: var(--brand);
+    color: var(--text-primary);
+    padding: 10px 18px;
+    border-radius: var(--r-sm);
+    font-weight: 700;
+    font-size: 0.9rem;
+    text-decoration: none;
+    box-shadow: 0 8px 24px var(--brand-glow);
+    transition: top var(--duration-2) var(--ease-out);
+}
+
+.skip-link:focus,
+.skip-link:focus-visible {
+    top: 12px;
+    color: var(--text-primary);
+}
+
+/* Honor user motion preferences */
+@media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+    }
 }
 
 img { max-width: 100%; display: block; }
