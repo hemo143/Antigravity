@@ -50,6 +50,8 @@ def _resend_send(*, from_addr: str, to: list, subject: str, html: str, text: str
         headers={
             'Authorization': f'Bearer {api_key}',
             'Content-Type': 'application/json',
+            'Accept': 'application/json',
+            'User-Agent': 'ProEvent-Site/1.0 (+https://proevent.onrender.com)',
         },
         method='POST',
     )
@@ -59,12 +61,12 @@ def _resend_send(*, from_addr: str, to: list, subject: str, html: str, text: str
             return True, body.get('id', 'sent')
     except urllib.error.HTTPError as e:
         try:
-            err_body = json.loads(e.read().decode('utf-8'))
+            err_body = e.read().decode('utf-8')
         except Exception:
-            err_body = str(e)
-        return False, f'HTTP {e.code}: {err_body}'
+            err_body = ''
+        return False, f'HTTP {e.code}: {err_body[:300]}'
     except Exception as e:
-        return False, str(e)
+        return False, f'{type(e).__name__}: {e}'
 
 
 def _send_quote_emails(quote: QuoteRequest) -> None:
