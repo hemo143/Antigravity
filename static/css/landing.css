@@ -52,11 +52,34 @@
     --r-2xl: 28px;
     --r-pill: 999px;
 
+    /* ── Type scale ── */
+    --text-xs:    0.72rem;   /* 11.5px — micro labels */
+    --text-sm:    0.85rem;   /* 13.6px — captions, hints */
+    --text-base:  0.95rem;   /* 15.2px — body */
+    --text-md:    1.05rem;   /* 16.8px — card titles */
+    --text-lg:    1.35rem;   /* 21.6px — section accents */
+    --text-xl:    1.75rem;   /* 28px   — small headings */
+    --text-2xl:   2.4rem;    /* 38.4px — section titles */
+
+    /* ── Font weight ── */
+    --weight-regular: 400;
+    --weight-medium:  500;
+    --weight-semi:    600;
+    --weight-bold:    700;
+    --weight-black:   900;
+
     /* ── Motion ── */
     --ease-out:    cubic-bezier(0.25, 1, 0.5, 1);
+    --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
     --duration-1:  0.2s;
     --duration-2:  0.35s;
     --duration-3:  0.5s;
+
+    /* ── Shadow tokens ── */
+    --shadow-sm:   0 4px 12px rgba(0, 0, 0, 0.20);
+    --shadow-md:   0 8px 24px rgba(0, 0, 0, 0.30);
+    --shadow-lg:   0 16px 40px rgba(0, 0, 0, 0.40);
+    --shadow-glow: 0 12px 32px var(--brand-glow);
 }
 
 /* ── Reset & Base ── */
@@ -179,7 +202,7 @@ a { text-decoration: none; color: inherit; }
     right: 0;
     z-index: 1000;
     padding: 0 24px;
-    transition: top 0.35s ease;
+    transition: top var(--duration-2) ease;
 }
 
 .av-navbar .container-xl {
@@ -205,7 +228,7 @@ a { text-decoration: none; color: inherit; }
         inset 0 1px 0 rgba(255, 255, 255, 0.08),
         0 14px 40px rgba(0, 0, 0, 0.40),
         0 1px 2px rgba(0, 0, 0, 0.30);
-    transition: background 0.35s ease, border-color 0.35s ease;
+    transition: background var(--duration-2) ease, border-color var(--duration-2) ease;
 }
 
 .av-navbar.scrolled .nav-inner {
@@ -255,7 +278,7 @@ a { text-decoration: none; color: inherit; }
     font-size: 0.9rem;
     font-weight: 500;
     color: var(--text-secondary);
-    transition: color 0.2s;
+    transition: color var(--duration-1);
     position: relative;
     padding-bottom: 4px;
 }
@@ -266,7 +289,7 @@ a { text-decoration: none; color: inherit; }
     bottom: 0; left: 0;
     width: 0; height: 2px;
     background: var(--brand);
-    transition: width 0.3s;
+    transition: width var(--duration-2);
 }
 
 .nav-links a:hover { color: var(--text-primary); }
@@ -281,7 +304,7 @@ a { text-decoration: none; color: inherit; }
     padding: 10px 22px;
     border-radius: 8px;
     border: 2px solid #FF6B35;
-    transition: background 0.25s, transform 0.2s, box-shadow 0.25s;
+    transition: background var(--duration-1), transform var(--duration-1), box-shadow var(--duration-1);
     white-space: nowrap;
 }
 
@@ -309,7 +332,7 @@ a { text-decoration: none; color: inherit; }
     width: 24px; height: 2px;
     background: var(--text-primary);
     border-radius: 2px;
-    transition: all 0.3s;
+    transition: all var(--duration-2);
 }
 
 /* Mobile Menu — floats below the pill, matches its style */
@@ -343,7 +366,7 @@ a { text-decoration: none; color: inherit; }
     font-weight: 500;
     font-size: 0.95rem;
     border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-    transition: color 0.2s, padding-left 0.2s;
+    transition: color var(--duration-1), padding-left var(--duration-1);
 }
 
 .mobile-menu ul li:last-child .mobile-link { border-bottom: none; }
@@ -575,9 +598,9 @@ a { text-decoration: none; color: inherit; }
         0 1px 2px rgba(0,0,0,0.2),
         0 12px 32px rgba(255,107,53,0.28),
         0 2px 6px rgba(0,0,0,0.3);
-    transition: transform 0.35s cubic-bezier(0.25,1,0.5,1),
-                box-shadow 0.35s ease,
-                filter 0.35s ease;
+    transition: transform var(--duration-2) cubic-bezier(0.25,1,0.5,1),
+                box-shadow var(--duration-2) ease,
+                filter var(--duration-2) ease;
     cursor: pointer;
     overflow: hidden;
 }
@@ -588,7 +611,7 @@ a { text-decoration: none; color: inherit; }
     inset: 0;
     background: linear-gradient(120deg, transparent 30%, rgba(255,255,255,0.22) 50%, transparent 70%);
     transform: translateX(-100%);
-    transition: transform 0.6s ease;
+    transition: transform var(--duration-3) ease;
     pointer-events: none;
 }
 
@@ -623,10 +646,10 @@ a { text-decoration: none; color: inherit; }
     box-shadow:
         inset 0 1px 0 rgba(255,255,255,0.08),
         0 8px 24px rgba(0,0,0,0.25);
-    transition: transform 0.35s cubic-bezier(0.25,1,0.5,1),
-                background 0.35s ease,
-                border-color 0.35s ease,
-                box-shadow 0.35s ease;
+    transition: transform var(--duration-2) cubic-bezier(0.25,1,0.5,1),
+                background var(--duration-2) ease,
+                border-color var(--duration-2) ease,
+                box-shadow var(--duration-2) ease;
 }
 
 .btn-ghost-av:hover {
@@ -651,7 +674,7 @@ a { text-decoration: none; color: inherit; }
     border-radius: 8px;
     border: 1px solid rgba(255,255,255,0.2);
     backdrop-filter: blur(8px);
-    transition: all 0.25s;
+    transition: all var(--duration-1);
     margin-top: 12px;
 }
 
@@ -688,9 +711,9 @@ a { text-decoration: none; color: inherit; }
     box-shadow:
         inset 0 1px 0 rgba(255,255,255,0.05),
         0 14px 36px rgba(0, 0, 0, 0.35);
-    transition: transform 0.4s cubic-bezier(0.25,1,0.5,1),
-                border-color 0.4s ease,
-                box-shadow 0.4s ease;
+    transition: transform var(--duration-2) cubic-bezier(0.25,1,0.5,1),
+                border-color var(--duration-2) ease,
+                box-shadow var(--duration-2) ease;
     overflow: hidden;
 }
 
@@ -700,7 +723,7 @@ a { text-decoration: none; color: inherit; }
     inset: 0;
     background: radial-gradient(circle at 50% 0%, rgba(255,107,53,0.10), transparent 60%);
     opacity: 0;
-    transition: opacity 0.4s ease;
+    transition: opacity var(--duration-2) ease;
     pointer-events: none;
 }
 
@@ -728,7 +751,7 @@ a { text-decoration: none; color: inherit; }
     left: 6%;
     right: 6%;
     height: 4px;
-    transition: all 0.4s ease;
+    transition: all var(--duration-2) ease;
 }
 
 .stat-icon {
@@ -742,7 +765,7 @@ a { text-decoration: none; color: inherit; }
     border: none;
     color: rgba(255, 255, 255, 0.85);
     font-size: 1.75rem;
-    transition: color 0.35s ease, transform 0.35s ease;
+    transition: color var(--duration-2) ease, transform var(--duration-2) ease;
 }
 
 .stat-emoji {
@@ -819,7 +842,7 @@ a { text-decoration: none; color: inherit; }
     color: rgba(255,255,255,0.5);
     font-size: 1.1rem;
     animation: bounce 2s infinite;
-    transition: color 0.2s, border-color 0.2s;
+    transition: color var(--duration-1), border-color var(--duration-1);
 }
 
 .scroll-indicator:hover { color: var(--brand); border-color: var(--brand); }
@@ -844,7 +867,7 @@ a { text-decoration: none; color: inherit; }
     border: 1px solid rgba(255,255,255,0.06);
     border-radius: 16px;
     padding: 32px 28px;
-    transition: transform 0.3s, border-color 0.3s, box-shadow 0.3s;
+    transition: transform var(--duration-2), border-color var(--duration-2), box-shadow var(--duration-2);
     position: relative;
     overflow: hidden;
 }
@@ -856,7 +879,7 @@ a { text-decoration: none; color: inherit; }
     height: 3px;
     background: linear-gradient(90deg, var(--accent, #FF6B35), transparent);
     opacity: 0;
-    transition: opacity 0.3s;
+    transition: opacity var(--duration-2);
 }
 
 .service-card:hover {
@@ -877,7 +900,7 @@ a { text-decoration: none; color: inherit; }
     color: var(--accent, #FF6B35);
     font-size: 1.5rem;
     margin-bottom: 20px;
-    transition: background 0.3s;
+    transition: background var(--duration-2);
 }
 
 .service-card:hover .service-icon-wrap {
@@ -905,7 +928,7 @@ a { text-decoration: none; color: inherit; }
     display: inline-flex;
     align-items: center;
     gap: 4px;
-    transition: gap 0.2s;
+    transition: gap var(--duration-1);
 }
 
 .service-card:hover .service-link { gap: 8px; }
@@ -1041,7 +1064,7 @@ a { text-decoration: none; color: inherit; }
     font-size: 0.85rem;
     font-weight: 600;
     cursor: pointer;
-    transition: all 0.25s;
+    transition: all var(--duration-1);
 }
 
 .pf-btn:hover,
@@ -1060,7 +1083,7 @@ a { text-decoration: none; color: inherit; }
 .portfolio-card {
     border-radius: 14px;
     overflow: hidden;
-    transition: transform 0.3s;
+    transition: transform var(--duration-2);
 }
 
 .portfolio-card:hover { transform: translateY(-6px); }
@@ -1074,7 +1097,7 @@ a { text-decoration: none; color: inherit; }
 .portfolio-img img {
     width: 100%; height: 100%;
     object-fit: cover;
-    transition: transform 0.5s;
+    transition: transform var(--duration-3);
 }
 
 .portfolio-card:hover .portfolio-img img { transform: scale(1.08); }
@@ -1093,7 +1116,7 @@ a { text-decoration: none; color: inherit; }
     flex-direction: column;
     justify-content: flex-end;
     opacity: 0;
-    transition: opacity 0.35s;
+    transition: opacity var(--duration-2);
 }
 
 .portfolio-card:hover .portfolio-overlay { opacity: 1; }
@@ -1149,7 +1172,7 @@ a { text-decoration: none; color: inherit; }
     background: var(--bg-card);
     border: 1px solid rgba(255,255,255,0.06);
     border-radius: 20px;
-    transition: transform 0.3s, box-shadow 0.3s;
+    transition: transform var(--duration-2), box-shadow var(--duration-2);
 }
 
 .how-step:hover {
@@ -1230,7 +1253,7 @@ a { text-decoration: none; color: inherit; }
     border: 1px solid rgba(255,255,255,0.06);
     border-radius: 16px;
     padding: 32px 28px;
-    transition: transform 0.3s;
+    transition: transform var(--duration-2);
 }
 
 .testimonial-card:hover { transform: translateY(-5px); }
@@ -1320,7 +1343,7 @@ a { text-decoration: none; color: inherit; }
     display: flex;
     align-items: center;
     gap: 6px;
-    transition: color 0.2s;
+    transition: color var(--duration-1);
 }
 
 .logo-item:hover { color: var(--text-faint); }
@@ -1386,7 +1409,7 @@ a { text-decoration: none; color: inherit; }
     font-size: 0.9rem;
     padding: 16px 28px;
     border-radius: 12px;
-    transition: all 0.25s;
+    transition: all var(--duration-1);
 }
 
 .btn-whatsapp:hover {
@@ -1466,10 +1489,10 @@ a { text-decoration: none; color: inherit; }
     color: var(--brand, #FFFFFF);
     font-size: 1.05rem;
     border: 1px solid rgba(255,255,255,0.10);
-    transition: transform 0.3s cubic-bezier(0.25,1,0.5,1),
-                background 0.3s ease,
-                border-color 0.3s ease,
-                box-shadow 0.3s ease;
+    transition: transform var(--duration-2) cubic-bezier(0.25,1,0.5,1),
+                background var(--duration-2) ease,
+                border-color var(--duration-2) ease,
+                box-shadow var(--duration-2) ease;
     position: relative;
 }
 
@@ -1540,7 +1563,7 @@ a { text-decoration: none; color: inherit; }
     font-size: 0.9rem;
     padding: 12px 16px;
     font-family: 'Inter', sans-serif;
-    transition: border-color 0.25s, box-shadow 0.25s;
+    transition: border-color var(--duration-1), box-shadow var(--duration-1);
     outline: none;
     -webkit-appearance: none;
 }
@@ -1607,7 +1630,7 @@ a { text-decoration: none; color: inherit; }
     border-radius: 10px;
     border: 1px solid rgba(255,255,255,0.08);
     background: rgba(255,255,255,0.02);
-    transition: all 0.25s ease;
+    transition: all var(--duration-1) ease;
     user-select: none;
 }
 
@@ -1637,14 +1660,14 @@ a { text-decoration: none; color: inherit; }
     border-radius: 6px;
     border: 1.5px solid rgba(255,255,255,0.20);
     background: rgba(0,0,0,0.25);
-    transition: all 0.25s ease;
+    transition: all var(--duration-1) ease;
 }
 
 .check-box i {
     color: var(--text-primary);
     font-size: 0.95rem;
     transform: scale(0);
-    transition: transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
+    transition: transform var(--duration-1) cubic-bezier(0.34, 1.56, 0.64, 1);
 }
 
 .check-text { line-height: 1.2; }
@@ -1730,7 +1753,7 @@ a { text-decoration: none; color: inherit; }
 .footer-col ul li a {
     font-size: 0.875rem;
     color: #4A5568;
-    transition: color 0.2s, padding-left 0.2s;
+    transition: color var(--duration-1), padding-left var(--duration-1);
     display: block;
 }
 
@@ -1864,7 +1887,7 @@ a { text-decoration: none; color: inherit; }
     padding: 7px 14px;
     cursor: pointer;
     letter-spacing: 0.5px;
-    transition: all 0.25s;
+    transition: all var(--duration-1);
     font-family: inherit;
 }
 
@@ -1995,7 +2018,7 @@ a { text-decoration: none; color: inherit; }
     font-size: 1.15rem;
     line-height: 1;
     opacity: 0.85;
-    transition: transform 0.4s ease, color 0.3s ease;
+    transition: transform var(--duration-2) ease, color var(--duration-2) ease;
     pointer-events: none;
 }
 
@@ -2021,7 +2044,7 @@ a { text-decoration: none; color: inherit; }
     font-weight: 500;
     letter-spacing: 0.2px;
     box-shadow: 0 8px 28px rgba(0, 0, 0, 0.35);
-    transition: transform 0.3s ease, border-color 0.3s ease, background 0.3s ease, box-shadow 0.3s ease;
+    transition: transform var(--duration-2) ease, border-color var(--duration-2) ease, background var(--duration-2) ease, box-shadow var(--duration-2) ease;
 }
 
 .audio-toggle:hover {
@@ -2278,8 +2301,8 @@ a { text-decoration: none; color: inherit; }
     color: var(--text-primary);
     font-size: 1.5rem;
     text-decoration: none;
-    transition: transform 0.3s cubic-bezier(0.25,1,0.5,1),
-                box-shadow 0.3s ease;
+    transition: transform var(--duration-2) cubic-bezier(0.25,1,0.5,1),
+                box-shadow var(--duration-2) ease;
 }
 
 .float-btn:hover {
@@ -2346,7 +2369,7 @@ a { text-decoration: none; color: inherit; }
     box-shadow: 0 8px 20px rgba(0,0,0,0.4);
     opacity: 0;
     pointer-events: none;
-    transition: opacity 0.25s ease, transform 0.25s ease;
+    transition: opacity var(--duration-1) ease, transform var(--duration-1) ease;
     backdrop-filter: blur(10px);
 }
 

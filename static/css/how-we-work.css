@@ -104,7 +104,7 @@
     padding: 14px 28px;
     border: 1px solid rgba(255,255,255,0.2);
     border-radius: 30px;
-    transition: all 0.3s;
+    transition: all var(--duration-2);
 }
 
 .hww-scroll-cta:hover {
@@ -142,7 +142,7 @@
     border-top: 3px solid var(--phase-color);
     border-radius: 16px;
     padding: 28px 24px;
-    transition: all 0.3s;
+    transition: all var(--duration-2);
 }
 
 .hww-phase-card:hover {
@@ -286,7 +286,7 @@
     border-radius: 18px;
     padding: 28px;
     width: calc(50% - 60px);
-    transition: all 0.3s;
+    transition: all var(--duration-2);
 }
 
 .hww-stage-card::before {
@@ -386,7 +386,7 @@
     padding: 8px 12px;
     background: rgba(255,255,255,0.025);
     border-radius: 8px;
-    transition: background 0.2s;
+    transition: background var(--duration-1);
 }
 
 .hww-activities li:hover {
@@ -461,7 +461,7 @@
     border-radius: 12px;
     font-weight: 600;
     text-decoration: none;
-    transition: all 0.3s;
+    transition: all var(--duration-2);
 }
 
 .btn-outline:hover {
@@ -588,7 +588,7 @@
         linear-gradient(135deg, #0F1626 0%, #0A0E1A 100%);
     border: 1px solid color-mix(in srgb, var(--phase-color) 22%, rgba(255,255,255,0.06));
     box-shadow: 0 16px 40px rgba(0, 0, 0, 0.45);
-    transition: transform 0.4s ease, box-shadow 0.4s ease, border-color 0.4s ease;
+    transition: transform var(--duration-2) ease, box-shadow var(--duration-2) ease, border-color var(--duration-2) ease;
 }
 
 .hww-stage-with-visual.hww-stage-left .hww-stage-visual { right: 0; }
@@ -646,7 +646,7 @@
     color: var(--phase-color);
     filter: drop-shadow(0 8px 24px color-mix(in srgb, var(--phase-color) 60%, transparent));
     margin: auto;
-    transition: transform 0.5s ease;
+    transition: transform var(--duration-3) ease;
 }
 
 /* Stage name pill at the top */
@@ -771,7 +771,7 @@
     object-position: center;
     display: block;
     border-radius: 19px;
-    transition: transform 0.6s ease;
+    transition: transform var(--duration-3) ease;
 }
 
 .hww-stage-with-visual:hover .hww-stage-visual-img > img {

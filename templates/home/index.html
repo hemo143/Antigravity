@@ -876,8 +876,8 @@
                         {% if LANGUAGE_CODE == 'ar' %}أرسل طلب العرض{% else %}Submit Quote Request{% endif %}
                     </button>
 
-                    <div class="form-success d-none" id="formSuccess">
-                        <i class="bi bi-check-circle-fill text-success fs-2"></i>
+                    <div class="form-success d-none" id="formSuccess" role="status" aria-live="polite">
+                        <i class="bi bi-check-circle-fill text-success fs-2" aria-hidden="true"></i>
                         <p>{% if LANGUAGE_CODE == 'ar' %}شكراً! سنتواصل معك خلال 24 ساعة بعرض سعر مخصص.{% else %}Thank you! We'll contact you within 24 hours with your custom quote.{% endif %}</p>
                     </div>
                 </form>
