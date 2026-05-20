@@ -142,7 +142,8 @@
                 </ul>
             </div>
             <div class="hww-stage-visual hww-stage-visual-img">
-                <img src="{% static 'img/stages/01-discovery.jpg' %}"
+                <img src="{% if LANGUAGE_CODE == 'ar' %}{% static 'img/stages/01-discovery-ar.jpg' %}{% else %}{% static 'img/stages/01-discovery.jpg' %}{% endif %}"
+                     onerror="this.onerror=null;this.src='{% static 'img/stages/01-discovery.jpg' %}';"
                      alt="{% if LANGUAGE_CODE == 'ar' %}الاكتشاف والتخطيط{% else %}Discovery & Planning{% endif %}"
                      loading="lazy" width="1500" height="735">
             </div>
@@ -170,7 +171,8 @@
                 </ul>
             </div>
             <div class="hww-stage-visual hww-stage-visual-img">
-                <img src="{% static 'img/stages/02-technical-design.jpg' %}"
+                <img src="{% if LANGUAGE_CODE == 'ar' %}{% static 'img/stages/02-technical-design-ar.jpg' %}{% else %}{% static 'img/stages/02-technical-design.jpg' %}{% endif %}"
+                     onerror="this.onerror=null;this.src='{% static 'img/stages/02-technical-design.jpg' %}';"
                      alt="{% if LANGUAGE_CODE == 'ar' %}التصميم التقني والعرض{% else %}Technical Design & Quotation{% endif %}"
                      loading="lazy" width="1500" height="735">
             </div>
