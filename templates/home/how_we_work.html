@@ -252,11 +252,10 @@
                     <li><i class="bi bi-lightning-fill"></i> {% if LANGUAGE_CODE == 'ar' %}بروتوكول استجابة سريعة{% else %}Rapid response protocol{% endif %}</li>
                 </ul>
             </div>
-            <div class="hww-stage-visual">
-                <span class="hww-visual-num">05</span>
-                <i class="bi bi-broadcast hww-visual-icon"></i>
-                <span class="hww-visual-tag">{% if LANGUAGE_CODE == 'ar' %}البث المباشر{% else %}Live Operations{% endif %}</span>
-                <span class="hww-visual-light"></span>
+            <div class="hww-stage-visual hww-stage-visual-img">
+                <img src="{% static 'img/stages/05-live-operations.jpg' %}"
+                     alt="{% if LANGUAGE_CODE == 'ar' %}التشغيل المباشر والمراقبة{% else %}Live Operations & Monitoring{% endif %}"
+                     loading="lazy" width="1500" height="735">
             </div>
         </div>
 
