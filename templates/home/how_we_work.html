@@ -196,11 +196,10 @@
                     <li><i class="bi bi-truck"></i> {% if LANGUAGE_CODE == 'ar' %}خطة التحميل والتراخيص وتوزيع المركبات{% else %}Load plan, permits & vehicle dispatch{% endif %}</li>
                 </ul>
             </div>
-            <div class="hww-stage-visual">
-                <span class="hww-visual-num">03</span>
-                <i class="bi bi-box-seam-fill hww-visual-icon"></i>
-                <span class="hww-visual-tag">{% if LANGUAGE_CODE == 'ar' %}ما قبل الإنتاج{% else %}Pre-Production{% endif %}</span>
-                <span class="hww-visual-light"></span>
+            <div class="hww-stage-visual hww-stage-visual-img">
+                <img src="{% static 'img/stages/03-preproduction.jpg' %}"
+                     alt="{% if LANGUAGE_CODE == 'ar' %}ما قبل الإنتاج واللوجستيات{% else %}Pre-Production & Logistics{% endif %}"
+                     loading="lazy" width="1500" height="735">
             </div>
         </div>
 
