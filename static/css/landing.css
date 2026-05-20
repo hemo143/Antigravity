@@ -2423,3 +2423,104 @@ a { text-decoration: none; color: inherit; }
     opacity: 0;
     pointer-events: none;
 }
+
+
+/* ══════════════════════════════════════════════
+   CUSTOM CURSOR — Spotlight + LED Dot + Glow
+   Desktop only (disabled on touch + reduced-motion)
+══════════════════════════════════════════════ */
+@media (hover: hover) and (pointer: fine) {
+    html, body { cursor: none; }
+
+    /* Re-show the native cursor on form fields so people can still see they're typing */
+    input, textarea, select { cursor: text; }
+    button, a, label, [role="button"], summary { cursor: none; }
+
+    .cursor-dot,
+    .cursor-ring,
+    .cursor-glow {
+        position: fixed;
+        top: 0;
+        left: 0;
+        pointer-events: none;
+        z-index: 99999;
+        border-radius: 50%;
+        transform: translate(-50%, -50%);
+        mix-blend-mode: screen;
+    }
+
+    /* Bright orange LED dot — sharp center */
+    .cursor-dot {
+        width: 8px;
+        height: 8px;
+        background: var(--brand);
+        box-shadow:
+            0 0 6px var(--brand),
+            0 0 14px var(--brand-glow);
+        transition: width 0.2s var(--ease-out),
+                    height 0.2s var(--ease-out),
+                    background 0.2s var(--ease-out);
+    }
+
+    /* Trailing ring — follows with easing for the LERP feel */
+    .cursor-ring {
+        width: 34px;
+        height: 34px;
+        border: 1.5px solid rgba(255, 107, 53, 0.55);
+        background: rgba(255, 107, 53, 0.04);
+        backdrop-filter: blur(2px);
+        -webkit-backdrop-filter: blur(2px);
+        transition: width 0.35s var(--ease-spring),
+                    height 0.35s var(--ease-spring),
+                    border-color 0.3s ease,
+                    background 0.3s ease;
+    }
+
+    /* Soft stage-light halo — biggest, most diffuse */
+    .cursor-glow {
+        width: 160px;
+        height: 160px;
+        background: radial-gradient(circle, rgba(255, 107, 53, 0.18) 0%, transparent 65%);
+        filter: blur(8px);
+        opacity: 0;
+        transition: opacity 0.35s ease;
+    }
+
+    /* Reveal the glow once the user starts moving */
+    body.cursor-active .cursor-glow { opacity: 1; }
+
+    /* Hover state — over any interactive surface */
+    body.cursor-hover .cursor-dot {
+        width: 4px;
+        height: 4px;
+        background: var(--text-primary);
+    }
+
+    body.cursor-hover .cursor-ring {
+        width: 56px;
+        height: 56px;
+        border-color: var(--brand);
+        background: rgba(255, 107, 53, 0.10);
+    }
+
+    /* Click pulse */
+    body.cursor-click .cursor-ring {
+        width: 26px;
+        height: 26px;
+        border-color: var(--brand-light);
+        background: rgba(255, 179, 71, 0.20);
+    }
+
+    /* Hide cursor over the floating soundtrack and contact CTAs so
+       their existing styling shows through */
+    .audio-toggle:hover,
+    .float-btn:hover {
+        cursor: none;
+    }
+}
+
+/* Respect reduced motion — no trailing animation, hide custom cursor */
+@media (prefers-reduced-motion: reduce) {
+    html, body { cursor: auto !important; }
+    .cursor-dot, .cursor-ring, .cursor-glow { display: none !important; }
+}

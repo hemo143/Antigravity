@@ -24,6 +24,10 @@
 
 <a href="#phase-1" class="skip-link">{% if LANGUAGE_CODE == 'ar' %}تخطّ إلى المحتوى{% else %}Skip to content{% endif %}</a>
 
+<div class="cursor-dot"  id="cursorDot"  aria-hidden="true"></div>
+<div class="cursor-ring" id="cursorRing" aria-hidden="true"></div>
+<div class="cursor-glow" id="cursorGlow" aria-hidden="true"></div>
+
 <!-- ═══ NAVBAR ═══ -->
 <nav class="av-navbar" id="mainNav">
     <div class="container-xl">
@@ -357,6 +361,7 @@
         document.getElementById('mainNav').classList.toggle('scrolled', window.scrollY > 50);
     });
 </script>
+<script src="{% static 'js/cursor.js' %}" defer></script>
 {% include "home/_audio_widget.html" %}
 </body>
 </html>
