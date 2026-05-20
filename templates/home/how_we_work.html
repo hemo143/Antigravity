@@ -224,11 +224,10 @@
                     <li><i class="bi bi-clipboard-check-fill"></i> {% if LANGUAGE_CODE == 'ar' %}بروفة تقنية كاملة{% else %}Full tech rehearsal{% endif %}</li>
                 </ul>
             </div>
-            <div class="hww-stage-visual">
-                <span class="hww-visual-num">04</span>
-                <i class="bi bi-tools hww-visual-icon"></i>
-                <span class="hww-visual-tag">{% if LANGUAGE_CODE == 'ar' %}التركيب{% else %}On-Site Setup{% endif %}</span>
-                <span class="hww-visual-light"></span>
+            <div class="hww-stage-visual hww-stage-visual-img">
+                <img src="{% static 'img/stages/04-onsite-setup.jpg' %}"
+                     alt="{% if LANGUAGE_CODE == 'ar' %}التركيب والاختبار في الموقع{% else %}On-Site Setup & Testing{% endif %}"
+                     loading="lazy" width="1500" height="735">
             </div>
         </div>
 
