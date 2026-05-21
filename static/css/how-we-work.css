@@ -538,6 +538,17 @@
 [dir="rtl"] .hww-stage-left .hww-stage-card::before { right: auto; left: -28px; }
 [dir="rtl"] .hww-stage-right .hww-stage-card::before { left: auto; right: -28px; }
 
+/* RTL: flip the card's margin so it sits on the opposite side of the
+   absolutely-positioned visual (otherwise both pile up on one side). */
+[dir="rtl"] .hww-stage-left .hww-stage-card {
+    margin-right: 0;
+    margin-left: auto;
+}
+[dir="rtl"] .hww-stage-right .hww-stage-card {
+    margin-left: 0;
+    margin-right: auto;
+}
+
 @media (max-width: 768px) {
     [dir="rtl"] .hww-timeline .container-xl::before {
         left: auto;
