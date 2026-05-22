@@ -8,9 +8,13 @@ from django.conf.urls.static import static
 from django.conf.urls.i18n import i18n_patterns
 from django.views.generic import RedirectView
 from apps.management.home_views import home_view, quote_submit, how_we_work_view
+from apps.management.seo_views import sitemap as seo_sitemap, robots as seo_robots
 
 urlpatterns = [
     path('i18n/', include('django.conf.urls.i18n')),
+    # SEO endpoints — served WITHOUT language prefix
+    path('sitemap.xml', seo_sitemap, name='sitemap'),
+    path('robots.txt',  seo_robots,  name='robots'),
     # Redirect bare root → /en/
     path('', RedirectView.as_view(url='/en/', permanent=False)),
 ]

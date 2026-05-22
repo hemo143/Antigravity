@@ -3,15 +3,74 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#0A0E1A">
+
     {% if LANGUAGE_CODE == 'ar' %}
-    <title>كيف نعمل – Pro Event Operations Workflow</title>
-    <meta name="description" content="منهجية تنفيذ الفعاليات في Pro Event — 6 مراحل احترافية من استلام طلب العميل إلى التقرير النهائي.">
+    <title>منهجية العمل – Pro Event | 6 مراحل لتنفيذ فعالية احترافية</title>
+    <meta name="description" content="اكتشف منهجية Pro Event الكاملة لتنفيذ المؤتمرات والفعاليات في مصر — 6 مراحل احترافية من استلام طلب العميل إلى التقرير النهائي: التخطيط، التصميم التقني، ما قبل الإنتاج، التركيب، التشغيل المباشر، والإقفال.">
+    <meta name="keywords" content="منهجية تنظيم فعاليات, مراحل تنفيذ مؤتمر, إدارة الإنتاج الفني, Pro Event workflow, AV production process">
     {% else %}
-    <title>How We Work – Pro Event Operations Workflow</title>
-    <meta name="description" content="Pro Event's 6-stage event operations workflow — from client inquiry through technical design, live execution, and post-event reporting.">
+    <title>How We Work – Pro Event | 6-Stage Event Operations Workflow</title>
+    <meta name="description" content="Inside Pro Event's 6-stage event operations workflow: Discovery & Planning, Technical Design, Pre-Production, On-Site Setup, Live Operations, and Wrap-Up. The methodology that delivers 200+ flawless events across Egypt.">
+    <meta name="keywords" content="event production workflow, AV production process, conference planning stages, Pro Event methodology, technical event partner">
     {% endif %}
 
+    <meta name="author" content="Pro Event">
+    <meta name="robots" content="index, follow, max-image-preview:large">
+
+    <!-- Canonical + alternates -->
+    <link rel="canonical" href="https://proevent.onrender.com{{ request.path }}">
+    <link rel="alternate" hreflang="en" href="https://proevent.onrender.com/en/how-we-work/">
+    <link rel="alternate" hreflang="ar" href="https://proevent.onrender.com/ar/how-we-work/">
+    <link rel="alternate" hreflang="x-default" href="https://proevent.onrender.com/en/how-we-work/">
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="Pro Event">
+    <meta property="og:locale" content="{% if LANGUAGE_CODE == 'ar' %}ar_EG{% else %}en_US{% endif %}">
+    <meta property="og:url" content="https://proevent.onrender.com{{ request.path }}">
+    {% if LANGUAGE_CODE == 'ar' %}
+    <meta property="og:title" content="منهجية العمل – Pro Event | 6 مراحل لتنفيذ فعالية احترافية">
+    <meta property="og:description" content="6 مراحل احترافية من استلام طلب العميل إلى التقرير النهائي — منهجية Pro Event الكاملة لتنفيذ فعاليات لا تُنسى.">
+    {% else %}
+    <meta property="og:title" content="How We Work – Pro Event's 6-Stage Workflow">
+    <meta property="og:description" content="The methodology that delivers 200+ flawless events: Discovery, Technical Design, Pre-Production, Setup, Live Operations, Wrap-Up.">
+    {% endif %}
+    <meta property="og:image" content="https://proevent.onrender.com{% static 'img/stages/04-onsite-setup.jpg' %}">
+    <meta property="og:image:width" content="1500">
+    <meta property="og:image:height" content="735">
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="How We Work – Pro Event's 6-Stage Workflow">
+    <meta name="twitter:description" content="{% if LANGUAGE_CODE == 'ar' %}منهجية Pro Event الكاملة لتنفيذ فعاليات احترافية{% else %}The methodology that delivers 200+ flawless events across Egypt{% endif %}">
+    <meta name="twitter:image" content="https://proevent.onrender.com{% static 'img/stages/04-onsite-setup.jpg' %}">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="{% static 'img/favicon.svg' %}">
+    <link rel="apple-touch-icon" href="{% static 'img/favicon.svg' %}">
+
+    <!-- Structured Data — HowTo schema -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "HowTo",
+      "name": "{% if LANGUAGE_CODE == 'ar' %}منهجية Pro Event لتنفيذ الفعاليات{% else %}Pro Event's Event Operations Workflow{% endif %}",
+      "description": "{% if LANGUAGE_CODE == 'ar' %}منهجية احترافية من 6 مراحل لتنفيذ المؤتمرات والفعاليات{% else %}A 6-stage professional workflow for conferences and corporate events{% endif %}",
+      "totalTime": "P12W",
+      "step": [
+        {"@type":"HowToStep","position":1,"name":"Discovery & Planning","text":"Brief intake, venue survey, audience analysis, creative concept, risk register."},
+        {"@type":"HowToStep","position":2,"name":"Technical Design & Quotation","text":"LED mapping, audio coverage, 3D lighting design, streaming topology, power load, itemized quotation and SLA."},
+        {"@type":"HowToStep","position":3,"name":"Pre-Production & Logistics","text":"Crew briefings, run-of-show lock, equipment PAT testing, load plan, vehicle dispatch."},
+        {"@type":"HowToStep","position":4,"name":"On-Site Setup & Testing","text":"Stage rigging, LED wall assembly, audio deployment, lighting install, camera positioning, full tech rehearsal."},
+        {"@type":"HowToStep","position":5,"name":"Live Operations & Monitoring","text":"FOH audio mixing, multi-cam switching, lighting operation, stream control, show calling, hot-standby backup engineer."},
+        {"@type":"HowToStep","position":6,"name":"Wrap-Up & Final Reporting","text":"Systematic de-rigging, inventory verification, venue restoration, performance report, client debrief, lessons-learned documentation."}
+      ]
+    }
+    </script>
+
     <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Cairo:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">

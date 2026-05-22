@@ -3,22 +3,113 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#0A0E1A">
+    <meta name="format-detection" content="telephone=no">
+
     {% if LANGUAGE_CODE == 'ar' %}
-    <title>Pro Event – خبراء المؤتمرات وفعاليات الشركات</title>
-    <meta name="description" content="حلول صوت وصورة احترافية للمؤتمرات وفعاليات الشركات. شاشات LED وأنظمة صوت وإضاءة وإنتاج فيديو.">
+    <title>Pro Event – شركة تنظيم مؤتمرات وفعاليات الشركات في مصر</title>
+    <meta name="description" content="Pro Event — الشريك التقني الأول للفعاليات في مصر. حلول AV احترافية للمؤتمرات والمعارض وفعاليات الشركات: شاشات LED، أنظمة صوت، إضاءة، بث مباشر، وإنتاج فيديو. عرض سعر مجاني خلال 24 ساعة.">
+    <meta name="keywords" content="تنظيم مؤتمرات, شركة فعاليات مصر, شاشات LED, إنتاج فيديو, بث مباشر, تأجير معدات صوت وضوء, AV solutions, conference setup Egypt, Pro Event">
     {% else %}
-    <title>Pro Event – Conference & Corporate Event Specialists</title>
-    <meta name="description" content="Professional Audio Visual solutions for conferences and corporate events. LED screens, sound systems, lighting & video production.">
+    <title>Pro Event – Egypt's #1 Technical Event &amp; AV Production Partner</title>
+    <meta name="description" content="Pro Event delivers end-to-end AV production for conferences, exhibitions and corporate events in Egypt. LED screens, audio systems, lighting, live streaming, video production — with 12+ years of on-site experience. Free quote within 24 hours.">
+    <meta name="keywords" content="event production Egypt, AV company Cairo, conference setup, LED screen rental, live streaming Egypt, corporate events, technical event partner, Pro Event">
     {% endif %}
+
+    <meta name="author" content="Pro Event">
+    <meta name="robots" content="index, follow, max-image-preview:large">
+    <meta name="generator" content="Pro Event Operations Platform">
+
+    <!-- Canonical + language alternates -->
+    <link rel="canonical" href="https://proevent.onrender.com{{ request.path }}">
+    <link rel="alternate" hreflang="en" href="https://proevent.onrender.com/en{{ request.path|slice:'3:' }}">
+    <link rel="alternate" hreflang="ar" href="https://proevent.onrender.com/ar{{ request.path|slice:'3:' }}">
+    <link rel="alternate" hreflang="x-default" href="https://proevent.onrender.com/en{{ request.path|slice:'3:' }}">
+
+    <!-- Open Graph (Facebook, LinkedIn, WhatsApp) -->
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="Pro Event">
+    <meta property="og:locale" content="{% if LANGUAGE_CODE == 'ar' %}ar_EG{% else %}en_US{% endif %}">
+    <meta property="og:locale:alternate" content="{% if LANGUAGE_CODE == 'ar' %}en_US{% else %}ar_EG{% endif %}">
+    <meta property="og:url" content="https://proevent.onrender.com{{ request.path }}">
+    {% if LANGUAGE_CODE == 'ar' %}
+    <meta property="og:title" content="Pro Event – شركة تنظيم مؤتمرات وفعاليات الشركات في مصر">
+    <meta property="og:description" content="الشريك التقني الأول للفعاليات في مصر. حلول AV احترافية، شاشات LED، أنظمة صوت، إضاءة، بث مباشر، وإنتاج فيديو. +12 سنة خبرة، +200 فعالية منفذة.">
+    {% else %}
+    <meta property="og:title" content="Pro Event – Egypt's #1 Technical Event &amp; AV Production Partner">
+    <meta property="og:description" content="End-to-end AV production for conferences, exhibitions and corporate events in Egypt. 12+ years experience, 200+ events delivered, 98% client satisfaction.">
+    {% endif %}
+    <meta property="og:image" content="https://proevent.onrender.com{% static 'img/hero-poster.jpg' %}">
+    <meta property="og:image:width" content="1920">
+    <meta property="og:image:height" content="1080">
+    <meta property="og:image:alt" content="Pro Event — Technical Event Production">
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Pro Event – {% if LANGUAGE_CODE == 'ar' %}شركة تنظيم مؤتمرات وفعاليات الشركات{% else %}Egypt's #1 Technical Event Partner{% endif %}">
+    <meta name="twitter:description" content="{% if LANGUAGE_CODE == 'ar' %}حلول AV احترافية للمؤتمرات وفعاليات الشركات في مصر{% else %}AV production for conferences, exhibitions, and corporate events in Egypt{% endif %}">
+    <meta name="twitter:image" content="https://proevent.onrender.com{% static 'img/hero-poster.jpg' %}">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="{% static 'img/favicon.svg' %}">
+    <link rel="apple-touch-icon" href="{% static 'img/favicon.svg' %}">
+
+    <!-- Structured Data (JSON-LD) — Organization + LocalBusiness -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "LocalBusiness",
+      "@id": "https://proevent.onrender.com/#organization",
+      "name": "Pro Event",
+      "alternateName": "ProEvent",
+      "url": "https://proevent.onrender.com",
+      "logo": "https://proevent.onrender.com{% static 'img/favicon.svg' %}",
+      "image": "https://proevent.onrender.com{% static 'img/hero-poster.jpg' %}",
+      "description": "Technical event production and AV solutions for conferences, exhibitions, and corporate events in Egypt.",
+      "telephone": "+201119333199",
+      "email": "hammammazin@gmail.com",
+      "priceRange": "$$",
+      "address": {
+        "@type": "PostalAddress",
+        "addressLocality": "Cairo",
+        "addressCountry": "EG"
+      },
+      "sameAs": [
+        "https://www.linkedin.com/",
+        "https://www.instagram.com/",
+        "https://www.facebook.com/"
+      ],
+      "areaServed": {
+        "@type": "Country",
+        "name": "Egypt"
+      },
+      "knowsAbout": [
+        "Conference Production",
+        "LED Screen Rental",
+        "Audio Visual Solutions",
+        "Live Streaming",
+        "Stage Lighting",
+        "Corporate Event Management"
+      ],
+      "aggregateRating": {
+        "@type": "AggregateRating",
+        "ratingValue": "4.9",
+        "reviewCount": "200",
+        "bestRating": "5",
+        "worstRating": "1"
+      }
+    }
+    </script>
 
     <!-- Inter (EN) + Cairo (AR) -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Cairo:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" rel="stylesheet">
-    <link href="/static/css/landing.css" rel="stylesheet">
+    <link href="{% static 'css/landing.css' %}" rel="stylesheet">
 </head>
 <body>
 
