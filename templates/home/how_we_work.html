@@ -17,6 +17,7 @@
 
     <meta name="author" content="Pro Event">
     <meta name="robots" content="index, follow, max-image-preview:large">
+    {% if GOOGLE_SITE_VERIFICATION %}<meta name="google-site-verification" content="{{ GOOGLE_SITE_VERIFICATION }}">{% endif %}
 
     <!-- Canonical + alternates -->
     <link rel="canonical" href="https://proevent.onrender.com{{ request.path }}">

@@ -17,11 +17,16 @@ logger = logging.getLogger(__name__)
 
 def home_view(request):
     portfolio_items = PortfolioProject.objects.filter(is_featured=True).exclude(event_type='exhibition')
-    return render(request, 'home/index.html', {'portfolio_items': portfolio_items})
+    return render(request, 'home/index.html', {
+        'portfolio_items': portfolio_items,
+        'GOOGLE_SITE_VERIFICATION': getattr(settings, 'GOOGLE_SITE_VERIFICATION', ''),
+    })
 
 
 def how_we_work_view(request):
-    return render(request, 'home/how_we_work.html')
+    return render(request, 'home/how_we_work.html', {
+        'GOOGLE_SITE_VERIFICATION': getattr(settings, 'GOOGLE_SITE_VERIFICATION', ''),
+    })
 
 
 # ─── Resend HTTP API helpers ───────────────────────────────────────────
