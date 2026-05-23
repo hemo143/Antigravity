@@ -203,8 +203,9 @@
 ══════════════════════════════════════════════ -->
 <section class="hero-section" id="home">
     <div class="hero-video-wrap">
-        <video autoplay muted loop playsinline preload="metadata"
-               poster="{% static 'img/hero-poster.jpg' %}" class="hero-video">
+        <video autoplay muted loop playsinline preload="auto"
+               poster="{% static 'img/hero-poster.jpg' %}" class="hero-video"
+               disablepictureinpicture disableremoteplayback>
             <source src="{% static 'video/hero.mp4' %}" type="video/mp4">
         </video>
         <div class="hero-overlay"></div>
