@@ -51,9 +51,17 @@
     <meta name="twitter:description" content="{% if LANGUAGE_CODE == 'ar' %}حلول AV احترافية للمؤتمرات وفعاليات الشركات في مصر{% else %}AV production for conferences, exhibitions, and corporate events in Egypt{% endif %}">
     <meta name="twitter:image" content="https://proevent.onrender.com{% static 'img/hero-poster.jpg' %}">
 
-    <!-- Favicon -->
+    <!-- Favicon + PWA manifest -->
     <link rel="icon" type="image/svg+xml" href="{% static 'img/favicon.svg' %}">
     <link rel="apple-touch-icon" href="{% static 'img/favicon.svg' %}">
+    <link rel="manifest" href="{% static 'site.webmanifest' %}">
+    <meta name="apple-mobile-web-app-title" content="Pro Event">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
+    <!-- DNS prefetch + preconnect for CDNs we load below -->
+    <link rel="dns-prefetch" href="//cdn.jsdelivr.net">
+    <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
 
     <!-- Structured Data (JSON-LD) — Organization + LocalBusiness -->
     <script type="application/ld+json">
@@ -394,14 +402,14 @@
             <div class="why-visual" data-aos="fade-left">
             {% endif %}
                 <div class="why-img-main">
-                    <img src="https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=600&q=80" alt="Conference event" loading="lazy">
+                    <img src="https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=600&q=80" alt="Conference event" loading="lazy" decoding="async">
                 </div>
                 <div class="why-img-badge">
                     <i class="bi bi-award-fill text-warning fs-2"></i>
                     <span>{% if LANGUAGE_CODE == 'ar' %}جائزة<br><strong>قطاع AV</strong>{% else %}Industry<br><strong>Award Winner</strong>{% endif %}</span>
                 </div>
                 <div class="why-img-float">
-                    <img src="https://images.unsplash.com/photo-1505373877841-8d25f7d46678?w=280&q=80" alt="Event production" loading="lazy">
+                    <img src="https://images.unsplash.com/photo-1505373877841-8d25f7d46678?w=280&q=80" alt="Event production" loading="lazy" decoding="async">
                 </div>
             </div>
 
@@ -486,7 +494,7 @@
                 {% for item in portfolio_items %}
                 <div class="portfolio-card" data-type="{{ item.event_type }}">
                     <div class="portfolio-img">
-                        <img src="{{ item.image.url }}" alt="{% if LANGUAGE_CODE == 'ar' %}{{ item.title_ar }}{% else %}{{ item.title_en }}{% endif %}" loading="lazy">
+                        <img src="{{ item.image.url }}" alt="{% if LANGUAGE_CODE == 'ar' %}{{ item.title_ar }}{% else %}{{ item.title_en }}{% endif %}" loading="lazy" decoding="async">
                         <div class="portfolio-overlay">
                             <span class="portfolio-tag">
                                 {% if LANGUAGE_CODE == 'ar' %}
@@ -513,7 +521,7 @@
                 <!-- Default placeholder items when DB is empty -->
                 <div class="portfolio-card" data-type="conference">
                     <div class="portfolio-img">
-                        <img src="https://images.unsplash.com/photo-1587825140708-dfaf72ae4b04?w=600&q=80" alt="Tech Summit" loading="lazy">
+                        <img src="https://images.unsplash.com/photo-1587825140708-dfaf72ae4b04?w=600&q=80" alt="Tech Summit" loading="lazy" decoding="async">
                         <div class="portfolio-overlay">
                             <span class="portfolio-tag">{% if LANGUAGE_CODE == 'ar' %}مؤتمر{% else %}Conference{% endif %}</span>
                             <h4>{% if LANGUAGE_CODE == 'ar' %}قمة التقنية 2024{% else %}Tech Summit 2024{% endif %}</h4>
@@ -524,7 +532,7 @@
                 </div>
                 <div class="portfolio-card" data-type="corporate">
                     <div class="portfolio-img">
-                        <img src="https://images.unsplash.com/photo-1515187029135-18ee286d815b?w=600&q=80" alt="Corporate Event" loading="lazy">
+                        <img src="https://images.unsplash.com/photo-1515187029135-18ee286d815b?w=600&q=80" alt="Corporate Event" loading="lazy" decoding="async">
                         <div class="portfolio-overlay">
                             <span class="portfolio-tag">{% if LANGUAGE_CODE == 'ar' %}شركات{% else %}Corporate{% endif %}</span>
                             <h4>{% if LANGUAGE_CODE == 'ar' %}قمة القيادة السنوية{% else %}Annual Leadership Summit{% endif %}</h4>
@@ -535,7 +543,7 @@
                 </div>
                 <div class="portfolio-card" data-type="conference">
                     <div class="portfolio-img">
-                        <img src="https://images.unsplash.com/photo-1475721027785-f74eccf877e2?w=600&q=80" alt="Medical Congress" loading="lazy">
+                        <img src="https://images.unsplash.com/photo-1475721027785-f74eccf877e2?w=600&q=80" alt="Medical Congress" loading="lazy" decoding="async">
                         <div class="portfolio-overlay">
                             <span class="portfolio-tag">{% if LANGUAGE_CODE == 'ar' %}مؤتمر{% else %}Conference{% endif %}</span>
                             <h4>{% if LANGUAGE_CODE == 'ar' %}المؤتمر الطبي 2024{% else %}Medical Congress 2024{% endif %}</h4>
@@ -546,7 +554,7 @@
                 </div>
                 <div class="portfolio-card" data-type="corporate">
                     <div class="portfolio-img">
-                        <img src="https://images.unsplash.com/photo-1529543544282-ea669407fca3?w=600&q=80" alt="Product Launch" loading="lazy">
+                        <img src="https://images.unsplash.com/photo-1529543544282-ea669407fca3?w=600&q=80" alt="Product Launch" loading="lazy" decoding="async">
                         <div class="portfolio-overlay">
                             <span class="portfolio-tag">{% if LANGUAGE_CODE == 'ar' %}شركات{% else %}Corporate{% endif %}</span>
                             <h4>{% if LANGUAGE_CODE == 'ar' %}إطلاق منتج عالمي{% else %}Global Product Launch{% endif %}</h4>

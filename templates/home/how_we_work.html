@@ -47,9 +47,13 @@
     <meta name="twitter:description" content="{% if LANGUAGE_CODE == 'ar' %}منهجية Pro Event الكاملة لتنفيذ فعاليات احترافية{% else %}The methodology that delivers 200+ flawless events across Egypt{% endif %}">
     <meta name="twitter:image" content="https://proevent.onrender.com{% static 'img/stages/04-onsite-setup.jpg' %}">
 
-    <!-- Favicon -->
+    <!-- Favicon + PWA manifest -->
     <link rel="icon" type="image/svg+xml" href="{% static 'img/favicon.svg' %}">
     <link rel="apple-touch-icon" href="{% static 'img/favicon.svg' %}">
+    <link rel="manifest" href="{% static 'site.webmanifest' %}">
+
+    <link rel="dns-prefetch" href="//cdn.jsdelivr.net">
+    <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
 
     <!-- Structured Data — HowTo schema -->
     <script type="application/ld+json">
@@ -205,7 +209,7 @@
                 <img src="{% if LANGUAGE_CODE == 'ar' %}{% static 'img/stages/01-discovery-ar.jpg' %}{% else %}{% static 'img/stages/01-discovery.jpg' %}{% endif %}"
                      onerror="this.onerror=null;this.src='{% static 'img/stages/01-discovery.jpg' %}';"
                      alt="{% if LANGUAGE_CODE == 'ar' %}الاكتشاف والتخطيط{% else %}Discovery & Planning{% endif %}"
-                     loading="lazy" width="1500" height="735">
+                     loading="lazy" width="1500" height="735" decoding="async">
             </div>
         </div>
 
@@ -234,7 +238,7 @@
                 <img src="{% if LANGUAGE_CODE == 'ar' %}{% static 'img/stages/02-technical-design-ar.jpg' %}{% else %}{% static 'img/stages/02-technical-design.jpg' %}{% endif %}"
                      onerror="this.onerror=null;this.src='{% static 'img/stages/02-technical-design.jpg' %}';"
                      alt="{% if LANGUAGE_CODE == 'ar' %}التصميم التقني والعرض{% else %}Technical Design & Quotation{% endif %}"
-                     loading="lazy" width="1500" height="735">
+                     loading="lazy" width="1500" height="735" decoding="async">
             </div>
         </div>
 
@@ -261,7 +265,7 @@
             <div class="hww-stage-visual hww-stage-visual-img">
                 <img src="{% static 'img/stages/03-preproduction.jpg' %}"
                      alt="{% if LANGUAGE_CODE == 'ar' %}ما قبل الإنتاج واللوجستيات{% else %}Pre-Production & Logistics{% endif %}"
-                     loading="lazy" width="1500" height="735">
+                     loading="lazy" width="1500" height="735" decoding="async">
             </div>
         </div>
 
@@ -289,7 +293,7 @@
             <div class="hww-stage-visual hww-stage-visual-img">
                 <img src="{% static 'img/stages/04-onsite-setup.jpg' %}"
                      alt="{% if LANGUAGE_CODE == 'ar' %}التركيب والاختبار في الموقع{% else %}On-Site Setup & Testing{% endif %}"
-                     loading="lazy" width="1500" height="735">
+                     loading="lazy" width="1500" height="735" decoding="async">
             </div>
         </div>
 
@@ -317,7 +321,7 @@
             <div class="hww-stage-visual hww-stage-visual-img">
                 <img src="{% static 'img/stages/05-live-operations.jpg' %}"
                      alt="{% if LANGUAGE_CODE == 'ar' %}التشغيل المباشر والمراقبة{% else %}Live Operations & Monitoring{% endif %}"
-                     loading="lazy" width="1500" height="735">
+                     loading="lazy" width="1500" height="735" decoding="async">
             </div>
         </div>
 

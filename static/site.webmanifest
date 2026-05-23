@@ -1,0 +1,21 @@
+{
+  "name": "Pro Event",
+  "short_name": "ProEvent",
+  "description": "Egypt's #1 Technical Event Partner — AV production for conferences and corporate events.",
+  "start_url": "/en/",
+  "scope": "/",
+  "display": "standalone",
+  "orientation": "portrait-primary",
+  "background_color": "#0A0E1A",
+  "theme_color": "#FF6B35",
+  "lang": "en",
+  "categories": ["business", "productivity"],
+  "icons": [
+    {
+      "src": "/static/img/favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}
