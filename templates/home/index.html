@@ -12,13 +12,12 @@
     <meta name="keywords" content="تنظيم مؤتمرات, شركة فعاليات مصر, شاشات LED, إنتاج فيديو, بث مباشر, تأجير معدات صوت وضوء, AV solutions, conference setup Egypt, Pro Event">
     {% else %}
     <title>Pro Event – Egypt's #1 Technical Event &amp; AV Production Partner</title>
-    <meta name="description" content="Pro Event delivers end-to-end AV production for conferences, exhibitions and corporate events in Egypt. LED screens, audio systems, lighting, live streaming, video production — with 12+ years of on-site experience. Free quote within 24 hours.">
+    <meta name="description" content="Pro Event delivers end-to-end AV production for conferences, exhibitions and corporate events in Egypt. LED screens, audio systems, lighting, live streaming, video production — with an experienced on-site engineering team. Free quote within 24 hours.">
     <meta name="keywords" content="event production Egypt, AV company Cairo, conference setup, LED screen rental, live streaming Egypt, corporate events, technical event partner, Pro Event">
     {% endif %}
 
     <meta name="author" content="Pro Event">
     <meta name="robots" content="index, follow, max-image-preview:large">
-    <meta name="generator" content="Pro Event Operations Platform">
     {% if GOOGLE_SITE_VERIFICATION %}<meta name="google-site-verification" content="{{ GOOGLE_SITE_VERIFICATION }}">{% endif %}
 
     <!-- Canonical + language alternates -->
@@ -35,10 +34,10 @@
     <meta property="og:url" content="https://proevent.onrender.com{{ request.path }}">
     {% if LANGUAGE_CODE == 'ar' %}
     <meta property="og:title" content="Pro Event – شركة تنظيم مؤتمرات وفعاليات الشركات في مصر">
-    <meta property="og:description" content="الشريك التقني الأول للفعاليات في مصر. حلول AV احترافية، شاشات LED، أنظمة صوت، إضاءة، بث مباشر، وإنتاج فيديو. +12 سنة خبرة، +200 فعالية منفذة.">
+    <meta property="og:description" content="الشريك التقني للفعاليات في مصر. حلول AV احترافية، شاشات LED، أنظمة صوت، إضاءة، بث مباشر، وإنتاج فيديو. فريق هندسي متخصص ودعم فني في موقعك.">
     {% else %}
     <meta property="og:title" content="Pro Event – Egypt's #1 Technical Event &amp; AV Production Partner">
-    <meta property="og:description" content="End-to-end AV production for conferences, exhibitions and corporate events in Egypt. 12+ years experience, 200+ events delivered, 98% client satisfaction.">
+    <meta property="og:description" content="End-to-end AV production for conferences, exhibitions and corporate events in Egypt. Experienced engineering team, on-site technical support, free quote within 24 hours.">
     {% endif %}
     <meta property="og:image" content="https://proevent.onrender.com{% static 'img/hero-poster.jpg' %}">
     <meta property="og:image:width" content="1920">
@@ -99,14 +98,7 @@
         "Live Streaming",
         "Stage Lighting",
         "Corporate Event Management"
-      ],
-      "aggregateRating": {
-        "@type": "AggregateRating",
-        "ratingValue": "4.9",
-        "reviewCount": "200",
-        "bestRating": "5",
-        "worstRating": "1"
-      }
+      ]
     }
     </script>
 
@@ -254,27 +246,10 @@
             </a>
         </div>
 
-        <div class="hero-stats" data-aos="fade-up" data-aos-delay="400">
-            <div class="stat-item stat-accent-orange">
-                <span class="stat-icon stat-emoji" aria-hidden="true">🚚</span>
-                <span class="stat-num">200+</span>
-                <span class="stat-label">{% if LANGUAGE_CODE == 'ar' %}فعالية<br>منجزة{% else %}Events<br>Delivered{% endif %}</span>
-            </div>
-            <div class="stat-item stat-accent-blue">
-                <span class="stat-icon stat-emoji" aria-hidden="true">🏆</span>
-                <span class="stat-num">12+</span>
-                <span class="stat-label">{% if LANGUAGE_CODE == 'ar' %}سنوات<br>خبرة{% else %}Years<br>Experience{% endif %}</span>
-            </div>
-            <div class="stat-item stat-accent-orange">
-                <span class="stat-icon stat-emoji" aria-hidden="true">🤝</span>
-                <span class="stat-num">98%</span>
-                <span class="stat-label">{% if LANGUAGE_CODE == 'ar' %}رضا<br>العملاء{% else %}Client<br>Satisfaction{% endif %}</span>
-            </div>
-            <div class="stat-item stat-accent-blue">
-                <span class="stat-icon stat-emoji" aria-hidden="true">🏢</span>
-                <span class="stat-num">50+</span>
-                <span class="stat-label">{% if LANGUAGE_CODE == 'ar' %}عملاء<br>مؤسسيون{% else %}Corporate<br>Clients{% endif %}</span>
-            </div>
+        <div class="hero-trust" data-aos="fade-up" data-aos-delay="400">
+            <span class="hero-trust-item"><i class="bi bi-check-circle-fill"></i>{% if LANGUAGE_CODE == 'ar' %}عرض سعر خلال 24 ساعة{% else %}Quote within 24 hours{% endif %}</span>
+            <span class="hero-trust-item"><i class="bi bi-check-circle-fill"></i>{% if LANGUAGE_CODE == 'ar' %}فريق هندسي في موقعك{% else %}On-site engineering crew{% endif %}</span>
+            <span class="hero-trust-item"><i class="bi bi-check-circle-fill"></i>{% if LANGUAGE_CODE == 'ar' %}استشارة بدون التزام{% else %}No-obligation consultation{% endif %}</span>
         </div>
     </div>
 
@@ -403,14 +378,15 @@
             <div class="why-visual" data-aos="fade-left">
             {% endif %}
                 <div class="why-img-main">
-                    <img src="https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=600&q=80" alt="Conference event" loading="lazy" decoding="async">
-                </div>
-                <div class="why-img-badge">
-                    <i class="bi bi-award-fill text-warning fs-2"></i>
-                    <span>{% if LANGUAGE_CODE == 'ar' %}جائزة<br><strong>قطاع AV</strong>{% else %}Industry<br><strong>Award Winner</strong>{% endif %}</span>
+                    <div class="media-placeholder media-placeholder-lg">
+                        <i class="bi bi-camera-reels-fill"></i>
+                        <span>{% if LANGUAGE_CODE == 'ar' %}صور من فعالياتنا قريبًا{% else %}Our event photos coming soon{% endif %}</span>
+                    </div>
                 </div>
                 <div class="why-img-float">
-                    <img src="https://images.unsplash.com/photo-1505373877841-8d25f7d46678?w=280&q=80" alt="Event production" loading="lazy" decoding="async">
+                    <div class="media-placeholder">
+                        <i class="bi bi-projector-fill"></i>
+                    </div>
                 </div>
             </div>
 
@@ -522,7 +498,7 @@
                 <!-- Default placeholder items when DB is empty -->
                 <div class="portfolio-card" data-type="conference">
                     <div class="portfolio-img">
-                        <img src="https://images.unsplash.com/photo-1587825140708-dfaf72ae4b04?w=600&q=80" alt="Tech Summit" loading="lazy" decoding="async">
+                        <div class="media-placeholder"><i class="bi bi-easel2-fill"></i></div>
                         <div class="portfolio-overlay">
                             <span class="portfolio-tag">{% if LANGUAGE_CODE == 'ar' %}مؤتمر{% else %}Conference{% endif %}</span>
                             <h4>{% if LANGUAGE_CODE == 'ar' %}قمة التقنية 2024{% else %}Tech Summit 2024{% endif %}</h4>
@@ -533,7 +509,7 @@
                 </div>
                 <div class="portfolio-card" data-type="corporate">
                     <div class="portfolio-img">
-                        <img src="https://images.unsplash.com/photo-1515187029135-18ee286d815b?w=600&q=80" alt="Corporate Event" loading="lazy" decoding="async">
+                        <div class="media-placeholder"><i class="bi bi-people-fill"></i></div>
                         <div class="portfolio-overlay">
                             <span class="portfolio-tag">{% if LANGUAGE_CODE == 'ar' %}شركات{% else %}Corporate{% endif %}</span>
                             <h4>{% if LANGUAGE_CODE == 'ar' %}قمة القيادة السنوية{% else %}Annual Leadership Summit{% endif %}</h4>
@@ -544,7 +520,7 @@
                 </div>
                 <div class="portfolio-card" data-type="conference">
                     <div class="portfolio-img">
-                        <img src="https://images.unsplash.com/photo-1475721027785-f74eccf877e2?w=600&q=80" alt="Medical Congress" loading="lazy" decoding="async">
+                        <div class="media-placeholder"><i class="bi bi-translate"></i></div>
                         <div class="portfolio-overlay">
                             <span class="portfolio-tag">{% if LANGUAGE_CODE == 'ar' %}مؤتمر{% else %}Conference{% endif %}</span>
                             <h4>{% if LANGUAGE_CODE == 'ar' %}المؤتمر الطبي 2024{% else %}Medical Congress 2024{% endif %}</h4>
@@ -555,7 +531,7 @@
                 </div>
                 <div class="portfolio-card" data-type="corporate">
                     <div class="portfolio-img">
-                        <img src="https://images.unsplash.com/photo-1529543544282-ea669407fca3?w=600&q=80" alt="Product Launch" loading="lazy" decoding="async">
+                        <div class="media-placeholder"><i class="bi bi-rocket-takeoff-fill"></i></div>
                         <div class="portfolio-overlay">
                             <span class="portfolio-tag">{% if LANGUAGE_CODE == 'ar' %}شركات{% else %}Corporate{% endif %}</span>
                             <h4>{% if LANGUAGE_CODE == 'ar' %}إطلاق منتج عالمي{% else %}Global Product Launch{% endif %}</h4>
@@ -648,92 +624,6 @@
 
 
 <!-- ══════════════════════════════════════════════
-     TESTIMONIALS
-══════════════════════════════════════════════ -->
-<section class="section-pad bg-section-alt testimonials-section">
-    <div class="container-xl">
-        <div class="section-header" data-aos="fade-up">
-            <span class="section-tag">{% if LANGUAGE_CODE == 'ar' %}آراء العملاء{% else %}Client Reviews{% endif %}</span>
-            <h2 class="section-title">{% if LANGUAGE_CODE == 'ar' %}موثوق به من قادة الصناعة{% else %}Trusted by Industry Leaders{% endif %}</h2>
-            <p class="section-subtitle">
-                {% if LANGUAGE_CODE == 'ar' %}آراء حقيقية من الشركات التي عايشت عملنا عن كثب.{% else %}Real feedback from the companies that have experienced our work first-hand.{% endif %}
-            </p>
-        </div>
-
-        <div class="testimonials-grid" data-aos="fade-up" data-aos-delay="100">
-
-            <div class="testimonial-card">
-                <div class="testi-stars"><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i></div>
-                <p class="testi-text">
-                    {% if LANGUAGE_CODE == 'ar' %}
-                        "حوّلت Pro Event مؤتمرنا السنوي إلى تجربة احترافية رائعة. جدار LED كان مذهلاً والصوت كان نقياً طوال القاعة."
-                    {% else %}
-                        "Pro Event transformed our annual conference into an incredibly professional experience. The LED wall was stunning and the sound was crystal clear throughout the 3,000-seat hall."
-                    {% endif %}
-                </p>
-                <div class="testi-author">
-                    <div class="testi-avatar">MA</div>
-                    <div>
-                        <strong>{% if LANGUAGE_CODE == 'ar' %}محمد الراشد{% else %}Mohammed Al-Rashid{% endif %}</strong>
-                        <span>{% if LANGUAGE_CODE == 'ar' %}مدير الفعاليات، TechCorp ME{% else %}Events Director, TechCorp ME{% endif %}</span>
-                    </div>
-                </div>
-            </div>
-
-            <div class="testimonial-card featured-testi">
-                <div class="testi-stars"><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i></div>
-                <p class="testi-text">
-                    {% if LANGUAGE_CODE == 'ar' %}
-                        "تعاملنا مع شركات AV كثيرة على مدار السنين. Pro Event تتميز باحترافيتها وسرعة الإعداد والخبرة التقنية التي يجلبها فريقها. لا يُفوّتون شيئاً."
-                    {% else %}
-                        "We've worked with many AV companies over the years. Pro Event stands out for their professionalism, rapid setup, and the technical expertise their team brings on-site. They don't miss a beat."
-                    {% endif %}
-                </p>
-                <div class="testi-author">
-                    <div class="testi-avatar">SL</div>
-                    <div>
-                        <strong>Sarah Lindström</strong>
-                        <span>{% if LANGUAGE_CODE == 'ar' %}مدير الفعاليات العالمي، Nexus Group{% else %}Global Events Manager, Nexus Group{% endif %}</span>
-                    </div>
-                </div>
-            </div>
-
-            <div class="testimonial-card">
-                <div class="testi-stars"><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i></div>
-                <p class="testi-text">
-                    {% if LANGUAGE_CODE == 'ar' %}
-                        "بدا جناحنا في جيتكس رائعاً بفضل إعداد جدار الفيديو من Pro Event. زاد حجم الزيارات بنسبة 40% مقارنة بالعام الماضي."
-                    {% else %}
-                        "Our GITEX booth looked incredible thanks to Pro Event's video wall setup. Foot traffic increased by 40% compared to last year. Our brand finally looked as premium as it deserves."
-                    {% endif %}
-                </p>
-                <div class="testi-author">
-                    <div class="testi-avatar">KJ</div>
-                    <div>
-                        <strong>{% if LANGUAGE_CODE == 'ar' %}خالد جاسم{% else %}Khalid Jassim{% endif %}</strong>
-                        <span>{% if LANGUAGE_CODE == 'ar' %}نائب رئيس التسويق، فلك للابتكار{% else %}Marketing VP, Falak Innovations{% endif %}</span>
-                    </div>
-                </div>
-            </div>
-
-        </div>
-
-        <div class="client-logos-strip" data-aos="fade-up" data-aos-delay="200">
-            <span class="logos-label">{% if LANGUAGE_CODE == 'ar' %}يثق بنا{% else %}Trusted By{% endif %}</span>
-            <div class="logos-track">
-                <div class="logo-item"><i class="bi bi-building-fill"></i> TechCorp</div>
-                <div class="logo-item"><i class="bi bi-building-fill"></i> Nexus Group</div>
-                <div class="logo-item"><i class="bi bi-building-fill"></i> Falak Inc</div>
-                <div class="logo-item"><i class="bi bi-building-fill"></i> Gulf Expo</div>
-                <div class="logo-item"><i class="bi bi-building-fill"></i> Meridian</div>
-                <div class="logo-item"><i class="bi bi-building-fill"></i> AlFajr Co</div>
-            </div>
-        </div>
-    </div>
-</section>
-
-
-<!-- ══════════════════════════════════════════════
      CTA SECTION
 ══════════════════════════════════════════════ -->
 <section class="cta-section">
@@ -812,11 +702,11 @@
             <div class="cta-banner-trust">
                 <div class="cta-trust-item">
                     <i class="bi bi-shield-check"></i>
-                    <span>{% if LANGUAGE_CODE == 'ar' %}+12 سنة خبرة{% else %}12+ Years Experience{% endif %}</span>
+                    <span>{% if LANGUAGE_CODE == 'ar' %}فريق هندسي متخصص{% else %}Specialized Engineering Team{% endif %}</span>
                 </div>
                 <div class="cta-trust-item">
                     <i class="bi bi-people-fill"></i>
-                    <span>{% if LANGUAGE_CODE == 'ar' %}+50 عميل مؤسسي{% else %}50+ Corporate Clients{% endif %}</span>
+                    <span>{% if LANGUAGE_CODE == 'ar' %}دعم فني في موقعك{% else %}On-Site Technical Support{% endif %}</span>
                 </div>
                 <div class="cta-trust-item">
                     <i class="bi bi-clock-history"></i>
@@ -1050,7 +940,7 @@
         </div>
 
         <div class="footer-bottom">
-            <p>&copy; 2024 Pro Event. {% if LANGUAGE_CODE == 'ar' %}جميع الحقوق محفوظة.{% else %}All rights reserved.{% endif %}</p>
+            <p>&copy; {% now "Y" %} Pro Event. {% if LANGUAGE_CODE == 'ar' %}جميع الحقوق محفوظة.{% else %}All rights reserved.{% endif %}</p>
             <p>{% if LANGUAGE_CODE == 'ar' %}مصمم للأداء وتوليد العملاء.{% else %}Designed for performance &amp; lead generation.{% endif %}</p>
         </div>
     </div>
