@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+{% block title %}تم استلام طلبك · ProEvent{% endblock %}
+{% block heading %}تم استلام طلبك{% endblock %}
+{% block extra_css %}<link href="/static/css/packages.css" rel="stylesheet">{% endblock %}
+
+{% block content %}
+<div class="pk-wrap">
+    <div class="pk-panel text-center" style="max-width:560px;margin:0 auto;">
+        <div style="font-size:3.4rem;color:var(--pk-success)"><i class="bi bi-check-circle-fill"></i></div>
+        <h2 class="fw-bold mt-2">تم استلام طلب التعاقد بنجاح!</h2>
+        <p class="text-muted">بعتنالك إيميل تأكيد بالتفاصيل، وفريقنا هيتواصل معك قريبًا لإتمام التفعيل.</p>
+        <a href="{% url 'subscriptions:pricing' %}" class="pk-btn pk-btn--ghost mt-2" style="max-width:240px;margin:0 auto;">
+            <i class="bi bi-arrow-right"></i>رجوع للباقات
+        </a>
+    </div>
+</div>
+{% endblock %}

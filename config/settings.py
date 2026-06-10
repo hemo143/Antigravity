@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'apps.events',
     'apps.dashboard',
     'apps.management',
+    'apps.subscriptions',
 ]
 
 MIDDLEWARE = [
@@ -150,6 +151,9 @@ RESEND_FROM_EMAIL = config('RESEND_FROM_EMAIL', default='onboarding@resend.dev')
 
 # Recipient(s) who get a notification on every new quote request
 QUOTE_NOTIFICATION_EMAIL = config('QUOTE_NOTIFICATION_EMAIL', default='')
+
+# الإيميل اللي بيوصله تنبيه بكل طلب تعاقد جديد (لو فاضي بيستخدم EMAIL_HOST_USER)
+CONTRACT_NOTIFICATION_EMAIL = config('CONTRACT_NOTIFICATION_EMAIL', default='')
 
 # Search Console verification (set via env on Render)
 GOOGLE_SITE_VERIFICATION = config('GOOGLE_SITE_VERIFICATION', default='')

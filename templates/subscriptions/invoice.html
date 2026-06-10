@@ -1,0 +1,72 @@
+{% extends 'base.html' %}
+{% block title %}فاتورة {{ invoice.number }} · ProEvent{% endblock %}
+{% block heading %}الفاتورة{% endblock %}
+{% block extra_css %}<link href="/static/css/packages.css" rel="stylesheet">{% endblock %}
+
+{% block content %}
+<div class="pk-wrap">
+
+    <div class="text-center mb-3 pk-noprint">
+        <a href="{% url 'subscriptions:invoice_pdf' invoice.pk %}" class="pk-btn pk-btn--cta" style="max-width:220px;display:inline-flex;margin:0 6px;">
+            <i class="bi bi-file-earmark-pdf"></i>تحميل PDF
+        </a>
+        <button onclick="window.print()" class="pk-btn pk-btn--ghost" style="max-width:160px;display:inline-flex;margin:0 6px;">
+            <i class="bi bi-printer"></i>طباعة
+        </button>
+    </div>
+
+    <div class="pk-invoice">
+        <div class="pk-invoice__head">
+            <div>
+                <div style="font-size:1.6rem;font-weight:800">ProEvent</div>
+                <div style="opacity:.9">شريكك التقني لنجاح الفعاليات</div>
+            </div>
+            <div class="text-end">
+                <div style="font-size:1.3rem;font-weight:800">فاتورة</div>
+                <div style="opacity:.95">{{ invoice.number }}</div>
+                <div style="opacity:.85;font-size:.9rem">{{ invoice.issued_date|date:"Y/m/d" }}</div>
+            </div>
+        </div>
+
+        <div class="pk-invoice__body">
+            <div class="row mb-4">
+                <div class="col-sm-6">
+                    <div class="text-muted small text-uppercase fw-bold mb-1">فاتورة إلى</div>
+                    <div class="fw-bold fs-5">{{ invoice.contract.company_name }}</div>
+                    <div class="text-muted">{{ invoice.contract.contact_email }}</div>
+                    <div class="text-muted" dir="ltr" style="text-align:start">{{ invoice.contract.contact_phone }}</div>
+                </div>
+                <div class="col-sm-6 text-sm-end mt-3 mt-sm-0">
+                    <div class="text-muted small text-uppercase fw-bold mb-1">الحالة</div>
+                    <span class="pk-badge pk-badge--{{ invoice.status }}" style="font-size:.95rem">{{ invoice.get_status_display }}</span>
+                </div>
+            </div>
+
+            <table class="pk-table mb-4">
+                <thead><tr><th>الوصف</th><th class="text-end">المبلغ</th></tr></thead>
+                <tbody>
+                    <tr>
+                        <td>
+                            <div class="fw-bold">باقة {{ invoice.contract.package.get_name_display }}</div>
+                            <div class="text-muted small">اشتراك {{ invoice.contract.get_payment_method_display }}</div>
+                        </td>
+                        <td class="text-end fw-bold">{{ invoice.amount|floatformat:2 }} ج.م</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <div class="pk-invoice__total">
+                <div class="box">
+                    <div class="d-flex justify-content-between py-2 border-top">
+                        <span class="fw-bold fs-5">الإجمالي</span>
+                        <span class="fw-bold fs-5" style="color:var(--pk-primary)">{{ invoice.amount|floatformat:2 }} ج.م</span>
+                    </div>
+                </div>
+            </div>
+
+            <p class="text-muted small text-center mt-4 mb-0">شكرًا لتعاملك مع ProEvent 🎉</p>
+        </div>
+    </div>
+
+</div>
+{% endblock %}

@@ -1,0 +1,116 @@
+{% extends 'base.html' %}
+{% load i18n %}
+
+{% block title %}طلب تعاقد · ProEvent{% endblock %}
+{% block heading %}طلب تعاقد{% endblock %}
+{% block extra_css %}<link href="/static/css/packages.css" rel="stylesheet">{% endblock %}
+
+{% block content %}
+<div class="pk-wrap">
+<form method="post" novalidate>
+    {% csrf_token %}
+    <div class="row g-4">
+
+        <!-- بيانات الفورم -->
+        <div class="col-lg-7">
+            <div class="pk-panel mb-4">
+                <h2 class="pk-section-title">بيانات الشركة / المنظّم</h2>
+                <div class="mb-3">
+                    <label class="form-label">{{ form.company_name.label }}</label>
+                    {{ form.company_name }}
+                    {% for e in form.company_name.errors %}<div class="text-danger small mt-1">{{ e }}</div>{% endfor %}
+                </div>
+                <div class="row">
+                    <div class="col-sm-6 mb-3">
+                        <label class="form-label">{{ form.contact_email.label }}</label>
+                        {{ form.contact_email }}
+                        {% for e in form.contact_email.errors %}<div class="text-danger small mt-1">{{ e }}</div>{% endfor %}
+                    </div>
+                    <div class="col-sm-6 mb-3">
+                        <label class="form-label">{{ form.contact_phone.label }}</label>
+                        {{ form.contact_phone }}
+                        {% for e in form.contact_phone.errors %}<div class="text-danger small mt-1">{{ e }}</div>{% endfor %}
+                    </div>
+                </div>
+            </div>
+
+            <div class="pk-panel mb-4">
+                <h2 class="pk-section-title">الباقة وطريقة الدفع</h2>
+                <div class="mb-3">
+                    <label class="form-label">{{ form.package.label }}</label>
+                    {{ form.package }}
+                    {% for e in form.package.errors %}<div class="text-danger small mt-1">{{ e }}</div>{% endfor %}
+                </div>
+                <label class="form-label">{{ form.payment_method.label }}</label>
+                <div class="pk-pay-options mb-3">
+                    {% for radio in form.payment_method %}
+                    <label>{{ radio.tag }}<span>{{ radio.choice_label }}</span></label>
+                    {% endfor %}
+                </div>
+                <div class="mb-2">
+                    <label class="form-label">{{ form.notes.label }}</label>
+                    {{ form.notes }}
+                </div>
+            </div>
+        </div>
+
+        <!-- ملخص العقد -->
+        <div class="col-lg-5">
+            <div class="pk-summary">
+                <h5 class="mb-3"><i class="bi bi-receipt me-2"></i>ملخص العقد</h5>
+                <div class="row-line"><span>الباقة</span><span id="sum-package">—</span></div>
+                <div class="row-line"><span>طريقة الدفع</span><span id="sum-method">—</span></div>
+                <div class="row-line"><span>عدد الفعاليات</span><span id="sum-events">—</span></div>
+                <div class="row-line"><span>عدد الحضور</span><span id="sum-attendees">—</span></div>
+                <div class="row-line" style="border:0"><span>الإجمالي</span><span class="total" id="sum-total">—</span></div>
+                <button type="submit" class="pk-btn pk-btn--cta mt-3">
+                    <i class="bi bi-check2-circle"></i>تأكيد طلب التعاقد
+                </button>
+                <p class="small mt-2 mb-0" style="color:#aab2c5">هنراجع طلبك ونتواصل معك لإتمام التفعيل.</p>
+            </div>
+        </div>
+    </div>
+</form>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+    var PKG = {};
+    {% for p in packages %}
+    PKG["{{ p.pk }}"] = {
+        name: "{{ p.get_name_display|escapejs }}",
+        monthly: {{ p.price_monthly|floatformat:0 }},
+        yearly: {{ p.price_yearly|floatformat:0 }},
+        events: {{ p.max_events }},
+        attendees: {{ p.max_attendees }}
+    };
+    {% endfor %}
+
+    function updateSummary() {
+        var pkgSel = document.getElementById("id_package");
+        var method = document.querySelector('input[name="payment_method"]:checked');
+        var p = pkgSel && PKG[pkgSel.value];
+        var m = method ? method.value : 'monthly';
+        if (!p) {
+            ["sum-package","sum-method","sum-events","sum-attendees","sum-total"].forEach(function(id){
+                document.getElementById(id).textContent = "—"; });
+            return;
+        }
+        document.getElementById("sum-package").textContent = p.name;
+        document.getElementById("sum-method").textContent = (m === 'yearly' ? 'سنوي' : 'شهري');
+        document.getElementById("sum-events").textContent = p.events;
+        document.getElementById("sum-attendees").textContent = p.attendees;
+        var total = (m === 'yearly') ? p.yearly : p.monthly;
+        document.getElementById("sum-total").textContent = total.toLocaleString() + " ج.م";
+    }
+    document.addEventListener("DOMContentLoaded", function () {
+        var pkgSel = document.getElementById("id_package");
+        if (pkgSel) pkgSel.addEventListener("change", updateSummary);
+        document.querySelectorAll('input[name="payment_method"]').forEach(function (r) {
+            r.addEventListener("change", updateSummary);
+        });
+        updateSummary();
+    });
+</script>
+{% endblock %}

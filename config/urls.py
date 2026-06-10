@@ -33,6 +33,8 @@ urlpatterns += i18n_patterns(
     path('dashboard/', include('apps.dashboard.urls', namespace='dashboard')),
     path('events/', include('apps.events.urls', namespace='events')),
     path('management/', include('apps.management.urls', namespace='management')),
+    # نظام الباقات والتعاقد (/pricing /contract /portal /invoice/<id>)
+    path('', include('apps.subscriptions.urls', namespace='subscriptions')),
 
     # API URLs
     path('api/v1/', include('apps.events.api_urls', namespace='api')),
