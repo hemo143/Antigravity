@@ -1,99 +1,170 @@
 {% extends 'base.html' %}
 {% load i18n %}
 
-{% block title %}{{ event.title }} - EventPro{% endblock %}
+{% block title %}{{ event.title }} · ProEvent{% endblock %}
 
 {% block heading %}{% trans "Event Details" %}{% endblock %}
 
+{% block extra_css %}<link href="/static/css/events.css" rel="stylesheet">{% endblock %}
+
 {% block content %}
-<div class="row">
-    <div class="col-md-9">
-        <div class="card shadow-sm mb-4">
+<div class="ev-wrap">
+<div class="row g-4">
+
+    <!-- ═══ MAIN COLUMN ═══ -->
+    <div class="col-lg-8">
+
+        <!-- Hero / cover -->
+        <div class="ev-hero mb-4">
             {% if event.cover_image %}
-                <img src="{{ event.cover_image.url }}" class="card-img-top" style="max-height: 400px; object-fit: cover;">
+                <img src="{{ event.cover_image.url }}" alt="{{ event.title }}" class="ev-hero__img">
             {% endif %}
-            <div class="card-body">
-                <div class="d-flex justify-content-between align-items-center mb-3">
-                    <h1 class="fw-bold mb-0">{{ event.title }}</h1>
-                    {% if event.category %}
-                    <span class="badge" style="background:{{ event.category.color }}; border-radius: 4px;">{{ event.category.name }}</span>
-                    {% endif %}
-                </div>
-                
-                <div class="mb-4">
-                   <h5><strong>{% trans "Description" %}</strong></h5>
-                   <p>{{ event.description|linebreaks }}</p>
-                </div>
-
-                <hr>
-
-                <div class="row text-muted">
-                    <div class="col-sm-6">
-                        <p><i class="bi bi-calendar3 me-2"></i><strong>{% trans "Start" %}:</strong> {{ event.start_date|date:"F d, Y · g:i A" }}</p>
-                        <p><i class="bi bi-calendar3-range me-2"></i><strong>{% trans "End" %}:</strong> {{ event.end_date|date:"F d, Y · g:i A" }}</p>
-                    </div>
-                    <div class="col-sm-6">
-                        <p><i class="bi bi-geo-alt-fill me-2"></i><strong>{% trans "Venue" %}:</strong> {{ event.venue }}</p>
-                        <p><i class="bi bi-map me-2"></i><strong>{% trans "City" %}:</strong> {{ event.city|default:"—" }}</p>
-                    </div>
+            <div class="ev-hero__scrim"></div>
+            <div class="ev-hero__body">
+                {% if event.category %}<span class="ev-badge-cat">{{ event.category.name }}</span>{% endif %}
+                <h1 class="ev-hero__title">{{ event.title }}</h1>
+                <div class="ev-meta">
+                    <span class="ev-meta__chip"><i class="bi bi-calendar3"></i>{{ event.start_date|date:"D, M d, Y" }}</span>
+                    <span class="ev-meta__chip"><i class="bi bi-clock"></i>{{ event.start_date|date:"g:i A" }}</span>
+                    <span class="ev-meta__chip"><i class="bi bi-geo-alt-fill"></i>{{ event.venue }}{% if event.city %}, {{ event.city }}{% endif %}</span>
+                    {% if event.is_online %}<span class="ev-meta__chip"><i class="bi bi-broadcast"></i>{% trans "Online" %}</span>{% endif %}
                 </div>
             </div>
         </div>
+
+        <!-- Description -->
+        <div class="ev-card ev-card--pad mb-4">
+            <h2 class="ev-section-title">{% trans "About this event" %}</h2>
+            <div class="ev-desc">{{ event.description|linebreaks }}</div>
+
+            <hr class="my-4" style="border-color: var(--ev-border);">
+
+            <div class="row g-3">
+                <div class="col-sm-6">
+                    <div class="ev-stat"><span class="ev-stat__label"><i class="bi bi-calendar-check me-2"></i>{% trans "Starts" %}</span>
+                        <span class="ev-stat__value">{{ event.start_date|date:"M d · g:i A" }}</span></div>
+                    <div class="ev-stat"><span class="ev-stat__label"><i class="bi bi-calendar-x me-2"></i>{% trans "Ends" %}</span>
+                        <span class="ev-stat__value">{{ event.end_date|date:"M d · g:i A" }}</span></div>
+                </div>
+                <div class="col-sm-6">
+                    <div class="ev-stat"><span class="ev-stat__label"><i class="bi bi-geo-alt me-2"></i>{% trans "Venue" %}</span>
+                        <span class="ev-stat__value">{{ event.venue }}</span></div>
+                    <div class="ev-stat"><span class="ev-stat__label"><i class="bi bi-map me-2"></i>{% trans "City" %}</span>
+                        <span class="ev-stat__value">{{ event.city|default:"—" }}</span></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Related events -->
+        {% if related_events %}
+        <h2 class="ev-section-title">{% trans "You may also like" %}</h2>
+        <div class="row g-3 mb-2">
+            {% for rel in related_events %}
+            <div class="col-sm-4">
+                <a href="{% url 'events:event_detail' rel.slug %}" class="d-block h-100">
+                    <div class="ev-card ev-related-card">
+                        {% if rel.cover_image %}<img src="{{ rel.cover_image.url }}" class="ev-related-card__img" alt="{{ rel.title }}">
+                        {% else %}<div class="ev-related-card__img"></div>{% endif %}
+                        <div class="ev-related-card__body">
+                            <div class="ev-related-card__title">{{ rel.title|truncatechars:42 }}</div>
+                            <small class="text-muted mt-auto"><i class="bi bi-calendar3 me-1"></i>{{ rel.start_date|date:"M d, Y" }}</small>
+                        </div>
+                    </div>
+                </a>
+            </div>
+            {% endfor %}
+        </div>
+        {% endif %}
     </div>
 
-    <div class="col-md-3">
-        <!-- Booking Card -->
-        <div class="card card-primary card-outline shadow-sm mb-4">
-            <div class="card-body">
-                <h4 class="text-center fw-bold mb-3">
-                    {% if event.is_free %}FREE{% else %}${{ event.price }}{% endif %}
-                </h4>
-                
-                <ul class="list-group list-group-unbordered mb-3">
-                    <li class="list-group-item d-flex justify-content-between">
-                        <b>{% trans "Available Seats" %}</b> <span class="bg-primary badge">{{ event.available_seats }}</span>
-                    </li>
-                    <li class="list-group-item d-flex justify-content-between">
-                        <b>{% trans "Capacity" %}</b> <span>{{ event.capacity }}</span>
-                    </li>
-                </ul>
+    <!-- ═══ SIDEBAR ═══ -->
+    <div class="col-lg-4">
+        <div class="ev-booking">
 
-                {% if user.is_authenticated %}
-                    {% if user_booking %}
-                        <div class="alert alert-success text-center py-2">
-                            <i class="bi bi-check-circle-fill"></i> {% trans "You are booked!" %}
-                        </div>
-                    {% elif event.is_full %}
-                        <button class="btn btn-secondary w-100 disabled">{% trans "Event Full" %}</button>
+            <!-- Booking card -->
+            <div class="ev-card ev-card--pad mb-4">
+                <div class="text-center mb-3">
+                    {% if event.is_free %}
+                        <div class="ev-price ev-price--free">{% trans "FREE" %}</div>
                     {% else %}
-                        <a href="{% url 'events:book_event' event.slug %}" class="btn btn-primary w-100 fw-bold">{% trans "Book Now" %}</a>
+                        <div class="ev-price">${{ event.price }} <small>/ {% trans "ticket" %}</small></div>
                     {% endif %}
-                    <a href="{% url 'events:toggle_wishlist' event.slug %}" class="btn btn-outline-danger w-100 mt-2">
-                        <i class="bi bi-heart-fill me-1"></i>
-                        {% trans "Add to Wishlist" %}
-                    </a>
-                {% else %}
-                    <a href="{% url 'accounts:login' %}?next={{ request.path }}" class="btn btn-primary w-100 fw-bold">{% trans "Login to Book" %}</a>
-                {% endif %}
-            </div>
-        </div>
+                </div>
 
-        <!-- Organizer Card -->
-        <div class="card shadow-sm px-3 py-3">
-            <h6 class="text-muted text-uppercase small fw-bold">{% trans "Organizer" %}</h6>
-            <div class="d-flex align-items-center mt-2">
-                <div class="bg-secondary rounded-circle me-2" style="width: 40px; height: 40px;"></div>
-                <div>
-                    <div class="fw-bold">{{ event.organizer.username }}</div>
-                    <small class="text-muted">{% trans "Member since" %} {{ event.organizer.date_joined|date:"Y" }}</small>
+                <div class="ev-stat"><span class="ev-stat__label">{% trans "Available Seats" %}</span>
+                    <span class="ev-stat__value">{{ event.available_seats }}</span></div>
+                <div class="ev-progress"><div class="ev-progress__bar" style="width: {{ event.booking_percentage }}%;"></div></div>
+                <div class="d-flex justify-content-between"><small class="text-muted">{{ event.booking_percentage }}% {% trans "booked" %}</small>
+                    <small class="text-muted">{% trans "of" %} {{ event.capacity }}</small></div>
+
+                <div class="mt-4 d-grid gap-2">
+                    {% if user.is_authenticated %}
+                        {% if user_booking %}
+                            <div class="ev-booked-flag"><i class="bi bi-check-circle-fill"></i> {% trans "You are booked!" %}</div>
+                        {% elif event.is_full %}
+                            <button class="ev-btn is-disabled" disabled>{% trans "Sold Out" %}</button>
+                        {% else %}
+                            <a href="{% url 'events:book_event' event.slug %}" class="ev-btn ev-btn--cta">
+                                <i class="bi bi-ticket-perforated-fill"></i>{% trans "Book Now" %}</a>
+                        {% endif %}
+                        <a href="{% url 'events:toggle_wishlist' event.slug %}" class="ev-btn ev-btn--ghost ev-btn--wish">
+                            <i class="bi bi-heart"></i>{% trans "Add to Wishlist" %}</a>
+                    {% else %}
+                        <a href="{% url 'accounts:login' %}?next={{ request.path }}" class="ev-btn ev-btn--cta">
+                            <i class="bi bi-box-arrow-in-right"></i>{% trans "Login to Book" %}</a>
+                    {% endif %}
+
+                    {# Eventbrite Embedded Checkout — يظهر فقط لو فيه eb_event_id #}
+                    {% if event.eb_event_id %}
+                        <button id="eb-buy-{{ event.eb_event_id }}" type="button" class="ev-btn ev-btn--eventbrite">
+                            <i class="bi bi-bag-check-fill"></i>{% trans "Buy Ticket via Eventbrite" %}</button>
+                    {% endif %}
+
+                    {# رابط التفاعل المباشر — يظهر فقط لو فيه slido_code #}
+                    {% if event.slido_code %}
+                        <a href="{% url 'events:event_live' event.slug %}" class="ev-btn ev-btn--live">
+                            <i class="bi bi-broadcast"></i>{% trans "Join Live Q&A" %}</a>
+                    {% endif %}
                 </div>
             </div>
-            {% if user == event.organizer or user.is_admin %}
-            <a href="{% url 'events:event_attendees' event.slug %}" class="btn btn-outline-primary btn-sm mt-3 w-100">
-                <i class="bi bi-people-fill me-1"></i> {% trans "View Attendees" %}
-            </a>
-            {% endif %}
+
+            <!-- Organizer card -->
+            <div class="ev-card ev-card--pad">
+                <small class="text-muted text-uppercase fw-bold" style="letter-spacing:.06em;">{% trans "Organized by" %}</small>
+                <div class="ev-organizer mt-3">
+                    <div class="ev-avatar">{{ event.organizer.username|first|upper }}</div>
+                    <div>
+                        <div class="fw-bold">{{ event.organizer.get_full_name|default:event.organizer.username }}</div>
+                        <small class="text-muted">{% trans "Member since" %} {{ event.organizer.date_joined|date:"Y" }}</small>
+                    </div>
+                </div>
+                {% if user == event.organizer or user.is_admin %}
+                <a href="{% url 'events:event_attendees' event.slug %}" class="ev-btn ev-btn--ghost mt-3">
+                    <i class="bi bi-people-fill"></i> {% trans "View Attendees" %}</a>
+                {% endif %}
+            </div>
+
         </div>
     </div>
 </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+{% if event.eb_event_id %}
+<script src="https://www.eventbrite.com/static/widgets/eb_widgets.js"></script>
+<script>
+    // فتح نافذة شراء التذكرة من Eventbrite جوه الموقع (modal) عند الضغط على الزر
+    window.addEventListener('load', function () {
+        if (window.EBWidgets) {
+            window.EBWidgets.createWidget({
+                widgetType: 'checkout',
+                eventId: '{{ event.eb_event_id }}',
+                modal: true,
+                modalTriggerElementId: 'eb-buy-{{ event.eb_event_id }}'
+            });
+        }
+    });
+</script>
+{% endif %}
 {% endblock %}

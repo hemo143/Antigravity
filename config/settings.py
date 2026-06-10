@@ -154,6 +154,13 @@ QUOTE_NOTIFICATION_EMAIL = config('QUOTE_NOTIFICATION_EMAIL', default='')
 # Search Console verification (set via env on Render)
 GOOGLE_SITE_VERIFICATION = config('GOOGLE_SITE_VERIFICATION', default='')
 
+# ═══ Eventbrite Integration (set via env — never hardcode the token) ═══
+# Private OAuth token from https://www.eventbrite.com/platform/api-keys
+EVENTBRITE_TOKEN = config('EVENTBRITE_TOKEN', default='')
+# Optional: pin a specific Organization ID. If empty, the first org on the
+# token is auto-discovered at runtime.
+EVENTBRITE_ORG_ID = config('EVENTBRITE_ORG_ID', default='')
+
 # Legacy SMTP settings still parsed for local dev / fallback only
 EMAIL_HOST = config('EMAIL_HOST', default='smtp.gmail.com')
 EMAIL_PORT = config('EMAIL_PORT', default=587, cast=int)

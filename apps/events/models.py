@@ -72,6 +72,16 @@ class Event(models.Model):
     is_online = models.BooleanField(default=False)
     online_link = models.URLField(blank=True, null=True)
 
+    # ─── التكامل مع منصات خارجية (Eventbrite + Slido) ───
+    eb_event_id = models.CharField(
+        max_length=50, blank=True, default='',
+        help_text='Eventbrite numeric Event ID — يفعّل زر شراء التذكرة (Embedded Checkout)'
+    )
+    slido_code = models.CharField(
+        max_length=50, blank=True, default='',
+        help_text='Slido event code/hash — يفعّل صفحة التفاعل المباشر مع الحضور'
+    )
+
     # التذاكر والسعر
     capacity = models.PositiveIntegerField(default=100)
     price = models.DecimalField(max_digits=10, decimal_places=2, default=0.00)

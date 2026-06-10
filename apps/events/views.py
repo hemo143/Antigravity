@@ -1,6 +1,7 @@
 """
 Events Views - عرض وإدارة الأحداث
 """
+import requests
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
@@ -11,6 +12,7 @@ from django.core.mail import send_mail
 from django.conf import settings
 from .models import Event, Category, Booking, WishList
 from .forms import EventForm, CategoryForm, BookingForm, EventSearchForm
+from .eventbrite import fetch_org_events, EventbriteError
 
 
 # ─── PUBLIC VIEWS ────────────────────────────────────────────────────────────
@@ -88,6 +90,38 @@ def event_detail_view(request, slug):
         'booking_form': BookingForm(),
     }
     return render(request, 'events/event_detail.html', context)
+
+
+# ─── EVENTBRITE + SLIDO INTEGRATION ───────────────────────────────────────────
+
+def eventbrite_events_view(request):
+    """
+    يعرض فعاليات مؤسستك مباشرة من Eventbrite API.
+    لو التوكن مش مضبوط أو فيه مشكلة اتصال، بنعرض رسالة بدل ما الصفحة تقع.
+    """
+    eb_events, error = [], None
+    if not settings.EVENTBRITE_TOKEN:
+        error = 'لم يتم ضبط EVENTBRITE_TOKEN بعد.'
+    else:
+        try:
+            eb_events = fetch_org_events(status=request.GET.get('status', 'live'))
+        except EventbriteError as e:
+            error = str(e)
+        except requests.exceptions.HTTPError as e:
+            error = f'Eventbrite رفض الطلب: {e.response.status_code} (تأكد من صلاحية التوكن).'
+        except Exception as e:
+            error = f'تعذّر الاتصال بـ Eventbrite: {e}'
+
+    return render(request, 'events/eventbrite_list.html', {
+        'eb_events': eb_events,
+        'error': error,
+    })
+
+
+def event_live_view(request, slug):
+    """صفحة التفاعل المباشر مع الحضور عبر Slido (iframe)."""
+    event = get_object_or_404(Event, slug=slug, status='published')
+    return render(request, 'events/event_live.html', {'event': event})
 
 
 # ─── BOOKING VIEWS ────────────────────────────────────────────────────────────

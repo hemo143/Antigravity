@@ -36,6 +36,10 @@ class EventAdmin(admin.ModelAdmin):
         ('Tickets & Pricing', {
             'fields': ('capacity', 'price', 'is_free')
         }),
+        ('Integrations (Eventbrite + Slido)', {
+            'fields': ('eb_event_id', 'slido_code'),
+            'description': 'Eventbrite Event ID لتفعيل شراء التذكرة، و Slido code لتفعيل التفاعل المباشر.'
+        }),
         ('Status', {
             'fields': ('status', 'is_featured', 'created_at', 'updated_at')
         }),

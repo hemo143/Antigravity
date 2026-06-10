@@ -1,0 +1,178 @@
+/* ════════════════════════════════════════════════════════════════
+   Events UI — event_detail & event_live
+   كل الألوان متحكَّم فيها من CSS Variables تحت — عدّل من هنا بس.
+   ════════════════════════════════════════════════════════════════ */
+:root {
+    --ev-primary:        #ff6b35;   /* برتقالي البراند — CTA */
+    --ev-primary-dark:   #e2541d;
+    --ev-accent:         #4f8ef7;   /* أزرق ثانوي */
+    --ev-accent-dark:    #2f6fe0;
+    --ev-ink:            #1a1f36;   /* لون النص الأساسي */
+    --ev-muted:          #6b7280;   /* نص ثانوي */
+    --ev-bg:             #f7f8fb;   /* خلفية القسم */
+    --ev-card:           #ffffff;
+    --ev-border:         #e8ebf2;
+    --ev-success:        #1db954;
+    --ev-radius:         18px;
+    --ev-radius-sm:      12px;
+    --ev-shadow:         0 10px 30px rgba(20, 25, 45, .08);
+    --ev-shadow-hover:   0 18px 44px rgba(20, 25, 45, .16);
+    --ev-gradient:       linear-gradient(135deg, #ff6b35 0%, #ff9362 100%);
+    --ev-gradient-blue:  linear-gradient(135deg, #4f8ef7 0%, #6aa6ff 100%);
+    --ev-transition:     .25s cubic-bezier(.4, 0, .2, 1);
+}
+
+.ev-wrap { color: var(--ev-ink); }
+.ev-wrap a { text-decoration: none; }
+
+/* ─── Hero / cover ─────────────────────────────────────────────── */
+.ev-hero {
+    position: relative;
+    border-radius: var(--ev-radius);
+    overflow: hidden;
+    min-height: 320px;
+    display: flex;
+    align-items: flex-end;
+    box-shadow: var(--ev-shadow);
+    background: var(--ev-gradient);
+}
+.ev-hero__img {
+    position: absolute; inset: 0;
+    width: 100%; height: 100%;
+    object-fit: cover;
+}
+.ev-hero__scrim {
+    position: absolute; inset: 0;
+    background: linear-gradient(0deg, rgba(15,18,33,.88) 0%, rgba(15,18,33,.35) 55%, rgba(15,18,33,.15) 100%);
+}
+.ev-hero__body { position: relative; z-index: 2; padding: 32px; color: #fff; width: 100%; }
+.ev-hero__title { font-weight: 800; font-size: clamp(1.6rem, 4vw, 2.6rem); line-height: 1.1; margin: 10px 0 14px; }
+.ev-meta { display: flex; flex-wrap: wrap; gap: 10px; }
+.ev-meta__chip {
+    display: inline-flex; align-items: center; gap: 7px;
+    background: rgba(255,255,255,.14);
+    backdrop-filter: blur(6px);
+    border: 1px solid rgba(255,255,255,.22);
+    color: #fff; font-size: .86rem; font-weight: 500;
+    padding: 7px 13px; border-radius: 999px;
+}
+.ev-meta__chip i { color: var(--ev-primary); }
+.ev-badge-cat {
+    display: inline-block; font-size: .72rem; font-weight: 700; letter-spacing: .04em;
+    text-transform: uppercase; padding: 6px 14px; border-radius: 999px;
+    background: var(--ev-gradient); color: #fff;
+}
+
+/* ─── Cards ───────────────────────────────────────────────────── */
+.ev-card {
+    background: var(--ev-card);
+    border: 1px solid var(--ev-border);
+    border-radius: var(--ev-radius);
+    box-shadow: var(--ev-shadow);
+    transition: transform var(--ev-transition), box-shadow var(--ev-transition);
+}
+.ev-card--pad { padding: 26px; }
+.ev-section-title {
+    font-weight: 700; font-size: 1.05rem; margin-bottom: 14px;
+    display: flex; align-items: center; gap: 9px;
+}
+.ev-section-title::before {
+    content: ""; width: 5px; height: 20px; border-radius: 3px; background: var(--ev-gradient);
+}
+.ev-desc { color: #374151; line-height: 1.85; }
+
+/* ─── Sticky booking card ─────────────────────────────────────── */
+.ev-booking { position: sticky; top: 20px; }
+.ev-price { font-size: 2.1rem; font-weight: 800; color: var(--ev-ink); }
+.ev-price--free { color: var(--ev-success); }
+.ev-price small { font-size: .9rem; font-weight: 600; color: var(--ev-muted); }
+
+.ev-stat { display: flex; justify-content: space-between; align-items: center; padding: 11px 0; border-bottom: 1px dashed var(--ev-border); }
+.ev-stat:last-of-type { border-bottom: 0; }
+.ev-stat__label { color: var(--ev-muted); font-size: .9rem; }
+.ev-stat__value { font-weight: 700; }
+
+.ev-progress { height: 8px; border-radius: 999px; background: #eef1f6; overflow: hidden; margin: 6px 0 4px; }
+.ev-progress__bar { height: 100%; border-radius: 999px; background: var(--ev-gradient); transition: width .6s ease; }
+
+/* ─── Buttons ─────────────────────────────────────────────────── */
+.ev-btn {
+    display: inline-flex; align-items: center; justify-content: center; gap: 9px;
+    width: 100%; padding: 14px 18px; border: 0; cursor: pointer;
+    font-weight: 700; font-size: 1rem; border-radius: var(--ev-radius-sm);
+    transition: transform var(--ev-transition), box-shadow var(--ev-transition), background var(--ev-transition);
+}
+.ev-btn--cta {
+    color: #fff; background: var(--ev-gradient);
+    box-shadow: 0 8px 20px rgba(255, 107, 53, .35);
+}
+.ev-btn--cta:hover { transform: translateY(-2px); box-shadow: 0 12px 28px rgba(255, 107, 53, .5); color: #fff; }
+.ev-btn--eventbrite { color: #fff; background: #f05537; box-shadow: 0 8px 20px rgba(240,85,55,.3); }
+.ev-btn--eventbrite:hover { transform: translateY(-2px); box-shadow: 0 12px 28px rgba(240,85,55,.45); color:#fff; }
+.ev-btn--live { color: #fff; background: var(--ev-gradient-blue); box-shadow: 0 8px 20px rgba(79,142,247,.3); }
+.ev-btn--live:hover { transform: translateY(-2px); box-shadow: 0 12px 28px rgba(79,142,247,.45); color:#fff; }
+.ev-btn--ghost { background: #fff; color: var(--ev-ink); border: 1.5px solid var(--ev-border); }
+.ev-btn--ghost:hover { border-color: var(--ev-primary); color: var(--ev-primary); transform: translateY(-2px); }
+.ev-btn--wish:hover { color: #e0245e; border-color: #e0245e; }
+.ev-btn[disabled], .ev-btn.is-disabled { opacity: .55; cursor: not-allowed; box-shadow: none; transform: none; background: #9ca3af; }
+
+.ev-booked-flag {
+    display: flex; align-items: center; justify-content: center; gap: 8px;
+    background: rgba(29,185,84,.12); color: var(--ev-success);
+    font-weight: 700; padding: 13px; border-radius: var(--ev-radius-sm);
+}
+
+/* ─── Organizer ───────────────────────────────────────────────── */
+.ev-organizer { display: flex; align-items: center; gap: 12px; }
+.ev-avatar {
+    width: 46px; height: 46px; border-radius: 50%; flex: none;
+    background: var(--ev-gradient-blue); color: #fff;
+    display: flex; align-items: center; justify-content: center; font-weight: 800;
+}
+
+/* ─── Related events grid ─────────────────────────────────────── */
+.ev-related-card { overflow: hidden; height: 100%; display: flex; flex-direction: column; }
+.ev-related-card:hover { transform: translateY(-6px); box-shadow: var(--ev-shadow-hover); }
+.ev-related-card__img { height: 140px; object-fit: cover; width: 100%; background: var(--ev-gradient); }
+.ev-related-card__body { padding: 16px; display: flex; flex-direction: column; flex: 1; }
+.ev-related-card__title { font-weight: 700; font-size: 1rem; margin-bottom: 6px; color: var(--ev-ink); }
+
+/* ════ LIVE PAGE ══════════════════════════════════════════════ */
+.ev-live-header {
+    background: linear-gradient(135deg, #0f1221 0%, #1d2238 100%);
+    border-radius: var(--ev-radius); color: #fff; padding: 24px 28px;
+    display: flex; justify-content: space-between; align-items: center;
+    flex-wrap: wrap; gap: 16px; box-shadow: var(--ev-shadow);
+}
+.ev-live-title { font-weight: 800; font-size: clamp(1.3rem, 3vw, 1.9rem); margin: 0; }
+.ev-live-sub { color: #aab2c5; font-size: .9rem; margin-top: 4px; }
+.ev-live-badge {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: rgba(255,59,59,.18); color: #ff6b6b; font-weight: 800;
+    font-size: .78rem; letter-spacing: .08em; padding: 6px 14px; border-radius: 999px;
+    text-transform: uppercase; margin-bottom: 8px;
+}
+.ev-live-dot { width: 9px; height: 9px; border-radius: 50%; background: #ff3b3b; animation: evPulse 1.4s ease-in-out infinite; }
+@keyframes evPulse { 0%,100% { opacity: 1; transform: scale(1); } 50% { opacity: .4; transform: scale(1.4); } }
+
+.ev-slido-frame {
+    margin-top: 22px; border-radius: var(--ev-radius); overflow: hidden;
+    box-shadow: var(--ev-shadow); border: 1px solid var(--ev-border); background: #fff;
+}
+.ev-slido-frame iframe { display: block; width: 100%; min-height: 70vh; border: 0; }
+
+/* ─── Responsive ──────────────────────────────────────────────── */
+@media (max-width: 991px) {
+    .ev-booking { position: static; }
+}
+@media (max-width: 575px) {
+    .ev-hero__body { padding: 22px; }
+    .ev-card--pad { padding: 18px; }
+    .ev-slido-frame iframe { min-height: 78vh; }
+}
+
+/* احترام تفضيل تقليل الحركة */
+@media (prefers-reduced-motion: reduce) {
+    .ev-card, .ev-btn, .ev-related-card, .ev-progress__bar { transition: none; }
+    .ev-live-dot { animation: none; }
+}

@@ -9,7 +9,10 @@ app_name = 'events'
 urlpatterns = [
     # Public
     path('', views.event_list_view, name='event_list'),
+    # Eventbrite + Slido (لازم قبل المسار العام <slug>/ عشان ما يتلقفش)
+    path('eventbrite/', views.eventbrite_events_view, name='eventbrite_events'),
     path('<slug:slug>/', views.event_detail_view, name='event_detail'),
+    path('<slug:slug>/live/', views.event_live_view, name='event_live'),
 
     # Booking
     path('<slug:slug>/book/', views.book_event_view, name='book_event'),
