@@ -1,23 +1,23 @@
-{% extends 'base.html' %}
+{% extends 'base_public.html' %}
 {% load i18n %}
+{% get_current_language as LANGUAGE_CODE %}
 
-{% block title %}الباقات والأسعار · ProEvent{% endblock %}
-{% block heading %}الباقات والأسعار{% endblock %}
+{% block title %}{% if LANGUAGE_CODE == 'ar' %}الباقات · Pro Event{% else %}Packages · Pro Event{% endif %}{% endblock %}
 {% block extra_css %}<link href="/static/css/packages.css" rel="stylesheet">{% endblock %}
 
 {% block content %}
 <div class="pk-wrap">
 
     <div class="pk-head">
-        <h1>اختر الباقة المناسبة لفعالياتك</h1>
-        <p>باقات مرنة تناسب المنظّمين والشركات — ابدأ صغير وكبّر وقت ما تحب.</p>
+        <h1>{% if LANGUAGE_CODE == 'ar' %}باقات خدماتنا{% else %}Our Service Packages{% endif %}</h1>
+        <p>{% if LANGUAGE_CODE == 'ar' %}باقات مرنة تناسب المنظّمين والشركات — ابدأ صغير وكبّر وقت ما تحب.{% else %}Flexible packages for organizers and companies — start small and scale anytime.{% endif %}</p>
     </div>
 
     <!-- تبديل شهري / سنوي -->
     <div class="text-center my-4">
         <div class="pk-toggle" role="tablist">
-            <button id="btn-monthly" class="active" onclick="setBilling('monthly')">شهري</button>
-            <button id="btn-yearly" onclick="setBilling('yearly')">سنوي <span class="pk-save-badge">وفّر 20%</span></button>
+            <button id="btn-monthly" class="active" onclick="setBilling('monthly')">{% if LANGUAGE_CODE == 'ar' %}شهري{% else %}Monthly{% endif %}</button>
+            <button id="btn-yearly" onclick="setBilling('yearly')">{% if LANGUAGE_CODE == 'ar' %}سنوي{% else %}Yearly{% endif %} <span class="pk-save-badge">{% if LANGUAGE_CODE == 'ar' %}وفّر 20%{% else %}Save 20%{% endif %}</span></button>
         </div>
     </div>
 
@@ -25,60 +25,67 @@
     <div class="pk-cards">
         {% for p in packages %}
         <div class="pk-card {% if p.is_popular %}pk-card--popular{% endif %}">
-            {% if p.is_popular %}<span class="pk-popular-tag"><i class="bi bi-star-fill me-1"></i>الأكثر طلبًا</span>{% endif %}
-            <div class="pk-name">{{ p.get_name_display }}</div>
-            <div class="pk-tagline">{{ p.tagline }}</div>
+            {% if p.is_popular %}<span class="pk-popular-tag"><i class="bi bi-star-fill me-1"></i>{% if LANGUAGE_CODE == 'ar' %}الأكثر طلبًا{% else %}Most Popular{% endif %}</span>{% endif %}
+            <div class="pk-name">
+                {% if p.name == 'basic' %}{% if LANGUAGE_CODE == 'ar' %}أساسي{% else %}Basic{% endif %}
+                {% elif p.name == 'pro' %}{% if LANGUAGE_CODE == 'ar' %}احترافي{% else %}Pro{% endif %}
+                {% else %}VIP{% endif %}
+            </div>
+            <div class="pk-tagline">
+                {% if p.name == 'basic' %}{% if LANGUAGE_CODE == 'ar' %}البداية المثالية للمنظّمين الجدد{% else %}The perfect start for new organizers{% endif %}
+                {% elif p.name == 'pro' %}{% if LANGUAGE_CODE == 'ar' %}الأنسب للشركات والفعاليات المتوسطة{% else %}Best for companies & mid-size events{% endif %}
+                {% else %}{% if LANGUAGE_CODE == 'ar' %}حلّ متكامل للمؤتمرات والفعاليات الكبرى{% else %}A complete solution for large conferences{% endif %}{% endif %}
+            </div>
 
             <div class="pk-price"
                  data-monthly="{{ p.price_monthly|floatformat:0 }}"
                  data-yearly="{{ p.price_yearly|floatformat:0 }}"
                  data-yearly-eq="{{ p.yearly_monthly_equivalent|floatformat:0 }}">
                 <span class="amount">{{ p.price_monthly|floatformat:0 }}</span>
-                <span class="cur">ج.م</span>
-                <span class="per">/ <span class="per-word">شهريًا</span></span>
+                <span class="cur">{% if LANGUAGE_CODE == 'ar' %}ج.م{% else %}EGP{% endif %}</span>
+                <span class="per">/ <span class="per-word">{% if LANGUAGE_CODE == 'ar' %}شهريًا{% else %}mo{% endif %}</span></span>
             </div>
-            <div class="pk-price-yearly-note" data-discount="{{ p.yearly_discount_percent }}"></div>
+            <div class="pk-price-yearly-note" data-discount="{{ p.yearly_discount_percent }}"
+                 data-eq-label="{% if LANGUAGE_CODE == 'ar' %}ج.م شهريًا{% else %}EGP/mo{% endif %}"
+                 data-save-label="{% if LANGUAGE_CODE == 'ar' %}وفّر{% else %}Save{% endif %}"></div>
 
             <ul class="pk-features">
-                <li><i class="bi bi-check-circle-fill"></i><span>حتى <b>{{ p.max_events }}</b> فعالية</span></li>
-                <li><i class="bi bi-check-circle-fill"></i><span>حتى <b>{{ p.max_attendees }}</b> حاضر</span></li>
-                <li><i class="bi bi-check-circle-fill"></i><span>عمولة <b>{{ p.commission_rate|floatformat:0 }}%</b> على التذاكر</span></li>
-                <li class="{% if not p.has_slido %}off{% endif %}"><i class="bi {% if p.has_slido %}bi-check-circle-fill{% else %}bi-x-circle{% endif %}"></i><span>تفاعل مباشر (Slido)</span></li>
-                <li class="{% if not p.has_reports %}off{% endif %}"><i class="bi {% if p.has_reports %}bi-check-circle-fill{% else %}bi-x-circle{% endif %}"></i><span>تقارير وإحصائيات</span></li>
-                {% for f in p.features %}
-                <li><i class="bi bi-check-circle-fill"></i><span>{{ f }}</span></li>
-                {% endfor %}
+                <li><i class="bi bi-check-circle-fill"></i><span>{% if LANGUAGE_CODE == 'ar' %}حتى <b>{{ p.max_events }}</b> فعالية{% else %}Up to <b>{{ p.max_events }}</b> events{% endif %}</span></li>
+                <li><i class="bi bi-check-circle-fill"></i><span>{% if LANGUAGE_CODE == 'ar' %}حتى <b>{{ p.max_attendees }}</b> حاضر{% else %}Up to <b>{{ p.max_attendees }}</b> attendees{% endif %}</span></li>
+                <li><i class="bi bi-check-circle-fill"></i><span>{% if LANGUAGE_CODE == 'ar' %}عمولة <b>{{ p.commission_rate|floatformat:0 }}%</b> على التذاكر{% else %}<b>{{ p.commission_rate|floatformat:0 }}%</b> ticket commission{% endif %}</span></li>
+                <li class="{% if not p.has_slido %}off{% endif %}"><i class="bi {% if p.has_slido %}bi-check-circle-fill{% else %}bi-x-circle{% endif %}"></i><span>{% if LANGUAGE_CODE == 'ar' %}تفاعل مباشر (Slido){% else %}Live interaction (Slido){% endif %}</span></li>
+                <li class="{% if not p.has_reports %}off{% endif %}"><i class="bi {% if p.has_reports %}bi-check-circle-fill{% else %}bi-x-circle{% endif %}"></i><span>{% if LANGUAGE_CODE == 'ar' %}تقارير وإحصائيات{% else %}Reports & analytics{% endif %}</span></li>
             </ul>
 
             <a href="{% url 'subscriptions:contract' %}?package={{ p.slug }}"
                class="pk-btn {% if p.is_popular %}pk-btn--cta{% else %}pk-btn--ghost{% endif %}">
-                <i class="bi bi-rocket-takeoff"></i>اشترك دلوقتي
+                <i class="bi bi-rocket-takeoff"></i>{% if LANGUAGE_CODE == 'ar' %}اشترك دلوقتي{% else %}Subscribe Now{% endif %}
             </a>
         </div>
         {% empty %}
-        <div class="pk-panel text-center">لا توجد باقات متاحة حاليًا.</div>
+        <div class="pk-panel text-center">{% if LANGUAGE_CODE == 'ar' %}لا توجد باقات متاحة حاليًا.{% else %}No packages available right now.{% endif %}</div>
         {% endfor %}
     </div>
 
     <!-- جدول المقارنة -->
     {% if packages %}
-    <h2 class="pk-section-title mt-5 justify-content-center">مقارنة تفصيلية بين الباقات</h2>
+    <h2 class="pk-section-title mt-5 justify-content-center">{% if LANGUAGE_CODE == 'ar' %}مقارنة تفصيلية بين الباقات{% else %}Detailed Comparison{% endif %}</h2>
     <div class="pk-compare-wrap">
         <table class="pk-compare">
             <thead>
                 <tr>
-                    <th>الميزة</th>
-                    {% for p in packages %}<th>{{ p.get_name_display }}</th>{% endfor %}
+                    <th>{% if LANGUAGE_CODE == 'ar' %}الميزة{% else %}Feature{% endif %}</th>
+                    {% for p in packages %}<th>{% if p.name == 'basic' %}{% if LANGUAGE_CODE == 'ar' %}أساسي{% else %}Basic{% endif %}{% elif p.name == 'pro' %}{% if LANGUAGE_CODE == 'ar' %}احترافي{% else %}Pro{% endif %}{% else %}VIP{% endif %}</th>{% endfor %}
                 </tr>
             </thead>
             <tbody>
-                <tr><td>السعر الشهري</td>{% for p in packages %}<td>{{ p.price_monthly|floatformat:0 }} ج.م</td>{% endfor %}</tr>
-                <tr><td>السعر السنوي</td>{% for p in packages %}<td>{{ p.price_yearly|floatformat:0 }} ج.م</td>{% endfor %}</tr>
-                <tr><td>عدد الفعاليات</td>{% for p in packages %}<td>{{ p.max_events }}</td>{% endfor %}</tr>
-                <tr><td>عدد الحضور</td>{% for p in packages %}<td>{{ p.max_attendees }}</td>{% endfor %}</tr>
-                <tr><td>عمولة التذاكر</td>{% for p in packages %}<td>{{ p.commission_rate|floatformat:0 }}%</td>{% endfor %}</tr>
-                <tr><td>تفاعل مباشر (Slido)</td>{% for p in packages %}<td>{% if p.has_slido %}<span class="yes">✓</span>{% else %}<span class="no">✕</span>{% endif %}</td>{% endfor %}</tr>
-                <tr><td>تقارير وإحصائيات</td>{% for p in packages %}<td>{% if p.has_reports %}<span class="yes">✓</span>{% else %}<span class="no">✕</span>{% endif %}</td>{% endfor %}</tr>
+                <tr><td>{% if LANGUAGE_CODE == 'ar' %}السعر الشهري{% else %}Monthly price{% endif %}</td>{% for p in packages %}<td>{{ p.price_monthly|floatformat:0 }} {% if LANGUAGE_CODE == 'ar' %}ج.م{% else %}EGP{% endif %}</td>{% endfor %}</tr>
+                <tr><td>{% if LANGUAGE_CODE == 'ar' %}السعر السنوي{% else %}Yearly price{% endif %}</td>{% for p in packages %}<td>{{ p.price_yearly|floatformat:0 }} {% if LANGUAGE_CODE == 'ar' %}ج.م{% else %}EGP{% endif %}</td>{% endfor %}</tr>
+                <tr><td>{% if LANGUAGE_CODE == 'ar' %}عدد الفعاليات{% else %}Events{% endif %}</td>{% for p in packages %}<td>{{ p.max_events }}</td>{% endfor %}</tr>
+                <tr><td>{% if LANGUAGE_CODE == 'ar' %}عدد الحضور{% else %}Attendees{% endif %}</td>{% for p in packages %}<td>{{ p.max_attendees }}</td>{% endfor %}</tr>
+                <tr><td>{% if LANGUAGE_CODE == 'ar' %}عمولة التذاكر{% else %}Ticket commission{% endif %}</td>{% for p in packages %}<td>{{ p.commission_rate|floatformat:0 }}%</td>{% endfor %}</tr>
+                <tr><td>{% if LANGUAGE_CODE == 'ar' %}تفاعل مباشر (Slido){% else %}Live interaction (Slido){% endif %}</td>{% for p in packages %}<td>{% if p.has_slido %}<span class="yes">✓</span>{% else %}<span class="no">✕</span>{% endif %}</td>{% endfor %}</tr>
+                <tr><td>{% if LANGUAGE_CODE == 'ar' %}تقارير وإحصائيات{% else %}Reports & analytics{% endif %}</td>{% for p in packages %}<td>{% if p.has_reports %}<span class="yes">✓</span>{% else %}<span class="no">✕</span>{% endif %}</td>{% endfor %}</tr>
             </tbody>
         </table>
     </div>
@@ -98,12 +105,12 @@
             var note = el.parentElement.querySelector('.pk-price-yearly-note');
             if (mode === 'yearly') {
                 amount.textContent = el.dataset.yearly;
-                perWord.textContent = 'سنويًا';
+                perWord.textContent = '{% if LANGUAGE_CODE == "ar" %}سنويًا{% else %}yr{% endif %}';
                 var d = note.dataset.discount;
-                note.textContent = d > 0 ? ('وفّر ' + d + '% — يعادل ' + el.dataset.yearlyEq + ' ج.م شهريًا') : '';
+                note.textContent = d > 0 ? (note.dataset.saveLabel + ' ' + d + '% — ' + el.dataset.yearlyEq + ' ' + note.dataset.eqLabel) : '';
             } else {
                 amount.textContent = el.dataset.monthly;
-                perWord.textContent = 'شهريًا';
+                perWord.textContent = '{% if LANGUAGE_CODE == "ar" %}شهريًا{% else %}mo{% endif %}';
                 note.textContent = '';
             }
         });

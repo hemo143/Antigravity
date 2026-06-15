@@ -44,13 +44,12 @@ class ContractRequestForm(forms.ModelForm):
             'notes': 'ملاحظات إضافية (اختياري)',
         }
         widgets = {
-            'company_name': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'مثال: ProEvent Productions'}),
+            'company_name': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'ProEvent Productions'}),
             'contact_email': forms.EmailInput(attrs={'class': 'form-control', 'placeholder': 'name@company.com'}),
             'contact_phone': forms.TextInput(attrs={'class': 'form-control', 'placeholder': '01XXXXXXXXX', 'dir': 'ltr'}),
             'package': forms.Select(attrs={'class': 'form-select'}),
             'payment_method': forms.RadioSelect(),
-            'notes': forms.Textarea(attrs={'class': 'form-control', 'rows': 3,
-                                           'placeholder': 'أي تفاصيل أو متطلبات خاصة...'}),
+            'notes': forms.Textarea(attrs={'class': 'form-control', 'rows': 3}),
         }
 
     def __init__(self, *args, **kwargs):

@@ -1,55 +1,60 @@
-{% extends 'base.html' %}
-{% block title %}داشبورد العميل · ProEvent{% endblock %}
-{% block heading %}داشبورد العميل{% endblock %}
+{% extends 'base_public.html' %}
+{% load i18n %}
+{% get_current_language as LANGUAGE_CODE %}
+
+{% block title %}{% if LANGUAGE_CODE == 'ar' %}حسابي · Pro Event{% else %}My Account · Pro Event{% endif %}{% endblock %}
 {% block extra_css %}<link href="/static/css/packages.css" rel="stylesheet">{% endblock %}
 
 {% block content %}
 <div class="pk-wrap">
+    <div class="pk-head mb-4" style="text-align:start;max-width:none;">
+        <h1 style="font-size:1.9rem;">{% if LANGUAGE_CODE == 'ar' %}لوحة حسابي{% else %}My Dashboard{% endif %}</h1>
+    </div>
 
     <!-- إحصائيات سريعة -->
     <div class="pk-stats mb-4">
         <div class="pk-stat">
             <div class="icon bg-orange"><i class="bi bi-calendar-event"></i></div>
             <div class="num">{{ stats.events_count }}</div>
-            <div class="lbl">فعالياتك</div>
+            <div class="lbl">{% if LANGUAGE_CODE == 'ar' %}فعالياتك{% else %}Your events{% endif %}</div>
         </div>
         <div class="pk-stat">
             <div class="icon bg-blue"><i class="bi bi-file-earmark-text"></i></div>
             <div class="num">{{ stats.contracts_count }}</div>
-            <div class="lbl">عقودك</div>
+            <div class="lbl">{% if LANGUAGE_CODE == 'ar' %}اشتراكاتك{% else %}Your subscriptions{% endif %}</div>
         </div>
         <div class="pk-stat">
             <div class="icon bg-green"><i class="bi bi-clock-history"></i></div>
             <div class="num">{% if stats.days_remaining is not None %}{{ stats.days_remaining }}{% else %}—{% endif %}</div>
-            <div class="lbl">يوم متبقي في العقد</div>
+            <div class="lbl">{% if LANGUAGE_CODE == 'ar' %}يوم متبقي{% else %}Days remaining{% endif %}</div>
         </div>
         <div class="pk-stat">
             <div class="icon bg-dark"><i class="bi bi-receipt"></i></div>
             <div class="num">{{ stats.invoices_unpaid }}</div>
-            <div class="lbl">فواتير غير مدفوعة</div>
+            <div class="lbl">{% if LANGUAGE_CODE == 'ar' %}فواتير غير مدفوعة{% else %}Unpaid invoices{% endif %}</div>
         </div>
     </div>
 
     <div class="row g-4">
-        <!-- العقد الحالي -->
+        <!-- الاشتراك الحالي -->
         <div class="col-lg-5">
             <div class="pk-panel h-100">
-                <h2 class="pk-section-title">العقد الحالي</h2>
+                <h2 class="pk-section-title">{% if LANGUAGE_CODE == 'ar' %}الاشتراك الحالي{% else %}Current Subscription{% endif %}</h2>
                 {% if active_contract %}
                 <div class="d-flex justify-content-between align-items-center mb-2">
-                    <span class="fw-bold fs-5">{{ active_contract.package.get_name_display }}</span>
-                    <span class="pk-badge pk-badge--{{ active_contract.status }}">{{ active_contract.get_status_display }}</span>
+                    <span class="fw-bold fs-5">{% if active_contract.package.name == 'basic' %}{% if LANGUAGE_CODE == 'ar' %}أساسي{% else %}Basic{% endif %}{% elif active_contract.package.name == 'pro' %}{% if LANGUAGE_CODE == 'ar' %}احترافي{% else %}Pro{% endif %}{% else %}VIP{% endif %}</span>
+                    <span class="pk-badge pk-badge--{{ active_contract.status }}">{% if active_contract.status == 'active' %}{% if LANGUAGE_CODE == 'ar' %}نشط{% else %}Active{% endif %}{% elif active_contract.status == 'pending' %}{% if LANGUAGE_CODE == 'ar' %}قيد المراجعة{% else %}Pending{% endif %}{% else %}{% if LANGUAGE_CODE == 'ar' %}ملغي{% else %}Cancelled{% endif %}{% endif %}</span>
                 </div>
                 <table class="pk-table">
-                    <tr><td class="text-muted">طريقة الدفع</td><td class="text-end fw-bold">{{ active_contract.get_payment_method_display }}</td></tr>
-                    <tr><td class="text-muted">القيمة</td><td class="text-end fw-bold">{{ active_contract.amount|floatformat:0 }} ج.م</td></tr>
-                    <tr><td class="text-muted">حالة الدفع</td><td class="text-end"><span class="pk-badge pk-badge--{{ active_contract.payment_status }}">{{ active_contract.get_payment_status_display }}</span></td></tr>
-                    <tr><td class="text-muted">من</td><td class="text-end">{{ active_contract.start_date|date:"Y/m/d" }}</td></tr>
-                    <tr><td class="text-muted">إلى</td><td class="text-end">{{ active_contract.end_date|date:"Y/m/d"|default:"—" }}</td></tr>
+                    <tr><td class="text-muted">{% if LANGUAGE_CODE == 'ar' %}طريقة الدفع{% else %}Billing{% endif %}</td><td class="text-end fw-bold">{% if active_contract.payment_method == 'yearly' %}{% if LANGUAGE_CODE == 'ar' %}سنوي{% else %}Yearly{% endif %}{% else %}{% if LANGUAGE_CODE == 'ar' %}شهري{% else %}Monthly{% endif %}{% endif %}</td></tr>
+                    <tr><td class="text-muted">{% if LANGUAGE_CODE == 'ar' %}القيمة{% else %}Amount{% endif %}</td><td class="text-end fw-bold">{{ active_contract.amount|floatformat:0 }} {% if LANGUAGE_CODE == 'ar' %}ج.م{% else %}EGP{% endif %}</td></tr>
+                    <tr><td class="text-muted">{% if LANGUAGE_CODE == 'ar' %}حالة الدفع{% else %}Payment{% endif %}</td><td class="text-end"><span class="pk-badge pk-badge--{{ active_contract.payment_status }}">{% if active_contract.payment_status == 'paid' %}{% if LANGUAGE_CODE == 'ar' %}مدفوع{% else %}Paid{% endif %}{% else %}{% if LANGUAGE_CODE == 'ar' %}غير مدفوع{% else %}Unpaid{% endif %}{% endif %}</span></td></tr>
+                    <tr><td class="text-muted">{% if LANGUAGE_CODE == 'ar' %}من{% else %}From{% endif %}</td><td class="text-end">{{ active_contract.start_date|date:"Y/m/d" }}</td></tr>
+                    <tr><td class="text-muted">{% if LANGUAGE_CODE == 'ar' %}إلى{% else %}To{% endif %}</td><td class="text-end">{{ active_contract.end_date|date:"Y/m/d"|default:"—" }}</td></tr>
                 </table>
                 {% else %}
-                <p class="text-muted">لا يوجد عقد بعد.</p>
-                <a href="{% url 'subscriptions:pricing' %}" class="pk-btn pk-btn--cta"><i class="bi bi-rocket-takeoff"></i>اشترك في باقة</a>
+                <p class="text-muted">{% if LANGUAGE_CODE == 'ar' %}لا يوجد اشتراك بعد.{% else %}No subscription yet.{% endif %}</p>
+                <a href="{% url 'subscriptions:pricing' %}" class="pk-btn pk-btn--cta"><i class="bi bi-rocket-takeoff"></i>{% if LANGUAGE_CODE == 'ar' %}اشترك في باقة{% else %}Subscribe to a package{% endif %}</a>
                 {% endif %}
             </div>
         </div>
@@ -57,24 +62,24 @@
         <!-- الفواتير -->
         <div class="col-lg-7">
             <div class="pk-panel h-100">
-                <h2 class="pk-section-title">الفواتير</h2>
+                <h2 class="pk-section-title">{% if LANGUAGE_CODE == 'ar' %}الفواتير{% else %}Invoices{% endif %}</h2>
                 {% if invoices %}
                 <table class="pk-table">
-                    <thead><tr><th>رقم الفاتورة</th><th>التاريخ</th><th>المبلغ</th><th>الحالة</th><th></th></tr></thead>
+                    <thead><tr><th>{% if LANGUAGE_CODE == 'ar' %}رقم الفاتورة{% else %}Invoice #{% endif %}</th><th>{% if LANGUAGE_CODE == 'ar' %}التاريخ{% else %}Date{% endif %}</th><th>{% if LANGUAGE_CODE == 'ar' %}المبلغ{% else %}Amount{% endif %}</th><th>{% if LANGUAGE_CODE == 'ar' %}الحالة{% else %}Status{% endif %}</th><th></th></tr></thead>
                     <tbody>
                         {% for inv in invoices %}
                         <tr>
                             <td class="fw-bold">{{ inv.number }}</td>
                             <td>{{ inv.issued_date|date:"Y/m/d" }}</td>
-                            <td>{{ inv.amount|floatformat:0 }} ج.م</td>
-                            <td><span class="pk-badge pk-badge--{{ inv.status }}">{{ inv.get_status_display }}</span></td>
+                            <td>{{ inv.amount|floatformat:0 }} {% if LANGUAGE_CODE == 'ar' %}ج.م{% else %}EGP{% endif %}</td>
+                            <td><span class="pk-badge pk-badge--{{ inv.status }}">{% if inv.status == 'paid' %}{% if LANGUAGE_CODE == 'ar' %}مدفوعة{% else %}Paid{% endif %}{% else %}{% if LANGUAGE_CODE == 'ar' %}غير مدفوعة{% else %}Unpaid{% endif %}{% endif %}</span></td>
                             <td class="text-end"><a href="{% url 'subscriptions:invoice_detail' inv.pk %}" class="btn btn-sm btn-outline-secondary"><i class="bi bi-eye"></i></a></td>
                         </tr>
                         {% endfor %}
                     </tbody>
                 </table>
                 {% else %}
-                <p class="text-muted">لا توجد فواتير بعد.</p>
+                <p class="text-muted">{% if LANGUAGE_CODE == 'ar' %}لا توجد فواتير بعد.{% else %}No invoices yet.{% endif %}</p>
                 {% endif %}
             </div>
         </div>
@@ -82,25 +87,24 @@
 
     <!-- الفعاليات -->
     <div class="pk-panel mt-4">
-        <h2 class="pk-section-title">فعالياتك</h2>
+        <h2 class="pk-section-title">{% if LANGUAGE_CODE == 'ar' %}فعالياتك{% else %}Your Events{% endif %}</h2>
         {% if events %}
         <table class="pk-table">
-            <thead><tr><th>الفعالية</th><th>التاريخ</th><th>المكان</th><th>الحالة</th></tr></thead>
+            <thead><tr><th>{% if LANGUAGE_CODE == 'ar' %}الفعالية{% else %}Event{% endif %}</th><th>{% if LANGUAGE_CODE == 'ar' %}التاريخ{% else %}Date{% endif %}</th><th>{% if LANGUAGE_CODE == 'ar' %}المكان{% else %}Venue{% endif %}</th><th>{% if LANGUAGE_CODE == 'ar' %}الحالة{% else %}Status{% endif %}</th></tr></thead>
             <tbody>
                 {% for ev in events %}
                 <tr>
                     <td class="fw-bold">{{ ev.title }}</td>
                     <td>{{ ev.start_date|date:"Y/m/d" }}</td>
                     <td>{{ ev.venue }}</td>
-                    <td><span class="pk-badge pk-badge--{% if ev.status == 'published' %}active{% else %}pending{% endif %}">{{ ev.get_status_display }}</span></td>
+                    <td><span class="pk-badge pk-badge--{% if ev.status == 'published' %}active{% else %}pending{% endif %}">{% if ev.status == 'published' %}{% if LANGUAGE_CODE == 'ar' %}منشور{% else %}Published{% endif %}{% else %}{% if LANGUAGE_CODE == 'ar' %}مسودة{% else %}Draft{% endif %}{% endif %}</span></td>
                 </tr>
                 {% endfor %}
             </tbody>
         </table>
         {% else %}
-        <p class="text-muted mb-0">لا توجد فعاليات بعد.</p>
+        <p class="text-muted mb-0">{% if LANGUAGE_CODE == 'ar' %}لا توجد فعاليات بعد.{% else %}No events yet.{% endif %}</p>
         {% endif %}
     </div>
-
 </div>
 {% endblock %}
