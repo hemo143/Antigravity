@@ -9,22 +9,28 @@
 <div class="pk-wrap">
 
     <div class="pk-head">
-        <h1>{% if LANGUAGE_CODE == 'ar' %}باقات خدماتنا{% else %}Our Service Packages{% endif %}</h1>
-        <p>{% if LANGUAGE_CODE == 'ar' %}باقات مرنة تناسب المنظّمين والشركات — ابدأ صغير وكبّر وقت ما تحب.{% else %}Flexible packages for organizers and companies — start small and scale anytime.{% endif %}</p>
+        <h1 class="pk-reveal" style="animation-delay:.05s">{% if LANGUAGE_CODE == 'ar' %}عندنا الباقة المثالية ليك{% else %}We've got a plan that's perfect for you{% endif %}</h1>
+        <p class="pk-reveal" style="animation-delay:.2s">{% if LANGUAGE_CODE == 'ar' %}بنساعد فرق العمل في كل مكان — اختار الباقة المناسبة ليك.{% else %}Trusted by teams everywhere — explore which option is right for you.{% endif %}</p>
     </div>
 
-    <!-- تبديل شهري / سنوي -->
-    <div class="text-center my-4">
-        <div class="pk-toggle" role="tablist">
-            <button id="btn-monthly" class="active" onclick="setBilling('monthly')">{% if LANGUAGE_CODE == 'ar' %}شهري{% else %}Monthly{% endif %}</button>
-            <button id="btn-yearly" onclick="setBilling('yearly')">{% if LANGUAGE_CODE == 'ar' %}سنوي{% else %}Yearly{% endif %} <span class="pk-save-badge">{% if LANGUAGE_CODE == 'ar' %}وفّر 20%{% else %}Save 20%{% endif %}</span></button>
+    <!-- السويتش البرتقالي المتحرك -->
+    <div class="text-center my-4 pk-reveal" style="animation-delay:.35s">
+        <div class="pk-switch" id="pkSwitch" role="tablist">
+            <span class="pk-switch__pill" id="pkPill"></span>
+            <button type="button" class="active" data-mode="monthly" onclick="setBilling('monthly')">
+                {% if LANGUAGE_CODE == 'ar' %}اشتراك شهري{% else %}Monthly Billing{% endif %}
+            </button>
+            <button type="button" data-mode="yearly" onclick="setBilling('yearly')">
+                {% if LANGUAGE_CODE == 'ar' %}اشتراك سنوي{% else %}Yearly Billing{% endif %}
+                <span class="save-pill">{% if LANGUAGE_CODE == 'ar' %}وفّر 20%{% else %}Save 20%{% endif %}</span>
+            </button>
         </div>
     </div>
 
     <!-- كروت الباقات -->
     <div class="pk-cards">
         {% for p in packages %}
-        <div class="pk-card {% if p.is_popular %}pk-card--popular{% endif %}">
+        <div class="pk-card pk-reveal {% if p.is_popular %}pk-card--popular{% endif %}" style="animation-delay:{{ forloop.counter0|add:'4' }}00ms;">
             {% if p.is_popular %}<span class="pk-popular-tag"><i class="bi bi-star-fill me-1"></i>{% if LANGUAGE_CODE == 'ar' %}الأكثر طلبًا{% else %}Most Popular{% endif %}</span>{% endif %}
             <div class="pk-name">
                 {% if p.name == 'basic' %}{% if LANGUAGE_CODE == 'ar' %}أساسي{% else %}Basic{% endif %}
@@ -37,29 +43,23 @@
                 {% else %}{% if LANGUAGE_CODE == 'ar' %}حلّ متكامل للمؤتمرات والفعاليات الكبرى{% else %}A complete solution for large conferences{% endif %}{% endif %}
             </div>
 
-            <div class="pk-price"
-                 data-monthly="{{ p.price_monthly|floatformat:0 }}"
-                 data-yearly="{{ p.price_yearly|floatformat:0 }}"
-                 data-yearly-eq="{{ p.yearly_monthly_equivalent|floatformat:0 }}">
-                <span class="amount">{{ p.price_monthly|floatformat:0 }}</span>
+            <div class="pk-price">
+                <span class="amount"><span class="pk-amount" data-monthly="{{ p.price_monthly|floatformat:0 }}" data-yearly="{{ p.price_yearly|floatformat:0 }}">{{ p.price_monthly|floatformat:0 }}</span></span>
                 <span class="cur">{% if LANGUAGE_CODE == 'ar' %}ج.م{% else %}EGP{% endif %}</span>
-                <span class="per">/ <span class="per-word">{% if LANGUAGE_CODE == 'ar' %}شهريًا{% else %}mo{% endif %}</span></span>
+                <span class="per">/ <span class="per-word">{% if LANGUAGE_CODE == 'ar' %}شهريًا{% else %}month{% endif %}</span></span>
             </div>
-            <div class="pk-price-yearly-note" data-discount="{{ p.yearly_discount_percent }}"
-                 data-eq-label="{% if LANGUAGE_CODE == 'ar' %}ج.م شهريًا{% else %}EGP/mo{% endif %}"
-                 data-save-label="{% if LANGUAGE_CODE == 'ar' %}وفّر{% else %}Save{% endif %}"></div>
 
             <ul class="pk-features">
-                <li><i class="bi bi-check-circle-fill"></i><span>{% if LANGUAGE_CODE == 'ar' %}حتى <b>{{ p.max_events }}</b> فعالية{% else %}Up to <b>{{ p.max_events }}</b> events{% endif %}</span></li>
-                <li><i class="bi bi-check-circle-fill"></i><span>{% if LANGUAGE_CODE == 'ar' %}حتى <b>{{ p.max_attendees }}</b> حاضر{% else %}Up to <b>{{ p.max_attendees }}</b> attendees{% endif %}</span></li>
-                <li><i class="bi bi-check-circle-fill"></i><span>{% if LANGUAGE_CODE == 'ar' %}عمولة <b>{{ p.commission_rate|floatformat:0 }}%</b> على التذاكر{% else %}<b>{{ p.commission_rate|floatformat:0 }}%</b> ticket commission{% endif %}</span></li>
-                <li class="{% if not p.has_slido %}off{% endif %}"><i class="bi {% if p.has_slido %}bi-check-circle-fill{% else %}bi-x-circle{% endif %}"></i><span>{% if LANGUAGE_CODE == 'ar' %}تفاعل مباشر (Slido){% else %}Live interaction (Slido){% endif %}</span></li>
-                <li class="{% if not p.has_reports %}off{% endif %}"><i class="bi {% if p.has_reports %}bi-check-circle-fill{% else %}bi-x-circle{% endif %}"></i><span>{% if LANGUAGE_CODE == 'ar' %}تقارير وإحصائيات{% else %}Reports & analytics{% endif %}</span></li>
+                <li><span class="pk-check"><i class="bi bi-check-lg"></i></span><span>{% if LANGUAGE_CODE == 'ar' %}حتى <b>{{ p.max_events }}</b> فعالية{% else %}Up to <b>{{ p.max_events }}</b> events{% endif %}</span></li>
+                <li><span class="pk-check"><i class="bi bi-check-lg"></i></span><span>{% if LANGUAGE_CODE == 'ar' %}حتى <b>{{ p.max_attendees }}</b> حاضر{% else %}Up to <b>{{ p.max_attendees }}</b> attendees{% endif %}</span></li>
+                <li><span class="pk-check"><i class="bi bi-check-lg"></i></span><span>{% if LANGUAGE_CODE == 'ar' %}عمولة <b>{{ p.commission_rate|floatformat:0 }}%</b> على التذاكر{% else %}<b>{{ p.commission_rate|floatformat:0 }}%</b> ticket commission{% endif %}</span></li>
+                <li class="{% if not p.has_slido %}off{% endif %}"><span class="pk-check"><i class="bi {% if p.has_slido %}bi-check-lg{% else %}bi-x{% endif %}"></i></span><span>{% if LANGUAGE_CODE == 'ar' %}تفاعل مباشر (Slido){% else %}Live interaction (Slido){% endif %}</span></li>
+                <li class="{% if not p.has_reports %}off{% endif %}"><span class="pk-check"><i class="bi {% if p.has_reports %}bi-check-lg{% else %}bi-x{% endif %}"></i></span><span>{% if LANGUAGE_CODE == 'ar' %}تقارير وإحصائيات{% else %}Reports & analytics{% endif %}</span></li>
             </ul>
 
             <a href="{% url 'subscriptions:contract' %}?package={{ p.slug }}"
-               class="pk-btn {% if p.is_popular %}pk-btn--cta{% else %}pk-btn--ghost{% endif %}">
-                <i class="bi bi-rocket-takeoff"></i>{% if LANGUAGE_CODE == 'ar' %}اشترك دلوقتي{% else %}Subscribe Now{% endif %}
+               class="pk-btn {% if p.is_popular %}pk-btn--cta{% else %}pk-btn--dark{% endif %}">
+                <i class="bi bi-rocket-takeoff"></i>{% if LANGUAGE_CODE == 'ar' %}اشترك دلوقتي{% else %}Get started{% endif %}
             </a>
         </div>
         {% empty %}
@@ -96,24 +96,56 @@
 
 {% block extra_js %}
 <script>
+    var PER_MONTH = "{% if LANGUAGE_CODE == 'ar' %}شهريًا{% else %}month{% endif %}";
+    var PER_YEAR  = "{% if LANGUAGE_CODE == 'ar' %}سنويًا{% else %}year{% endif %}";
+
+    // تحريك الـ pill ليغطّي الزر النشط (يدعم RTL تلقائيًا عبر offsetLeft)
+    function movePill() {
+        var sw = document.getElementById('pkSwitch');
+        var pill = document.getElementById('pkPill');
+        var active = sw.querySelector('button.active');
+        if (!active) return;
+        pill.style.left = active.offsetLeft + 'px';
+        pill.style.width = active.offsetWidth + 'px';
+    }
+
+    // عدّاد رقمي يتحرك من قيمة لأخرى (NumberFlow equivalent)
+    function animateNumber(el, to) {
+        var from = parseInt(el.getAttribute('data-current') || el.textContent.replace(/[^0-9]/g, '')) || 0;
+        var start = null, dur = 500;
+        function step(ts) {
+            if (!start) start = ts;
+            var t = Math.min((ts - start) / dur, 1);
+            var eased = 1 - Math.pow(1 - t, 3); // easeOutCubic
+            var val = Math.round(from + (to - from) * eased);
+            el.textContent = val.toLocaleString();
+            if (t < 1) requestAnimationFrame(step);
+            else el.setAttribute('data-current', to);
+        }
+        requestAnimationFrame(step);
+    }
+
     function setBilling(mode) {
-        document.getElementById('btn-monthly').classList.toggle('active', mode === 'monthly');
-        document.getElementById('btn-yearly').classList.toggle('active', mode === 'yearly');
-        document.querySelectorAll('.pk-price').forEach(function (el) {
-            var amount = el.querySelector('.amount');
-            var perWord = el.querySelector('.per-word');
-            var note = el.parentElement.querySelector('.pk-price-yearly-note');
-            if (mode === 'yearly') {
-                amount.textContent = el.dataset.yearly;
-                perWord.textContent = '{% if LANGUAGE_CODE == "ar" %}سنويًا{% else %}yr{% endif %}';
-                var d = note.dataset.discount;
-                note.textContent = d > 0 ? (note.dataset.saveLabel + ' ' + d + '% — ' + el.dataset.yearlyEq + ' ' + note.dataset.eqLabel) : '';
-            } else {
-                amount.textContent = el.dataset.monthly;
-                perWord.textContent = '{% if LANGUAGE_CODE == "ar" %}شهريًا{% else %}mo{% endif %}';
-                note.textContent = '';
-            }
+        var sw = document.getElementById('pkSwitch');
+        sw.querySelectorAll('button').forEach(function (b) {
+            b.classList.toggle('active', b.dataset.mode === mode);
+        });
+        movePill();
+        document.querySelectorAll('.pk-amount').forEach(function (el) {
+            animateNumber(el, parseInt(mode === 'yearly' ? el.dataset.yearly : el.dataset.monthly));
+        });
+        document.querySelectorAll('.per-word').forEach(function (el) {
+            el.textContent = (mode === 'yearly') ? PER_YEAR : PER_MONTH;
         });
     }
+
+    window.addEventListener('load', function () {
+        // init data-current + pill position
+        document.querySelectorAll('.pk-amount').forEach(function (el) {
+            el.setAttribute('data-current', el.dataset.monthly);
+        });
+        movePill();
+    });
+    window.addEventListener('resize', movePill);
 </script>
 {% endblock %}

@@ -70,6 +70,52 @@
 .pk-btn--ghost { background: #fff; color: var(--pk-ink); border: 1.5px solid var(--pk-border); }
 .pk-btn--ghost:hover { border-color: var(--pk-primary); color: var(--pk-primary); }
 
+/* ═══ Sliding orange toggle (ported from React component) ═══ */
+.pk-switch {
+    position: relative; display: inline-flex; gap: 4px;
+    background: #fafafa; border: 1px solid var(--pk-border);
+    border-radius: 14px; padding: 4px;
+}
+.pk-switch__pill {
+    position: absolute; top: 4px; bottom: 4px; left: 0; width: 0;
+    border-radius: 12px; z-index: 0;
+    background: linear-gradient(to top, #f97316 0%, #fb923c 50%, #ea580c 100%);
+    border: 2px solid #ea580c; box-shadow: 0 2px 10px rgba(234,88,12,.45);
+    transition: left .35s cubic-bezier(.4,0,.2,1), width .35s cubic-bezier(.4,0,.2,1);
+}
+.pk-switch button {
+    position: relative; z-index: 1; border: 0; background: transparent;
+    height: 46px; padding: 0 22px; border-radius: 12px; cursor: pointer;
+    font-weight: 600; font-size: .95rem; color: var(--pk-muted);
+    display: inline-flex; align-items: center; gap: 8px; transition: color .25s;
+}
+.pk-switch button:hover { color: #000; }
+.pk-switch button.active { color: #fff; }
+.pk-switch .save-pill {
+    background: #fff7ed; color: #1a1f36; font-size: .72rem; font-weight: 600;
+    padding: 2px 9px; border-radius: 999px; white-space: nowrap;
+}
+.pk-switch button.active .save-pill { background: rgba(255,255,255,.9); }
+
+/* count-up number (NumberFlow equivalent) */
+.pk-amount { font-variant-numeric: tabular-nums; }
+
+/* dark gradient button (non-popular CTA, matches component) */
+.pk-btn--dark { color: #fff; background: linear-gradient(to top, #404040, #171717);
+    box-shadow: 0 8px 20px rgba(23,23,23,.35); border: 1px solid #404040; }
+.pk-btn--dark:hover { transform: translateY(-2px); box-shadow: 0 12px 28px rgba(23,23,23,.45); color: #fff; }
+
+/* circular feature checkmark (matches component) */
+.pk-check { flex: none; width: 24px; height: 24px; border-radius: 50%;
+    background: #fff; border: 1px solid var(--pk-primary);
+    display: grid; place-content: center; margin-inline-end: 12px; }
+.pk-check i { color: var(--pk-primary); font-size: .8rem; }
+
+/* entrance reveal (TimelineContent equivalent) */
+@keyframes pkReveal { from { opacity: 0; transform: translateY(-20px); filter: blur(10px); }
+    to { opacity: 1; transform: translateY(0); filter: blur(0); } }
+.pk-reveal { opacity: 0; animation: pkReveal .6s cubic-bezier(.4,0,.2,1) forwards; }
+
 /* ─── Comparison table ────────────────────────────────────────── */
 .pk-compare { width: 100%; border-collapse: collapse; background: #fff; border-radius: var(--pk-radius);
     overflow: hidden; box-shadow: var(--pk-shadow); }
