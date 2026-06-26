@@ -1,4 +1,4 @@
-# 🎉 Event Management System
+# 🎉 Apex Events
 
 نظام متكامل لإدارة الأحداث مبني بـ Django + Bootstrap 5
 

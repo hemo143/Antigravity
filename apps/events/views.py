@@ -153,7 +153,7 @@ def book_event_view(request, slug):
             # ─── Requirement 11: Email Notification ───────────────
             try:
                 subject = f'Booking Confirmation: {event.title}'
-                message = f'Hi {request.user.username},\n\nYour booking for "{event.title}" on {event.start_date.strftime("%B %d, %Y")} at {event.venue} is confirmed.\n\nThank you for using EventPro!'
+                message = f'Hi {request.user.username},\n\nYour booking for "{event.title}" on {event.start_date.strftime("%B %d, %Y")} at {event.venue} is confirmed.\n\nThank you for using Apex Events!'
                 email_from = settings.DEFAULT_FROM_EMAIL
                 recipient_list = [request.user.email]
                 send_mail(subject, message, email_from, recipient_list, fail_silently=True)

@@ -1,5 +1,5 @@
 """
-Event Management System - Main URL Configuration
+Apex Events - Main URL Configuration
 """
 from django.contrib import admin
 from django.urls import path, include

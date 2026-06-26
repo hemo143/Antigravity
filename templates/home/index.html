@@ -3,20 +3,20 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="theme-color" content="#0A0E1A">
+    <meta name="theme-color" content="#07080C">
     <meta name="format-detection" content="telephone=no">
 
     {% if LANGUAGE_CODE == 'ar' %}
-    <title>Pro Event – شركة تنظيم مؤتمرات وفعاليات الشركات في مصر</title>
-    <meta name="description" content="Pro Event — الشريك التقني الأول للفعاليات في مصر. حلول AV احترافية للمؤتمرات والمعارض وفعاليات الشركات: شاشات LED، أنظمة صوت، إضاءة، بث مباشر، وإنتاج فيديو. عرض سعر مجاني خلال 24 ساعة.">
-    <meta name="keywords" content="تنظيم مؤتمرات, شركة فعاليات مصر, شاشات LED, إنتاج فيديو, بث مباشر, تأجير معدات صوت وضوء, AV solutions, conference setup Egypt, Pro Event">
+    <title>Apex Events – شركة تنظيم مؤتمرات وفعاليات الشركات في مصر</title>
+    <meta name="description" content="Apex Events — الشريك التقني الأول للفعاليات في مصر. حلول AV احترافية للمؤتمرات والمعارض وفعاليات الشركات: شاشات LED، أنظمة صوت، إضاءة، بث مباشر، وإنتاج فيديو. عرض سعر مجاني خلال 24 ساعة.">
+    <meta name="keywords" content="تنظيم مؤتمرات, شركة فعاليات مصر, شاشات LED, إنتاج فيديو, بث مباشر, تأجير معدات صوت وضوء, AV solutions, conference setup Egypt, Apex Events">
     {% else %}
-    <title>Pro Event – Egypt's #1 Technical Event &amp; AV Production Partner</title>
-    <meta name="description" content="Pro Event delivers end-to-end AV production for conferences, exhibitions and corporate events in Egypt. LED screens, audio systems, lighting, live streaming, video production — with an experienced on-site engineering team. Free quote within 24 hours.">
-    <meta name="keywords" content="event production Egypt, AV company Cairo, conference setup, LED screen rental, live streaming Egypt, corporate events, technical event partner, Pro Event">
+    <title>Apex Events – Egypt's #1 Technical Event &amp; AV Production Partner</title>
+    <meta name="description" content="Apex Events delivers end-to-end AV production for conferences, exhibitions and corporate events in Egypt. LED screens, audio systems, lighting, live streaming, video production — with an experienced on-site engineering team. Free quote within 24 hours.">
+    <meta name="keywords" content="event production Egypt, AV company Cairo, conference setup, LED screen rental, live streaming Egypt, corporate events, technical event partner, Apex Events">
     {% endif %}
 
-    <meta name="author" content="Pro Event">
+    <meta name="author" content="Apex Events">
     <meta name="robots" content="index, follow, max-image-preview:large">
     {% if GOOGLE_SITE_VERIFICATION %}<meta name="google-site-verification" content="{{ GOOGLE_SITE_VERIFICATION }}">{% endif %}
 
@@ -28,25 +28,25 @@
 
     <!-- Open Graph (Facebook, LinkedIn, WhatsApp) -->
     <meta property="og:type" content="website">
-    <meta property="og:site_name" content="Pro Event">
+    <meta property="og:site_name" content="Apex Events">
     <meta property="og:locale" content="{% if LANGUAGE_CODE == 'ar' %}ar_EG{% else %}en_US{% endif %}">
     <meta property="og:locale:alternate" content="{% if LANGUAGE_CODE == 'ar' %}en_US{% else %}ar_EG{% endif %}">
     <meta property="og:url" content="https://proevent.onrender.com{{ request.path }}">
     {% if LANGUAGE_CODE == 'ar' %}
-    <meta property="og:title" content="Pro Event – شركة تنظيم مؤتمرات وفعاليات الشركات في مصر">
+    <meta property="og:title" content="Apex Events – شركة تنظيم مؤتمرات وفعاليات الشركات في مصر">
     <meta property="og:description" content="الشريك التقني للفعاليات في مصر. حلول AV احترافية، شاشات LED، أنظمة صوت، إضاءة، بث مباشر، وإنتاج فيديو. فريق هندسي متخصص ودعم فني في موقعك.">
     {% else %}
-    <meta property="og:title" content="Pro Event – Egypt's #1 Technical Event &amp; AV Production Partner">
+    <meta property="og:title" content="Apex Events – Egypt's #1 Technical Event &amp; AV Production Partner">
     <meta property="og:description" content="End-to-end AV production for conferences, exhibitions and corporate events in Egypt. Experienced engineering team, on-site technical support, free quote within 24 hours.">
     {% endif %}
     <meta property="og:image" content="https://proevent.onrender.com{% static 'img/hero-poster.jpg' %}">
     <meta property="og:image:width" content="1920">
     <meta property="og:image:height" content="1080">
-    <meta property="og:image:alt" content="Pro Event — Technical Event Production">
+    <meta property="og:image:alt" content="Apex Events — Technical Event Production">
 
     <!-- Twitter Card -->
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="Pro Event – {% if LANGUAGE_CODE == 'ar' %}شركة تنظيم مؤتمرات وفعاليات الشركات{% else %}Egypt's #1 Technical Event Partner{% endif %}">
+    <meta name="twitter:title" content="Apex Events – {% if LANGUAGE_CODE == 'ar' %}شركة تنظيم مؤتمرات وفعاليات الشركات{% else %}Egypt's #1 Technical Event Partner{% endif %}">
     <meta name="twitter:description" content="{% if LANGUAGE_CODE == 'ar' %}حلول AV احترافية للمؤتمرات وفعاليات الشركات في مصر{% else %}AV production for conferences, exhibitions, and corporate events in Egypt{% endif %}">
     <meta name="twitter:image" content="https://proevent.onrender.com{% static 'img/hero-poster.jpg' %}">
 
@@ -54,7 +54,7 @@
     <link rel="icon" type="image/svg+xml" href="{% static 'img/favicon.svg' %}">
     <link rel="apple-touch-icon" href="{% static 'img/favicon.svg' %}">
     <link rel="manifest" href="{% static 'site.webmanifest' %}">
-    <meta name="apple-mobile-web-app-title" content="Pro Event">
+    <meta name="apple-mobile-web-app-title" content="Apex Events">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 
@@ -68,8 +68,8 @@
       "@context": "https://schema.org",
       "@type": "LocalBusiness",
       "@id": "https://proevent.onrender.com/#organization",
-      "name": "Pro Event",
-      "alternateName": "ProEvent",
+      "name": "Apex Events",
+      "alternateName": "Apex Events",
       "url": "https://proevent.onrender.com",
       "logo": "https://proevent.onrender.com{% static 'img/favicon.svg' %}",
       "image": "https://proevent.onrender.com{% static 'img/hero-poster.jpg' %}",
@@ -105,7 +105,7 @@
     <!-- Inter (EN) + Cairo (AR) -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Cairo:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Cairo:wght@300;400;500;600;700;800;900&family=Cinzel:wght@500;600&family=Montserrat:wght@300;400&display=swap" rel="stylesheet">
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
@@ -129,8 +129,8 @@
         <div class="nav-inner">
 
             <a href="#home" class="nav-logo">
-                <span class="logo-icon logo-icon-pe">PE</span>
-                <span class="logo-text">Pro<span class="accent">Event</span></span>
+                <img src="{% static 'img/apex_logo.svg' %}" class="logo-icon logo-mark" alt="Apex Events">
+                <span class="logo-text">Apex<span class="accent">Events</span></span>
             </a>
 
             <ul class="nav-links">
@@ -215,10 +215,10 @@
         <div class="hero-headline-card" data-aos="fade-up" data-aos-delay="100">
             <h1 class="hero-title">
                 {% if LANGUAGE_CODE == 'ar' %}
-                    Pro Event – شريكك <span class="gradient-text">التقني</span><br>
+                    Apex Events – شريكك <span class="gradient-text">التقني</span><br>
                     <span class="gradient-text-blue">لنجاح</span> <span class="gradient-text-2">فعالياتك</span>
                 {% else %}
-                    Pro Event – Your <span class="gradient-text">Technical</span><br>
+                    Apex Events – Your <span class="gradient-text">Technical</span><br>
                     <span class="gradient-text-blue">Partner</span><br>
                     for Event <span class="gradient-text-2">Success</span>
                 {% endif %}
@@ -267,9 +267,9 @@
             <h2 class="section-title">{% if LANGUAGE_CODE == 'ar' %}خدماتنا التقنية{% else %}Our Technical Services{% endif %}</h2>
             <p class="section-subtitle">
                 {% if LANGUAGE_CODE == 'ar' %}
-                    في Pro Event نوفر مجموعة شاملة من خدمات تكنولوجيا الفعاليات لتلبية كافة متطلباتك الإبداعية والتقنية.
+                    في Apex Events نوفر مجموعة شاملة من خدمات تكنولوجيا الفعاليات لتلبية كافة متطلباتك الإبداعية والتقنية.
                 {% else %}
-                    At Pro Event, we provide comprehensive event technology services to meet all your creative and technical requirements.
+                    At Apex Events, we provide comprehensive event technology services to meet all your creative and technical requirements.
                 {% endif %}
             </p>
         </div>
@@ -395,7 +395,7 @@
             {% else %}
             <div class="why-content" data-aos="fade-right">
             {% endif %}
-                <span class="section-tag">{% if LANGUAGE_CODE == 'ar' %}من هي Pro Event؟{% else %}Who is Pro Event?{% endif %}</span>
+                <span class="section-tag">{% if LANGUAGE_CODE == 'ar' %}من هي Apex Events؟{% else %}Who is Apex Events?{% endif %}</span>
                 <h2 class="section-title">
                     {% if LANGUAGE_CODE == 'ar' %}شريكك الأمثل لفعالية لا تُنسى{% else %}Your Ideal Partner for an Unforgettable Event{% endif %}
                 </h2>
@@ -675,10 +675,10 @@
             </div>
             <h2 class="cta-banner-title">
                 {% if LANGUAGE_CODE == 'ar' %}
-                    دع <span class="gradient-text">Pro Event</span> يصنع<br>
+                    دع <span class="gradient-text">Apex Events</span> يصنع<br>
                     الفارق التقني في حدثك
                 {% else %}
-                    Let <span class="gradient-text">Pro Event</span> deliver<br>
+                    Let <span class="gradient-text">Apex Events</span> deliver<br>
                     the technical edge your event deserves
                 {% endif %}
             </h2>
@@ -892,9 +892,21 @@
         <div class="footer-top">
 
             <div class="footer-brand">
-                <a href="#home" class="nav-logo mb-3 d-inline-flex">
-                    <span class="logo-icon"><i class="bi bi-display-fill"></i></span>
-                    <span class="logo-text">Pro<span class="accent">Event</span></span>
+                <a href="#home" class="footer-logo-link d-inline-block mb-3" aria-label="Apex Events">
+                    <svg class="footer-logo" viewBox="0 0 300 360" width="150" height="180" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Apex Events">
+                        <polygon points="150,20 280,150 150,280 20,150" fill="none" stroke="#C9A84C" stroke-width="2.5"/>
+                        <polygon points="150,52 248,150 150,248 52,150" fill="none" stroke="#C9A84C" stroke-width="1.6" opacity="0.55"/>
+                        <line x1="150" y1="20"  x2="150" y2="52"  stroke="#C9A84C" stroke-width="1.6" opacity="0.7"/>
+                        <line x1="280" y1="150" x2="248" y2="150" stroke="#C9A84C" stroke-width="1.6" opacity="0.7"/>
+                        <line x1="150" y1="280" x2="150" y2="248" stroke="#C9A84C" stroke-width="1.6" opacity="0.7"/>
+                        <line x1="20"  y1="150" x2="52"  y2="150" stroke="#C9A84C" stroke-width="1.6" opacity="0.7"/>
+                        <circle cx="150" cy="150" r="5" fill="#C9A84C"/>
+                        <text x="150" y="318" font-family="Cinzel, serif" font-size="38" font-weight="600" letter-spacing="14" fill="#E8D5A3" text-anchor="middle">APEX</text>
+                        <line x1="60" y1="334" x2="116" y2="334" stroke="#C9A84C" stroke-width="1" opacity="0.45"/>
+                        <rect x="146" y="330" width="7" height="7" fill="#C9A84C" transform="rotate(45 149.5 333.5)"/>
+                        <line x1="184" y1="334" x2="240" y2="334" stroke="#C9A84C" stroke-width="1" opacity="0.45"/>
+                        <text x="150" y="352" font-family="Montserrat, sans-serif" font-size="12" font-weight="400" letter-spacing="9" fill="#C9A84C" text-anchor="middle">EVENTS</text>
+                    </svg>
                 </a>
                 <p>{% if LANGUAGE_CODE == 'ar' %}حلول تكنولوجيا الفعاليات والإنتاج الفني للمؤتمرات وفعاليات الشركات في مصر.{% else %}Event technology & technical production solutions for conferences and corporate events in Egypt.{% endif %}</p>
                 <div class="social-links mt-3">
@@ -940,8 +952,8 @@
         </div>
 
         <div class="footer-bottom">
-            <p>&copy; {% now "Y" %} Pro Event. {% if LANGUAGE_CODE == 'ar' %}جميع الحقوق محفوظة.{% else %}All rights reserved.{% endif %}</p>
-            <p>{% if LANGUAGE_CODE == 'ar' %}مصمم للأداء وتوليد العملاء.{% else %}Designed for performance &amp; lead generation.{% endif %}</p>
+            <p>Apex Events &middot; Cairo, Egypt &middot; Where Every Event Reaches Its Peak</p>
+            <p>&copy; {% now "Y" %} Apex Events. {% if LANGUAGE_CODE == 'ar' %}جميع الحقوق محفوظة.{% else %}All rights reserved.{% endif %}</p>
         </div>
     </div>
 </footer>
@@ -956,14 +968,14 @@
 
 <!-- Floating contact CTA — always-visible WhatsApp / Call -->
 <div class="floating-contact" aria-label="{% if LANGUAGE_CODE == 'ar' %}تواصل سريع{% else %}Quick contact{% endif %}">
-    <a href="tel:+201119333199" class="float-btn float-call" aria-label="Call Pro Event">
+    <a href="tel:+201119333199" class="float-btn float-call" aria-label="Call Apex Events">
         <i class="bi bi-telephone-fill"></i>
         <span class="float-tooltip">{% if LANGUAGE_CODE == 'ar' %}اتصل الآن{% else %}Call Now{% endif %}</span>
     </a>
     <a href="https://wa.me/201119333199?text={% if LANGUAGE_CODE == 'ar' %}مرحبا%20Pro%20Event،%20أريد%20الاستفسار%20عن%20حدث{% else %}Hi%20Pro%20Event%2C%20I%27d%20like%20a%20quote%20for%20an%20event{% endif %}"
        target="_blank" rel="noopener"
        class="float-btn float-whatsapp"
-       aria-label="WhatsApp Pro Event">
+       aria-label="WhatsApp Apex Events">
         <span class="float-pulse" aria-hidden="true"></span>
         <i class="bi bi-whatsapp"></i>
         <span class="float-tooltip">{% if LANGUAGE_CODE == 'ar' %}واتساب{% else %}WhatsApp Us{% endif %}</span>

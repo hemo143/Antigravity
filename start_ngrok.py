@@ -1,5 +1,5 @@
 """
-Start Django + ngrok tunnel for Pro Event website.
+Start Django + ngrok tunnel for Apex Events website.
 Run: python start_ngrok.py
 """
 import subprocess
@@ -10,7 +10,7 @@ NGROK_TOKEN = "38d73ut7yQQpOFuOqiGlpPCDRYf_77xhzWJ2AP2CuC5a2hvkj"
 
 def main():
     print("\n ==========================================")
-    print("   Pro Event - Starting Live Server")
+    print("   Apex Events - Starting Live Server")
     print(" ==========================================\n")
 
     print("[1/3] Checking database...")

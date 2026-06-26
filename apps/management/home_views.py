@@ -56,7 +56,7 @@ def _resend_send(*, from_addr: str, to: list, subject: str, html: str, text: str
             'Authorization': f'Bearer {api_key}',
             'Content-Type': 'application/json',
             'Accept': 'application/json',
-            'User-Agent': 'ProEvent-Site/1.0 (+https://proevent.onrender.com)',
+            'User-Agent': 'Apex Events-Site/1.0 (+https://proevent.onrender.com)',
         },
         method='POST',
     )
@@ -84,7 +84,7 @@ def _send_quote_emails(quote: QuoteRequest) -> None:
         return
 
     # ── 1) Internal notification ─────────────────────────────────────
-    notify_subject = f'[Pro Event] New Quote Request — {quote.name} / {quote.company}'
+    notify_subject = f'[Apex Events] New Quote Request — {quote.name} / {quote.company}'
 
     notify_text = (
         f'A new quote request was submitted.\n\n'
@@ -214,7 +214,7 @@ def _send_quote_emails(quote: QuoteRequest) -> None:
 
         <!-- Footer -->
         <tr><td align="center" style="padding:24px 0 0;color:#6B7A8D;font-size:11px;line-height:1.6;letter-spacing:0.3px;">
-          Pro Event — Egypt's #1 Technical Event Partner<br>
+          Apex Events — Egypt's #1 Technical Event Partner<br>
           This lead came from <a href="https://proevent.onrender.com" style="color:#8892A4;text-decoration:none;">proevent.onrender.com</a>
         </td></tr>
 
@@ -224,7 +224,7 @@ def _send_quote_emails(quote: QuoteRequest) -> None:
 </body></html>'''
 
     ok, info = _resend_send(
-        from_addr=f'Pro Event <{from_addr}>',
+        from_addr=f'Apex Events <{from_addr}>',
         to=[notify_to],
         subject=notify_subject,
         html=notify_html,
@@ -243,10 +243,10 @@ def _send_quote_emails(quote: QuoteRequest) -> None:
     if not quote.email:
         return
 
-    ack_subject = 'Thank you for contacting Pro Event'
+    ack_subject = 'Thank you for contacting Apex Events'
     ack_text = (
         f'Hi {quote.name},\n\n'
-        f'Thank you for reaching out to Pro Event. We have received your quote request '
+        f'Thank you for reaching out to Apex Events. We have received your quote request '
         f'and our team will get back to you within 24 hours.\n\n'
         f'Your request summary:\n'
         f'• Event Type: {quote.event_type}\n'
@@ -255,7 +255,7 @@ def _send_quote_emails(quote: QuoteRequest) -> None:
         f'• Services: {quote.services or "—"}\n\n'
         f'If your event is urgent, feel free to reach us directly on WhatsApp.\n\n'
         f'Best regards,\n'
-        f'The Pro Event Team\n'
+        f'The Apex Events Team\n'
         f'Egypt\'s #1 Technical Event Partner\n'
     )
 
@@ -293,7 +293,7 @@ def _send_quote_emails(quote: QuoteRequest) -> None:
             <tr><td style="padding:32px;">
 
               <p style="color:#E5EAF2;font-size:16px;line-height:1.75;margin:0 0 18px;">
-                We have received your quote request for Pro Event's technical services. Our senior production team is reviewing the details and will reach out to you <strong style="color:#FFFFFF;">within 24 hours</strong> with a tailored proposal.
+                We have received your quote request for Apex Events's technical services. Our senior production team is reviewing the details and will reach out to you <strong style="color:#FFFFFF;">within 24 hours</strong> with a tailored proposal.
               </p>
 
               <!-- Request summary -->
@@ -339,7 +339,7 @@ def _send_quote_emails(quote: QuoteRequest) -> None:
           <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0">
             <tr><td style="padding:0 32px 32px;">
               <div style="border-top:1px solid rgba(255,255,255,0.05);padding-top:22px;">
-                <div style="color:#FFFFFF;font-size:14px;font-weight:700;margin-bottom:2px;">The Pro Event Team</div>
+                <div style="color:#FFFFFF;font-size:14px;font-weight:700;margin-bottom:2px;">The Apex Events Team</div>
                 <div style="color:#6B7A8D;font-size:12px;">Egypt's #1 Technical Event Partner</div>
               </div>
             </td></tr>
@@ -349,7 +349,7 @@ def _send_quote_emails(quote: QuoteRequest) -> None:
 
         <!-- Footer -->
         <tr><td align="center" style="padding:24px 0 0;color:#6B7A8D;font-size:11px;line-height:1.7;letter-spacing:0.3px;">
-          Pro Event &nbsp;·&nbsp; Cairo, Egypt &nbsp;·&nbsp; +20 (111) 933 3199<br>
+          Apex Events &nbsp;·&nbsp; Cairo, Egypt &nbsp;·&nbsp; +20 (111) 933 3199<br>
           <a href="https://proevent.onrender.com" style="color:#8892A4;text-decoration:none;">proevent.onrender.com</a>
         </td></tr>
 
@@ -359,7 +359,7 @@ def _send_quote_emails(quote: QuoteRequest) -> None:
 </body></html>'''
 
     ok, info = _resend_send(
-        from_addr=f'Pro Event <{from_addr}>',
+        from_addr=f'Apex Events <{from_addr}>',
         to=[quote.email],
         subject=ack_subject,
         html=ack_html,

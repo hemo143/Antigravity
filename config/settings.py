@@ -1,5 +1,5 @@
 """
-Event Management System - Settings
+Apex Events - Settings
 """
 import os
 from pathlib import Path
