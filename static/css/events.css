@@ -3,7 +3,7 @@
    كل الألوان متحكَّم فيها من CSS Variables تحت — عدّل من هنا بس.
    ════════════════════════════════════════════════════════════════ */
 :root {
-    --ev-primary:        #B08A3C;   /* برتقالي البراند — CTA */
+    --ev-primary:        #9A7A34;   /* برتقالي البراند — CTA */
     --ev-primary-dark:   #e2541d;
     --ev-accent:         #4f8ef7;   /* أزرق ثانوي */
     --ev-accent-dark:    #2f6fe0;
@@ -17,7 +17,7 @@
     --ev-radius-sm:      12px;
     --ev-shadow:         0 10px 30px rgba(20, 25, 45, .08);
     --ev-shadow-hover:   0 18px 44px rgba(20, 25, 45, .16);
-    --ev-gradient:       linear-gradient(135deg, #B08A3C 0%, #D6B25C 100%);
+    --ev-gradient:       linear-gradient(135deg, #9A7A34 0%, #C49E48 100%);
     --ev-gradient-blue:  linear-gradient(135deg, #4f8ef7 0%, #6aa6ff 100%);
     --ev-transition:     .25s cubic-bezier(.4, 0, .2, 1);
 }
@@ -104,9 +104,9 @@
 }
 .ev-btn--cta {
     color: #fff; background: var(--ev-gradient);
-    box-shadow: 0 8px 20px rgba(176, 138, 60, .35);
+    box-shadow: 0 8px 20px rgba(154, 122, 52, .35);
 }
-.ev-btn--cta:hover { transform: translateY(-2px); box-shadow: 0 12px 28px rgba(176, 138, 60, .5); color: #fff; }
+.ev-btn--cta:hover { transform: translateY(-2px); box-shadow: 0 12px 28px rgba(154, 122, 52, .5); color: #fff; }
 .ev-btn--eventbrite { color: #fff; background: #f05537; box-shadow: 0 8px 20px rgba(240,85,55,.3); }
 .ev-btn--eventbrite:hover { transform: translateY(-2px); box-shadow: 0 12px 28px rgba(240,85,55,.45); color:#fff; }
 .ev-btn--live { color: #fff; background: var(--ev-gradient-blue); box-shadow: 0 8px 20px rgba(79,142,247,.3); }
