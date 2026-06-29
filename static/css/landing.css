@@ -2701,3 +2701,16 @@ a { text-decoration: none; color: inherit; }
     html, body { cursor: auto !important; }
     .cursor-dot, .cursor-ring, .cursor-glow { display: none !important; }
 }
+
+/* ══════════════════════════════════════════════
+   FIX: custom cursor was disappearing over buttons/menu choices
+   (cursor:none + tiny white dot + screen blend). Use the native
+   mouse pointer everywhere and hide the custom cursor entirely.
+══════════════════════════════════════════════ */
+html, body { cursor: auto !important; }
+a, button, label, summary, [role="button"],
+.btn-quote, .btn-lang, .nav-links a, .mobile-link,
+.audio-toggle, .audio-toggle:hover, .float-btn, .float-btn:hover,
+.service-card, .social-btn { cursor: pointer !important; }
+input, textarea, select { cursor: auto !important; }
+.cursor-dot, .cursor-ring, .cursor-glow { display: none !important; }
