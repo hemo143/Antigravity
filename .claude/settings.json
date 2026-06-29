@@ -1,7 +1,18 @@
 {
   "permissions": {
     "allow": [
-      "Bash(venv/Scripts/python.exe -c ' *)"
+      "Bash(venv/Scripts/python.exe -c ' *)",
+      "Bash(ffmpeg -ss 00:00:02 -i \"d:/Anti/event managment system/static/video/hero.mp4\" -vframes 1 -q:v 2 \"d:/Anti/event managment system/static/img/hero-poster.jpg\" -y)",
+      "Bash(git commit -m 'Replace hero placeholder video with real Pro Event footage *)",
+      "Bash(git commit -m 'Hero: 16:9 aspect ratio + brighter video with darker tones *)",
+      "Bash(git commit -m 'Hero: center-align content \\(title, subtitle, CTAs\\) *)",
+      "Bash(git commit -m 'Hero: force 100% width with 56.25vw height for true 16:9 *)",
+      "Bash(mkdir -p \"d:/Anti/event managment system/static/img/services\")",
+      "Bash(cp \"WhatsApp Image 2026-05-06 at 1.19.56 AM.jpeg\" \"services/corporate.jpg\")",
+      "Bash(cp \"WhatsApp Image 2026-05-06 at 1.23.50 AM \\(1\\).jpeg\" \"services/equipment.jpg\")",
+      "Bash(cp \"WhatsApp Image 2026-05-06 at 1.20.56 AM \\(1\\).jpeg\" \"services/staging.jpg\")",
+      "Bash(cp \"WhatsApp Image 2026-05-06 at 1.23.50 AM.jpeg\" \"services/streaming.jpg\")",
+      "Bash(git commit -m 'Services: revert to clean card design \\(drop hover background images\\) *)"
     ]
   }
 }

@@ -89,7 +89,16 @@ html { scroll-behavior: smooth; font-size: 16px; }
 
 body {
     font-family: 'Inter', sans-serif;
-    background: var(--bg-base);
+    /* Site-wide ambient color — warm orange + cool blue glows over the dark base.
+       background-attachment: fixed keeps the wash steady while content scrolls. */
+    background:
+        radial-gradient(60% 45% at 10% 6%,  rgba(255, 107, 53, 0.16), transparent 60%),
+        radial-gradient(55% 45% at 90% 20%, rgba(79, 142, 247, 0.15), transparent 60%),
+        radial-gradient(55% 45% at 6% 52%,  rgba(79, 142, 247, 0.11), transparent 60%),
+        radial-gradient(60% 45% at 94% 70%, rgba(255, 107, 53, 0.14), transparent 60%),
+        radial-gradient(60% 45% at 30% 96%, rgba(168, 85, 247, 0.10), transparent 60%),
+        var(--bg-base);
+    background-attachment: fixed;
     color: var(--text-secondary);
     line-height: 1.7;
     overflow-x: hidden;
@@ -157,7 +166,7 @@ a { text-decoration: none; color: inherit; }
 }
 
 .section-pad        { padding: 96px 0; }
-.bg-section-alt     { background: var(--bg-section-alt); }
+.bg-section-alt     { background: rgba(13, 20, 35, 0.55); }
 
 /* Section Header */
 .section-header { text-align: center; margin-bottom: 60px; }
@@ -439,15 +448,15 @@ a { text-decoration: none; color: inherit; }
     width: 100%; height: 100%;
     object-fit: cover;
     opacity: 1;
-    filter: contrast(1.15) saturate(1.25) brightness(0.85);
+    filter: contrast(1.08) saturate(1.15) brightness(0.72);
 }
 
 .hero-overlay {
     position: absolute;
     inset: 0;
     background:
-        linear-gradient(180deg, rgba(10,14,26,0.50) 0%, transparent 30%, transparent 70%, rgba(10,14,26,0.75) 100%),
-        linear-gradient(135deg, rgba(10,14,26,0.35) 0%, rgba(10,14,26,0.05) 50%, rgba(10,14,26,0.45) 100%);
+        linear-gradient(90deg, rgba(10,14,26,0.94) 0%, rgba(10,14,26,0.45) 20%, transparent 42%, transparent 58%, rgba(10,14,26,0.45) 80%, rgba(10,14,26,0.94) 100%),
+        linear-gradient(180deg, rgba(10,14,26,0.30) 0%, transparent 40%, rgba(10,14,26,0.55) 100%);
     z-index: 1;
 }
 
@@ -494,7 +503,7 @@ a { text-decoration: none; color: inherit; }
 .hero-vignette {
     position: absolute;
     inset: 0;
-    background: radial-gradient(ellipse at center, transparent 40%, rgba(0,0,0,0.45) 100%);
+    background: radial-gradient(ellipse at center, transparent 50%, rgba(0,0,0,0.38) 100%);
     pointer-events: none;
     z-index: 3;
 }
@@ -979,7 +988,7 @@ a { text-decoration: none; color: inherit; }
 ══════════════════════════════════════════════ */
 .why-section {
     padding: 96px 0;
-    background: var(--bg-base);
+    background: transparent;
 }
 
 .why-inner {
@@ -1231,7 +1240,7 @@ a { text-decoration: none; color: inherit; }
 /* ══════════════════════════════════════════════
    HOW IT WORKS
 ══════════════════════════════════════════════ */
-.how-section { background: var(--bg-base); }
+.how-section { background: transparent; }
 
 .how-steps {
     display: flex;
@@ -1434,7 +1443,7 @@ a { text-decoration: none; color: inherit; }
 .cta-section {
     position: relative;
     padding: 100px 0;
-    background: linear-gradient(135deg, #0D1423 0%, #07080C 50%, #0D1423 100%);
+    background: linear-gradient(135deg, rgba(13,20,35,0.55) 0%, rgba(10,14,26,0.35) 50%, rgba(13,20,35,0.55) 100%);
     overflow: hidden;
 }
 
@@ -1502,7 +1511,7 @@ a { text-decoration: none; color: inherit; }
 /* ══════════════════════════════════════════════
    CONTACT FORM
 ══════════════════════════════════════════════ */
-.contact-section { background: var(--bg-base); }
+.contact-section { background: transparent; }
 
 .contact-inner {
     display: grid;

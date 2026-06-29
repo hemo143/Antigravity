@@ -38,3 +38,6 @@ lt_err.txt
 start_ngrok.bat
 start_tunnel.bat
 start_ngrok.py
+
+# Local Claude settings (may contain tokens) — never commit
+.claude/settings.local.json
