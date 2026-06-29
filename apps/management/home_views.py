@@ -29,6 +29,12 @@ def how_we_work_view(request):
     })
 
 
+def about_view(request):
+    return render(request, 'about.html', {
+        'GOOGLE_SITE_VERIFICATION': getattr(settings, 'GOOGLE_SITE_VERIFICATION', ''),
+    })
+
+
 # ─── Resend HTTP API helpers ───────────────────────────────────────────
 RESEND_ENDPOINT = 'https://api.resend.com/emails'
 

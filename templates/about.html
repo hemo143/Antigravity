@@ -1,0 +1,236 @@
+{% load i18n static %}{% get_current_language as LANGUAGE_CODE %}<!DOCTYPE html>
+<html lang="{{ LANGUAGE_CODE }}" dir="{% if LANGUAGE_CODE == 'ar' %}rtl{% else %}ltr{% endif %}">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#07080C">
+
+    {% if LANGUAGE_CODE == 'ar' %}
+    <title>من نحن – Apex Events | شريكك التقني الأول للفعاليات في مصر</title>
+    <meta name="description" content="تعرّف على Apex Events — شركة إدارة فعاليات وإنتاج تقني (AV) مقرها القاهرة، متخصصة في المؤتمرات والندوات الطبية وإطلاق المنتجات والفعاليات الكبرى.">
+    {% else %}
+    <title>About – Apex Events | Egypt's Premier Technical Event &amp; AV Partner</title>
+    <meta name="description" content="Meet Apex Events — a Cairo-based premium event management and AV production company specializing in corporate conferences, pharmaceutical symposia, product launches, and high-profile gatherings.">
+    {% endif %}
+    <meta name="author" content="Apex Events">
+    {% if GOOGLE_SITE_VERIFICATION %}<meta name="google-site-verification" content="{{ GOOGLE_SITE_VERIFICATION }}">{% endif %}
+
+    <link rel="icon" type="image/svg+xml" href="{% static 'img/favicon.svg' %}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Cairo:wght@300;400;500;600;700;800;900&family=Cinzel:wght@500;600&family=Montserrat:wght@300;400&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
+    <link href="{% static 'css/landing.css' %}" rel="stylesheet">
+
+    <style>
+        /* ─── About page (uses landing.css design tokens) ─── */
+        .about-main { padding-top: 130px; }
+        .about-hero {
+            position: relative; text-align: center; padding: 60px 20px 50px;
+            background:
+                radial-gradient(ellipse 60% 60% at 50% 0%, rgba(201,168,76,0.16), transparent 70%),
+                var(--bg-base);
+        }
+        .about-hero h1 { font-weight: 800; font-size: clamp(2.2rem, 5vw, 3.6rem); color: var(--text-primary); margin-bottom: 14px; }
+        .about-hero h1 .gold { color: var(--brand); }
+        .about-hero p { color: var(--text-secondary); font-size: clamp(1rem, 2.5vw, 1.3rem); max-width: 640px; margin: 0 auto; }
+
+        .about-section { max-width: 1100px; margin: 0 auto; padding: 56px 20px; }
+        .about-eyebrow { display: inline-flex; align-items: center; gap: 9px; color: var(--brand);
+            font-weight: 700; font-size: .8rem; letter-spacing: .14em; text-transform: uppercase; margin-bottom: 14px; }
+        .about-eyebrow::before { content: ""; width: 28px; height: 2px; background: var(--brand); }
+        .about-title { font-weight: 800; font-size: clamp(1.8rem, 4vw, 2.6rem); color: var(--text-primary); margin-bottom: 18px; }
+        .about-story { color: var(--text-secondary); font-size: 1.1rem; line-height: 2; max-width: 820px; }
+        .about-story strong { color: var(--brand); font-weight: 700; }
+
+        .mv-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+        .mv-card {
+            background: var(--bg-card); border: 1px solid var(--border-medium); border-radius: var(--r-xl);
+            padding: 34px 30px; transition: transform .25s ease, border-color .25s ease;
+        }
+        .mv-card:hover { transform: translateY(-6px); border-color: rgba(201,168,76,0.5); }
+        .mv-icon {
+            width: 56px; height: 56px; border-radius: 14px; display: grid; place-content: center;
+            font-size: 1.5rem; color: #1a1200; margin-bottom: 18px;
+            background: linear-gradient(135deg, #E0CC8A, var(--brand));
+            box-shadow: 0 8px 22px rgba(201,168,76,0.35);
+        }
+        .mv-card h3 { color: var(--text-primary); font-weight: 800; font-size: 1.3rem; margin-bottom: 12px; }
+        .mv-card p { color: var(--text-secondary); line-height: 1.9; margin: 0; }
+
+        .about-cta {
+            max-width: 880px; margin: 20px auto 70px; text-align: center; padding: 56px 28px;
+            border-radius: var(--r-2xl); border: 1px solid var(--border-medium);
+            background:
+                radial-gradient(ellipse 70% 100% at 50% 0%, rgba(201,168,76,0.16), transparent 70%),
+                var(--bg-card);
+        }
+        .about-cta h2 { color: var(--text-primary); font-weight: 800; font-size: clamp(1.6rem, 4vw, 2.4rem); margin-bottom: 24px; }
+        .about-cta .btn-quote { display: inline-flex; }
+
+        @media (max-width: 768px) {
+            .about-main { padding-top: 100px; }
+            .mv-grid { grid-template-columns: 1fr; }
+            .about-section { padding: 40px 18px; }
+        }
+    </style>
+</head>
+<body>
+
+<a href="#about-hero" class="skip-link">{% if LANGUAGE_CODE == 'ar' %}تخطّ إلى المحتوى{% else %}Skip to content{% endif %}</a>
+
+<div class="cursor-dot"  id="cursorDot"  aria-hidden="true"></div>
+<div class="cursor-ring" id="cursorRing" aria-hidden="true"></div>
+<div class="cursor-glow" id="cursorGlow" aria-hidden="true"></div>
+
+<!-- ═══ NAVBAR ═══ -->
+<nav class="av-navbar scrolled" id="mainNav">
+    <div class="container-xl">
+        <div class="nav-inner">
+            <a href="{% url 'home' %}" class="nav-logo">
+                <img src="{% static 'img/apex_logo.svg' %}" class="logo-icon logo-mark" alt="Apex Events">
+                <span class="logo-text">Apex<span class="accent">Events</span></span>
+            </a>
+            <ul class="nav-links">
+                <li><a href="{% url 'home' %}#services">{% if LANGUAGE_CODE == 'ar' %}الخدمات{% else %}Services{% endif %}</a></li>
+                <li><a href="{% url 'how_we_work' %}">{% if LANGUAGE_CODE == 'ar' %}خبراتنا{% else %}Expertise{% endif %}</a></li>
+                <li><a href="{% url 'home' %}#portfolio">{% if LANGUAGE_CODE == 'ar' %}أعمالنا{% else %}Portfolio{% endif %}</a></li>
+                <li><a href="{% url 'about' %}" class="active">{% if LANGUAGE_CODE == 'ar' %}من نحن{% else %}About{% endif %}</a></li>
+                <li><a href="{% url 'home' %}#contact">{% if LANGUAGE_CODE == 'ar' %}تواصل{% else %}Contact{% endif %}</a></li>
+            </ul>
+            <form action="{% url 'set_language' %}" method="post" class="lang-switch-form">
+                {% csrf_token %}
+                <input name="next" type="hidden" value="{{ request.get_full_path }}">
+                {% if LANGUAGE_CODE == 'ar' %}
+                    <button name="language" value="en" class="btn-lang">EN</button>
+                {% else %}
+                    <button name="language" value="ar" class="btn-lang">عربي</button>
+                {% endif %}
+            </form>
+            <a href="{% url 'home' %}#contact" class="btn-quote">
+                <i class="bi bi-send-fill me-2"></i>{% if LANGUAGE_CODE == 'ar' %}احصل على عرض{% else %}Get a Quote{% endif %}
+            </a>
+            <button class="nav-toggle" id="navToggle" aria-label="Toggle menu"><span></span><span></span><span></span></button>
+        </div>
+    </div>
+    <div class="mobile-menu" id="mobileMenu">
+        <ul>
+            <li><a href="{% url 'home' %}#services" class="mobile-link">{% if LANGUAGE_CODE == 'ar' %}الخدمات{% else %}Services{% endif %}</a></li>
+            <li><a href="{% url 'how_we_work' %}" class="mobile-link">{% if LANGUAGE_CODE == 'ar' %}خبراتنا{% else %}Expertise{% endif %}</a></li>
+            <li><a href="{% url 'home' %}#portfolio" class="mobile-link">{% if LANGUAGE_CODE == 'ar' %}أعمالنا{% else %}Portfolio{% endif %}</a></li>
+            <li><a href="{% url 'about' %}" class="mobile-link">{% if LANGUAGE_CODE == 'ar' %}من نحن{% else %}About{% endif %}</a></li>
+            <li><a href="{% url 'home' %}#contact" class="mobile-link">{% if LANGUAGE_CODE == 'ar' %}تواصل{% else %}Contact{% endif %}</a></li>
+        </ul>
+        <div class="d-flex gap-2 mt-3">
+            <a href="{% url 'home' %}#contact" class="btn-quote flex-grow-1 text-center">{% if LANGUAGE_CODE == 'ar' %}احصل على عرض{% else %}Get a Quote{% endif %}</a>
+        </div>
+    </div>
+</nav>
+
+<main class="about-main">
+
+    <!-- ═══ Section 1 — Hero ═══ -->
+    <header class="about-hero" id="about-hero">
+        <h1>{% if LANGUAGE_CODE == 'ar' %}عن <span class="gold">Apex Events</span>{% else %}About <span class="gold">Apex Events</span>{% endif %}</h1>
+        <p>{% if LANGUAGE_CODE == 'ar' %}شريكك التقني الأول لإنتاج وإدارة الفعاليات في مصر{% else %}Egypt's Premier Technical Event &amp; AV Production Partner{% endif %}</p>
+    </header>
+
+    <!-- ═══ Section 2 — Our Story ═══ -->
+    <section class="about-section">
+        <span class="about-eyebrow">{% if LANGUAGE_CODE == 'ar' %}قصتنا{% else %}Our Story{% endif %}</span>
+        <h2 class="about-title">{% if LANGUAGE_CODE == 'ar' %}ليه Apex؟{% else %}Why Apex?{% endif %}</h2>
+        {% if LANGUAGE_CODE == 'ar' %}
+        <p class="about-story">
+            <strong>Apex</strong> تعني القمة — أعلى نقطة.<br>
+            وفي <strong>Apex Events</strong>، ده بالظبط اللي بنقدّمه.
+            إحنا شركة مقرها القاهرة متخصصة في الإدارة الراقية للفعاليات والإنتاج التقني (AV)،
+            في المؤتمرات المؤسسية، والندوات الطبية (الفارما)، وإطلاق المنتجات، والتجمّعات الكبرى.
+            إحنا مابننظّمش فعاليات وبس — إحنا <strong>بنهندس تجارب</strong>.
+        </p>
+        {% else %}
+        <p class="about-story">
+            <strong>Apex</strong> means the highest point — the peak.<br>
+            At <strong>Apex Events</strong>, that's exactly what we deliver.
+            We are a Cairo-based premium event management and AV production company
+            specializing in corporate conferences, pharmaceutical symposia,
+            product launches, and high-profile gatherings.
+            We don't just organize events — we <strong>engineer experiences</strong>.
+        </p>
+        {% endif %}
+    </section>
+
+    <!-- ═══ Section 3 — Mission & Vision ═══ -->
+    <section class="about-section pt-0">
+        <span class="about-eyebrow">{% if LANGUAGE_CODE == 'ar' %}مهمتنا ورؤيتنا{% else %}Mission &amp; Vision{% endif %}</span>
+        <div class="mv-grid">
+            <div class="mv-card">
+                <div class="mv-icon"><i class="bi bi-bullseye"></i></div>
+                <h3>{% if LANGUAGE_CODE == 'ar' %}مهمتنا{% else %}Our Mission{% endif %}</h3>
+                <p>{% if LANGUAGE_CODE == 'ar' %}أن نقدّم تجارب فعاليات تقنية بلا أخطاء، تعكس علامة عملائنا في أرقى صورة.{% else %}To deliver flawless technical event experiences that reflect our clients' brand at its highest level.{% endif %}</p>
+            </div>
+            <div class="mv-card">
+                <div class="mv-icon"><i class="bi bi-eye-fill"></i></div>
+                <h3>{% if LANGUAGE_CODE == 'ar' %}رؤيتنا{% else %}Our Vision{% endif %}</h3>
+                <p>{% if LANGUAGE_CODE == 'ar' %}أن نكون المرجع الأول في مصر لتكنولوجيا وإنتاج الفعاليات الراقية.{% else %}To be Egypt's number-one reference for premium event technology and production.{% endif %}</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- ═══ Section 4 — CTA ═══ -->
+    <section class="about-cta">
+        <h2>{% if LANGUAGE_CODE == 'ar' %}جاهز تشتغل معانا؟{% else %}Ready to work with us?{% endif %}</h2>
+        <a href="{% url 'home' %}#contact" class="btn-quote">
+            <i class="bi bi-send-fill me-2"></i>{% if LANGUAGE_CODE == 'ar' %}احصل على عرض مجاني{% else %}Get a Free Quote{% endif %}
+        </a>
+    </section>
+
+</main>
+
+<!-- ═══ FOOTER ═══ -->
+<footer class="av-footer">
+    <div class="container-xl">
+        <div class="footer-top">
+            <div class="footer-brand">
+                <a href="{% url 'home' %}" class="nav-logo mb-3 d-inline-flex">
+                    <img src="{% static 'img/apex_logo.svg' %}" class="logo-icon logo-mark" alt="Apex Events">
+                    <span class="logo-text">Apex<span class="accent">Events</span></span>
+                </a>
+                <p>{% if LANGUAGE_CODE == 'ar' %}حلول تكنولوجيا الفعاليات والإنتاج الفني للمؤتمرات وفعاليات الشركات في مصر.{% else %}Event technology &amp; technical production solutions for conferences and corporate events in Egypt.{% endif %}</p>
+                <div class="social-links mt-3">
+                    <a href="https://www.linkedin.com/" target="_blank" rel="noopener" aria-label="LinkedIn" class="social-btn social-linkedin"><i class="bi bi-linkedin"></i></a>
+                    <a href="https://www.instagram.com/" target="_blank" rel="noopener" aria-label="Instagram" class="social-btn social-instagram"><i class="bi bi-instagram"></i></a>
+                    <a href="https://www.facebook.com/" target="_blank" rel="noopener" aria-label="Facebook" class="social-btn social-facebook"><i class="bi bi-facebook"></i></a>
+                    <a href="https://wa.me/201119333199" target="_blank" rel="noopener" aria-label="WhatsApp" class="social-btn social-whatsapp"><i class="bi bi-whatsapp"></i></a>
+                </div>
+            </div>
+            <div class="footer-col">
+                <h5>{% if LANGUAGE_CODE == 'ar' %}روابط سريعة{% else %}Quick Links{% endif %}</h5>
+                <ul>
+                    <li><a href="{% url 'home' %}#services">{% if LANGUAGE_CODE == 'ar' %}الخدمات{% else %}Services{% endif %}</a></li>
+                    <li><a href="{% url 'home' %}#portfolio">{% if LANGUAGE_CODE == 'ar' %}أعمالنا{% else %}Portfolio{% endif %}</a></li>
+                    <li><a href="{% url 'about' %}">{% if LANGUAGE_CODE == 'ar' %}من نحن{% else %}About{% endif %}</a></li>
+                    <li><a href="{% url 'home' %}#contact">{% if LANGUAGE_CODE == 'ar' %}اطلب عرضاً{% else %}Get a Quote{% endif %}</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h5>{% if LANGUAGE_CODE == 'ar' %}تواصل معنا{% else %}Contact Us{% endif %}</h5>
+                <ul class="contact-list">
+                    <li><i class="bi bi-telephone-fill"></i> <span dir="ltr">+20 (111) 933 3199</span></li>
+                    <li><i class="bi bi-envelope-fill"></i> <span dir="ltr">hammammazin@gmail.com</span></li>
+                    <li><i class="bi bi-geo-alt-fill"></i> {% if LANGUAGE_CODE == 'ar' %}القاهرة، مصر{% else %}Cairo, Egypt{% endif %}</li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>Apex Events &middot; Cairo, Egypt &middot; Where Every Event Reaches Its Peak</p>
+            <p>&copy; {% now "Y" %} Apex Events. {% if LANGUAGE_CODE == 'ar' %}جميع الحقوق محفوظة.{% else %}All rights reserved.{% endif %}</p>
+        </div>
+    </div>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+<script>window.LANG = '{{ LANGUAGE_CODE }}';</script>
+<script src="{% static 'js/landing.js' %}"></script>
+</body>
+</html>
