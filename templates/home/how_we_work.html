@@ -20,16 +20,16 @@
     {% if GOOGLE_SITE_VERIFICATION %}<meta name="google-site-verification" content="{{ GOOGLE_SITE_VERIFICATION }}">{% endif %}
 
     <!-- Canonical + alternates -->
-    <link rel="canonical" href="https://proevent.onrender.com{{ request.path }}">
-    <link rel="alternate" hreflang="en" href="https://proevent.onrender.com/en/how-we-work/">
-    <link rel="alternate" hreflang="ar" href="https://proevent.onrender.com/ar/how-we-work/">
-    <link rel="alternate" hreflang="x-default" href="https://proevent.onrender.com/en/how-we-work/">
+    <link rel="canonical" href="https://apexevents.onrender.com{{ request.path }}">
+    <link rel="alternate" hreflang="en" href="https://apexevents.onrender.com/en/how-we-work/">
+    <link rel="alternate" hreflang="ar" href="https://apexevents.onrender.com/ar/how-we-work/">
+    <link rel="alternate" hreflang="x-default" href="https://apexevents.onrender.com/en/how-we-work/">
 
     <!-- Open Graph -->
     <meta property="og:type" content="article">
     <meta property="og:site_name" content="Apex Events">
     <meta property="og:locale" content="{% if LANGUAGE_CODE == 'ar' %}ar_EG{% else %}en_US{% endif %}">
-    <meta property="og:url" content="https://proevent.onrender.com{{ request.path }}">
+    <meta property="og:url" content="https://apexevents.onrender.com{{ request.path }}">
     {% if LANGUAGE_CODE == 'ar' %}
     <meta property="og:title" content="منهجية العمل – Apex Events | 6 مراحل لتنفيذ فعالية احترافية">
     <meta property="og:description" content="6 مراحل احترافية من استلام طلب العميل إلى التقرير النهائي — منهجية Apex Events الكاملة لتنفيذ فعاليات لا تُنسى.">
@@ -37,7 +37,7 @@
     <meta property="og:title" content="How We Work – Apex Events's 6-Stage Workflow">
     <meta property="og:description" content="The methodology that delivers 200+ flawless events: Discovery, Technical Design, Pre-Production, Setup, Live Operations, Wrap-Up.">
     {% endif %}
-    <meta property="og:image" content="https://proevent.onrender.com{% static 'img/stages/04-onsite-setup.jpg' %}">
+    <meta property="og:image" content="https://apexevents.onrender.com{% static 'img/stages/04-onsite-setup.jpg' %}">
     <meta property="og:image:width" content="1500">
     <meta property="og:image:height" content="735">
 
@@ -45,7 +45,7 @@
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="How We Work – Apex Events's 6-Stage Workflow">
     <meta name="twitter:description" content="{% if LANGUAGE_CODE == 'ar' %}منهجية Apex Events الكاملة لتنفيذ فعاليات احترافية{% else %}The methodology that delivers 200+ flawless events across Egypt{% endif %}">
-    <meta name="twitter:image" content="https://proevent.onrender.com{% static 'img/stages/04-onsite-setup.jpg' %}">
+    <meta name="twitter:image" content="https://apexevents.onrender.com{% static 'img/stages/04-onsite-setup.jpg' %}">
 
     <!-- Favicon + PWA manifest -->
     <link rel="icon" type="image/svg+xml" href="{% static 'img/favicon.svg' %}">

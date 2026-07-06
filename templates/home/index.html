@@ -21,17 +21,17 @@
     {% if GOOGLE_SITE_VERIFICATION %}<meta name="google-site-verification" content="{{ GOOGLE_SITE_VERIFICATION }}">{% endif %}
 
     <!-- Canonical + language alternates -->
-    <link rel="canonical" href="https://proevent.onrender.com{{ request.path }}">
-    <link rel="alternate" hreflang="en" href="https://proevent.onrender.com/en{{ request.path|slice:'3:' }}">
-    <link rel="alternate" hreflang="ar" href="https://proevent.onrender.com/ar{{ request.path|slice:'3:' }}">
-    <link rel="alternate" hreflang="x-default" href="https://proevent.onrender.com/en{{ request.path|slice:'3:' }}">
+    <link rel="canonical" href="https://apexevents.onrender.com{{ request.path }}">
+    <link rel="alternate" hreflang="en" href="https://apexevents.onrender.com/en{{ request.path|slice:'3:' }}">
+    <link rel="alternate" hreflang="ar" href="https://apexevents.onrender.com/ar{{ request.path|slice:'3:' }}">
+    <link rel="alternate" hreflang="x-default" href="https://apexevents.onrender.com/en{{ request.path|slice:'3:' }}">
 
     <!-- Open Graph (Facebook, LinkedIn, WhatsApp) -->
     <meta property="og:type" content="website">
     <meta property="og:site_name" content="Apex Events">
     <meta property="og:locale" content="{% if LANGUAGE_CODE == 'ar' %}ar_EG{% else %}en_US{% endif %}">
     <meta property="og:locale:alternate" content="{% if LANGUAGE_CODE == 'ar' %}en_US{% else %}ar_EG{% endif %}">
-    <meta property="og:url" content="https://proevent.onrender.com{{ request.path }}">
+    <meta property="og:url" content="https://apexevents.onrender.com{{ request.path }}">
     {% if LANGUAGE_CODE == 'ar' %}
     <meta property="og:title" content="Apex Events – شركة تنظيم مؤتمرات وفعاليات الشركات في مصر">
     <meta property="og:description" content="الشريك التقني للفعاليات في مصر. حلول AV احترافية، شاشات LED، أنظمة صوت، إضاءة، بث مباشر، وإنتاج فيديو. فريق هندسي متخصص ودعم فني في موقعك.">
@@ -39,7 +39,7 @@
     <meta property="og:title" content="Apex Events – Egypt's #1 Technical Event &amp; AV Production Partner">
     <meta property="og:description" content="End-to-end AV production for conferences, exhibitions and corporate events in Egypt. Experienced engineering team, on-site technical support, free quote within 24 hours.">
     {% endif %}
-    <meta property="og:image" content="https://proevent.onrender.com{% static 'img/hero-poster.jpg' %}">
+    <meta property="og:image" content="https://apexevents.onrender.com{% static 'img/hero-poster.jpg' %}">
     <meta property="og:image:width" content="1920">
     <meta property="og:image:height" content="1080">
     <meta property="og:image:alt" content="Apex Events — Technical Event Production">
@@ -48,7 +48,7 @@
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Apex Events – {% if LANGUAGE_CODE == 'ar' %}شركة تنظيم مؤتمرات وفعاليات الشركات{% else %}Egypt's #1 Technical Event Partner{% endif %}">
     <meta name="twitter:description" content="{% if LANGUAGE_CODE == 'ar' %}حلول AV احترافية للمؤتمرات وفعاليات الشركات في مصر{% else %}AV production for conferences, exhibitions, and corporate events in Egypt{% endif %}">
-    <meta name="twitter:image" content="https://proevent.onrender.com{% static 'img/hero-poster.jpg' %}">
+    <meta name="twitter:image" content="https://apexevents.onrender.com{% static 'img/hero-poster.jpg' %}">
 
     <!-- Favicon + PWA manifest -->
     <link rel="icon" type="image/svg+xml" href="{% static 'img/favicon.svg' %}">
@@ -67,12 +67,12 @@
     {
       "@context": "https://schema.org",
       "@type": "LocalBusiness",
-      "@id": "https://proevent.onrender.com/#organization",
+      "@id": "https://apexevents.onrender.com/#organization",
       "name": "Apex Events",
       "alternateName": "Apex Events",
-      "url": "https://proevent.onrender.com",
-      "logo": "https://proevent.onrender.com{% static 'img/favicon.svg' %}",
-      "image": "https://proevent.onrender.com{% static 'img/hero-poster.jpg' %}",
+      "url": "https://apexevents.onrender.com",
+      "logo": "https://apexevents.onrender.com{% static 'img/favicon.svg' %}",
+      "image": "https://apexevents.onrender.com{% static 'img/hero-poster.jpg' %}",
       "description": "Technical event production and AV solutions for conferences, exhibitions, and corporate events in Egypt.",
       "telephone": "+201119333199",
       "email": "hammammazin@gmail.com",

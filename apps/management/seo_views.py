@@ -3,7 +3,7 @@ from django.http import HttpResponse
 from django.utils import timezone
 
 
-SITE_URL = 'https://proevent.onrender.com'
+SITE_URL = 'https://apexevents.onrender.com'
 
 # (path, change-frequency, priority)
 PAGES = [

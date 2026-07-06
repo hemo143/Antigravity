@@ -62,7 +62,7 @@ def _resend_send(*, from_addr: str, to: list, subject: str, html: str, text: str
             'Authorization': f'Bearer {api_key}',
             'Content-Type': 'application/json',
             'Accept': 'application/json',
-            'User-Agent': 'Apex Events-Site/1.0 (+https://proevent.onrender.com)',
+            'User-Agent': 'Apex Events-Site/1.0 (+https://apexevents.onrender.com)',
         },
         method='POST',
     )
@@ -221,7 +221,7 @@ def _send_quote_emails(quote: QuoteRequest) -> None:
         <!-- Footer -->
         <tr><td align="center" style="padding:24px 0 0;color:#6B7A8D;font-size:11px;line-height:1.6;letter-spacing:0.3px;">
           Apex Events — Egypt's #1 Technical Event Partner<br>
-          This lead came from <a href="https://proevent.onrender.com" style="color:#8892A4;text-decoration:none;">proevent.onrender.com</a>
+          This lead came from <a href="https://apexevents.onrender.com" style="color:#8892A4;text-decoration:none;">apexevents.onrender.com</a>
         </td></tr>
 
       </table>
@@ -333,7 +333,7 @@ def _send_quote_emails(quote: QuoteRequest) -> None:
                     <a href="https://wa.me/201119333199" style="display:inline-block;background:#25D366;color:#FFFFFF;font-weight:700;font-size:14px;padding:13px 26px;border-radius:10px;text-decoration:none;letter-spacing:0.3px;">💬 &nbsp; WhatsApp Us</a>
                   </td>
                   <td align="center" style="padding:6px;">
-                    <a href="https://proevent.onrender.com/en/how-we-work/" style="display:inline-block;background:transparent;color:#FFFFFF;border:1px solid rgba(255,255,255,0.20);font-weight:600;font-size:14px;padding:12px 26px;border-radius:10px;text-decoration:none;letter-spacing:0.3px;">See How We Work →</a>
+                    <a href="https://apexevents.onrender.com/en/how-we-work/" style="display:inline-block;background:transparent;color:#FFFFFF;border:1px solid rgba(255,255,255,0.20);font-weight:600;font-size:14px;padding:12px 26px;border-radius:10px;text-decoration:none;letter-spacing:0.3px;">See How We Work →</a>
                   </td>
                 </tr>
               </table>
@@ -356,7 +356,7 @@ def _send_quote_emails(quote: QuoteRequest) -> None:
         <!-- Footer -->
         <tr><td align="center" style="padding:24px 0 0;color:#6B7A8D;font-size:11px;line-height:1.7;letter-spacing:0.3px;">
           Apex Events &nbsp;·&nbsp; Cairo, Egypt &nbsp;·&nbsp; +20 (111) 933 3199<br>
-          <a href="https://proevent.onrender.com" style="color:#8892A4;text-decoration:none;">proevent.onrender.com</a>
+          <a href="https://apexevents.onrender.com" style="color:#8892A4;text-decoration:none;">apexevents.onrender.com</a>
         </td></tr>
 
       </table>
